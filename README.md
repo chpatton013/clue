@@ -1,1 +1,1 @@
-Here's some content.
+See the wiki [HERE](https://github.com/chpatton013/clue/wiki).
