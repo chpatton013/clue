@@ -25,21 +25,12 @@ public class Lobby {
     }
     
     /**
-     * Returns the number of players in the lobby.
-     * 
-     * @return the number of players in this lobby.
-     */
-    public Integer getNumPlayers() {
-        return new Integer(0);
-    }
-    
-    /**
      * Returns the name of the lobby.
      * 
      * @return the name of the lobby
      */
     public String getLobbyName() {
-        return "";
+        return lobbyName;
     }
     
     /**
@@ -47,7 +38,7 @@ public class Lobby {
      * @return the ID of the game this lobby represents
      */
     public Integer getGameId() {
-        return new Integer(0);
+        return gameId;
     }
     
 }

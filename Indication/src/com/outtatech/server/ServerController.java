@@ -1,13 +1,16 @@
 package com.outtatech.server;
 
-import java.util.Map;
 import com.lloseng.ocsf.server.ConnectionToClient;
+import java.util.List;
+import java.util.Map;
 
 public class ServerController {
 
-    private Map<ConnectionToClient, Game> games;
+    private Map<ConnectionToClient, Game> playersToGames;
+    private Map<Integer, Game> games;
     private Map<ServerPlayer, ConnectionToClient> humans;
     private Map<ServerPlayer, AI> robots;
+    private List<Lobby> lobbies;
 
     public ServerController() 
     {
