@@ -14,11 +14,12 @@ class ClientNetwork extends AbstractClient
     /**
      * Construct a new ClientNetwork on the give port.
      *
-     * @param  port  the port number to connect to the server on
+     * @param host String value server name or ip
+     * @param  port the port number to connect to the server on
      */
-    public ClientNetwork(int port)
+    public ClientNetwork(String host, int port)
     {
-        super(port);
+        super(host, port);
     }
 
     /**
@@ -29,6 +30,7 @@ class ClientNetwork extends AbstractClient
      */
     public ClientController getClientController()
     {
+        return ctrl;
     }
 
     /**
@@ -56,6 +58,22 @@ class ClientNetwork extends AbstractClient
      */
     @Override
     protected void handleMessageFromServer(Object msg)
+    {
+    }
+    
+    /**
+     * Respond to normal server connection closure.
+     */
+    protected void connectionClosed() 
+    {
+    }
+
+    /**
+     * Respond to irregular server connection closure.
+     *
+     * @param exception Exception that caused irregular closure.
+     */
+    protected void connectionException(Exception exception) 
     {
     }
 }

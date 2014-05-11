@@ -16,6 +16,6 @@ public class ClientLobbyState extends State{
     private List<Integer> gameList;
     
     public List<Integer> getGameList() {
-        
+        return gameList;
     }
 }
