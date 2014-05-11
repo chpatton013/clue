@@ -1,8 +1,11 @@
 package server;
 
-import server.ServerPlayer;
+
 import java.util.List;
 import java.util.Map;
+import common.ActionCard;
+import common.HintCard;
+import common.DestinationID;
 
 public class Game {
 
@@ -11,7 +14,7 @@ public class Game {
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
     private List<HintCard> solution;
-    private Map<DestinationID, int> DesToPlayerId;
+    private Map<DestinationID, Integer> DesToPlayerId;
 
     public Game() 
     {
@@ -37,7 +40,7 @@ public class Game {
         return discardPile;
     }
     
-    public List<ActionCard> getSolution() 
+    public List<HintCard> getSolution() 
     {
         return solution;
     }

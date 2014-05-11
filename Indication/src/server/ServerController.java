@@ -1,18 +1,19 @@
 package server;
 
 import java.util.Map;
+import com.lloseng.ocsf.server.ConnectionToClient;
 
 public class ServerController {
 
-    private Map<Coneection, Game> games;
-    private Map<ServerPlayer, Connection> humans;
-    private Map<Server, AI> robots;
+    private Map<ConnectionToClient, Game> games;
+    private Map<ServerPlayer, ConnectionToClient> humans;
+    private Map<ServerPlayer, AI> robots;
 
     public ServerController() 
     {
     }
     
-    public void reactToNetwork(Ojbect obj, Connection connection) 
+    public void reactToNetwork(Object obj, ConnectionToClient connection) 
     {
     }
     
