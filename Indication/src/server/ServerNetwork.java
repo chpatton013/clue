@@ -1,21 +1,27 @@
 package server;
 
+import com.lloseng.ocsf.server.AbstractServer;
+import com.lloseng.ocsf.server.ConnectionToClient;
 import java.util.List;
 
-public class ServerNetwork {
+public class ServerNetwork extends AbstractServer
+{
 
     private ServerController ctrl;
-    private List<Connection> clients;
+    private List<ConnectionToClient> clients;
 
-    public ServerNetwork() 
+    public ServerNetwork(int port) 
+    {
+        super(port);
+    }
+    
+    public void send(Object obj, List<ConnectionToClient> clientList) 
     {
     }
     
-    public void send(Object obj, List<Client> clientList) 
-    {
-    }
-    
-    public void recieve(Object obj) 
+    @Override
+    public void handleMessageFromClient
+        (Object message, ConnectionToClient client)
     {
     }
 }

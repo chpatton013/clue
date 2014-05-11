@@ -2,6 +2,7 @@ package server;
 
 import java.awt.Color;
 import java.util.List;
+import common.Card;
 
 public class ServerPlayer {
 
@@ -20,7 +21,7 @@ public class ServerPlayer {
             return notes;
         }
         
-	public void setNotes(Ojbect notes) 
+	public void setNotes(Object notes) 
         {
             this.notes = notes;
         }
