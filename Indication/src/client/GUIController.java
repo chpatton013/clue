@@ -40,7 +40,7 @@ public class GUIController extends Observer {
 	* @param GUIWindow to return.
 	* @return Appropriate GUIWindow.
 	*/
-	public Window getGUIWindow(GUIWindow w) {
+	public GUIWindow getGUIWindow(GUIWindow w) {
 
 	}
 	/** 
