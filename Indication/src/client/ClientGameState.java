@@ -8,8 +8,8 @@ package client;
 
 import java.util.List;
 import java.util.Map;
-import common.Card;
-import common.DestinationID;
+import com.outtatech.common.Card;
+import com.outtatech.common.DestinationID;
 
 /**
  *
