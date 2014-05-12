@@ -17,7 +17,7 @@ public class GUIWindow extends javax.swing.JFrame implements ActionListener{
 
     /**Constructor with an int parameter to differentiate between
      * types of windows
-     * @param windowType    Value to determine the type of window to create*/
+     * @param windowType Value to determine the type of window to create*/
     public GUIWindow(int windowType) {
         
     }

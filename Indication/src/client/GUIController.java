@@ -31,7 +31,7 @@ public class GUIController implements Observer
 
     /**
      * Opens the appropriate window.
-     * @param GUIWindow to open.
+     * @param w GUIWindow to open.
      */
     public void openGUIWindow(GUIWindow w) 
     {
@@ -39,7 +39,7 @@ public class GUIController implements Observer
 	
     /**
      * Closes the appropriate window.
-     * @param GUIWindow to close.
+     * @param w GUIWindow to close.
      */
     public void closeGUIWindow(GUIWindow w) 
     {
@@ -47,7 +47,7 @@ public class GUIController implements Observer
 
     /**
      * Returns the Window object of specified window.
-     * @param GUIWindow to return.
+     * @param w GUIWindow to return.
      * @return Appropriate GUIWindow.
      */
     public GUIWindow getGUIWindow(GUIWindow w) 
