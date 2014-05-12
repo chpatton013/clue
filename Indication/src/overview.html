@@ -26,7 +26,7 @@ by specifying it in an ant task, like:
          <table>
              <tr>
                 <td>Project Name:  </td>
-                <td><i>High Level Design of Indication</i> </h6></td>
+                <td><i>High Level Design of Indication</i></td>
              </tr>
             <tr>
                 <td>Team Name:  </td>
@@ -47,91 +47,222 @@ by specifying it in an ant task, like:
         <a href="#doc.Description">[top]</a>
         <a name="doc.Overview"></a>
         <h3>Design Overview:</h3>
-        <a href="#doc.Description">[Description]</a>
         <p>
             <p>
                 The framework of the Indication game design is broken into several layers, 
                 Client(human player) classes, Server classes, Common classes, and Messaging classes.
             </p>
+            <h5>Client Layer</h5>
             <p>
                 The client layer of the framework has a finite number of states.  Each State class
-                extends the base State class.  The base State class extends the java.util.Observable class,
-                classes that extend the base State class will also become an observable model.
-                The ClientController class will then be able 
+                extends the base State class.  The base State class extends the java.util.Observable class.
+                Classes that extend the base State class will also become an observable model.
+                The ClientController class acts as facilitator in changing client States, handling
+                network communications, and provides hooks for GUIs or console applications.
+                The ClientController is the gateway for all external activity.
             </p>
-
-The game can be in a finite number of states. Each of them extends the base State object (which implements Observable), which allows our ClientController to serve as a state machine. These states behave thus:
-
-1. You turn the game on and enter the ClientMenuState. There is nothing fancy about this state; it just has the options for what you can do right now (single player game, multi player game, options, instructions).
-
-2. You decide you want to play a multi player game, and enter the ClientLobbyState. Here you are searching for / creating games on a server.
-
-3. You pick a game and join it, bringing you to the ClientPreGameState. Here, other players can join and you can add robot players. If you started a single player game, you were taken directly here, and no human players may join.
-
-4. Now the game is starting, and you are taken to the ClientGameState.
-
-When you enter the ClientPreGameState you are given a PlayerId (just an integer) to identify you to the server and distinguish you from other players in your game state. This PlayerId is preserved when you enter the ClientGameState.
-
-A static map of ClientPlayers is maintained by the Client. Their PlayerId is used to uniquely identify them; the other data (name, color) is displayed through the GUI because people like names more than numbers.
-
-The ClientController is the gateway for all external activity. UI and network activity both go through its methods to make modifications to the current state.
-
-There are two objects that can interact with the ClientController:
-1. ClientNetwork - uses methods react (from network) and send (to network)
-2. GUI - uses methods use (from GUI) and prompt (to GUI)
-
-The ClientNetwork class is an implementation of OCSF's AbstractClient interface that handles the networking layer between our controller and the server. Incoming network activity is passed on to the controller (via react), and any actions by the controller that require network activity are passed to this handler (via send).
-
-The GUI class relays user actions to the controller to elicit modifications to the current State (via use). The controller also sends signals to the GUI (via prompt) to extract desired user input. Because the GUI is an Observer of the current State, it can update any time the State is modified.
+            <p>
+                In this implementation there are two objects that interact with the ClientController:
+            </p>
+                <ul>
+                    <li>1. ClientNetwork - uses methods react (from network) and send (to network)</li>
+                    <li>2. GUI - uses methods use (from GUI) and prompt (to GUI)</li>
+                </ul>
+            <p>
+                The ClientNetwork class is an implementation of OCSF's AbstractClient 
+                interface that handles the networking layer between our controller and the server. 
+                Incoming network activity is passed on to the controller (via react), 
+                and any actions by the controller that require network activity 
+                are passed to this handler (via send).
+            </p>
+            <p>
+                The GUI class relays user actions to the controller to elicit modifications 
+                to the current State (via use). The controller also sends signals to the GUI (via prompt) 
+                to extract desired user input. Because the GUI is an Observer of the current State, 
+                it can update any time the State is modified.
+            </p>
             
-            First, there are a couple "common" components to both the Client and Server. These include data and an interface for Player objects.
-The common data include things like the different types of cards and all their enumerations.
-The Player interface will be important when we start talking about the Client and Server Players.
+            Design of Game States:
+            <table border="1">
+                <tr>
+                    <td>One turns the game on and enter the ClientMenuState.</td> 
+                    <td>State has options for single player game, multi player game, options, instructions.</td>
+                </tr>
+                <tr>
+                    <td>ClientLobbyState.</td> 
+                    <td>Client is searching for or creating games on a server.</td>
+                </tr>
+                <tr>
+                    <td>ClientPreGameState.</td>
+                    <td>Other players can join and you can add robot players. Landing State for single player games.</td>
+                </tr>
+                <tr>
+                    <td>ClientGameState.</td>
+                    <td>Client receives this State from the game server and client reacts to the Game State.</td>
+                </tr>
+            </table>
 
-A side note before I start going off about the rest of this:
-There is a Connection class mentioned that completely lacks documentation in our UML. This class is meant to be OCSF's representation of a connection between a server and a client. While we don't actually care to use this class (OCSF handles all of its use for us), we do want some unique identifier for every connection. For all intents and purposes, consider this to be a unique integer.
-
-From the Server's perspective:
-
-Each created game can be in one of two states:
-1. preparing - in the pre-game lobby, waiting for players
-2. playing - doing the thing
-
-The ServerController is controlling every game being played. Each game has a set of players connected to it, represented by our elusive Connection object. We track this association with a map of Connection to Game. This implies that multiple Connection keys will point to the same Game value (many people per game).
-
-The Server's representation of a game is absolute: the player order, draw pile, discard pile, destination map, and solution are kept in it (ClientGameStates only know of the player order, the size of the draw pile, and the destination map).
-
-These network Connections are associated with ServerPlayers via a map (ServerPlayer to Connection). The PlayerId of these ServerPlayers is the same as that of the ClientPlayers on the other end of these Connections.
-
-There is also another map from ServerPlayer to AI. In the event that a player drops out (the Connection becomes invalid), we will defer to the AI routine to play for the player. In this way, the Server plays for all AI's in a single game.
-
-ServerPlayers are different than ClientPlayers because they have more data in them (data that would have been held by the ClientController). When actions are performed in this game, more information becomes available to the players. To make AI's that care capable of playing, we need to keep track of this data on the Server so the AI's can use it in their decision making processes. We have not yet fully scoped out how this data will be represented (probably a giant knowledge matrix), so for now we will just consider notes to be Objects.
-
-When the ServerController is not playing for the AI characters, it is acting as a switchboard for Client interaction. The ServerNetwork class (which implements OCSF's AbstractServer interface) handles network requests from its Clients (via receive) and sends responses off to them (via send) in accordance with the ServerController's commands.
-
-When a Client makes a request the ServerNetwork calls reactToNetwork on the ServerController, which decides what action needs to be taken based on the request data (AI actions are handled similarly through reactToRobot). Then the ServerController needs to respond to a Client it uses send to delegate network activity to ServerNetwork.
-        </p>
-
+            <h5>Server Layer</h5>
+            <p>
+                From the perspective of the server, the game can be in two states.  
+                One a game can be in preparation(waiting for players), and second a game can be in play.
+                The ServerController is controlling every game being played. 
+                Each game has a set of players connected to it, represented by the OCSF ConnectionToClient object. 
+                We track this association with a map of ConnectionToClient to Game.
+                This implies that multiple ConnectionToClient keys will point to the same Game value (many people per game).  
+                The ConnectionToClient is also associated with ServerPlayers via a map (ServerPlayer to ConnectionToClient).   
+                The PlayerId of these ServerPlayers is the same as that of the ClientPlayers on the client side.
+                There is also another map from ServerPlayer to AI. 
+                In the event that a player drops out (the Connection becomes invalid), we will defer to the AI routine to play for the player. 
+            </p>
+            <p>
+                The Server's representation of a game is absolute: the player order, draw pile, discard pile, destination map, 
+                and solution are kept in it(ClientGameStates only know of the player order, the size of the draw pile, and the destination map).
+                The ServerController class is primarily composed of functions to facilitate playing for the AI characters and functions acting 
+                as a switchboard for Client interaction. The ServerNetwork class (which implements OCSF's AbstractServer interface) handles 
+                network requests from its Clients (via receive) and sends responses off to them (via send).
+            </p>
+            
+            <h5>Common Layer</h5>
+            <p>
+                There are "common" components to both the Client, Server, and messaging layers. 
+                The common classes are designed based on elements and rules of the Indication game.  
+                The common components also includes data and an interface for Player objects.  
+                All layers are dependent on the classes in the common layer.
+            </p>
+            
+            <h5>Messaging Layer</h5>
+            <p>
+                The messaging layer is composed of classes that encapsulate Objects that facilitate communication
+                between the client and server.  The client messaging classes are typically small classes.  The client classes simply
+                prompt the server to respond with data that is needed for a particular client state.  The server messaging classes
+                are used to respond back to the client(s).  The response can be sent to one or many clients, and requires that clients 
+                handle the response message appropriately.
+            </p>
+            <a href="#doc.Description">[top]</a>
         <a name="doc.Tools"></a>
         <h3>Tools:</h3>
-        <a href="#doc.Description">[Description]</a>
-        <p>
-            ...
-        </p>
+        <table border="1">
+            <tr>
+                <th>
+                    Tool
+                </th>
+                <th>
+                    Use
+                </th>
+                <th>
+                    External Info
+                </th>
+            </tr>
+            <tr>
+                <td>Google Drive</td>
+                <td>Hosting javadocs</td>
+                <td><a href="https://support.google.com/drive/answer/2881970?hl=en">Steps to host html</a></td>
+            </tr>
+            <tr>
+                <td>Violet UML</td>
+                <td>Creating and editing UML diagrams</td>
+                <td><a href="http://alexdp.free.fr/violetumleditor/page.php">Website</a></td>
+            </tr>
+            <tr>
+                <td>Java JDK 1.7</td>
+                <td>Compiling java classes</td>
+                <td><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Download</a></td>
+            </tr>
+            <tr>
+                <td>Netbeans IDE 8.0</td>
+                <td>Integrate Developement Environment</td>
+                <td><a href="https://netbeans.org/">Welcome Netbeans!</a></td>
+            </tr>
+            <tr>
+                <td>Github</td>
+                <td>Task tracking and source control</td>
+                <td><a href="https://github.com/chpatton013/clue/wiki/High-Level-Design">Design Wiki</a></td>
+            </tr>
+            
+        </table>
+        <a href="#doc.Description">[top]</a>
         
         <a name="doc.Libraries"></a>
         <h3>Libraries:</h3>
-        <a href="#doc.Description">[Description]</a>
-        <p>
-            ...
-        </p>
+        <table border="1">
+            <tr>
+                <th>
+                    Library
+                </th>
+                <th>
+                    Use
+                </th>
+                <th>
+                    Restrictions
+                </th>
+            </tr>
+            <tr>
+                <td>Java Standard Libraries</td>
+                <td>Utilities</td>
+                <td>Unsigned applications for development only.</td>
+            </tr>
+            <tr>
+                <td>OCSF</td>
+                <td>Handling Client and Server communication.</td>
+                <td><a href="http://www.site.uottawa.ca/school/research/lloseng/supportMaterial/source/openSourceLicense.html">Open Source License</a></td>
+            </tr>
+            
+        </table>
+        <a href="#doc.Description">[top]</a>
         
         <a name="doc.External"></a>
         <h3>External References:</h3>
-        <a href="#doc.Description">[Description]</a>
-        <p>
-            ...
-        </p>
+        <table border="1">
+            <tr>
+                <th>
+                    Reference
+                </th>
+                <th>
+                    Use
+                </th>
+                <th>
+                    Link to Details
+                </th>
+            </tr>
+            <tr>
+                <td>Coding Standards</td>
+                <td>Dr. Dalbey's coding standards.</td>
+                <td><a href="http://users.csc.calpoly.edu/~jdalbey/SWE/code_std.html">standards</a></td>
+            </tr>
+            <tr>
+                <td>Class Diagrams</td>
+                <td>UML Class Diagrams.</td>
+                <td><a href="https://github.com/chpatton013/clue/wiki/High-Level-Design#class-diagram">wiki</a></td>
+            </tr>
+            <tr>
+                <td>Feasibility Test</td>
+                <td>Understand new java libraries</td>
+                <td><a href="https://github.com/chpatton013/clue/tree/master/ClueFeasProt">repository branch</a></td>
+            </tr>
+            <tr>
+                <td>UI Storyboard</td>
+                <td>Understanding GUI classes</td>
+                <td><a href="https://github.com/chpatton013/clue/wiki/Preliminary-UI-Storyboard">storyboard wiki</a></td>
+            </tr>
+            <tr>
+                <td>Javadoc overview page</td>
+                <td>Tutorial on creating an overview page</td>
+                <td><a href="http://wiki.netbeans.org/JavadocTemplateTutorial#Creating_A_Overview_Document">tutorial</a></td>
+            </tr>
+            <tr>
+                <td>Java 1.7 API</td>
+                <td>Utilities, Collections, and GUIs</td>
+                <td><a href="http://docs.oracle.com/javase/7/docs/api/">1.7 javadocs</a></td>
+            </tr>
+            <tr>
+                <td>Test Plan</td>
+                <td>Design aware of what will be tested.</td>
+                <td><a href="https://github.com/chpatton013/clue/wiki/System-Test-Plan">test plan wiki</a></td>
+            </tr>
+            
+        </table>
+        <a href="#doc.Description">[top]</a>
 
     </body>
 </html>
