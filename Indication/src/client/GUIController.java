@@ -1,4 +1,5 @@
 package client;
+import java.util.Observable;
 import java.util.Observer;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Observer;
 * @version 5/10/2014
 */
 
-public class GUIController extends Observer 
+public class GUIController implements Observer 
 {
     private ClientController clientController;
     /**
@@ -54,12 +55,13 @@ public class GUIController extends Observer
         return w;
     }
 
-    /** 
+    /**
      * Updates all observer-relevant information for GUIController 
      * about the ClientController.
-     * @param Observable object.
+     * @param obs Observable object.
+     * @param obj Object that is under observation
      */
-    public void update(Object obj) 
+    public void update(Observable obs, Object obj)
     {
     }
 }

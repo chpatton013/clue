@@ -12,14 +12,17 @@ import java.util.Observable;
  * The state for the client
  * @author dmangin
  */
-public class State extends Observable {
-    private IPAddress hostname;
+public class State extends Observable 
+{
+    private String hostname;
     
-    private IPAddress getHostName() {
-        
+    private String getHostName() 
+    {
+        return hostname;
     }
     
-    public void setHostName(IPAddress address) {
+    public void setHostName(String hostname) 
+    {
         
     }
 }
