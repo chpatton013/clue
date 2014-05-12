@@ -12,28 +12,39 @@ import java.util.List;
  *
  * @author dmangin
  */
-public class ClientPreGameState extends State{
+public class ClientPreGameState extends State
+{
     private int playerId;
     private List<Integer> playerIdList;
     private boolean gameOwner;
     
-    public int getPlayerId() {
+    public ClientPreGameState()
+    {
         
+    }
+    
+    public int getPlayerId() 
+    {
+        return playerId;
     }
     
     public void setPlayerId(int id) {
         
     }
     
-    public List<Integer> getPlayerIdList() {
+    public List<Integer> getPlayerIdList() 
+    {
+        return playerIdList;
+    }
+    
+    public boolean getGameOwner() 
+    {
+        return gameOwner;
         
     }
     
-    public boolean getGameOwner() {
-        
-    }
-    
-    public void setGameOwner(boolean owner) {
+    public void setGameOwner(boolean owner) 
+    {
         
     }
 }
