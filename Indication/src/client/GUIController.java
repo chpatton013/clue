@@ -20,7 +20,8 @@ public class GUIController extends Observer
     }
     
     /**
-     * Returns the ClientController using the GUIController. 
+     * Returns the ClientController using the GUIController.
+     * @return ClientController using the GUIController.
      */
     public ClientController getClientController() 
     {
