@@ -6,8 +6,9 @@ import com.lloseng.ocsf.client.AbstractClient;
  * The networking layer for the client application.
  * Handles all incoming and outgoing network traffic by communicating directly
  * with the ClientController.
+ * @author Chris
  */
-class ClientNetwork extends AbstractClient
+public class ClientNetwork extends AbstractClient
 {
     private ClientController ctrl;
 
@@ -64,6 +65,7 @@ class ClientNetwork extends AbstractClient
     /**
      * Respond to normal server connection closure.
      */
+    @Override
     protected void connectionClosed() 
     {
     }
@@ -73,6 +75,7 @@ class ClientNetwork extends AbstractClient
      *
      * @param exception Exception that caused irregular closure.
      */
+    @Override
     protected void connectionException(Exception exception) 
     {
     }

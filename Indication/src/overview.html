@@ -11,30 +11,123 @@ by specifying it in an ant task, like:
     <head></head>
     <body>
         <a name="doc.Description"></a>
-        An overview description of the design of the game Indication
+        Overview of the design and classes of the game Indication
 
         <div align="center">
-            <a href="#doc.Intro">[Introduction]</a>
-            <a href="#doc.Overview">[Overview]</a>
-            <a href="#doc.Resources">[Resources]</a>
+            <a href="#doc.Intro">[Identifying Info]</a>
+            <a href="#doc.Overview">[Design Overview]</a>
+            <a href="#doc.Tools">[Tools]</a>
+            <a href="#doc.Libraries">[Libraries]</a>
+            <a href="#doc.External">[External References]</a>
         </div>
 
         <a name="doc.Intro"></a>
-        <h3>Introduction</h3>
-        <a href="#doc.Description">[Description]</a>
-        <p>
-            ...
-        </p>
-
+        <h3>Identifying Info:</h3>
+         <table>
+             <tr>
+                <td>Project Name:  </td>
+                <td><i>High Level Design of Indication</i> </h6></td>
+             </tr>
+            <tr>
+                <td>Team Name:  </td>
+                <td><i>OutaTech</i></td>
+            </tr>
+            <tr>
+                <td>Version:  </td>
+                <td><i>1.3</i></td>
+            </tr>
+            <tr>
+                <td>Last Modified Date:  </td>
+                <td><i>2014-05-11</i></td>
+            </tr>
+            <tr>
+            <td>Authors:  </td>
+            <td><i><a href="https://github.com/chpatton013/clue/wiki/High-Level-Design">Credits Page</a></i></td>
+        </table>
+        <a href="#doc.Description">[top]</a>
         <a name="doc.Overview"></a>
-        <h3>Overview</h3>
+        <h3>Design Overview:</h3>
+        <a href="#doc.Description">[Description]</a>
+        <p>
+            <p>
+                The framework of the Indication game design is broken into several layers, 
+                Client(human player) classes, Server classes, Common classes, and Messaging classes.
+            </p>
+            <p>
+                The client layer of the framework has a finite number of states.  Each State class
+                extends the base State class.  The base State class extends the java.util.Observable class,
+                classes that extend the base State class will also become an observable model.
+                The ClientController class will then be able 
+            </p>
+
+The game can be in a finite number of states. Each of them extends the base State object (which implements Observable), which allows our ClientController to serve as a state machine. These states behave thus:
+
+1. You turn the game on and enter the ClientMenuState. There is nothing fancy about this state; it just has the options for what you can do right now (single player game, multi player game, options, instructions).
+
+2. You decide you want to play a multi player game, and enter the ClientLobbyState. Here you are searching for / creating games on a server.
+
+3. You pick a game and join it, bringing you to the ClientPreGameState. Here, other players can join and you can add robot players. If you started a single player game, you were taken directly here, and no human players may join.
+
+4. Now the game is starting, and you are taken to the ClientGameState.
+
+When you enter the ClientPreGameState you are given a PlayerId (just an integer) to identify you to the server and distinguish you from other players in your game state. This PlayerId is preserved when you enter the ClientGameState.
+
+A static map of ClientPlayers is maintained by the Client. Their PlayerId is used to uniquely identify them; the other data (name, color) is displayed through the GUI because people like names more than numbers.
+
+The ClientController is the gateway for all external activity. UI and network activity both go through its methods to make modifications to the current state.
+
+There are two objects that can interact with the ClientController:
+1. ClientNetwork - uses methods react (from network) and send (to network)
+2. GUI - uses methods use (from GUI) and prompt (to GUI)
+
+The ClientNetwork class is an implementation of OCSF's AbstractClient interface that handles the networking layer between our controller and the server. Incoming network activity is passed on to the controller (via react), and any actions by the controller that require network activity are passed to this handler (via send).
+
+The GUI class relays user actions to the controller to elicit modifications to the current State (via use). The controller also sends signals to the GUI (via prompt) to extract desired user input. Because the GUI is an Observer of the current State, it can update any time the State is modified.
+            
+            First, there are a couple "common" components to both the Client and Server. These include data and an interface for Player objects.
+The common data include things like the different types of cards and all their enumerations.
+The Player interface will be important when we start talking about the Client and Server Players.
+
+A side note before I start going off about the rest of this:
+There is a Connection class mentioned that completely lacks documentation in our UML. This class is meant to be OCSF's representation of a connection between a server and a client. While we don't actually care to use this class (OCSF handles all of its use for us), we do want some unique identifier for every connection. For all intents and purposes, consider this to be a unique integer.
+
+From the Server's perspective:
+
+Each created game can be in one of two states:
+1. preparing - in the pre-game lobby, waiting for players
+2. playing - doing the thing
+
+The ServerController is controlling every game being played. Each game has a set of players connected to it, represented by our elusive Connection object. We track this association with a map of Connection to Game. This implies that multiple Connection keys will point to the same Game value (many people per game).
+
+The Server's representation of a game is absolute: the player order, draw pile, discard pile, destination map, and solution are kept in it (ClientGameStates only know of the player order, the size of the draw pile, and the destination map).
+
+These network Connections are associated with ServerPlayers via a map (ServerPlayer to Connection). The PlayerId of these ServerPlayers is the same as that of the ClientPlayers on the other end of these Connections.
+
+There is also another map from ServerPlayer to AI. In the event that a player drops out (the Connection becomes invalid), we will defer to the AI routine to play for the player. In this way, the Server plays for all AI's in a single game.
+
+ServerPlayers are different than ClientPlayers because they have more data in them (data that would have been held by the ClientController). When actions are performed in this game, more information becomes available to the players. To make AI's that care capable of playing, we need to keep track of this data on the Server so the AI's can use it in their decision making processes. We have not yet fully scoped out how this data will be represented (probably a giant knowledge matrix), so for now we will just consider notes to be Objects.
+
+When the ServerController is not playing for the AI characters, it is acting as a switchboard for Client interaction. The ServerNetwork class (which implements OCSF's AbstractServer interface) handles network requests from its Clients (via receive) and sends responses off to them (via send) in accordance with the ServerController's commands.
+
+When a Client makes a request the ServerNetwork calls reactToNetwork on the ServerController, which decides what action needs to be taken based on the request data (AI actions are handled similarly through reactToRobot). Then the ServerController needs to respond to a Client it uses send to delegate network activity to ServerNetwork.
+        </p>
+
+        <a name="doc.Tools"></a>
+        <h3>Tools:</h3>
         <a href="#doc.Description">[Description]</a>
         <p>
             ...
         </p>
-
-        <a name="doc.Resources"></a>
-        <h3>Resources</h3>
+        
+        <a name="doc.Libraries"></a>
+        <h3>Libraries:</h3>
+        <a href="#doc.Description">[Description]</a>
+        <p>
+            ...
+        </p>
+        
+        <a name="doc.External"></a>
+        <h3>External References:</h3>
         <a href="#doc.Description">[Description]</a>
         <p>
             ...
