@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/DiscoveryResponse.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/client/MessageClient.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/GameStart.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/LobbyCreateResponse.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/client/MessageSubscriber.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/ActionResponse.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/server/ClueServerGUI.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/server/ClueServer.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/client/ClientApplication.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/lloseng/ocsf/client/AbstractClient.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/lloseng/ocsf/server/ConnectionToClient.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/GameStateResponse.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/client/ClientGUI.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/server/CardDeal.java</file>
-            <file>file:/Users/jbilous/Development/CPE307/clue/ClueFeasProt/src/com/outtatech/message/client/ActionType.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

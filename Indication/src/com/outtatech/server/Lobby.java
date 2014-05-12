@@ -14,6 +14,7 @@ package com.outtatech.server;
 public class Lobby {
     String lobbyName;
     Integer gameId;
+    Integer lobbyId;
     
     /**
      * Constructs a new Lobby 
@@ -31,6 +32,15 @@ public class Lobby {
      */
     public String getLobbyName() {
         return lobbyName;
+    }
+    
+    /**
+     * Returns the id of this lobby.
+     * 
+     * @return the id of this lobby. 
+     */
+    public Integer getLobbyId() { 
+        return lobbyId;
     }
     
     /**
