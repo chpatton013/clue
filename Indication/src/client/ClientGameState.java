@@ -12,8 +12,12 @@ import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
 
 /**
- *
+ * The ClientGameState class holds logic for the players 
+ * State in the Indication Game.  The class mediates game logic
+ * between the server and the player.
+ * 
  * @author dmangin
+ * @author bschache
  */
 public class ClientGameState {
     private int playerID;

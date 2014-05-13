@@ -12,8 +12,8 @@ import com.lloseng.ocsf.server.ConnectionToClient;
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
-public class ServerController {
-
+public class ServerController 
+{
     private Map<ConnectionToClient, Game> games;
     private Map<ServerPlayer, ConnectionToClient> humans;
     private Map<ServerPlayer, AI> robots;
