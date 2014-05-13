@@ -7,7 +7,7 @@
 package com.outtatech.common;
 
 /**
- *
+ * The DestinationID enumeration models types of destinations destination cards can have
  * @author bennettschalich
  */
 public enum DestinationID 

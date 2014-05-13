@@ -8,19 +8,17 @@ package com.outtatech.common;
 
 
 /**
- *
+ * The Suggestion class represents a type of ActionCard that represents an 
+ * Suggestion action.
  * @author bennettschalich
  */
 public class Suggestion extends ActionCard
 {
+    /**
+     * Constructs a new Suggestion ActionCard.
+     */
     public Suggestion()
     {
         super(ActionCardType.SUGGESTION);
-    }
-    
-    @Override
-    public void play()
-    {
-        
     }
 }

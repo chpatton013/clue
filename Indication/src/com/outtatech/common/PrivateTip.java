@@ -7,19 +7,17 @@
 package com.outtatech.common;
 
 /**
- *
+ * The PrivateTip class represents a type of ActionCard that represents an 
+ * Private Tip action.
  * @author bennettschalich
  */
 public class PrivateTip extends ActionCard
-{
+{    
+    /**
+     * Constructs a new PrivatTip ActionCard.
+     */ 
     public PrivateTip()
     {
         super(ActionCardType.PRIVATE_TIP);
-    }
-    
-    @Override
-    public void play()
-    {
-        
     }
 }

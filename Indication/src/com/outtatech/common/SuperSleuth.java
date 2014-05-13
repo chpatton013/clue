@@ -8,19 +8,17 @@ package com.outtatech.common;
 
 
 /**
- *
+ * The SuperSleuth class represents a type of ActionCard that represents an 
+ * SuperSleuth action.
  * @author bennettschalich
  */
 public class SuperSleuth extends ActionCard
 {
+    /**
+     * Constructs a new SuperSleuth ActionCard.
+     */ 
     public SuperSleuth()
     {
         super(ActionCardType.SUPER_SLEUTH);
-    }
-    
-    @Override
-    public void play()
-    {
-        
     }
 }

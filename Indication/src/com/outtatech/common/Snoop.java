@@ -7,19 +7,17 @@
 package com.outtatech.common;
 
 /**
- *
+ * The Snoop class represents a type of ActionCard that represents an 
+ * Snoop action.
  * @author bennettschalich
  */
 public class Snoop extends ActionCard
 {
+    /**
+     * Constructs a new AllSnoop ActionCard.
+     */
     public Snoop()
     {
         super(ActionCardType.SNOOP);
-    }
-    
-    @Override
-    public void play()
-    {
-        
     }
 }
