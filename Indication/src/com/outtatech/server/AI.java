@@ -14,8 +14,8 @@ public class AI
     /**
      * Construct an AI instance, requires instantiated instances of
      * Difficulty and ServerController.
-     * @param difficulty
-     * @param ctrl 
+     * @param difficulty the Difficulty instance to drive the AI
+     * @param ctrl the Server Controller instance needing an AI
      */
     public AI(Difficulty difficulty, ServerController ctrl) 
     {

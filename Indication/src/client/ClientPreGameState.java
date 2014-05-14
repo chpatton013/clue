@@ -47,7 +47,7 @@ public class ClientPreGameState extends State
     /**
      * Returns a list of players that are waiting for 
      * the same game of indication to start.
-     * @return 
+     * @return List of Integer Objects representing player ids.
      */
     public List<Integer> getPlayerIdList() 
     {

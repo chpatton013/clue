@@ -22,9 +22,9 @@ public class ServerController
      * Construct a ServerController object.  A ServerController instance
      * can be used to facilitate changes to multiple Game instances with
      * many different Client connections and any AI players.
-     * @param games
-     * @param humans
-     * @param robots 
+     * @param games a Map of Client connections and Games
+     * @param humans a Map of ServerPlayers and Client Connections
+     * @param robots a Map of ServerPlayers and AI instances
      */
     public ServerController(Map<ConnectionToClient, Game> games,
                             Map<ServerPlayer, ConnectionToClient> humans,

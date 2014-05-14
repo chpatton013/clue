@@ -25,13 +25,13 @@ public class Game {
 
     /**
      * Constructor for a Game instance.
-     * @param player List<Player> list of players
+     * @param player List of Player Objects.
      * @param current ServerPlayer representing the player currently
      * taking a turn.
-     * @param drawPile List<ActionCard>
-     * @param discardPile List<ActionCard>
-     * @param solution List<HintCard>
-     * @param desToPlayerId Map<DestinationID, Integer> represents which player
+     * @param drawPile List of ActionCard Objects
+     * @param discardPile List of ActionCard Objects
+     * @param solution List of HintCard Objects
+     * @param desToPlayerId Map of DestinationID to Integer represents which player
      * is on which DestinationID
      */
     public Game(List<ServerPlayer> player,

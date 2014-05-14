@@ -86,6 +86,7 @@ public class ObservableServer extends Observable
 
   /**
    * Begins the thread that waits for new clients
+   * @throws IOException if and exception occurs when starting a new listener
    */
   final public void listen() throws IOException
   {
@@ -102,6 +103,7 @@ public class ObservableServer extends Observable
 
   /**
    * Closes the server's connections with all clients.
+   * @throws IOException if error occurs on client closure
    */
   final public void close() throws IOException
   {
@@ -122,6 +124,7 @@ public class ObservableServer extends Observable
 
   /**
    * Used to find out if the server is accepting new clients.
+   * @return boolean true if service is listening
    */
   final public boolean isListening()
   {

@@ -23,8 +23,8 @@ public class ServerPlayer
      * @param playerId int representing the player
      * @param notes Object representing notes for the player
      * @param name String representation of player
-     * @param color
-     * @param hand List<Card>
+     * @param color Color object to help differentiate players
+     * @param hand List of Card Objects representing a players hand
      */
     public ServerPlayer(int playerId,
 		        Object notes,

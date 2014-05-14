@@ -20,10 +20,10 @@ public class ClientLobbyState extends State
     private List<Integer> gameList;
     
     /**
-     * Constructor requires a List<Integer> that represents a
+     * Constructor requires a List of Integer Objects that represents a
      * list of available games that the client, player, is able
      * to join.
-     * @param gameList 
+     * @param gameList List of games in the lobby
      */
     public ClientLobbyState(List<Integer> gameList)
     {
@@ -33,7 +33,7 @@ public class ClientLobbyState extends State
     /**
      * Get the current list of games associated with the instance of
      * ClientLobbyState.
-     * @return List<Integer> games
+     * @return List of Integer Objects representing games
      */
     public List<Integer> getGameList() 
     {

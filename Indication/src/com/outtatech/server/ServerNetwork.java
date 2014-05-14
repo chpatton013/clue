@@ -21,7 +21,7 @@ public class ServerNetwork extends AbstractServer
      * Construct a ServerNetwork, requires an integer to designate
      * which port should be used.  Calls its super class,
      * AbstractServer, constructor.
-     * @param port 
+     * @param port the networking port the server will listen on
      */
     public ServerNetwork(int port) 
     {

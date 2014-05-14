@@ -27,7 +27,7 @@ public class ClientGameState
     
     /**
      * Constuctor requires int player id.
-     * @param playerID 
+     * @param playerID id for the instances player
      */
     public ClientGameState(int playerID)
     {
@@ -47,7 +47,7 @@ public class ClientGameState
     /**
      * Change the player id associated to the
      * instance of ClientGameState
-     * @param playerID 
+     * @param playerID int id of the player
      */
     public void setPlayerId (int playerID) 
     {
@@ -66,7 +66,7 @@ public class ClientGameState
     /**
      * Returns a list of the current Indication cards
      * held by the calling instance.
-     * @return List<Card>
+     * @return List of Card Objects
      */
     public List<Card> getHand() 
     {
@@ -76,7 +76,7 @@ public class ClientGameState
     /**
      * Returns a map representing a set of Destinations and its
      * corresponding playerID.
-     * @return Map<DestinationID, Integer> 
+     * @return Map of DestinationID Objects to Integer Playerids
      */
     public Map<DestinationID, Integer> getDestToPlayerId() 
     {

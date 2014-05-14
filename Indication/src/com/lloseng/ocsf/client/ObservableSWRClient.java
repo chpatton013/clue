@@ -170,8 +170,8 @@ public class ObservableSWRClient extends ObservableClient
   }
 
   /**
-   * Returns true if cancal has been called.
-   *
+   * Returns true if canceled has been called.
+   * @return true if canceled has been called.
    */
   public boolean isCancelled()
   {
