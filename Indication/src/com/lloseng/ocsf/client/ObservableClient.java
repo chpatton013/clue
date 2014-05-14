@@ -58,7 +58,7 @@ public class ObservableClient extends Observable
   }
 
   /**
-   * Closes the connection to the server.
+   * Closes the connection to the server..
    * @throws IOException when the server fails to close threads.
    */
   final public void closeConnection() throws IOException
