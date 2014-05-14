@@ -17,31 +17,69 @@ import com.outtatech.common.DestinationID;
  * between the server and the player.
  * 
  * @author dmangin
- * @author bschache
  */
-public class ClientGameState {
+public class ClientGameState 
+{
     private int playerID;
     private Object notes;
     private List<Card> hand;
     private Map<DestinationID, Integer> destToPlayerId;
     
-    public int getPlayerId() {
+    /**
+     * Constuctor requires int player id.
+     * @param playerID 
+     */
+    public ClientGameState(int playerID)
+    {
+        this.playerID = playerID;
+    }
+    
+    /**
+     * Returns the player id associated with the 
+     * ClientGameState instance.
+     * @return playerID
+     */
+    public int getPlayerId() 
+    {
         return playerID;
     }
     
-    public void setPlayerId (int playerID) {
+    /**
+     * Change the player id associated to the
+     * instance of ClientGameState
+     * @param playerID 
+     */
+    public void setPlayerId (int playerID) 
+    {
         
     }
     
-    public Object getNotes() {
+    /**
+     * Returns an Object representing the players notes.
+     * @return Object
+     */
+    public Object getNotes() 
+    {
         return notes;
     }
     
-    public List<Card> getHand() {
+    /**
+     * Returns a list of the current Indication cards
+     * held by the calling instance.
+     * @return List<Card>
+     */
+    public List<Card> getHand() 
+    {
         return hand;
     }
     
-    public Map<DestinationID, Integer> getDestToPlayerId() {
+    /**
+     * Returns a map representing a set of Destinations and its
+     * corresponding playerID.
+     * @return Map<DestinationID, Integer> 
+     */
+    public Map<DestinationID, Integer> getDestToPlayerId() 
+    {
         return destToPlayerId;
     }
 }

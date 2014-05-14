@@ -36,26 +36,26 @@ public class ServerController
     }
     
     /**
-     * 
-     * @param obj
-     * @param connection 
+     * Handle a network request from a client.
+     * @param obj Object signaling an action.
+     * @param connection ConnectionToClient used to respond back to client.
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection) 
     {
     }
     
     /**
-     * 
-     * @param obj
-     * @param robot 
+     * Handles a request made by an AI player.
+     * @param obj Object signaling an action.
+     * @param robot AI instance that triggered the action.
      */
     public void reactToRobot(Object obj, AI robot) 
     {
     }
     
     /**
-     * 
-     * @param obj 
+     * Provides a hook to send Objects to a networked client.
+     * @param obj Object to send to network hooks
      */
     public void send(Object obj) 
     {

@@ -13,7 +13,6 @@ package com.outtatech.common;
  * 
  * @author bennettschalich
  */
-
 public class ActionCard extends Card
 {   
     ActionCardType type;

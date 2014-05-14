@@ -29,18 +29,18 @@ public class ServerNetwork extends AbstractServer
     }
     
     /**
-     * 
-     * @param obj
-     * @param clientList 
+     * Sends an Object to all client connections provide in the client list.
+     * @param obj Object to send to client connections
+     * @param clientList list of client connections 
      */
     public void send(Object obj, List<ConnectionToClient> clientList) 
     {
     }
     
     /**
-     * 
-     * @param message
-     * @param client 
+     * Receives an Object from a client connection
+     * @param message Object received from the client connection
+     * @param client ConnectionToClient client to responded too.
      */
     @Override
     public void handleMessageFromClient

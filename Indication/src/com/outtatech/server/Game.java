@@ -8,7 +8,9 @@ import com.outtatech.common.HintCard;
 import com.outtatech.common.DestinationID;
 
 /**
- * The Game class ... TODO!
+ * The Game class contains functions that provide information
+ * on the state of an Indication Game and provide functions that can
+ * change the state of the Game.
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
@@ -21,6 +23,17 @@ public class Game {
     private List<HintCard> solution;
     private Map<DestinationID, Integer> desToPlayerId;
 
+    /**
+     * Constructor for a Game instance.
+     * @param player List<Player> list of players
+     * @param current ServerPlayer representing the player currently
+     * taking a turn.
+     * @param drawPile List<ActionCard>
+     * @param discardPile List<ActionCard>
+     * @param solution List<HintCard>
+     * @param desToPlayerId Map<DestinationID, Integer> represents which player
+     * is on which DestinationID
+     */
     public Game(List<ServerPlayer> player,
 		ServerPlayer current,
 		List<ActionCard> drawPile,
@@ -32,7 +45,7 @@ public class Game {
 	this.current = current;
 	this.drawPile = drawPile;
 	this.discardPile = discardPile;
-	this.solution = this.solution;
+	this.solution = solution;
 	this.desToPlayerId = desToPlayerId;
     }
 

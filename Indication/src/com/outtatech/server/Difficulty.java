@@ -11,7 +11,8 @@ public class Difficulty
     private int riskiness;
     
     /**
-     * Constructs a Difficulty with intelligence and riskiness.
+     * Constructs a Difficulty instance with the specified
+     * intelligence and riskiness.
      * @param intelligence The intelligence of an AI.
      * @param riskiness The likeliness an AI is to take risks.
      */
@@ -22,7 +23,7 @@ public class Difficulty
     }
         
     /**
-     * Gets the intelligence of this difficulty.
+     * Gets the intelligence of this difficulty instance.
      * @return The intelligence of this difficulty.
      */
     public int getIntelligence() 
