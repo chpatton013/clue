@@ -8,7 +8,8 @@ package com.outtatech.common;
 
 /**
  * The Snoop class represents a type of ActionCard that represents an 
- * Snoop action.
+ * Snoop action. The Snoop action allows you to look at the hint cards of the player of your 
+ * choice.
  * @author bennettschalich
  */
 public class Snoop extends ActionCard
