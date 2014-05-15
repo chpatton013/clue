@@ -147,7 +147,8 @@ by specifying it in an ant task, like:
                 The client messaging classes are typically small classes.  The client classes simply
                 prompt the server to respond with data that is needed for a particular client state.  The server messaging classes
                 are used to respond back to the client(s) and typically have more attributes.  The response can be sent to one or many clients, 
-                and requires that clients handle the response message appropriately.
+                and requires that clients handle the response message appropriately. (ie. The client should cast the Object back to its correct 
+                class instance and take the correct logical steps, based on the response type, to update the client game state.)
             </p>
             <a href="#doc.Description">[top]</a>
         <a name="doc.Tools"></a>
