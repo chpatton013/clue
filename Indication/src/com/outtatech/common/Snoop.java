@@ -7,19 +7,18 @@
 package com.outtatech.common;
 
 /**
- *
+ * The Snoop class represents a type of ActionCard that represents an 
+ * Snoop action. The Snoop action allows you to look at the hint cards of the 
+ * player of your choice
  * @author bennettschalich
  */
 public class Snoop extends ActionCard
 {
+    /**
+     * Constructs a new AllSnoop ActionCard.
+     */
     public Snoop()
     {
         super(ActionCardType.SNOOP);
-    }
-    
-    @Override
-    public void play()
-    {
-        
     }
 }

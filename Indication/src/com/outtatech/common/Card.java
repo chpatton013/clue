@@ -1,32 +1,39 @@
 
 
 package com.outtatech.common;
+
 /**
- * Card
- * @author Bennett Schalich
- * @version 1.01
- * date: 5/1/14
- * 
- * The Card models represents a clue card. A card has a unique id number that 
- * uniquely identifies it. A card has a type that specifies whether it is an 
- * action card or a suggestion card
+ * The Card models represents any Clue card.
+ * @author bennettschalich
  */
 public class Card 
 {
     private static int id = -1;
     CardType cardType;
     
+    /**
+     * Constructs a new Card.
+     * @param cardType Describes whether the card is of the type Hint or Action.
+     */
     public Card(CardType cardType)
     {
         this.cardType = cardType;
         this.id++;
     }
     
+    /**
+     * Returns the card type (Hint or Action).
+     * @return The card type (Hint or Action).
+     */
     public CardType getCardType()
     {
         return cardType;
     }
     
+    /**
+     * Returns a unique id
+     * @return a unique id
+     */
     public int getID()
     {
         return id;

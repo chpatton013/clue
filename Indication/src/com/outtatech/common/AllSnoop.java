@@ -7,19 +7,26 @@
 package com.outtatech.common;
 
 /**
- *
+ * The AllSnoop class represents a type of ActionCard that represents an 
+ * All Snoop action. The AllSnoop action has every player look at a HintCard of 
+ * another player to either the right or left (depending on the direction 
+ * specified on the card.
  * @author bennettschalich
  */
 public class AllSnoop extends ActionCard
 {
-    public AllSnoop()
+    /* Whether or not the All Snoop action occurs to the right
+     To the right if true; otherwise false*/
+    private boolean right;
+    
+    /**
+     * Constructs a new AllSnoop ActionCard.
+     * @param right The direction the All Snoop action will take. If true- 
+     * right; otherwise left.
+     */
+    public AllSnoop(boolean right)
     {
         super(ActionCardType.ALL_SNOOP);
-    }
-    
-    @Override
-    public void play()
-    {
-        
+        this.right = right;
     }
 }

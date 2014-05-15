@@ -6,7 +6,7 @@
 
 package com.outtatech.common;
 /**
- *
+ * The ActionCardType enumeration models types of actions action cards can have.
  * @author bennettschalich
  */
 
