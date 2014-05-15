@@ -8,9 +8,7 @@ package com.outtatech.common;
 
 /**
  * The AllSnoop class represents a type of ActionCard that represents an 
- * All Snoop action. The AllSnoop action has every player look at a HintCard of 
- * another player to either the right or left (depending on the direction 
- * specified on the card.
+ * All Snoop action.
  * @author bennettschalich
  */
 public class AllSnoop extends ActionCard
