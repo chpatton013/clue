@@ -25,24 +25,32 @@ public class GUIWindow extends javax.swing.JFrame implements ActionListener
     
     /**Sets a message in the text box of the window, or does nothing if not
      *applicable
-     *@param message    The message to set*/
-    public void setMessage(String message) {
+     *@param message    The message to set
+     */
+    public void setMessage(String message) 
+    {
         
     }
     
-    /**Presents the window on the screen*/
-    public void showWindow() {
+    /**Presents the window on the screen
+     */
+    public void showWindow() 
+    {
         
     }
     
-    /**Hides the window from the screen*/
-    public void hideWindow() {
+    /**Hides the window from the screen
+     */
+    public void hideWindow() 
+    {
         
     }
     
     /**Handles any actions performed by the user and take appropriate action
-     *@param e  The event that took place*/
-    public void actionPerformed(java.awt.event.ActionEvent e) { 
+     *@param e  The event that took place
+     */
+    public void actionPerformed(java.awt.event.ActionEvent e) 
+    { 
         
     }
 }

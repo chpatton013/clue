@@ -218,6 +218,7 @@ public class ConnectionToClient extends Thread
    * Based on a hash map.
    *
    * @param infoType   identifies the type of information
+   * @return Object with information about the client
    */
   public Object getInfo(String infoType)
   {
@@ -295,6 +296,7 @@ public class ConnectionToClient extends Thread
    * The default implementation simply returns true.
    *
    * @param message   the message sent.
+   * @return boolean true then all clear to proceed.
    */
   protected boolean handleMessageFromClient(Object message)
   {

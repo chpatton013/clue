@@ -13,10 +13,9 @@ package com.outtatech.common;
  * 
  * @author bennettschalich
  */
-
 public class ActionCard extends Card
 {   
-    ActionCardType type;
+    private ActionCardType type;
     
     /**
      * Constructs a new ActionCard.
