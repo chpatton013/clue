@@ -34,7 +34,7 @@ by specifying it in an ant task, like:
             </tr>
             <tr>
                 <td>Version:  </td>
-                <td><i>1.3</i></td>
+                <td><i>1.4</i></td>
             </tr>
             <tr>
                 <td>Last Modified Date:  </td>
@@ -49,7 +49,7 @@ by specifying it in an ant task, like:
         <h3>Design Overview:</h3>
         <p>
             <p>
-                The framework of the Indication game design is broken into several layers, 
+                The framework of the Indication game is broken into several layers, 
                 Client(human player) classes, Server classes, Common classes, and Messaging classes.
             </p>
             <h5>Client Layer</h5>
@@ -85,19 +85,19 @@ by specifying it in an ant task, like:
             Design of Game States:
             <table border="1">
                 <tr>
-                    <td>One turns the game on and enter the ClientMenuState.</td> 
-                    <td>State has options for single player game, multi player game, options, instructions.</td>
+                    <td>ClientMenuState</td> 
+                    <td>The first State the client enters.  The State has options for single player game, multi player game, options, instructions.</td>
                 </tr>
                 <tr>
-                    <td>ClientLobbyState.</td> 
+                    <td>ClientLobbyState</td> 
                     <td>Client is searching for or creating games on a server.</td>
                 </tr>
                 <tr>
-                    <td>ClientPreGameState.</td>
+                    <td>ClientPreGameState</td>
                     <td>Other players can join and you can add robot players. Landing State for single player games.</td>
                 </tr>
                 <tr>
-                    <td>ClientGameState.</td>
+                    <td>ClientGameState</td>
                     <td>Client receives this State from the game server and client reacts to the Game State.</td>
                 </tr>
             </table>
@@ -125,19 +125,30 @@ by specifying it in an ant task, like:
             
             <h5>Common Layer</h5>
             <p>
-                There are "common" components to both the Client, Server, and messaging layers. 
+                There are "common" components to both the Client, Server, and messaging layers.
                 The common classes are designed based on elements and rules of the Indication game.  
                 The common components also includes data and an interface for Player objects.  
                 All layers are dependent on the classes in the common layer.
             </p>
+            <p>
+                An example of a common component would be the Card class.  The Card class is used 
+                by the server layer's Game class.  The Game class maintains a draw pile and discard pile composed
+                of Card Objects.  The server layer passes serialized card Objects, via the messaging layer, to 
+                the Client layer.  Players on the client layer use the Card objects to reveal information about the solution of
+                the game.  The player on the client layer can then play a Card Object, by sending a serialized request, via the messaging 
+                layer, to the game layer.
+            </p>
             
             <h5>Messaging Layer</h5>
             <p>
-                The messaging layer is composed of classes that encapsulate Objects that facilitate communication
-                between the client and server.  The client messaging classes are typically small classes.  The client classes simply
+                The messaging layer is composed of classes that contain various attributes.  The attributes are requested by the client
+                and provide by the server layer.  Messaging layer instances are serialized and sent as generic Objects.  When the client or server receives 
+                a message layer object, the object is de-serialized and casted back to the appropriate class.  
+                The client messaging classes are typically small classes.  The client classes simply
                 prompt the server to respond with data that is needed for a particular client state.  The server messaging classes
-                are used to respond back to the client(s).  The response can be sent to one or many clients, and requires that clients 
-                handle the response message appropriately.
+                are used to respond back to the client(s) and typically have more attributes.  The response can be sent to one or many clients, 
+                and requires that clients handle the response message appropriately. (ie. The client should cast the Object back to its correct 
+                class instance and take the correct logical steps, based on the response type, to update the client game state.)
             </p>
             <a href="#doc.Description">[top]</a>
         <a name="doc.Tools"></a>

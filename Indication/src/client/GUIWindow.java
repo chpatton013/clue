@@ -13,35 +13,46 @@ import java.awt.event.ActionListener;
  * @author Thomas
  * @version 5/10/2014
  */
-public class GUIWindow extends javax.swing.JFrame implements ActionListener{
+public class GUIWindow extends javax.swing.JFrame implements ActionListener
+{
 
     /**Constructor with an int parameter to differentiate between
      * types of windows
-     * @param windowType Value to determine the type of window to create*/
-    public GUIWindow(int windowType) {
+     * @param windowType Value to determine the type of window to create
+     */
+    public GUIWindow(int windowType) 
+    {
         
     }
     
     /**Sets a message in the text box of the window, or does nothing if not
      *applicable
-     *@param message    The message to set*/
-    public void setMessage(String message) {
+     *@param message    The message to set
+     */
+    public void setMessage(String message) 
+    {
         
     }
     
-    /**Presents the window on the screen*/
-    public void showWindow() {
+    /**Presents the window on the screen
+     */
+    public void showWindow() 
+    {
         
     }
     
-    /**Hides the window from the screen*/
-    public void hideWindow() {
+    /**Hides the window from the screen
+     */
+    public void hideWindow() 
+    {
         
     }
     
     /**Handles any actions performed by the user and take appropriate action
-     *@param e  The event that took place*/
-    public void actionPerformed(java.awt.event.ActionEvent e) { 
+     *@param e  The event that took place
+     */
+    public void actionPerformed(java.awt.event.ActionEvent e) 
+    { 
         
     }
 }
