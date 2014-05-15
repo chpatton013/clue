@@ -12,10 +12,9 @@ public class AI
     private ServerController ctrl;
 
     /**
-     * Construct an AI instance, requires instantiated instances of
-     * Difficulty and ServerController.
-     * @param difficulty the Difficulty instance to drive the AI
-     * @param ctrl the Server Controller instance needing an AI
+     * 
+     * @param difficulty
+     * @param ctrl 
      */
     public AI(Difficulty difficulty, ServerController ctrl) 
     {
@@ -52,11 +51,11 @@ public class AI
 
     /**
      * Invoking this method will allow the AI to take a turn 
-     * that will change the game's state. Based on the riskiness
+     * that will change the game's state. Based on the riskiness \
      * and difficulty of this AI instance the turn will either 
      * be simple, well calculated,  and/or out right risky.
      */
-    public void playTurn() 
+    public void play() 
     {
     }
 }

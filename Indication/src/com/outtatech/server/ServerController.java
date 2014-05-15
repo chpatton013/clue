@@ -12,8 +12,8 @@ import com.lloseng.ocsf.server.ConnectionToClient;
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
-public class ServerController 
-{
+public class ServerController {
+
     private Map<ConnectionToClient, Game> games;
     private Map<ServerPlayer, ConnectionToClient> humans;
     private Map<ServerPlayer, AI> robots;
@@ -22,9 +22,9 @@ public class ServerController
      * Construct a ServerController object.  A ServerController instance
      * can be used to facilitate changes to multiple Game instances with
      * many different Client connections and any AI players.
-     * @param games a Map of Client connections and Games
-     * @param humans a Map of ServerPlayers and Client Connections
-     * @param robots a Map of ServerPlayers and AI instances
+     * @param games
+     * @param humans
+     * @param robots 
      */
     public ServerController(Map<ConnectionToClient, Game> games,
                             Map<ServerPlayer, ConnectionToClient> humans,
@@ -36,28 +36,28 @@ public class ServerController
     }
     
     /**
-     * Handle a network request from a client.
-     * @param obj Object signaling an action.
-     * @param connection ConnectionToClient used to respond back to client.
+     * 
+     * @param obj
+     * @param connection 
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection) 
     {
     }
     
     /**
-     * Handles a request made by an AI player.
-     * @param obj Object signaling an action.
-     * @param robot AI instance that triggered the action.
+     * 
+     * @param obj
+     * @param robot 
      */
     public void reactToRobot(Object obj, AI robot) 
     {
     }
     
     /**
-     * Provides a hook to send Objects to a networked client.
-     * @param obj Object to send to network hooks
+     * 
+     * @param obj 
      */
-    public void forwardMessage(Object obj) 
+    public void send(Object obj) 
     {
     }
 }

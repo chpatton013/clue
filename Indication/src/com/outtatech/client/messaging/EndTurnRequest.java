@@ -12,14 +12,13 @@ package com.outtatech.client.messaging;
  * 
  * @author jbilous
  */
-public class EndTurnRequest extends ClientRequest
-{
+public class EndTurnRequest extends ClientRequest{
+    
     
     /**
      * Creates a new EndTurnRequest object.
      */
-    public EndTurnRequest() 
-    {
+    public EndTurnRequest() {
         
     }
     
