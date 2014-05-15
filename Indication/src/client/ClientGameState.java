@@ -23,10 +23,14 @@ public class ClientGameState
     private int playerID;
     private Object notes;
     private List<Card> hand;
+    /**
+     * Map holds the set of DestinationIds and a
+     * corresponding playerId.
+     */
     private Map<DestinationID, Integer> destToPlayerId;
     
     /**
-     * Constuctor requires int player id.
+     * Constructor requires int player id.
      * @param playerID id for the instances player
      */
     public ClientGameState(int playerID)

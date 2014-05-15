@@ -57,7 +57,7 @@ public class ServerController
      * Provides a hook to send Objects to a networked client.
      * @param obj Object to send to network hooks
      */
-    public void send(Object obj) 
+    public void forwardMessage(Object obj) 
     {
     }
 }

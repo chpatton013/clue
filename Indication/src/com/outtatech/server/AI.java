@@ -56,7 +56,7 @@ public class AI
      * and difficulty of this AI instance the turn will either 
      * be simple, well calculated,  and/or out right risky.
      */
-    public void play() 
+    public void playTurn() 
     {
     }
 }

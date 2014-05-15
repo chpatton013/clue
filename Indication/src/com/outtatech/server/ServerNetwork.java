@@ -33,7 +33,16 @@ public class ServerNetwork extends AbstractServer
      * @param obj Object to send to client connections
      * @param clientList list of client connections 
      */
-    public void send(Object obj, List<ConnectionToClient> clientList) 
+    public void sendMessageToClients(Object obj, List<ConnectionToClient> clientList) 
+    {
+    }
+    
+    /**
+     * Sends an Object to the provided client connection.
+     * @param obj Object to send to client connections
+     * @param client the client connection
+     */
+    public void sendMessageToClient(Object obj, ConnectionToClient client) 
     {
     }
     

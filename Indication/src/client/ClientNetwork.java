@@ -44,15 +44,6 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
-     * Handle reception of an object from the server.
-     *
-     * @param  obj   incoming object from server.
-     */
-    public void receive(Object obj)
-    {
-    }
-
-    /**
      * Handles a message sent from the server to this client.
      *
      * @param msg   the message sent.
