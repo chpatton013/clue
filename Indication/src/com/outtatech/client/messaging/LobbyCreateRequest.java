@@ -7,8 +7,7 @@
 package com.outtatech.client.messaging;
 
 /**
- * An encapsulated message used by the client to request that the game 
- * server creates a new game.
+ *
  * @author jbilous
  */
 public class LobbyCreateRequest extends ClientRequest {

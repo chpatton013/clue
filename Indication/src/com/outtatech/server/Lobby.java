@@ -18,8 +18,8 @@ public class Lobby {
     
     /**
      * Constructs a new Lobby 
-     * @param lobbyName String designating the lobby name.
-     * @param gameId Integer that differentiates one game from the next.
+     * @param lobbyName
+     * @param gameId 
      */
     public Lobby(String lobbyName, Integer gameId) {
         

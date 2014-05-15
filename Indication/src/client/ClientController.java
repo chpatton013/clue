@@ -92,7 +92,7 @@ public class ClientController
      * ie an object from a GUI.
      * @param obj Object from a client extension
      */
-    public void requestUse(Object obj)
+    public void use(Object obj)
     {
     }
     
@@ -101,7 +101,7 @@ public class ClientController
      * ie. the Controller will prompt a GUI extension.
      * @param obj Object that requiring examination
      */
-    public void promptViews(Object obj)
+    public void prompt(Object obj)
     {
     }
     
@@ -109,7 +109,7 @@ public class ClientController
      * React to a message from the ClientNetwork
      * @param obj Object message from the ClientNetwork
      */
-    public void reactToMessage(Object obj)
+    public void react(Object obj)
     {
         
     }
@@ -119,7 +119,7 @@ public class ClientController
      * @param obj Object, the message object to send via
      * the Client network instance.
      */
-    public void forwardMessage(Object obj)
+    public void send(Object obj)
     {
     }
 }

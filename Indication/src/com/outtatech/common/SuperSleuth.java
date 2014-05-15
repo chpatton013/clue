@@ -6,6 +6,7 @@
 
 package com.outtatech.common;
 
+
 /**
  * The SuperSleuth class represents a type of ActionCard that represents an 
  * SuperSleuth action. A SuperSleuth action does on of the following:
