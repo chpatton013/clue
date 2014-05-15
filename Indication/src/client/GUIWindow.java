@@ -13,12 +13,13 @@ import java.awt.event.ActionListener;
  * @author Thomas
  * @version 5/10/2014
  */
-public class GUIWindow extends javax.swing.JFrame implements ActionListener{
-
+public class GUIWindow extends javax.swing.JFrame implements ActionListener
+{
     /**Constructor with an int parameter to differentiate between
      * types of windows
      * @param windowType Value to determine the type of window to create*/
-    public GUIWindow(int windowType) {
+    public GUIWindow(int windowType) 
+    {
         
     }
     
