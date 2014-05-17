@@ -41,6 +41,7 @@ public class ClientNetwork extends AbstractClient
      */
     public void sendMessageToServer(Object obj)
     {
+        // Call OCSF's sendToServer method
     }
 
     /**
@@ -51,6 +52,8 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void handleMessageFromServer(Object msg)
     {
+        // Switch over the type of server response and handle
+        // each response accordingly by updating the game state.
     }
     
     /**
@@ -59,6 +62,7 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void connectionClosed() 
     {
+        // Call OCSF close 
     }
 
     /**
@@ -69,5 +73,6 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void connectionException(Exception exception) 
     {
+        // Prompt an error popup on the GUI
     }
 }
