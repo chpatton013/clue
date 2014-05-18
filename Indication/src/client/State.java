@@ -23,7 +23,7 @@ public class State extends Observable
      * Get the host name associated with this instance.
      * @return String host name.
      */
-    private String getHostName() 
+    public String getHostName() 
     {
         return hostname;
     }

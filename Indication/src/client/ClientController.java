@@ -120,7 +120,7 @@ public class ClientController
      * ie an object from a GUI.
      * @param obj Object from a client extension
      */
-    public void requestUse(Object obj)
+    /*public void requestUse(Object obj)
     {
         if (obj instanceof ActionCard)
         {
@@ -137,7 +137,7 @@ public class ClientController
      * ie. the Controller will prompt a GUI extension.
      * @param obj Object that requiring examination
      */
-    public void promptViews(Object obj)
+    /*public void promptViews(Object obj)
     {
         if (obj instanceof ActionResponse)
         {
@@ -173,7 +173,7 @@ public class ClientController
      */
     public void reactToMessage(Object obj)
     {
-        if (obj instanceof ActionResponse)
+        /*if (obj instanceof ActionResponse)
         {
            this.reactToActionResponse((ActionResponse)obj);
         }
@@ -196,10 +196,10 @@ public class ClientController
         else if (obj instanceof LobbyUpdateResponse)
         {
            this.reactToLobbyUpdateResponse((LobbyUpdateResponse)obj);
-        }
+        }*/
     }
 
-    private void reactToActionResponse(ActionResponse rsp)
+    /*private void reactToActionResponse(ActionResponse rsp)
     {
         // prepare RevealCardRequest
         // this.promptViews(rsp);
@@ -228,15 +228,15 @@ public class ClientController
     private void reactToLobbyUpdateResponse(LobbyUpdateResponse rsp)
     {
         // add new player to player list
-    }
+    }*/
 
     /**
      * Send a message via the ClientNetwork instance.
      * @param obj Object the message object to send via the Client network
      * instance.
      */
-    public void forwardMessage(Object obj)
+    /*public void forwardMessage(Object obj)
     {
         this.network.send(obj);
-    }
+    }*/
 }
