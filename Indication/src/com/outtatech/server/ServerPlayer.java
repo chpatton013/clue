@@ -18,12 +18,13 @@ public class ServerPlayer
     private List<Card> hand;
 
     /**
-     *
-     * @param playerId
-     * @param notes
-     * @param name
-     * @param color
-     * @param hand
+     * Construct a sever player to keep track of client and server 
+     * player actions.
+     * @param playerId int representing the player
+     * @param notes Object representing notes for the player
+     * @param name String representation of player
+     * @param color Color object to help differentiate players
+     * @param hand List of Card Objects representing a players hand
      */
     public ServerPlayer(int playerId,
 		        Object notes,
