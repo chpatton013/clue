@@ -5,7 +5,7 @@
  */
 
 package client;
-
+import com.outtatech.common.*;
 /**
  * The ClientController class facilitates changes to the clients
  * State, facilitates sending requests to the Networking classes,

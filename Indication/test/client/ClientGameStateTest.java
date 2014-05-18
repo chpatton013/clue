@@ -9,7 +9,6 @@ package client;
 import com.outtatech.common.Card;
 import com.outtatech.common.CardType;
 import com.outtatech.common.DestinationID;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
