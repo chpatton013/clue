@@ -18,9 +18,12 @@ public class ClientPreGameState extends State
     private List<Integer> playerIdList;
     private boolean gameOwner;
     
-    public ClientPreGameState()
+    public ClientPreGameState(int playerId, List<Integer> playerIdList, 
+            boolean gameOwner)
     {
-        
+        this.playerId = playerId;
+        this.playerIdList = playerIdList;
+        this.gameOwner = gameOwner;
     }
     
     public int getPlayerId() 
@@ -28,8 +31,9 @@ public class ClientPreGameState extends State
         return playerId;
     }
     
-    public void setPlayerId(int id) {
-        
+    public void setPlayerId(int id) 
+    {
+        this.playerId = id;
     }
     
     public List<Integer> getPlayerIdList() 
@@ -45,6 +49,6 @@ public class ClientPreGameState extends State
     
     public void setGameOwner(boolean owner) 
     {
-        
+        this.gameOwner = owner;
     }
 }

@@ -1,0 +1,122 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.outtatech.common;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author bennettschalich
+ */
+public class SuspectCardTest
+{
+    
+    public SuspectCardTest()
+    {
+    }
+    
+    @BeforeClass
+    public static void setUpClass()
+    {
+    }
+    
+    @AfterClass
+    public static void tearDownClass()
+    {
+    }
+    
+    @Before
+    public void setUp()
+    {
+    }
+    
+    @After
+    public void tearDown()
+    {
+    }
+
+    /**
+     * Test of getSuspect method, of class SuspectCard.
+     */
+    @Test
+    public void testGetSuspect()
+    {
+        System.out.println("getSuspect");
+        
+        System.out.println("WHITE");
+        testWhite();
+        
+        System.out.println("PEACOCK");
+        testPeacock();
+        
+        System.out.println("GREEN");
+        testGreen();
+        
+        System.out.println("MUSTARD");
+        testMustard();
+        
+        System.out.println("PLUM");
+        testPlum();
+        
+        System.out.println("SCARLET");
+        testScarlet();
+    }
+    
+    public void testWhite()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.WHITE);
+        SuspectID expResult = SuspectID.WHITE;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+    public void testPeacock()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.PEACOCK);
+        SuspectID expResult = SuspectID.PEACOCK;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+    public void testGreen()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.GREEN);
+        SuspectID expResult = SuspectID.GREEN;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+    public void testMustard()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.MUSTARD);
+        SuspectID expResult = SuspectID.MUSTARD;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+    public void testPlum()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.PLUM);
+        SuspectID expResult = SuspectID.PLUM;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+    public void testScarlet()
+    {
+        SuspectCard instance = new SuspectCard(SuspectID.SCARLET);
+        SuspectID expResult = SuspectID.SCARLET;
+        SuspectID result = instance.getSuspect();
+        assertEquals(expResult, result);
+    }
+    
+}

@@ -16,8 +16,9 @@ public class GUIController implements Observer
     /**
      * Constructor initializes new GUIController for a ClientController.
      */
-    public GUIController() 
+    public GUIController(ClientController clientController) 
     {
+        this.clientController = clientController;
     }
     
     /**

@@ -16,13 +16,13 @@ public class State extends Observable
 {
     private String hostname;
     
-    private String getHostName() 
+    public String getHostName() 
     {
         return hostname;
     }
     
     public void setHostName(String hostname) 
     {
-        
+        this.hostname = hostname;
     }
 }

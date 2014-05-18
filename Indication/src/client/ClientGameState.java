@@ -21,23 +21,37 @@ public class ClientGameState {
     private List<Card> hand;
     private Map<DestinationID, Integer> destToPlayerId;
     
-    public int getPlayerId() {
+    public ClientGameState(int playerID, Object notes, List<Card> hand, 
+            Map<DestinationID, Integer> destToPlayerId)
+    {
+        this.playerID = playerID;
+        this.notes = notes;
+        this.hand = hand;
+        this.destToPlayerId = destToPlayerId;
+    }
+    
+    public int getPlayerId() 
+    {
         return playerID;
     }
     
-    public void setPlayerId (int playerID) {
-        
+    public void setPlayerId (int playerID) 
+    {
+        this.playerID = playerID;
     }
     
-    public Object getNotes() {
+    public Object getNotes() 
+    {
         return notes;
     }
     
-    public List<Card> getHand() {
+    public List<Card> getHand() 
+    {
         return hand;
     }
     
-    public Map<DestinationID, Integer> getDestToPlayerId() {
+    public Map<DestinationID, Integer> getDestToPlayerId() 
+    {
         return destToPlayerId;
     }
 }
