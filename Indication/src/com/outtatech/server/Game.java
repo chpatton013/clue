@@ -16,12 +16,12 @@ import com.outtatech.common.DestinationID;
  */
 public class Game {
 
-    private List<ServerPlayer> player;
+    private List<ServerPlayer> players;
     private ServerPlayer current;
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
     private List<HintCard> solution;
-    private Map<DestinationID, Integer> desToPlayerId;
+    private Map<DestinationID, Integer> destToPlayerId;
 
     /**
      * Constructor for a Game instance.
@@ -31,24 +31,29 @@ public class Game {
      * @param drawPile List of ActionCard Objects
      * @param discardPile List of ActionCard Objects
      * @param solution List of HintCard Objects
-     * @param desToPlayerId Map of DestinationID to Integer represents which player
+     * @param destToPlayerId Map of DestinationID to Integer represents which player
      * is on which DestinationID
      */
-    public Game(List<ServerPlayer> player,
+    public Game(List<ServerPlayer> players,
 		ServerPlayer current,
 		List<ActionCard> drawPile,
 		List<ActionCard> discardPile,
 		List<HintCard> solution,
-		Map<DestinationID, Integer> desToPlayerId) 
+		Map<DestinationID, Integer> destToPlayerId) 
     {
-	this.player = player;
+	this.players = players;
 	this.current = current;
 	this.drawPile = drawPile;
 	this.discardPile = discardPile;
 	this.solution = solution;
-	this.desToPlayerId = desToPlayerId;
+	this.destToPlayerId = destToPlayerId;
     }
 
+    public List<ServerPlayer> getServerPlayers()
+    {
+        return players;
+    }
+    
     /**
      * Gets the current ServerPlayer associated with this game.
      * @return The current ServerPlayer associated with this game.
@@ -83,5 +88,10 @@ public class Game {
     public List<HintCard> getSolution() 
     {
         return solution;
+    }
+    
+    public Map<DestinationID, Integer> getDestToPlayerId()
+    {
+        return destToPlayerId;
     }
 }

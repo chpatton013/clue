@@ -39,6 +39,11 @@ public class ServerPlayer
 	this.hand = hand;
     }
     
+    public int getPlayerId()
+    {
+        return playerId;
+    }
+    
     /**
      * Gets the notes of this player.
      * @return The notes of this player.

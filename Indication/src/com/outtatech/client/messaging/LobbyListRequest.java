@@ -12,12 +12,14 @@ package com.outtatech.client.messaging;
  * 
  * @author jbilous
  */
-public class LobbyListRequest extends ClientRequest {
+public class LobbyListRequest extends ClientRequest 
+{
     
     /**
      * Creates a new LobbyListRequest object.
      */
-    public LobbyListRequest() {
+    public LobbyListRequest() 
+    {
         
     }
 }

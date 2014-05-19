@@ -10,12 +10,14 @@ package com.outtatech.client.messaging;
  * Represents a message sent from the client to the server
  * @author jbilous
  */
-public class ClientRequest {
+public class ClientRequest 
+{
     
     /**
      * Creates a new ClientRequest object.
      */
-    public ClientRequest() {
+    public ClientRequest() 
+    {
         
     }
     
