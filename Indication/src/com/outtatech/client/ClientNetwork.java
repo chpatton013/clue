@@ -1,4 +1,4 @@
-package client;
+package com.outtatech.client;
 
 import com.lloseng.ocsf.client.AbstractClient;
 

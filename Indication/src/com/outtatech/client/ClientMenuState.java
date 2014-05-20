@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package client;
+package com.outtatech.client;
 
 /**
  * ClientMenuState is the initial state when a client is 

@@ -1,4 +1,4 @@
-package client;
+package com.outtatech.client;
 import java.util.Observable;
 import java.util.Observer;
 
