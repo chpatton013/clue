@@ -19,11 +19,11 @@ public class State extends Observable
 {
     private String hostname;
     
-    /**
+	/**
      * Get the host name associated with this instance.
      * @return String host name.
      */
-    private String getHostName() 
+    public String getHostName() 
     {
         return hostname;
     }
@@ -34,6 +34,6 @@ public class State extends Observable
      */
     public void setHostName(String hostname) 
     {
-        
+        this.hostname = hostname;
     }
 }

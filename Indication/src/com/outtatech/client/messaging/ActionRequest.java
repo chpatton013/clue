@@ -26,8 +26,10 @@ public class ActionRequest extends ClientRequest {
     * @param actionCard the action card that the client is playing
     * @param cards the cards involved in the action
     */
-   public ActionRequest(ActionCard actionCard, List<Card> cards) {
-       
+   public ActionRequest(ActionCard actionCard, List<Card> cards) 
+   {
+       this.actionCard = actionCard;
+       this.cards = cards;
    }
    
    /**

@@ -29,14 +29,15 @@ public class ClientGameState
      */
     private Map<DestinationID, Integer> destToPlayerId;
     
-    /**
-     * Constructor requires int player id.
-     * @param playerID id for the instances player
-     */
-    public ClientGameState(int playerID)
+    public ClientGameState(int playerID, Object notes, List<Card> hand, 
+            Map<DestinationID, Integer> destToPlayerId)
     {
         this.playerID = playerID;
+        this.notes = notes;
+        this.hand = hand;
+        this.destToPlayerId = destToPlayerId;
     }
+    
     
     /**
      * Returns the player id associated with the 
@@ -55,7 +56,7 @@ public class ClientGameState
      */
     public void setPlayerId (int playerID) 
     {
-        
+        this.playerID = playerID;
     }
     
     /**
@@ -82,6 +83,7 @@ public class ClientGameState
      * corresponding playerID.
      * @return Map of DestinationID Objects to Integer Playerids
      */
+
     public Map<DestinationID, Integer> getDestToPlayerId() 
     {
         return destToPlayerId;

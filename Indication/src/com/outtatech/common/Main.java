@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 
-package com.outtatech.client.messaging;
+package com.outtatech.common;
 
 /**
- * Represents a message sent from the client to the server
- * @author jbilous
+ *
+ * @author bennettschalich
  */
-public class ClientRequest 
+public class Main
 {
-    
+
     /**
-     * Creates a new ClientRequest object.
+     * @param args the command line arguments
      */
-    public ClientRequest() 
+    public static void main(String[] args)
     {
-        
+        // TODO code application logic here
     }
     
 }

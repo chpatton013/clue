@@ -13,10 +13,10 @@ import com.outtatech.server.Difficulty;
  * 
  * @author jbilous
  */
-public class AddAIRequest extends ClientRequest {
+public class AddAIRequest extends ClientRequest 
+{
     
     private Difficulty difficulty;
-    
     private Integer lobbyId;
     
     /**
@@ -24,8 +24,10 @@ public class AddAIRequest extends ClientRequest {
      * 
      * @param difficulty the difficulty of the new AI player
      */
-    public AddAIRequest(Difficulty difficulty) {
+    public AddAIRequest(Integer lobbyId, Difficulty difficulty) 
+    {
         this.difficulty = difficulty;
+        this.lobbyId = lobbyId;
     }
     
     /**
@@ -33,15 +35,23 @@ public class AddAIRequest extends ClientRequest {
      * 
      * @param lobbyId the lobby ID this AI player belongs to
      */
-    public void setLobbyId(Integer lobbyId) {
+    public void setLobbyId(Integer lobbyId) 
+    {
         this.lobbyId = lobbyId;
+    }
+    
+    //for testing
+    public Integer getLobbyId()
+    {
+        return lobbyId;
     }
     
     /**
      * Returns the difficulty of the AI player.
      * @return the difficulty of the AI player
      */
-    public Difficulty getDifficulty() {
+    public Difficulty getDifficulty() 
+    {
         return difficulty;
     }
 }

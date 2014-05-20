@@ -11,8 +11,8 @@ package com.outtatech.client.messaging;
  * server creates a new game.
  * @author jbilous
  */
-public class LobbyCreateRequest extends ClientRequest {
-    
+public class LobbyCreateRequest extends ClientRequest 
+{
     String lobbyName;
     
     /**
@@ -20,7 +20,8 @@ public class LobbyCreateRequest extends ClientRequest {
      * 
      * @param lobbyName the name of the lobby to create
      */
-    public LobbyCreateRequest(String lobbyName) {
+    public LobbyCreateRequest(String lobbyName) 
+    {
         this.lobbyName = lobbyName;
     }
     
@@ -29,7 +30,8 @@ public class LobbyCreateRequest extends ClientRequest {
      * 
      * @return the name of the lobby.
      */
-    public String getLobbyName() {
+    public String getLobbyName() 
+    {
         return this.lobbyName;
     }
     

@@ -19,12 +19,12 @@ public class ClientPreGameState extends State
     private List<Integer> playerIdList;
     private boolean gameOwner;
     
-    /**
-     * ClientPreGameState uses the default constructor
-     */
-    public ClientPreGameState()
+    public ClientPreGameState(int playerId, List<Integer> playerIdList, 
+            boolean gameOwner)
     {
-        
+        this.playerId = playerId;
+        this.playerIdList = playerIdList;
+        this.gameOwner = gameOwner;
     }
     
     /**
@@ -40,8 +40,9 @@ public class ClientPreGameState extends State
      * Sets the playerId of this instance.
      * @param id int playerId
      */
-    public void setPlayerId(int id) {
-        
+    public void setPlayerId(int id) 
+	{
+        this.playerId = id;
     }
     
     /**
@@ -72,6 +73,6 @@ public class ClientPreGameState extends State
      */
     public void setGameOwner(boolean owner) 
     {
-        
+        this.gameOwner = owner;
     }
 }

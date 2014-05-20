@@ -19,7 +19,6 @@ import java.util.List;
 public class RevealCardRequest extends ClientRequest {
     
     private Integer revealToId;
-    
     private List<Card> cards;
     
     /**
@@ -28,8 +27,10 @@ public class RevealCardRequest extends ClientRequest {
      * @param playerId the id of the player the cards are being revealed to.
      * @param cards the cards that will be revealed to the other player.
      */
-    public RevealCardRequest(Integer playerId, List<Card> cards) {
-        
+    public RevealCardRequest(Integer playerId, List<Card> cards) 
+    {
+        this.revealToId = revealToId;
+        this.cards = cards;
     }
     
     /**
@@ -37,7 +38,8 @@ public class RevealCardRequest extends ClientRequest {
      * 
      * @return the id of the player the cards will be revealed to
      */
-    public Integer getPlayerId() {
+    public Integer getPlayerId() 
+    {
         return revealToId;
     }
     
@@ -46,7 +48,8 @@ public class RevealCardRequest extends ClientRequest {
      * 
      * @return the cards that will be revealed to the other play 
      */
-    public List<Card> getCards() {
+    public List<Card> getCards() 
+    {
         return cards;
     }
 }

@@ -21,8 +21,11 @@ public class Lobby {
      * @param lobbyName String designating the lobby name.
      * @param gameId Integer that differentiates one game from the next.
      */
-    public Lobby(String lobbyName, Integer gameId) {
-        
+    public Lobby(String lobbyName, Integer gameId, Integer lobbyId) 
+    {
+        this.lobbyName = lobbyName;
+        this.gameId = gameId;
+        this.lobbyId = lobbyId;
     }
     
     /**
@@ -30,8 +33,18 @@ public class Lobby {
      * 
      * @return the name of the lobby
      */
-    public String getLobbyName() {
+    public String getLobbyName() 
+    {
         return lobbyName;
+    }
+    
+    /**
+     * Returns the ID of the game that this lobby represents
+     * @return the ID of the game this lobby represents
+     */
+    public Integer getGameId() 
+    {
+        return gameId;
     }
     
     /**
@@ -39,16 +52,8 @@ public class Lobby {
      * 
      * @return the id of this lobby. 
      */
-    public Integer getLobbyId() { 
+    public Integer getLobbyId() 
+    { 
         return lobbyId;
     }
-    
-    /**
-     * Returns the ID of the game that this lobby represents
-     * @return the ID of the game this lobby represents
-     */
-    public Integer getGameId() {
-        return gameId;
-    }
-    
-}
+ }

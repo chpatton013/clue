@@ -29,4 +29,14 @@ public class AllSnoop extends ActionCard
         super(ActionCardType.ALL_SNOOP);
         this.right = right;
     }
+    
+    /**
+     * Gets the direction the AllSnoop action
+     * @return the direction of the Allsnoop action. True is right, false is
+     * left.
+     */
+    public boolean getDirection()
+    {
+        return right;
+    }
 }

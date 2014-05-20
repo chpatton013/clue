@@ -135,6 +135,7 @@ public class ClientController
         else if (obj instanceof List)
         {
             // this.forwardMessage(new RevealCardRequest((List<Card>)obj);
+
         }
     }
 
