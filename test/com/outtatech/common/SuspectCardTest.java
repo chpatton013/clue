@@ -71,6 +71,42 @@ public class SuspectCardTest
         testScarlet();
     }
     
+    @Test
+    public void testGetGender()
+    {
+        System.out.println("getGender");
+        
+        SuspectCard instance = new SuspectCard(SuspectID.WHITE);
+        Gender expResult = Gender.FEMALE;
+        Gender result = instance.getGender();
+        assertEquals(expResult, result);
+        
+        instance = new SuspectCard(SuspectID.GREEN);
+        expResult = Gender.MALE;
+        result = instance.getGender();
+        assertEquals(expResult, result);
+        
+        instance = new SuspectCard(SuspectID.MUSTARD);
+        expResult = Gender.MALE;
+        result = instance.getGender();
+        assertEquals(expResult, result);
+        
+        instance = new SuspectCard(SuspectID.PEACOCK);
+        expResult = Gender.FEMALE;
+        result = instance.getGender();
+        assertEquals(expResult, result);
+        
+        instance = new SuspectCard(SuspectID.PLUM);
+        expResult = Gender.MALE;
+        result = instance.getGender();
+        assertEquals(expResult, result);
+        
+        instance = new SuspectCard(SuspectID.SCARLET);
+        expResult = Gender.FEMALE;
+        result = instance.getGender();
+        assertEquals(expResult, result);
+    }
+    
     public void testWhite()
     {
         SuspectCard instance = new SuspectCard(SuspectID.WHITE);

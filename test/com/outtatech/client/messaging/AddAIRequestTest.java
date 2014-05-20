@@ -72,8 +72,9 @@ public class AddAIRequestTest
     {
         System.out.println("getDifficulty");
         
-        AddAIRequest instance = new AddAIRequest(new Integer(2), new Difficulty(5, 5));
-        Difficulty expResult = new Difficulty(5, 5);
+        Difficulty diff = new Difficulty(4, 5);
+        AddAIRequest instance = new AddAIRequest(new Integer(2), diff);
+        Difficulty expResult = diff;
         Difficulty result = instance.getDifficulty();
         assertEquals(expResult, result);
     }

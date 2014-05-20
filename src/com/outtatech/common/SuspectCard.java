@@ -15,6 +15,7 @@ public class SuspectCard extends HintCard
 {
     /*A unique Suspect*/
     private SuspectID suspect;
+    Gender gender;
     
     /**
      * Constructs a new SuspectCard
@@ -24,6 +25,18 @@ public class SuspectCard extends HintCard
     {
         super(HintCardType.SUSPECT);
         this.suspect = suspect;
+        
+        if (suspect == SuspectID.WHITE || suspect == SuspectID.PEACOCK || 
+                suspect == SuspectID.SCARLET)
+        {
+            gender = Gender.FEMALE;
+        }
+        
+        else if (suspect == SuspectID.GREEN || suspect == SuspectID.MUSTARD || 
+                suspect == SuspectID.PLUM)
+        {
+            gender = Gender.MALE;
+        }
     }
     
     /**
@@ -33,5 +46,10 @@ public class SuspectCard extends HintCard
     public SuspectID getSuspect()
     {
         return suspect;
+    }
+    
+    public Gender getGender()
+    {
+        return gender;
     }
 }

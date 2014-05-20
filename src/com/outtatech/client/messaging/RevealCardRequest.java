@@ -29,7 +29,7 @@ public class RevealCardRequest extends ClientRequest {
      */
     public RevealCardRequest(Integer playerId, List<Card> cards) 
     {
-        this.revealToId = revealToId;
+        this.revealToId = playerId;
         this.cards = cards;
     }
     
