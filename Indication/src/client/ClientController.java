@@ -6,6 +6,12 @@
 
 package client;
 
+import java.util.List;
+
+import com.outtatech.common.*;
+import com.outtatech.client.messaging.*;
+import com.outtatech.server.messaging.*;
+
 /**
  * The ClientController class facilitates changes to the clients
  * State, facilitates sending requests to the Networking classes,
@@ -124,11 +130,11 @@ public class ClientController
     {
         if (obj instanceof ActionCard)
         {
-            this.forwardMessage(new ActionRequest((ActionCard)obj));
+            // this.forwardMessage(new ActionRequest((ActionCard)obj));
         }
         else if (obj instanceof List)
         {
-            this.forwardMessage(new RevealCardRequest((List<Card>)obj);
+            // this.forwardMessage(new RevealCardRequest((List<Card>)obj);
         }
     }
 
@@ -237,6 +243,6 @@ public class ClientController
      */
     public void forwardMessage(Object obj)
     {
-        this.network.send(obj);
+        this.network.sendMessageToServer(obj);
     }
 }
