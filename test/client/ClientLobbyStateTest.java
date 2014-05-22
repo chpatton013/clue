@@ -6,7 +6,7 @@
 
 package client;
 
-import com.outtatech.client.ClientLobbyState;
+import com.outtatech.client.ClientLobbyDiscoveryState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -59,7 +59,7 @@ public class ClientLobbyStateTest
         list.add(2);
         list.add(1);
         
-        ClientLobbyState instance = new ClientLobbyState(list);
+        ClientLobbyDiscoveryState instance = new ClientLobbyDiscoveryState(list);
         List<Integer> expResult = list;
         List<Integer> result = instance.getGameList();
         assertEquals(expResult, result);

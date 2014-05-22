@@ -6,7 +6,7 @@
 
 package client;
 
-import com.outtatech.client.ClientPreGameState;
+import com.outtatech.client.ClientLobbyState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -57,7 +57,7 @@ public class ClientPreGameStateTest
         list.add(1);
         list.add(2);
         
-        ClientPreGameState instance = new ClientPreGameState(3, list, false);
+        ClientLobbyState instance = new ClientLobbyState(3, list, false);
         int expResult = 3;
         int result = instance.getPlayerId();
         assertEquals(expResult, result);
@@ -78,7 +78,7 @@ public class ClientPreGameStateTest
         list.add(1);
         list.add(2);
         
-        ClientPreGameState instance = new ClientPreGameState(3, list, false);
+        ClientLobbyState instance = new ClientLobbyState(3, list, false);
         List<Integer> expResult = new ArrayList<Integer>();
         expResult.add(1);
         expResult.add(2);
@@ -96,7 +96,7 @@ public class ClientPreGameStateTest
         list.add(1);
         list.add(2);
         
-        ClientPreGameState instance = new ClientPreGameState(5, list, false);
+        ClientLobbyState instance = new ClientLobbyState(5, list, false);
         boolean expResult = false;
         boolean result = instance.getGameOwner();
         assertEquals(expResult, result);

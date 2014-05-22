@@ -8,36 +8,75 @@ package com.outtatech.client;
 import java.util.List;
 
 /**
- * Class ClientLobbyState holds a list of games available on the connected game
- * server. After a client connects to have server and sends a lobby list
- * request, the ClientLobbyState will be instantiated and include a list of
- * available games.
+ * ClientPreGameState instances will hold information about other players
+ * waiting to join the same game of Indication.
  *
  * @author dmangin
  */
 public class ClientLobbyState extends State
 {
-    private List<Integer> gameList;
+    private int playerId;
+    private List<Integer> playerIdList;
+    private boolean gameOwner;
 
-    /**
-     * Constructor requires a List of Integer Objects that represents a list of
-     * available games that the client, player, is able to join.
-     *
-     * @param gameList List of games in the lobby
-     */
-    public ClientLobbyState(List<Integer> gameList)
+    public ClientLobbyState(int playerId, List<Integer> playerIdList,
+            boolean gameOwner)
     {
-        this.gameList = gameList;
+        this.playerId = playerId;
+        this.playerIdList = playerIdList;
+        this.gameOwner = gameOwner;
     }
 
     /**
-     * Get the current list of games associated with the instance of
-     * ClientLobbyState.
+     * Returns the playerId associated with this instance.
      *
-     * @return List of Integer Objects representing games
+     * @return int playerId
      */
-    public List<Integer> getGameList()
+    public int getPlayerId()
     {
-        return gameList;
+        return playerId;
+    }
+
+    /**
+     * Sets the playerId of this instance.
+     *
+     * @param id int playerId
+     */
+    public void setPlayerId(int id)
+    {
+        this.playerId = id;
+    }
+
+    /**
+     * Returns a list of players that are waiting for the same game of
+     * indication to start.
+     *
+     * @return List of Integer Objects representing player ids.
+     */
+    public List<Integer> getPlayerIdList()
+    {
+        return playerIdList;
+    }
+
+    /**
+     * Checks if the playerId associated with this instance is the game owner.
+     * ie. created the game.
+     *
+     * @return boolean true if player is the game owner.
+     */
+    public boolean getGameOwner()
+    {
+        return gameOwner;
+
+    }
+
+    /**
+     * Make the playerId that created this game the game owner.
+     *
+     * @param owner boolean true sets the owner to the instances player id.
+     */
+    public void setGameOwner(boolean owner)
+    {
+        this.gameOwner = owner;
     }
 }

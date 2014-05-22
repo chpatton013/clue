@@ -13,5 +13,10 @@ package com.outtatech.server.messaging;
  */
 public class AddAIResponse extends ServerResponse
 {
-
+    /**
+     * Creates a new AddAIResponse Object.
+     */
+    public AddAIResponse() {
+        
+    }
 }
