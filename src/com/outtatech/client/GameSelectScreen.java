@@ -1,4 +1,4 @@
-package guicontroller;
+package com.outtatech.client;
 
 import java.util.ArrayList;
 
