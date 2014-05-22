@@ -6,6 +6,7 @@
             <name>Indication</name>
             <explicit-platform explicit-source-supported="true"/>
             <source-roots>
+                <root id="src.libs.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
