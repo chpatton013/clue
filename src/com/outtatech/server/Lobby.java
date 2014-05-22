@@ -12,6 +12,8 @@ package com.outtatech.server;
  */
 public class Lobby
 {
+    //IMPORTANT: check if issue with lobbyID
+    protected static Integer lobbyIdCounter = 0;
     String lobbyName;
     Integer gameId;
     Integer lobbyId;
@@ -22,11 +24,11 @@ public class Lobby
      * @param lobbyName String designating the lobby name.
      * @param gameId Integer that differentiates one game from the next.
      */
-    public Lobby(String lobbyName, Integer gameId, Integer lobbyId)
+    public Lobby(String lobbyName, Integer gameId)
     {
         this.lobbyName = lobbyName;
         this.gameId = gameId;
-        this.lobbyId = lobbyId;
+        this.lobbyId = lobbyIdCounter++;
     }
 
     /**

@@ -15,7 +15,7 @@ import com.outtatech.common.DestinationID;
  */
 public class Game
 {
-
+    private Integer gameId;
     private List<ServerPlayer> players;
     private ServerPlayer current;
     private List<ActionCard> drawPile;
@@ -98,5 +98,9 @@ public class Game
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
         return destToPlayerId;
+    }
+    
+    public Integer getGameId() {
+        return gameId;
     }
 }

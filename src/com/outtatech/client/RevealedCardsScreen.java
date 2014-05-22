@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package guicontroller;
+package com.outtatech.client;
 
 import java.awt.List;
 
