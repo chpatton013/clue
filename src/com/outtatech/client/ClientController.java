@@ -18,6 +18,7 @@ import com.outtatech.server.messaging.*;
  *
  * @author bschache TODO: make a notification class to send to the GUI contains
  * message triggers display of message and loading animation
+ * @author jbilous added accusation methods
  */
 public class ClientController
 {
@@ -149,7 +150,19 @@ public class ClientController
 
         }
     }
-
+    
+    /**
+     * Called when the client would like to make an accusation during their
+     * turn.
+     * 
+     * @param accusationCards list containing the Destination, Vehicle and
+     * Suspect card required to make an accusation.
+     */
+    public void makeAccusation(List<Card> accusationCards) {
+        // Create an AccusationRequest message
+        // Send AccusationRequest message to the server
+    }
+    
     /**
      * A hook to prompt a client extension, Controller sends a message out. ie.
      * the Controller will prompt a GUI extension.
