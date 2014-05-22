@@ -17,17 +17,21 @@ import static org.junit.Assert.*;
  *
  * @author bennettschalich
  */
-public class DestinationCardTest {
+public class DestinationCardTest 
+{
     
-    public DestinationCardTest() {
+    public DestinationCardTest() 
+    {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() 
+    {
     }
     
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() 
+    {
     }
     
     @Before
@@ -45,31 +49,31 @@ public class DestinationCardTest {
     public void testGetDestination() {
         System.out.println("GetDestination");
         
-        System.out.println("NIAGRA_FALLS");
+        System.out.println("    NIAGRA_FALLS");
         testNiagraFalls();
         
-        System.out.println("GOLDEN_GATE_BRIDGE");
+        System.out.println("    GOLDEN_GATE_BRIDGE");
         testGoldenGateBridge();
         
-        System.out.println("OLD_FAITHFUL");
+        System.out.println("    OLD_FAITHFUL");
         testOldFaithful();
         
-        System.out.println("CONEY_ISLAND");
+        System.out.println("    CONEY_ISLAND");
         testConeyIsland();
         
-        System.out.println("THE_ALAMO");
+        System.out.println("    THE_ALAMO");
         testTheAlamo();
         
-        System.out.println("HOOVER_DAM");
+        System.out.println("    HOOVER_DAM");
         testHooverDam();
         
-        System.out.println("LINCOLN_MEMORIAL");
+        System.out.println("    LINCOLN_MEMORIAL");
         testLincolnMemorial();
         
-        System.out.println("MIAMI_BEACH");
+        System.out.println("    MIAMI_BEACH");
         testMiamiBeach();
         
-        System.out.println("MT_RUSHMORE");
+        System.out.println("    MT_RUSHMORE");
         testMtRushmore();
     }
     
@@ -142,6 +146,230 @@ public class DestinationCardTest {
         DestinationCard instance = new DestinationCard(DestinationID.MT_RUSHMORE);
         DestinationID expResult = DestinationID.MT_RUSHMORE;
         DestinationID result = instance.getDestination();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetIsNorth()
+    {
+        System.out.println("getIsNorth");
+        
+        System.out.println("    NIAGRA_FALLS");
+        testisNorthNiagraFalls();
+        
+        System.out.println("    CONEY_ISLAND");
+        testIsNorthConeyIsland();
+        
+        System.out.println("    MT_RUSHMORE");
+        testIsNorthMtRushmore();
+        
+        System.out.println("    OLD_FAITHFUL");
+        testIsNorthOldFaithful();
+        
+        System.out.println("    GOLDEN_GATE_BRIDGE");
+        testIsNorthGoldenGateBridge();
+        
+        System.out.println("    HOOVER_DAM");
+        testIsNorthHooverDam();
+        
+        System.out.println("    THE_ALAMO");
+        testIsNorthTheAlamo();
+        
+        System.out.println("    LINCOLN_MEMORIAL");
+        testIsNorthLincolnMemorial();
+        
+        System.out.println("    MIAMI_BEACH");
+        testIsNorthMiamiBeach();
+    }
+    
+    public void testisNorthNiagraFalls()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.NIAGRA_FALLS);
+        boolean expResult = true;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthConeyIsland()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.CONEY_ISLAND);
+        boolean expResult = true;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthMtRushmore()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.MT_RUSHMORE);
+        boolean expResult = true;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthOldFaithful()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.OLD_FAITHFUL);
+        boolean expResult = true;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthGoldenGateBridge()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
+        boolean expResult = false;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthHooverDam()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.HOOVER_DAM);
+        boolean expResult = false;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthTheAlamo()
+    {
+        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
+        boolean expResult = false;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthLincolnMemorial()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
+        boolean expResult = false;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsNorthMiamiBeach()
+    {
+        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
+        boolean expResult = false;
+        boolean result = instance.getIsNorth();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetIsWest()
+    {
+        System.out.println("getIsWest");
+        
+        System.out.println("    NIAGRA_FALLS");
+        testisWestNiagraFalls();
+        
+        System.out.println("    CONEY_ISLAND");
+        testIsWestConeyIsland();
+        
+        System.out.println("    MT_RUSHMORE");
+        testIsWestMtRushmore();
+        
+        System.out.println("    OLD_FAITHFUL");
+        testIsWestOldFaithful();
+        
+        System.out.println("    GOLDEN_GATE_BRIDGE");
+        testIsWestGoldenGateBridge();
+        
+        System.out.println("    HOOVER_DAM");
+        testIsWestHooverDam();
+        
+        System.out.println("    THE_ALAMO");
+        testIsWestTheAlamo();
+        
+        System.out.println("    LINCOLN_MEMORIAL");
+        testIsWestLincolnMemorial();
+        
+        System.out.println("    MIAMI_BEACH");
+        testIsWestMiamiBeach();
+    }
+    
+    public void testisWestNiagraFalls()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.NIAGRA_FALLS);
+        boolean expResult = false;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestConeyIsland()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.CONEY_ISLAND);
+        boolean expResult = false;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestMtRushmore()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.MT_RUSHMORE);
+        boolean expResult = true;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestOldFaithful()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.OLD_FAITHFUL);
+        boolean expResult = true;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestGoldenGateBridge()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
+        boolean expResult = true;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestHooverDam()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.HOOVER_DAM);
+        boolean expResult = true;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestTheAlamo()
+    {
+        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
+        boolean expResult = true;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestLincolnMemorial()
+    {
+        DestinationCard instance = 
+                new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
+        boolean expResult = false;
+        boolean result = instance.getIsWest();
+        assertEquals(expResult, result);
+    }
+    
+    public void testIsWestMiamiBeach()
+    {
+        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
+        boolean expResult = false;
+        boolean result = instance.getIsWest();
         assertEquals(expResult, result);
     }
 }

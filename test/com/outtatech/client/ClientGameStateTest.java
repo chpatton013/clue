@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package client;
+package com.outtatech.client;
 
 import com.outtatech.common.Card;
 import com.outtatech.common.CardType;
