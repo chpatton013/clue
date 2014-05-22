@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.client.messaging;
 
 /**
@@ -11,21 +10,25 @@ package com.outtatech.client.messaging;
  *
  * @author jbilous
  */
-public class LobbyJoinRequest extends ClientRequest {
+public class LobbyJoinRequest extends ClientRequest
+{
     Integer lobbyId;
 
     /**
      * Creates a new ClientRequest object
      */
-    public LobbyJoinRequest(Integer lobbyId) {
+    public LobbyJoinRequest(Integer lobbyId)
+    {
         this.lobbyId = lobbyId;
     }
 
     /**
      * Returns the lobby id.
+     *
      * @return the lobby id
      */
-    public Integer getLobbyId() {
+    public Integer getLobbyId()
+    {
         return lobbyId;
     }
 }

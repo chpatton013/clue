@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.client;
 
 import java.util.List;
@@ -12,24 +11,22 @@ import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
 
 /**
- * The ClientGameState class holds logic for the players 
- * State in the Indication Game.  The class mediates game logic
- * between the server and the player.
- * 
+ * The ClientGameState class holds logic for the players State in the Indication
+ * Game. The class mediates game logic between the server and the player.
+ *
  * @author dmangin
  */
-public class ClientGameState 
+public class ClientGameState
 {
     private int playerID;
     private Object notes;
     private List<Card> hand;
     /**
-     * Map holds the set of DestinationIds and a
-     * corresponding playerId.
+     * Map holds the set of DestinationIds and a corresponding playerId.
      */
     private Map<DestinationID, Integer> destToPlayerId;
-    
-    public ClientGameState(int playerID, Object notes, List<Card> hand, 
+
+    public ClientGameState(int playerID, Object notes, List<Card> hand,
             Map<DestinationID, Integer> destToPlayerId)
     {
         this.playerID = playerID;
@@ -37,54 +34,55 @@ public class ClientGameState
         this.hand = hand;
         this.destToPlayerId = destToPlayerId;
     }
-    
-    
+
     /**
-     * Returns the player id associated with the 
-     * ClientGameState instance.
+     * Returns the player id associated with the ClientGameState instance.
+     *
      * @return playerID
      */
-    public int getPlayerId() 
+    public int getPlayerId()
     {
         return playerID;
     }
-    
+
     /**
-     * Change the player id associated to the
-     * instance of ClientGameState
+     * Change the player id associated to the instance of ClientGameState
+     *
      * @param playerID int id of the player
      */
-    public void setPlayerId (int playerID) 
+    public void setPlayerId(int playerID)
     {
         this.playerID = playerID;
     }
-    
+
     /**
      * Returns an Object representing the players notes.
+     *
      * @return Object
      */
-    public Object getNotes() 
+    public Object getNotes()
     {
         return notes;
     }
-    
+
     /**
-     * Returns a list of the current Indication cards
-     * held by the calling instance.
+     * Returns a list of the current Indication cards held by the calling
+     * instance.
+     *
      * @return List of Card Objects
      */
-    public List<Card> getHand() 
+    public List<Card> getHand()
     {
         return hand;
     }
-    
+
     /**
-     * Returns a map representing a set of Destinations and its
-     * corresponding playerID.
+     * Returns a map representing a set of Destinations and its corresponding
+     * playerID.
+     *
      * @return Map of DestinationID Objects to Integer Playerids
      */
-
-    public Map<DestinationID, Integer> getDestToPlayerId() 
+    public Map<DestinationID, Integer> getDestToPlayerId()
     {
         return destToPlayerId;
     }

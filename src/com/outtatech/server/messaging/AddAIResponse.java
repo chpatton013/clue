@@ -6,12 +6,12 @@
 package com.outtatech.server.messaging;
 
 /**
- * Message passed from the server to the client in response to a player joining
- * or leaving an existing lobby.
+ * Message sent from the server to the client in response to a request for an AI
+ * Player to be added to the game.
  *
  * @author jbilous
  */
-public class LobbyUpdateResponse
+public class AddAIResponse extends ServerResponse
 {
 
 }
