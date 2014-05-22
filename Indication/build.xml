@@ -10,10 +10,23 @@
 <project name="Indication" default="default" basedir=".">
     <description>Builds, tests, and runs the project Indication.</description>
     <import file="nbproject/build-impl.xml"/>
-      <!-- Generate javadocs for current project into ${doc.dir} -->
-  <target name="doc" depends="init" description="generate documentation">
-    <javadoc overview="src/overview.html" sourcepath="${source.dir}" destdir="${doc.dir}" windowtitle="Indication JavaDocs"/>
-  </target>
+  
+    <!-- Generate javadocs for current project into ${doc.dir} -->
+    <target name="doc" depends="init" description="generate documentation">
+            <javadoc additionalparam="${javadoc.additionalparam}" author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}" docencoding="UTF-8" encoding="${javadoc.encoding.used}" failonerror="true" noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}" notree="${javadoc.notree}" private="${javadoc.private}" overview="src/overview.html" source="${javac.source}" splitindex="${javadoc.splitindex}" use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}">
+                <classpath>
+                    <path path="${javac.classpath}"/>
+                </classpath>
+                <fileset dir="${src.dir}" excludes="*.java,${excludes}" includes="${includes}">
+                    <filename name="**/*.java"/>
+                </fileset>
+                <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
+                    <include name="**/*.java"/>
+                    <exclude name="*.java"/>
+                </fileset>
+                <!--<arg line="${javadoc.endorsed.classpath.cmd.line.arg}"/>-->
+            </javadoc>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
