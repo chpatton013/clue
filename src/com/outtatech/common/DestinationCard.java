@@ -15,7 +15,9 @@ public class DestinationCard extends HintCard
 {
     /*A unique destination*/
     DestinationID destination;
-
+    boolean north;
+    boolean west;
+    
     /**
      * Constructs a unique Destination Card.
      *
@@ -25,6 +27,29 @@ public class DestinationCard extends HintCard
     {
         super(HintCardType.DESTINATION);
         this.destination = destination;
+        
+        if (this.destination == DestinationID.NIAGRA_FALLS || 
+                this.destination == DestinationID.CONEY_ISLAND || 
+                this.destination == DestinationID.MT_RUSHMORE || 
+                this.destination == DestinationID.OLD_FAITHFUL)
+        {
+            north = true;
+        }
+        
+        else
+            north = false;
+        
+        if (this.destination == DestinationID.MT_RUSHMORE || 
+                this.destination == DestinationID.OLD_FAITHFUL || 
+                this.destination == DestinationID.GOLDEN_GATE_BRIDGE ||
+                this.destination == DestinationID.HOOVER_DAM || 
+                this.destination == DestinationID.THE_ALAMO)
+        {
+            west = true;
+        }
+        
+        else 
+            west = false;
     }
 
     /**
@@ -35,5 +60,15 @@ public class DestinationCard extends HintCard
     public DestinationID getDestination()
     {
         return destination;
+    }
+    
+    public boolean getIsNorth()
+    {
+        return north;
+    }
+    
+    public boolean getIsWest()
+    {
+        return west;
     }
 }

@@ -4,24 +4,23 @@
  * and open the template in the editor.
  */
 
-package client;
+package com.outtatech.common;
 
-import com.outtatech.client.State;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author bennettschalich
  */
-public class StateTest
+public class SuggestionTest
 {
     
-    public StateTest()
+    public SuggestionTest()
     {
     }
     
@@ -44,19 +43,26 @@ public class StateTest
     public void tearDown()
     {
     }
-    
+
     /**
-     * Test of setHostName method, of class State.
+     * Test of getType method, of class Suggestion.
      */
     @Test
-    public void testSetGetHostName()
+    public void testGetType()
     {
-        System.out.println("setGetHostName");
-        String hostname = "host_guy";
-        State instance = new State();
-        instance.setHostName(hostname);
-        String expResult = "host_guy";
-        String result = instance.getHostName();
+        System.out.println("getType");
+        
+        System.out.println("    ANY");
+        Suggestion instance = new Suggestion(SuggestionType.ANY);
+        SuggestionType expResult = SuggestionType.ANY;
+        SuggestionType result = instance.getType();
+        assertEquals(expResult, result);
+        
+        System.out.println("    CURRENT");
+        instance = new Suggestion(SuggestionType.CURRENT);
+        expResult = SuggestionType.CURRENT;
+        result = instance.getType();
         assertEquals(expResult, result);
     }
+    
 }

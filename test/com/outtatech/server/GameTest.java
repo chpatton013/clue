@@ -48,8 +48,8 @@ public class GameTest
         drawPile.add(new AllSnoop(true));
         
         List<ActionCard> discardPile = new ArrayList<ActionCard>();
-        discardPile.add(new PrivateTip());
-        discardPile.add(new Suggestion());
+        discardPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
+        discardPile.add(new Suggestion(SuggestionType.ANY));
         
         ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), hand);
         

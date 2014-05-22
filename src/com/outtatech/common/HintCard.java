@@ -15,7 +15,9 @@ public class HintCard extends Card
 {
     /*The type of HintCard this card is.*/
     private HintCardType type;
-
+    //red or blue; used for action card actions
+    private CardColor cardColor;
+    
     /**
      * Constructs a new HintCard with a type.
      *
@@ -35,5 +37,10 @@ public class HintCard extends Card
     public HintCardType getHintType()
     {
         return type;
+    }
+    
+    public CardColor getCardColor()
+    {
+        return cardColor;
     }
 }

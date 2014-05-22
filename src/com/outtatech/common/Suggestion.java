@@ -15,11 +15,18 @@ package com.outtatech.common;
  */
 public class Suggestion extends ActionCard
 {
+    SuggestionType type;
     /**
      * Constructs a new Suggestion ActionCard.
      */
-    public Suggestion()
+    public Suggestion(SuggestionType type)
     {
         super(ActionCardType.SUGGESTION);
+        this.type = type;
+    }
+    
+    public SuggestionType getType()
+    {
+        return type;
     }
 }

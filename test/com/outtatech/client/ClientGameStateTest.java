@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package client;
+package com.outtatech.client;
 
 import com.outtatech.client.ClientGameState;
 import com.outtatech.common.Card;

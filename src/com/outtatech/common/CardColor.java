@@ -10,7 +10,7 @@ package com.outtatech.common;
  *
  * @author bennettschalich
  */
-public enum Gender
+public enum CardColor
 {
-    MALE, FEMALE;
+    RED, BLUE;
 }
