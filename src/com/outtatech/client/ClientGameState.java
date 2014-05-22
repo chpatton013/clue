@@ -24,6 +24,8 @@ public class ClientGameState
     private List<Card> hand;
     private boolean revealStatus;
     private List<Card> revealed;
+    private boolean newAccusation;
+    private boolean accusationStatus;
 
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
@@ -39,6 +41,41 @@ public class ClientGameState
         this.destToPlayerId = destToPlayerId;
         this.revealed = new ArrayList<Card>();
         this.revealStatus = false;
+        this.newAccusation = false;
+        this.accusationStatus = false;
+    }
+
+    /**
+     * Sets a flag that indicates whether or not a new accusation has been made
+     * since last update.
+     */
+    public void setNewAccusation()
+    {
+        newAccusation = true;
+    }
+
+    /**
+     * Getter for a field that indicates whether or not a new accusation has
+     * been made since last check.
+     *
+     * @return whether or not a new accusation has been made
+     */
+    public boolean getAccusationStatus()
+    {
+        return accusationStatus;
+    }
+
+    /**
+     * Returns a field that indicates whether the current accusation is correct,
+     * sets the field that indicates whether or not there was a new accusation
+     * to false after access.
+     *
+     * @return whether or not the accusation was correct.
+     */
+    public boolean getAccusation()
+    {
+        newAccusation = false;
+        return accusationStatus;
     }
 
     /**
@@ -60,14 +97,15 @@ public class ClientGameState
     {
         return revealed;
     }
-    
+
     /**
      * Setter method for the list of cards that have been revealed to the
      * client.
-     * 
+     *
      * @param revealed the list of cards that have been revealed to the client.
      */
-    public void setRevealed(List<Card> revealed) {
+    public void setRevealed(List<Card> revealed)
+    {
         this.revealed = revealed;
     }
 
