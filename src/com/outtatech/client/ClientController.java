@@ -58,6 +58,15 @@ public class ClientController
     {
         this.state = state;
     }
+    
+    /**
+     * Initiates a message to the server that indicates the client has ended
+     * their current turn.
+     */
+    public void endTurn() {
+        // create new EndTurnRequest
+        // send the EndTurnRequest message to the server.
+    }
 
     /**
      * Get the ClientNetwork that the ClientController is using.
