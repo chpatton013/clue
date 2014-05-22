@@ -12,6 +12,7 @@ package com.outtatech.server.messaging;
  * 
  * @author jbilous
  */
-public class LobbyUpdateResponse {
+public class LobbyUpdateResponse 
+{
     
 }

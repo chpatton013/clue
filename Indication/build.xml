@@ -10,6 +10,10 @@
 <project name="Indication" default="default" basedir=".">
     <description>Builds, tests, and runs the project Indication.</description>
     <import file="nbproject/build-impl.xml"/>
+      <!-- Generate javadocs for current project into ${doc.dir} -->
+  <target name="doc" depends="init" description="generate documentation">
+    <javadoc overview="src/overview.html" sourcepath="${source.dir}" destdir="${doc.dir}" windowtitle="Indication JavaDocs"/>
+  </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

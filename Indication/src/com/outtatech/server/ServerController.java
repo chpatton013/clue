@@ -48,15 +48,14 @@ public class ServerController
          * else if LobbyCreateRequest respond with LobbyCreateResponse
          * else if ActionRequest respond with ActionResponse
          * 
-         * else if AddAIRequest? 
-         * @TODO Add a response class?  PlayersResponse? 
-         * List of player names and made up AI names?
-         * or Add a list of players to the LobbyDiscoveryResponse?
+         * else if AddAIRequest respond with AddAIResponse
          * 
          * else if EndTurnRequest respond with GameStateResponse
          * 
          * else if RevealCardRequest(prompted by an ActionResponse) 
          * respond with a GameStateResponse
+         * 
+         * else if KickPlayerRequest respond with KickPlayerResponse
          * 
          * Responses are made via the forwardMessage function.
          */
@@ -66,6 +65,7 @@ public class ServerController
      * Handles a request made by an AI player.
      * @param obj Object signaling an action.
      * @param robot AI instance that triggered the action.
+     * @link forwardMessage()
      */
     public void reactToRobot(Object obj, AI robot) 
     {
@@ -77,7 +77,7 @@ public class ServerController
          * 
          * If the Object obj instance designates an action that a human player 
          * must respond to, construct an ActionResponse Object and send 
-         * out using the forwardMessage() function and this will call
+         * out using the forwardMessage() function which will call
          * (sendMessageToClient()).
          * 
          * Notify all Clients that the Game instance has changed.
@@ -88,15 +88,12 @@ public class ServerController
     /**
      * Provides a hook to send Objects to a networked client.
      * @param obj Object to send to network hooks
+     * @link sendMessageToClients()
+     * @link sendMessageToClient()
      */
     public void forwardMessage(Object obj) 
     {
         /**
-         * @TODO instead of checking the instanceOf on this object
-         * maybe we should add a flag designating whether all clients 
-         * should be notified or just one client.  Or we can add a
-         * forwardMessageToAll function.
-         * 
          * Determine the instance of this object
          * if the object instance requires notifying all clients
          * then call ServerNetwork.sendMessageToClients().  

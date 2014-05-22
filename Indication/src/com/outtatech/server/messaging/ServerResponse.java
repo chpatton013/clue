@@ -11,12 +11,14 @@ package com.outtatech.server.messaging;
  * 
  * @author jbilous
  */
-public class ServerResponse {
+public class ServerResponse 
+{
     
     /**
      * Constructs a new ServerResponse object.
      */
-    public ServerResponse() {
+    public ServerResponse() 
+    {
         
     }
 }
