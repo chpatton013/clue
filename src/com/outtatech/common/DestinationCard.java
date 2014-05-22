@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.common;
 
 /**
- * A DestinationCard represents a HintCard that specifies a certain Destination 
+ * A DestinationCard represents a HintCard that specifies a certain Destination
  * ID.
+ *
  * @author bennettschalich
  */
 public class DestinationCard extends HintCard
@@ -20,6 +20,7 @@ public class DestinationCard extends HintCard
     
     /**
      * Constructs a unique Destination Card.
+     *
      * @param destination A unique destination ID.
      */
     public DestinationCard(DestinationID destination)
@@ -50,9 +51,10 @@ public class DestinationCard extends HintCard
         else 
             west = false;
     }
-    
+
     /**
      * Returns the unique destination of this DestinationCard.
+     *
      * @return A unique destination.
      */
     public DestinationID getDestination()

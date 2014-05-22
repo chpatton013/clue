@@ -6,18 +6,17 @@
 package com.outtatech.server.messaging;
 
 /**
- * Message class that represents a message sent from the server to a client.
+ * Message sent from the server to the client in response to a request for an AI
+ * Player to be added to the game.
  *
  * @author jbilous
  */
-public class ServerResponse
+public class AddAIResponse extends ServerResponse
 {
-
     /**
-     * Constructs a new ServerResponse object.
+     * Creates a new AddAIResponse Object.
      */
-    public ServerResponse()
-    {
-
+    public AddAIResponse() {
+        
     }
 }

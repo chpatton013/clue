@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.client;
 
 import java.util.List;
@@ -13,14 +12,13 @@ import com.outtatech.client.messaging.*;
 import com.outtatech.server.messaging.*;
 
 /**
- * The ClientController class facilitates changes to the clients
- * State, facilitates sending requests to the Networking classes,
- * and reacts to responses received from the Networking classes.
+ * The ClientController class facilitates changes to the clients State,
+ * facilitates sending requests to the Networking classes, and reacts to
+ * responses received from the Networking classes.
  *
- * @author bschache
- * TODO: make a notification class to send to the GUI
- *       contains message
- *       triggers display of message and loading animation
+ * @author bschache TODO: make a notification class to send to the GUI contains
+ * message triggers display of message and loading animation
+ * @author jbilous added accusation methods
  */
 public class ClientController
 {
@@ -29,8 +27,9 @@ public class ClientController
     private ClientRequest staged;
 
     /**
-     * Constructor for the ClientController.  Requires an initialized
-     * State object and an initialized ClientNetwork object
+     * Constructor for the ClientController. Requires an initialized State
+     * object and an initialized ClientNetwork object
+     *
      * @param state State of the client
      * @param network ClientNetwork instance to handle communication
      */
@@ -43,6 +42,7 @@ public class ClientController
 
     /**
      * Get the Player's current State
+     *
      * @return the Player's state
      */
     public State getState()
@@ -52,15 +52,26 @@ public class ClientController
 
     /**
      * Set the player's current state
+     *
      * @param state an initialized instance of State
      */
     public void setState(State state)
     {
         this.state = state;
     }
+    
+    /**
+     * Initiates a message to the server that indicates the client has ended
+     * their current turn.
+     */
+    public void endTurn() {
+        // create new EndTurnRequest
+        // send the EndTurnRequest message to the server.
+    }
 
     /**
      * Get the ClientNetwork that the ClientController is using.
+     *
      * @return ClientNetwork instance that is currently in use.
      */
     public ClientNetwork getNetwork()
@@ -69,9 +80,8 @@ public class ClientController
     }
 
     /**
-     * Start the single player game mode.
-     * Alerts game server.
-     * Changes to Client to next logical state
+     * Start the single player game mode. Alerts game server. Changes to Client
+     * to next logical state
      */
     public void startSinglePlayerGame()
     {
@@ -92,6 +102,7 @@ public class ClientController
 
     /**
      * Sends a Lobby Join request to the game server.
+     *
      * @param lobbyId Integer the id of the lobby to join
      */
     public void joinGame(Integer lobbyId)
@@ -122,8 +133,9 @@ public class ClientController
     }
 
     /**
-     * A hook allowing a client extension to message into the controller,
-     * ie an object from a GUI.
+     * A hook allowing a client extension to message into the controller, ie an
+     * object from a GUI.
+     *
      * @param obj Object from a client extension
      */
     public void requestUse(Object obj)
@@ -138,10 +150,23 @@ public class ClientController
 
         }
     }
-
+    
     /**
-     * A hook to prompt a client extension, Controller sends a message out.
-     * ie. the Controller will prompt a GUI extension.
+     * Called when the client would like to make an accusation during their
+     * turn.
+     * 
+     * @param accusationCards list containing the Destination, Vehicle and
+     * Suspect card required to make an accusation.
+     */
+    public void makeAccusation(List<Card> accusationCards) {
+        // Create an AccusationRequest message
+        // Send AccusationRequest message to the server
+    }
+    
+    /**
+     * A hook to prompt a client extension, Controller sends a message out. ie.
+     * the Controller will prompt a GUI extension.
+     *
      * @param obj Object that requiring examination
      */
     public void promptViews(Object obj)
@@ -176,33 +201,34 @@ public class ClientController
 
     /**
      * React to a message from the ClientNetwork.
+     *
      * @param obj Object message from the ClientNetwork
      */
     public void reactToMessage(Object obj)
     {
         if (obj instanceof ActionResponse)
         {
-           this.reactToActionResponse((ActionResponse)obj);
+            this.reactToActionResponse((ActionResponse) obj);
         }
         else if (obj instanceof CardDealResponse)
         {
-           this.reactToCardDealResponse((CardDealResponse)obj);
+            this.reactToCardDealResponse((CardDealResponse) obj);
         }
         else if (obj instanceof GameStateResponse)
         {
-           this.reactToGameStateResponse((GameStateResponse)obj);
+            this.reactToGameStateResponse((GameStateResponse) obj);
         }
         else if (obj instanceof LobbyCreateResponse)
         {
-           this.reactToLobbyCreateResponse((LobbyCreateResponse)obj);
+            this.reactToLobbyCreateResponse((LobbyCreateResponse) obj);
         }
         else if (obj instanceof LobbyDiscoveryResponse)
         {
-           this.reactToLobbyDiscoveryResponse((LobbyDiscoveryResponse)obj);
+            this.reactToLobbyDiscoveryResponse((LobbyDiscoveryResponse) obj);
         }
         else if (obj instanceof LobbyUpdateResponse)
         {
-           this.reactToLobbyUpdateResponse((LobbyUpdateResponse)obj);
+            this.reactToLobbyUpdateResponse((LobbyUpdateResponse) obj);
         }
     }
 
@@ -239,6 +265,7 @@ public class ClientController
 
     /**
      * Send a message via the ClientNetwork instance.
+     *
      * @param obj Object the message object to send via the Client network
      * instance.
      */

@@ -6,19 +6,20 @@
 
 package com.outtatech.client;
 
+import com.outtatech.client.ClientGameState;
 import com.outtatech.common.Card;
 import com.outtatech.common.CardType;
 import com.outtatech.common.DestinationID;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

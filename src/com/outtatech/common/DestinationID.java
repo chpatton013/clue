@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.common;
 
 /**
- * The DestinationID enumeration models types of destinations destination cards can have
+ * The DestinationID enumeration models types of destinations destination cards
+ * can have
+ *
  * @author bennettschalich
  */
-public enum DestinationID 
+public enum DestinationID
 {
-    NIAGRA_FALLS, GOLDEN_GATE_BRIDGE, OLD_FAITHFUL, CONEY_ISLAND, THE_ALAMO, 
+    NIAGRA_FALLS, GOLDEN_GATE_BRIDGE, OLD_FAITHFUL, CONEY_ISLAND, THE_ALAMO,
     HOOVER_DAM, LINCOLN_MEMORIAL, MIAMI_BEACH, MT_RUSHMORE;
 }

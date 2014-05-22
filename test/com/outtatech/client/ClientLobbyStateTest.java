@@ -6,14 +6,15 @@
 
 package com.outtatech.client;
 
-import java.util.List;
+import com.outtatech.client.ClientLobbyDiscoveryState;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -58,7 +59,7 @@ public class ClientLobbyStateTest
         list.add(2);
         list.add(1);
         
-        ClientLobbyState instance = new ClientLobbyState(list);
+        ClientLobbyDiscoveryState instance = new ClientLobbyDiscoveryState(list);
         List<Integer> expResult = list;
         List<Integer> result = instance.getGameList();
         assertEquals(expResult, result);

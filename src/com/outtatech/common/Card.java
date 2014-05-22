@@ -1,18 +1,18 @@
-
-
 package com.outtatech.common;
 
 /**
  * The Card models represents any Clue card.
+ *
  * @author bennettschalich
  */
-public class Card 
+public class Card
 {
     private static int id = -1;
     CardType cardType;
-    
+
     /**
      * Constructs a new Card.
+     *
      * @param cardType Describes whether the card is of the type Hint or Action.
      */
     public Card(CardType cardType)
@@ -20,18 +20,20 @@ public class Card
         this.cardType = cardType;
         this.id++;
     }
-    
+
     /**
      * Returns the card type (Hint or Action).
+     *
      * @return The card type (Hint or Action).
      */
     public CardType getCardType()
     {
         return cardType;
     }
-    
+
     /**
      * Returns a unique id
+     *
      * @return a unique id
      */
     public int getID()

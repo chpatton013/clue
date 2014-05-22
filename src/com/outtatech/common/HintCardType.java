@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.outtatech.common;
 
 /**
  * The HintCard enumeration models types HintCards can have.
+ *
  * @author bennettschalich
  */
-public enum HintCardType 
+public enum HintCardType
 {
-   VEHICLE, SUSPECT, DESTINATION; 
+    VEHICLE, SUSPECT, DESTINATION;
 }
