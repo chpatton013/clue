@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.outtatech.client;
+package guicontroller;
 
 import java.util.Observable;
 import java.util.Observer;

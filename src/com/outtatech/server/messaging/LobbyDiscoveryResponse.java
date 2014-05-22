@@ -25,7 +25,7 @@ public class LobbyDiscoveryResponse extends ServerResponse
      */
     public LobbyDiscoveryResponse(List<Lobby> lobbies)
     {
-        this.lobbies = lobbies;
+
     }
 
     /**

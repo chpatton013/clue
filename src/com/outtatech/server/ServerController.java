@@ -1,11 +1,7 @@
 package com.outtatech.server;
 
-import com.lloseng.ocsf.server.ConnectionToClient;
-import com.outtatech.client.messaging.*;
-import com.outtatech.server.messaging.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import com.lloseng.ocsf.server.ConnectionToClient;
 
 /**
  * The ServerController controls every game being played. Each game has a set of
@@ -21,8 +17,6 @@ public class ServerController
     private Map<ConnectionToClient, Game> games;
     private Map<ServerPlayer, ConnectionToClient> humans;
     private Map<ServerPlayer, AI> robots;
-    private Map<Integer, Lobby> lobbies;
-    private ServerNetwork network;
 
     /**
      * Construct a ServerController object. A ServerController instance can be
@@ -53,31 +47,8 @@ public class ServerController
         /**
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
-         */ 
-        if (obj instanceof LobbyListRequest) {
-            forwardMessage(new 
-                LobbyDiscoveryResponse(new ArrayList(lobbies.values())), 
-                    connection);
-        }
-        /* 
          * LobbyJoinRequest respond with LobbyUpdateResponse else if
-        */
-        else if (obj instanceof LobbyJoinRequest) {
-            
-            forwardMessage(new LobbyUpdateResponse(
-                lobbies.get(((LobbyJoinRequest)obj).getLobbyId())), 
-                    connection);
-        }
-       /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
-         */
-        else if (obj instanceof LobbyCreateRequest) {
-            Lobby temp = new Lobby(((LobbyCreateRequest)obj).getLobbyName(), 
-                    (games.get(connection)).getGameId());
-            lobbies.put(temp.getLobbyId(), temp);
-            forwardMessage(new LobbyCreateResponse(temp), connection);
-        }
-       /**
          * ActionRequest respond with ActionResponse
          *
          * else if AddAIRequest?
@@ -105,10 +76,8 @@ public class ServerController
     {
         /**
          * Using the robots Map find the Game instance of the AI robot.
-         */
-        
-        
-        /** Check instanceOf obj to determine what change needs to be made the AI
+         *
+         * Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
          *
          * If the Object obj instance designates an action that a human player
@@ -125,9 +94,8 @@ public class ServerController
      * Provides a hook to send Objects to a networked client.
      *
      * @param obj Object to send to network hooks
-     * @param connection The connection to send the object to
      */
-    public void forwardMessage(Object obj, ConnectionToClient connection)
+    public void forwardMessage(Object obj)
     {
         /**
          * @TODO instead of checking the instanceOf on this object maybe we

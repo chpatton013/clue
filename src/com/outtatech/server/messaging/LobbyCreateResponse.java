@@ -25,7 +25,7 @@ public class LobbyCreateResponse extends ServerResponse
      */
     public LobbyCreateResponse(Lobby lobby)
     {
-        this.lobby = lobby;
+
     }
 
     /**
