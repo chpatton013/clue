@@ -100,7 +100,7 @@ public class ActionCardTest
     
     public void testPrivateTip()
     {
-        ActionCard instance = new PrivateTip();
+        ActionCard instance = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
         ActionCardType expResult = ActionCardType.PRIVATE_TIP;
         ActionCardType result = instance.getActionType();
         assertEquals(expResult, result);
@@ -108,7 +108,7 @@ public class ActionCardTest
     
     public void testSuperSleuth()
     {
-        ActionCard instance = new SuperSleuth();
+        ActionCard instance = new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT);
         ActionCardType expResult = ActionCardType.SUPER_SLEUTH;
         ActionCardType result = instance.getActionType();
         assertEquals(expResult, result);
@@ -116,7 +116,7 @@ public class ActionCardTest
     
     public void testSuggestion()
     {
-        ActionCard instance = new Suggestion();
+        ActionCard instance = new Suggestion(SuggestionType.ANY);
         ActionCardType expResult = ActionCardType.SUGGESTION;
         ActionCardType result = instance.getActionType();
         assertEquals(expResult, result);

@@ -17,11 +17,18 @@ package com.outtatech.common;
  */
 public class SuperSleuth extends ActionCard
 {
+    SuperSleuthType type;
     /**
      * Constructs a new SuperSleuth ActionCard.
      */
-    public SuperSleuth()
+    public SuperSleuth(SuperSleuthType type)
     {
         super(ActionCardType.SUPER_SLEUTH);
+        this.type = type;
+    }
+    
+    public SuperSleuthType getType()
+    {
+        return type;
     }
 }
