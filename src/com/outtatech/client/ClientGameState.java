@@ -21,6 +21,8 @@ public class ClientGameState
     private int playerID;
     private Object notes;
     private List<Card> hand;
+    private boolean newReveal;
+
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
      */
@@ -33,6 +35,7 @@ public class ClientGameState
         this.notes = notes;
         this.hand = hand;
         this.destToPlayerId = destToPlayerId;
+        this.newReveal = false;
     }
 
     /**
@@ -46,9 +49,31 @@ public class ClientGameState
     }
 
     /**
+     * Gets the field that indicates whether or not new cards have been revealed
+     * to the client since last state check, set to false after access.
+     */
+    public boolean getNewReveal()
+    {
+        boolean curReveal = newReveal;
+        newReveal = false;
+        return curReveal;
+    }
+
+    /**
+     * Gets the field that indicates whether or not new cards have been revealed
+     * to the client since last state check.
+     *
+     * @param revealStatus
+     */
+    public void setNewReveal(boolean revealStatus)
+    {
+        newReveal = revealStatus;
+    }
+
+    /**
      * Change the player id associated to the instance of ClientGameState
      *
-     * @param playerID int id of the player
+     * @param playerID integer id of the player
      */
     public void setPlayerId(int playerID)
     {
