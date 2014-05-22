@@ -5,10 +5,11 @@
  */
 package com.outtatech.client;
 
-import java.util.List;
-import java.util.Map;
 import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The ClientGameState class holds logic for the players State in the Indication
@@ -21,7 +22,8 @@ public class ClientGameState
     private int playerID;
     private Object notes;
     private List<Card> hand;
-    private boolean newReveal;
+    private boolean revealStatus;
+    private List<Card> revealed;
 
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
@@ -35,7 +37,8 @@ public class ClientGameState
         this.notes = notes;
         this.hand = hand;
         this.destToPlayerId = destToPlayerId;
-        this.newReveal = false;
+        this.revealed = new ArrayList<Card>();
+        this.revealStatus = false;
     }
 
     /**
@@ -49,14 +52,34 @@ public class ClientGameState
     }
 
     /**
+     * Getter method for the cards that have been revealed to the client.
+     *
+     * @return a list that contains cards that have been revealed to the client.
+     */
+    public List<Card> getRevealed()
+    {
+        return revealed;
+    }
+    
+    /**
+     * Setter method for the list of cards that have been revealed to the
+     * client.
+     * 
+     * @param revealed the list of cards that have been revealed to the client.
+     */
+    public void setRevealed(List<Card> revealed) {
+        this.revealed = revealed;
+    }
+
+    /**
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check, set to false after access.
      */
-    public boolean getNewReveal()
+    public boolean getRevealStatus()
     {
-        boolean curReveal = newReveal;
-        newReveal = false;
-        return curReveal;
+        boolean curRevealStatus = revealStatus;
+        revealStatus = false;
+        return curRevealStatus;
     }
 
     /**
@@ -65,9 +88,9 @@ public class ClientGameState
      *
      * @param revealStatus
      */
-    public void setNewReveal(boolean revealStatus)
+    public void setRevealStatus(boolean revealStatus)
     {
-        newReveal = revealStatus;
+        this.revealStatus = revealStatus;
     }
 
     /**
