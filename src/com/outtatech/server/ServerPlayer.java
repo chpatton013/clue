@@ -2,7 +2,7 @@ package com.outtatech.server;
 
 import java.awt.Color;
 import java.util.List;
-import com.outtatech.common.Card;
+import com.outtatech.common.*;
 
 /**
  * The ServerPlayer class represents a player in a game... TODO!
@@ -16,7 +16,8 @@ public class ServerPlayer
     private Object notes;
     private String name;
     private Color color;
-    private List<Card> hand;
+    public List<HintCard> hintCardsHand;
+    public List<ActionCard> actionCardsHand;
 
     /**
      * Construct a sever player to keep track of client and server player
@@ -26,19 +27,22 @@ public class ServerPlayer
      * @param notes Object representing notes for the player
      * @param name String representation of player
      * @param color Color object to help differentiate players
-     * @param hand List of Card Objects representing a players hand
+     * @param hintCardsHand List of Card Objects representing a players hand of Hint Cards
+     * @param actionCardsHand List of Card Objects representing a players hand of Action Cards
      */
     public ServerPlayer(int playerId,
             Object notes,
             String name,
             Color color,
-            List<Card> hand)
+            List<HintCard> hintCardsHand,
+            List<ActionCard> actionCardsHand)
     {
         this.playerId = playerId;
         this.notes = notes;
         this.name = name;
         this.color = color;
-        this.hand = hand;
+        this.hintCardsHand = hintCardsHand;
+        this.actionCardsHand = actionCardsHand;
     }
 
     public int getPlayerId()
@@ -107,22 +111,43 @@ public class ServerPlayer
     }
 
     /**
-     * Gets the hand of this player.
+     * Gets the action cards hand of this player.
      *
-     * @return The hand of this player.
+     * @return The action cards hand of this player.
      */
-    public List<Card> getHand()
+    public List<ActionCard> getActionCardsHand()
     {
-        return hand;
+        return actionCardsHand;
+    }
+     /**
+     * Gets the hint cards hand of this player.
+     *
+     * @return The hint cards hand of this player.
+     */
+    public List<HintCard> getHintCardsHand()
+    {
+        return hintCardsHand;
     }
 
     /**
-     * Sets the hand of this player.
+     * Sets the action cards hand of this player.
      *
-     * @param hand of the player.
+     * @param actionCardsHand of the player.
      */
-    public void setHand(List<Card> hand)
+    public void setActionCardsHand(List<ActionCard> actionCardsHand)
     {
-        this.hand = hand;
+    
+        this.actionCardsHand = actionCardsHand;
+    }
+    
+     /**
+     * Sets the hint cards hand of this player.
+     *
+     * @param hintCardsHand of the player.
+     */
+    public void setHintCardsHand(List<HintCard> hintCardsHand)
+    {
+    
+        this.hintCardsHand = hintCardsHand;
     }
 }

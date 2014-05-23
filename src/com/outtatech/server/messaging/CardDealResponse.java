@@ -26,4 +26,13 @@ public class CardDealResponse extends ServerResponse
     {
         this.cards = cards;
     }
+    
+    /**
+     * Getter methods for the cards dealt to the player.
+     * 
+     * @return cards dealt to the player.
+     */
+    public List<Card> getCards() {
+        return cards;
+    }
 }
