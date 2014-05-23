@@ -21,9 +21,9 @@ public class VehicleCard extends HintCard
      *
      * @param vehicle A unique vehicle ID
      */
-    public VehicleCard(VehicleID vehicle)
+    public VehicleCard(VehicleID vehicle, CardColor cardColor)
     {
-        super(HintCardType.VEHICLE);
+        super(HintCardType.VEHICLE, cardColor);
         this.vehicle = vehicle;
         
         if (this.vehicle == VehicleID.SEAPLANE || 
