@@ -84,7 +84,7 @@ public class ServerController
         else if (obj instanceof ActionRequest) 
         {
             ActionRequest temp = ((ActionRequest)obj);
-            forwardMessage(new ActionResponse(), connection, false);
+            //forwardMessage(new ActionResponse(), connection, false);
         }
         /** AddAIRequest?
          */
@@ -95,7 +95,7 @@ public class ServerController
             //need to create an AI
             games.get(connection).getServerPlayers().add(null);
             //update the mapping
-            forwardMessage(new ActionResponse(), connection, false);
+            //forwardMessage(new ActionResponse(), connection, false);
         }
         /** @TODO Add a response class? PlayersResponse? List of player names and
          * made up AI names? or Add a list of players to the
@@ -164,11 +164,11 @@ public class ServerController
          * ServerNetwork.sendMessageToClient().
          */
         if(flag) {
-            network.sendMessageToClients(obj, 
+            network.sendMessageToClients((ServerResponse)obj, 
                     new ArrayList<ConnectionToClient>(games.keySet()));
         }
         else {
-            network.sendMessageToClient(obj, connection);
+            network.sendMessageToClient((ServerResponse)obj, connection);
         }
     }
     
