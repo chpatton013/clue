@@ -2,8 +2,10 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
+import com.outtatech.common.Card;
 import com.outtatech.server.messaging.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +15,13 @@ import java.util.Map;
  * object. This association is tracked with a map of Connection to Game. This
  * implies that multiple Connection keys will point to the same Game value.
  *
- * @author Steven Chiu
+ * @author Steven Chiu, James Bilous
  * @version 1.0 - May 11, 2014
  */
 public class ServerController
 {
     private Map<ConnectionToClient, Game> games;
+    private Map<Game, ArrayList<ConnectionToClient>> players;
     private Map<ServerPlayer, ConnectionToClient> humans;
     //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
@@ -34,13 +37,14 @@ public class ServerController
      * @param humans a Map of ServerPlayers and Client Connections
      * @param robots a Map of ServerPlayers and AI instances
      */
-    public ServerController(Map<ConnectionToClient, Game> games,
-            Map<ServerPlayer, ConnectionToClient> humans,
-            Map<ServerPlayer, AI> robots)
+    public ServerController(ServerNetwork network)
     {
-        this.games = games;
-        this.humans = humans;
-        this.robots = robots;
+        this.network = network;
+        this.games = new HashMap<ConnectionToClient, Game>();
+        this.players = new HashMap<Game, ArrayList<ConnectionToClient>>();
+        this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
+        this.robots = new HashMap<ServerPlayer, AI>();
+        this.lobbies = new HashMap<Integer, Lobby>();
     }
 
     /**
@@ -58,7 +62,13 @@ public class ServerController
         if (obj instanceof LobbyListRequest) {
             forwardMessage(new 
                 LobbyDiscoveryResponse(new ArrayList(lobbies.values())), 
-                    connection, false);
+                    connection);
+        }
+        else if (obj instanceof AccusationRequest)
+        {
+            AccusationRequest accusation = (AccusationRequest)obj;
+            List<Card> accusationCards = accusation.getAccusationCards();
+            
         }
         /* 
          * LobbyJoinRequest respond with LobbyUpdateResponse else if
@@ -144,33 +154,33 @@ public class ServerController
          * forwardMessage() and this will call (sendMessageToClients()).
          */
     }
+    
+    /**
+     * Provides a hook to send a single message to a networked client.
+     * 
+     * @param obj Object to send to network hooks
+     * @param client The connection to send the object to
+     */
+    public void forwardMessage(Object obj, ConnectionToClient client)
+    {
+        network.sendMessageToClient(obj, client);
+    }
 
     /**
      * Provides a hook to send Objects to a networked client.
      *
      * @param obj Object to send to network hooks
-     * @param connection The connection to send the object to
+     * @param clients The connections to send the object to
      */
-    public void forwardMessage(Object obj, ConnectionToClient connection, 
-            boolean flag)
+    public void forwardMessage(Object obj, List<ConnectionToClient> clients)
     {
         /**
-         * @TODO instead of checking the instanceOf on this object maybe we
-         * should add a flag designating whether all clients should be notified
-         * or just one client. Or we can add a forwardMessageToAll function.
-         *
          * Determine the instance of this object if the object instance requires
          * notifying all clients then call ServerNetwork.sendMessageToClients().
          * If only one client needs to be notified by the response then call
          * ServerNetwork.sendMessageToClient().
          */
-        if(flag) {
-            network.sendMessageToClients((ServerResponse)obj, 
-                    new ArrayList<ConnectionToClient>(games.keySet()));
-        }
-        else {
-            network.sendMessageToClient((ServerResponse)obj, connection);
-        }
+        network.sendMessageToClients((ServerResponse)obj, clients);
     }
     
     private boolean isHuman(ServerPlayer player) {

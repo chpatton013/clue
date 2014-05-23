@@ -30,7 +30,17 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
-     * Sends a Message object to all client connections provide in the client list.
+     * Sets this instance's server controller
+     * @param ctrl the ServerController object.
+     */
+    public void setServerController(ServerController ctrl)
+    {
+        this.ctrl = ctrl;
+    }
+
+    /**
+     * Sends a Message object to all client connections provide in the client
+     * list.
      *
      * @param msg ServerResponse to send to client connections
      * @param clientList list of client connections
@@ -38,15 +48,17 @@ public class ServerNetwork extends AbstractServer
     public void sendMessageToClients(ServerResponse msg,
             List<ConnectionToClient> clientList)
     {
-        try 
+        try
         {
             // For each ConnectionToClient in clientList
-            for(ConnectionToClient client : clientList) {
+            for (ConnectionToClient client : clientList)
+            {
                 // Call sendMessageToClient on obj
                 client.sendToClient(msg);
-            } 
+            }
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
             // Handle Exception
             System.out.println("Error sending message to client");
         }
@@ -58,17 +70,19 @@ public class ServerNetwork extends AbstractServer
      * @param msg ServerResponse to send to client connections
      * @param client the client connection
      */
-    public void sendMessageToClient(ServerResponse msg, ConnectionToClient client)
+    public void sendMessageToClient(Object msg,
+            ConnectionToClient client)
     {
         // Ensure the obj is instanceof ServerMessage
         try
         {
             // Call OCSF's sendToClient on obj
             client.sendToClient(msg);
-        }catch(Exception e) 
+        }
+        catch (Exception e)
         {
             System.out.println("Error sending message to client");
-            
+
         }
     }
 
@@ -82,8 +96,8 @@ public class ServerNetwork extends AbstractServer
     public void handleMessageFromClient(Object message,
             ConnectionToClient client)
     {
-        // Ensure message is an instance of ClientMessage
         // Cast message to the appropriate ClientMessage type
         // Update server state based on message as appropriate.
+        ctrl.reactToNetwork(message, client);
     }
 }

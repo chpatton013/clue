@@ -6,80 +6,59 @@
 
 package com.outtatech.server;
 
-import com.lloseng.ocsf.server.ConnectionToClient;
+import com.outtatech.client.ClientController;
+import com.outtatech.client.ClientMenuState;
+import com.outtatech.client.ClientNetwork;
+import com.outtatech.client.messaging.LobbyListRequest;
+import com.outtatech.common.Card;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author dmangin
+ * @author jbilous
  */
-public class ServerControllerTest {
+public class ServerControllerTest
+{
+    private ClientMenuState state;
+    private ClientNetwork clientnw;
+    private ClientController clientctrl;
     
-    public ServerControllerTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private ServerNetwork servernw;
+    private ServerController serverctrl;
     
     @Before
-    public void setUp() {
+    public void setUp()
+    {
+        state = new ClientMenuState();
+        clientnw = new ClientNetwork("localhost", 5300);
+        clientctrl = new ClientController(state, clientnw);
+        clientnw.setClientController(clientctrl);
+        
+        servernw = new ServerNetwork(5300);
+        serverctrl = new ServerController(servernw);
+        servernw.setServerController(serverctrl);
     }
     
     @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of reactToNetwork method, of class ServerController.
-     */
-    @Test
-    public void testReactToNetwork() {
-        System.out.println("reactToNetwork");
-        Object obj = null;
-        ConnectionToClient connection = null;
-        ServerController instance = null;
-        instance.reactToNetwork(obj, connection);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of reactToRobot method, of class ServerController.
-     */
-    @Test
-    public void testReactToRobot() {
-        System.out.println("reactToRobot");
-        Object obj = null;
-        AI robot = null;
-        ServerController instance = null;
-        instance.reactToRobot(obj, robot);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of forwardMessage method, of class ServerController.
-     */
-    @Test
-    public void testForwardMessage() {
-        System.out.println("forwardMessage");
-        Object obj = null;
-        ConnectionToClient connection = null;
-        boolean flag = false;
-        ServerController instance = null;
-        instance.forwardMessage(obj, connection, flag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void tearDown()
+    {
+        try {
+          clientnw.closeConnection();
+        } catch(Exception e) {
+            System.out.println("Problem closing connection");
+        }
     }
     
+    @Test
+    public void testCreateLobby() {
+        
+        //Send a new LobbyListRequest
+        LobbyListRequest llreq = new LobbyListRequest();
+        clientctrl.forwardMessage(llreq);
+        
+    }
 }

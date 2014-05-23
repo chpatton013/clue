@@ -5,6 +5,7 @@
  */
 package com.outtatech.client;
 
+import com.outtatech.server.Lobby;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class ClientLobbyDiscoveryState extends State
 {
-    private List<Integer> gameList;
+    private List<Lobby> lobbyList;
 
     /**
      * Constructor requires a List of Integer Objects that represents a list of
@@ -25,19 +26,34 @@ public class ClientLobbyDiscoveryState extends State
      *
      * @param gameList List of games in the lobby
      */
-    public ClientLobbyDiscoveryState(List<Integer> gameList)
+    public ClientLobbyDiscoveryState(List<Lobby> lobbyList)
     {
-        this.gameList = gameList;
+        this.lobbyList = lobbyList;
+    }
+
+    ClientLobbyDiscoveryState()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * Get the current list of games associated with the instance of
+     * Get the current list of lobbies associated with the instance of
      * ClientLobbyState.
      *
-     * @return List of Integer Objects representing games
+     * @return List of Lobby Objects representing unstarted games
      */
-    public List<Integer> getGameList()
+    public List<Lobby> getLobbyList()
     {
-        return gameList;
+        return lobbyList;
+    }
+
+    /**
+     * Sets the lobby list of the state
+     *
+     * @param newLobbyList the lobby list of the state
+     */
+    public void setLobbyList(List<Lobby> newLobbyList)
+    {
+        this.lobbyList = newLobbyList;
     }
 }

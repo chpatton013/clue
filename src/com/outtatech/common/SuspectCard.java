@@ -53,4 +53,5 @@ public class SuspectCard extends HintCard
     {
         return gender;
     }
+    
 }
