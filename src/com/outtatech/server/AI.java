@@ -1,6 +1,9 @@
 package com.outtatech.server;
 
 import com.outtatech.common.*;
+import java.awt.Color;
+import java.util.*;
+import com.outtatech.client.messaging.*;
 
 /**
  * AI Class can be used to replace a human player. An AI instance will have its
@@ -9,7 +12,7 @@ import com.outtatech.common.*;
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
-public class AI
+public class AI extends ServerPlayer
 {
     private Difficulty difficulty;
     private ServerController ctrl;
@@ -21,8 +24,16 @@ public class AI
      * @param difficulty the Difficulty instance to drive the AI
      * @param ctrl the Server Controller instance needing an AI
      */
-    public AI(Difficulty difficulty, ServerController ctrl)
+    public AI(int playerId,
+            Object notes,
+            String name,
+            Color color,
+            List<HintCard> hintCardsHand,
+            List<ActionCard> actionCardsHand,
+            Difficulty difficulty, 
+            ServerController ctrl)
     {
+        super(playerId, notes, name, color, hintCardsHand, actionCardsHand);
         this.difficulty = difficulty;
         this.ctrl = ctrl;
     }
@@ -62,31 +73,34 @@ public class AI
      * participation.
      *
      * @param card The card to respond to.
-     * @return playableCards The list of cards to show.
+     * @return playableCards The list of cards to show or null if there are no compatible cards found.
      */
-    public void aiRespond(ActionCard card)
-    { // void for sake of complitation w/pseudocde. should return a List
-        // This method won't require knowledge of game state or any reasoning methods. 
-        // List playableCards
+    public ArrayList<HintCard> aiRespond(ActionCard card)
+    { 
+        // List playableCards to return
+        ArrayList<HintCard> playableCards = new ArrayList();
 
-            // typeCardToShow = type of card required // E.g. male suspect, southern location, etc.
+        // typeCardRequired = type of card required // E.g. male suspect, southern location, etc.
         // numCardsToShow = number of cards to show // can either be 1 or all cards of the type
-            // // Responses that require specific cards to be found in hand and shown to player(s).
-        // if card is a super-sleuth card or private tip {
-        // 	for each card cardInHand in hand {
-        // 		if cardInHand matches the typeCardToShow {
-        // 			add card to list playableCards
-        // 			if numCardsToShow == 1
-        // 				break
-        // 		}
-        // 	}
-        // }
-            // if playableCards is empty {
-        // 	display “no such card in hand” message in log
-        // 	return null
-        // }
-        // else 
-        //  return playableCards;
+        
+        if (card instanceof SuperSleuth || card instanceof PrivateTip)
+        {
+            for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++) 
+            {
+           //     if (hintCardsHand.get(i).getHintType() == typeCardRequired) {
+           //           playableCards.add(hintCardsHand.get(i));
+           //           if numCardsToShow == 1
+           //                 break;
+           //     }
+            }
+        }
+        
+        if (playableCards.size() > 0)
+            return playableCards;
+        else
+            return null;
+  
+
     }
 
     /**
@@ -95,15 +109,14 @@ public class AI
 
     public void aiTurn()
     {
+        // If not time to make an accusation, play an action card randomly determined.
+        if (!aiMakeAccusation()) 
+        {
+           ctrl.reactToRobot(actionCardsHand.get((int)(Math.random())), this);     
+        }
 
-            // if aiMakeAccusation == false { //if not time to make accusation, play normally. otherwise function aiMakeAccusation will accuse
-        // 	if number of actionCards in deck == 1
-        // 		add next action card from deck to hand
-            // 	if generate random number between 1 and 2 == 1
-        // 		reactToRobot(first actionCard)
-        // 	else
-        // 		reactToRobot(second actionCard)
-        // }
+        ctrl.reactToRobot(new EndTurnRequest(), this);
+        
     }
 
     /**
@@ -117,13 +130,15 @@ public class AI
 
     public Card aiRefuteSuggestion(SuspectCard sc, VehicleCard vc,
             DestinationCard dc)
-    {
-
-            // for each card in hand {
-        // 	if card == suspectcard or card == locationcard or card == vehiclecard{
-        // 		return Card
-        // 	}
-        // }
+    {   
+        for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++ ) 
+        {
+            if (hintCardsHand.get(hintCard) == sc || hintCardsHand.get(hintCard) == vc ||
+                    hintCardsHand.get(hintCard) == dc)
+            {
+                return hintCardsHand.get(hintCard);
+            }
+        }
         return null;
 
     }
@@ -135,7 +150,7 @@ public class AI
      * @return boolean Returns true if accusation has been made, false if it
      * hasn't.
      */
-    private void aiMakeAccusation()
+    private boolean aiMakeAccusation()
     { // void for sake of complitation w/pseudocde. should return a boolean
 
         // knowledge = (add number of known cards in each category / number of cards in each category) / 3
@@ -151,7 +166,7 @@ public class AI
         // 		    	break
         // 		}
         // 	reactToServer(list)
-        // 	return true
+         	return true;
         // }
     }
 }

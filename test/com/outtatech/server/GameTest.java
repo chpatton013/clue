@@ -39,9 +39,11 @@ public class GameTest
     
     public GameTest()
     {
-        List<Card> hand = new ArrayList<Card>();
-        hand.add(new DestinationCard(DestinationID.CONEY_ISLAND));
-        hand.add(new Snoop());
+        List<HintCard> hintCardsHand = new ArrayList<HintCard>();
+        hintCardsHand.add(new DestinationCard(DestinationID.CONEY_ISLAND));
+        
+        List<ActionCard> actionCardsHand = new ArrayList<ActionCard>();
+        actionCardsHand.add(new Snoop());
         
         List<ActionCard> drawPile = new ArrayList<ActionCard>();
         drawPile.add(new Snoop());
@@ -51,7 +53,8 @@ public class GameTest
         discardPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
         discardPile.add(new Suggestion(SuggestionType.ANY));
         
-        ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), hand);
+        ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), 
+                hintCardsHand, actionCardsHand);
         
         List<ServerPlayer> players = new ArrayList<ServerPlayer>();
         players.add(sp);
