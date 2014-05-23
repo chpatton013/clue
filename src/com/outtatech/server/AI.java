@@ -80,12 +80,8 @@ public class AI extends ServerPlayer
         // List playableCards to return
         ArrayList<HintCard> playableCards = new ArrayList();
         SuperSleuth sleuthCard;
-        boolean all;
-        
-        
-           
-        // typeCardRequired = type of card required // E.g. male suspect, southern location, etc.
-        // numCardsToShow = number of cards to show // can either be 1 or all cards of the type
+        PrivateTip privateTipCard;
+        boolean all = false;
         
         if (card instanceof SuperSleuth)
         {
@@ -102,30 +98,105 @@ public class AI extends ServerPlayer
                    case AIR_VEHICLE:
                        if (curHintType == HintCardType.VEHICLE) 
                        {
-                           //if ((VehicleCard)curHintCard.//isAirVehicle;)
-                            //       playableCards.add(curHintCard);
+                           if (((VehicleCard)curHintCard).getIsAir())
+                                   playableCards.add(curHintCard);
                        }
+                       break;
                    case BLUE_CARD:
                        if (curHintType == HintCardType.VEHICLE)
                        {
-                           //if((VehicleCard)curHintCard.getCardColor() == CardColor.BLUE) {
-                               
-                           //}
+                           if(((VehicleCard)curHintCard).getCardColor() == CardColor.BLUE) {
+                               playableCards.add(curHintCard);
+                           }
                        }
-               }
+                   break;
+                   case FEMALE_SUSPECT:
+                       if (curHintType == HintCardType.SUSPECT) 
+                       {
+                           if (((SuspectCard)curHintCard).getGender() == Gender.FEMALE)
+                                   playableCards.add(curHintCard);
+                       }
+                    case MALE_SUSPECT:
+                       if (curHintType == HintCardType.SUSPECT) 
+                       {
+                           if (((SuspectCard)curHintCard).getGender() == Gender.MALE)
+                                   playableCards.add(curHintCard);
+                       }
+                    break;
+                     case SOUTHERN_DESTINATION:
+                       if (curHintType == HintCardType.DESTINATION) 
+                       {
+                           if (!((DestinationCard)curHintCard).getIsNorth())
+                                   playableCards.add(curHintCard);
+
+                       }
+                      case WESTERN_DESTINATION:
+                       if (curHintType == HintCardType.DESTINATION) 
+                       {
+                          if (!((DestinationCard)curHintCard).getIsWest())
+                                   playableCards.add(curHintCard);
+                       }
+                      break;
+                }
                
-               // AIR_VEHICLE, BLUE_CARD, FEMALE_SUSPECT, MALE_SUSPECT, SOUTHERN_DESTINATION,
-   // WESTERN_DESTINATION;
             }
         }
         
-        if (playableCards.size() > 0)
-            return playableCards;
-        else
-            return null;
-  
+         if (card instanceof PrivateTip)
+        {
+            privateTipCard = (PrivateTip)card;
+            PrivateTipType privateTipType = privateTipCard.getType();
+ 
+            
+            for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++) 
+            {
+                HintCard curHintCard = hintCardsHand.get(cardInHand);
+                HintCardType curHintType = hintCardsHand.get(cardInHand).getHintType();
+                
+               switch (privateTipType)
+               {
+                   case ALL_DESTINATIONS:
+                       if (curHintType == HintCardType.DESTINATION) 
+                       {
+                          playableCards.add(curHintCard);
+                       }
+                   case ALL_VEHICLES:
+                       if (curHintType == HintCardType.VEHICLE)
+                       {
+                               playableCards.add(curHintCard);
+                       }
+                   case ALL_SUSPECTS:
+                       if (curHintType == HintCardType.SUSPECT) 
+                       {
+                          playableCards.add(curHintCard);
+                       }
+                    case ONE_FEMALE_SUSPECT:
+                       if (curHintType == HintCardType.DESTINATION) 
+                       {
+                           if (((SuspectCard)curHintCard).getGender() == Gender.FEMALE)
+                                   playableCards.add(curHintCard);
+                       }
+                     case ONE_NORTHERN_DESTINATION:
+                       if (curHintType == HintCardType.DESTINATION) 
+                       {
+                           if (((DestinationCard)curHintCard).getIsNorth())
+                                   playableCards.add(curHintCard);
 
-    }
+                       }
+                      case ONE_RED_VEHICLE:
+                       if (curHintType == HintCardType.VEHICLE) 
+                       {
+                          if (((VehicleCard)curHintCard).getCardColor() == CardColor.RED)
+                                   playableCards.add(curHintCard);
+                       }
+               }
+               
+            }
+        }
+        
+       return playableCards;
+  
+ }
 
     /**
      * Method invoked when it is AI's turn to play an action card.
@@ -155,16 +226,29 @@ public class AI extends ServerPlayer
     public Card aiRefuteSuggestion(SuspectCard sc, VehicleCard vc,
             DestinationCard dc)
     {   
+        SuspectID scType = sc.getSuspect();
+        VehicleID vcType = vc.getVehicle();
+        DestinationID dcType = dc.getDestination();
+        
         for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++ ) 
         {
-            if (hintCardsHand.get(hintCard) == sc || hintCardsHand.get(hintCard) == vc ||
-                    hintCardsHand.get(hintCard) == dc)
+            if (hintCardsHand.get(hintCard) instanceof SuspectCard)
             {
-                return hintCardsHand.get(hintCard);
+                if (((SuspectCard)hintCardsHand.get(hintCard)).getSuspect() == scType)
+                    return hintCardsHand.get(hintCard);
+            }
+            if (hintCardsHand.get(hintCard) instanceof DestinationCard)
+            {
+                if (((DestinationCard)hintCardsHand.get(hintCard)).getDestination() == dcType)
+                    return hintCardsHand.get(hintCard);
+            }
+            if (hintCardsHand.get(hintCard) instanceof VehicleCard)
+            {
+                if (((VehicleCard)hintCardsHand.get(hintCard)).getVehicle() == vcType)
+                    return hintCardsHand.get(hintCard);
             }
         }
         return null;
-
     }
 
     /**
