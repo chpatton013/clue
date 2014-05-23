@@ -76,32 +76,32 @@ public class SuspectCardTest
     {
         System.out.println("getGender");
         
-        SuspectCard instance = new SuspectCard(SuspectID.WHITE);
+        SuspectCard instance = new SuspectCard(SuspectID.WHITE, CardColor.RED);
         Gender expResult = Gender.FEMALE;
         Gender result = instance.getGender();
         assertEquals(expResult, result);
         
-        instance = new SuspectCard(SuspectID.GREEN);
+        instance = new SuspectCard(SuspectID.GREEN, CardColor.RED);
         expResult = Gender.MALE;
         result = instance.getGender();
         assertEquals(expResult, result);
         
-        instance = new SuspectCard(SuspectID.MUSTARD);
+        instance = new SuspectCard(SuspectID.MUSTARD, CardColor.RED);
         expResult = Gender.MALE;
         result = instance.getGender();
         assertEquals(expResult, result);
         
-        instance = new SuspectCard(SuspectID.PEACOCK);
+        instance = new SuspectCard(SuspectID.PEACOCK, CardColor.RED);
         expResult = Gender.FEMALE;
         result = instance.getGender();
         assertEquals(expResult, result);
         
-        instance = new SuspectCard(SuspectID.PLUM);
+        instance = new SuspectCard(SuspectID.PLUM, CardColor.RED);
         expResult = Gender.MALE;
         result = instance.getGender();
         assertEquals(expResult, result);
         
-        instance = new SuspectCard(SuspectID.SCARLET);
+        instance = new SuspectCard(SuspectID.SCARLET, CardColor.RED);
         expResult = Gender.FEMALE;
         result = instance.getGender();
         assertEquals(expResult, result);
@@ -109,7 +109,7 @@ public class SuspectCardTest
     
     public void testWhite()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.WHITE);
+        SuspectCard instance = new SuspectCard(SuspectID.WHITE, CardColor.RED);
         SuspectID expResult = SuspectID.WHITE;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);
@@ -117,7 +117,7 @@ public class SuspectCardTest
     
     public void testPeacock()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.PEACOCK);
+        SuspectCard instance = new SuspectCard(SuspectID.PEACOCK, CardColor.RED);
         SuspectID expResult = SuspectID.PEACOCK;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);
@@ -125,7 +125,7 @@ public class SuspectCardTest
     
     public void testGreen()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.GREEN);
+        SuspectCard instance = new SuspectCard(SuspectID.GREEN, CardColor.RED);
         SuspectID expResult = SuspectID.GREEN;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);
@@ -133,7 +133,7 @@ public class SuspectCardTest
     
     public void testMustard()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.MUSTARD);
+        SuspectCard instance = new SuspectCard(SuspectID.MUSTARD, CardColor.RED);
         SuspectID expResult = SuspectID.MUSTARD;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);
@@ -141,7 +141,7 @@ public class SuspectCardTest
     
     public void testPlum()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.PLUM);
+        SuspectCard instance = new SuspectCard(SuspectID.PLUM, CardColor.RED);
         SuspectID expResult = SuspectID.PLUM;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);
@@ -149,7 +149,7 @@ public class SuspectCardTest
     
     public void testScarlet()
     {
-        SuspectCard instance = new SuspectCard(SuspectID.SCARLET);
+        SuspectCard instance = new SuspectCard(SuspectID.SCARLET, CardColor.RED);
         SuspectID expResult = SuspectID.SCARLET;
         SuspectID result = instance.getSuspect();
         assertEquals(expResult, result);

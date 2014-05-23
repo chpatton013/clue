@@ -30,7 +30,7 @@ public class ServerPlayerTest
         actionCardsHand = new ArrayList<ActionCard>();
         hintCardsHand = new ArrayList<HintCard>();
         actionCardsHand.add(new Snoop());
-        hintCardsHand.add(new SuspectCard(SuspectID.WHITE));
+        hintCardsHand.add(new SuspectCard(SuspectID.WHITE, CardColor.RED));
 
     }
     
@@ -156,7 +156,7 @@ public class ServerPlayerTest
         actionList.add(new AllSnoop(true));
         
         List<HintCard> hintList = new ArrayList();
-        hintList.add(new VehicleCard(VehicleID.SEAPLANE));
+        hintList.add(new VehicleCard(VehicleID.SEAPLANE, CardColor.RED));
         
         instance.setHintCardsHand(hintList);
         expResult1 = hintList;

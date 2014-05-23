@@ -77,7 +77,7 @@ public class HintCardTest
     
     public void testVehicleCard()
     {
-        HintCard instance = new VehicleCard(VehicleID.SEAPLANE);
+        HintCard instance = new VehicleCard(VehicleID.SEAPLANE, CardColor.RED);
         VehicleID expResult = VehicleID.SEAPLANE;
         VehicleID result = ((VehicleCard)instance).getVehicle();
         assertEquals(expResult, result);
@@ -85,7 +85,7 @@ public class HintCardTest
     
     public void testSuspectCard()
     {
-        HintCard instance = new SuspectCard(SuspectID.WHITE);
+        HintCard instance = new SuspectCard(SuspectID.WHITE, CardColor.RED);
         SuspectID expResult = SuspectID.WHITE;
         SuspectID result = ((SuspectCard)instance).getSuspect();
         assertEquals(expResult, result);
@@ -93,7 +93,7 @@ public class HintCardTest
     
     public void testDestinationCard()
     {
-        HintCard instance = new DestinationCard(DestinationID.CONEY_ISLAND);
+        HintCard instance = new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED);
         DestinationID expResult = DestinationID.CONEY_ISLAND;
         DestinationID result = ((DestinationCard)instance).getDestination();
         assertEquals(expResult, result);
@@ -101,7 +101,7 @@ public class HintCardTest
     
     public void testGetVehicle()
     {
-        HintCard instance = new HintCard(HintCardType.VEHICLE);
+        HintCard instance = new HintCard(HintCardType.VEHICLE, CardColor.RED);
         HintCardType expResult = HintCardType.VEHICLE;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result);
@@ -109,7 +109,7 @@ public class HintCardTest
     
     public void testGetSuspect()
     {
-        HintCard instance = new HintCard(HintCardType.SUSPECT);
+        HintCard instance = new HintCard(HintCardType.SUSPECT, CardColor.RED);
         HintCardType expResult = HintCardType.SUSPECT;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result); 
@@ -117,7 +117,7 @@ public class HintCardTest
     
     public void testGetDestination()
     {
-        HintCard instance = new HintCard(HintCardType.DESTINATION);
+        HintCard instance = new HintCard(HintCardType.DESTINATION, CardColor.RED);
         HintCardType expResult = HintCardType.DESTINATION;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result);

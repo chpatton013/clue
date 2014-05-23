@@ -73,7 +73,7 @@ public class VehicleCardTest
     
     public void testSeaPlane()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.SEAPLANE);
+        VehicleCard instance = new VehicleCard(VehicleID.SEAPLANE, CardColor.RED);
         VehicleID expResult = VehicleID.SEAPLANE;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
@@ -81,7 +81,7 @@ public class VehicleCardTest
     
     public void testAutomobile()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.AUTOMOBILE);
+        VehicleCard instance = new VehicleCard(VehicleID.AUTOMOBILE, CardColor.RED);
         VehicleID expResult = VehicleID.AUTOMOBILE;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
@@ -89,7 +89,7 @@ public class VehicleCardTest
     
     public void testAirliner()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.AIRLINER);
+        VehicleCard instance = new VehicleCard(VehicleID.AIRLINER, CardColor.RED);
         VehicleID expResult = VehicleID.AIRLINER;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
@@ -97,7 +97,7 @@ public class VehicleCardTest
     
     public void testHotAirBalloon()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.HOT_AIR_BALLOON);
+        VehicleCard instance = new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.RED);
         VehicleID expResult = VehicleID.HOT_AIR_BALLOON;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
@@ -105,7 +105,7 @@ public class VehicleCardTest
     
     public void testLimousine()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.LIMOUSINE);
+        VehicleCard instance = new VehicleCard(VehicleID.LIMOUSINE, CardColor.RED);
         VehicleID expResult = VehicleID.LIMOUSINE;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
@@ -113,7 +113,7 @@ public class VehicleCardTest
     
     public void testTrain()
     {
-        VehicleCard instance = new VehicleCard(VehicleID.TRAIN);
+        VehicleCard instance = new VehicleCard(VehicleID.TRAIN, CardColor.RED);
         VehicleID expResult = VehicleID.TRAIN;
         VehicleID result = instance.getVehicle();
         assertEquals(expResult, result);
