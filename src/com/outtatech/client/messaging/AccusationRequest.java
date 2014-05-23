@@ -6,6 +6,7 @@
 package com.outtatech.client.messaging;
 
 import com.outtatech.common.Card;
+import com.outtatech.common.Solution;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class AccusationRequest extends ClientRequest
 {
-    List<Card> accusationCards;
+    Solution accusation;
 
     /**
      * Creates an AccusationRequest object.
@@ -24,22 +25,22 @@ public class AccusationRequest extends ClientRequest
      * @param accusationCards list that contains the three cards that are
      * required for an accusation.
      */
-    public AccusationRequest(List<Card> accusationCards)
+    public AccusationRequest(Solution accusation)
     {
         // Ensure that accusationCards contains a Suspect, Vehicle and
         // Destination card.
-        this.accusationCards = accusationCards;
+        this.accusation = accusation;
     }
 
     /**
-     * Getter method for the list of cards that were given by the client in
+     * Getter method for the solution that was given by the client in
      * order to make an accusation.
      *
-     * @return the list of cards that were given by the client in order to make
+     * @return the solution that was given by the client in order to make
      * an accusation.
      */
-    public List<Card> getAccusationCards()
+    public Solution getSolution()
     {
-        return accusationCards;
+        return accusation;
     }
 }

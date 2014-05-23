@@ -3,6 +3,7 @@ package com.outtatech.server;
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
 import com.outtatech.common.Card;
+import com.outtatech.common.Solution;
 import com.outtatech.server.messaging.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,75 +59,117 @@ public class ServerController
         /**
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
-         */ 
-        if (obj instanceof LobbyListRequest) {
-            forwardMessage(new 
-                LobbyDiscoveryResponse(new ArrayList(lobbies.values())), 
+         */
+        if (obj instanceof LobbyListRequest)
+        {
+            forwardMessage(new LobbyDiscoveryResponse(new ArrayList(lobbies.
+                    values())),
                     connection);
         }
         else if (obj instanceof AccusationRequest)
         {
-            AccusationRequest accusation = (AccusationRequest)obj;
-            List<Card> accusationCards = accusation.getAccusationCards();
+            ArrayList<ConnectionToClient> gamePlayers
+                    = new ArrayList<ConnectionToClient>();
+            ArrayList<AI> aiPlayers = new ArrayList<AI>();
             
+            AccusationRequest accusationReq = (AccusationRequest) obj;
+            Solution accusation = accusationReq.getSolution();
+            //Get the clients game
+            Game clientGame = games.get(connection);
+
+            //Get all players in game
+            List<ServerPlayer> gameServerPlayers
+                    = clientGame.getServerPlayers();
+
+            //Build a list of human client connections to send accusation
+            //response to
+            for (ServerPlayer serverPlayer : gameServerPlayers)
+            {
+                if (!humans.containsKey(serverPlayer))
+                {
+                    aiPlayers.add(robots.get(serverPlayer));
+                }
+                else
+                {
+                    gamePlayers.add(humans.get(serverPlayer));
+                }
+            }
+
+            //Create accusation response
+            AccusationResponse accResp = new AccusationResponse(
+                    accusation.equals(clientGame.getSolution()));
+            
+            //Send to humans
+            forwardMessage(accResp, gamePlayers);
+            
+            //Send to AI
+            informAI(accResp, aiPlayers);
+
         }
         /* 
          * LobbyJoinRequest respond with LobbyUpdateResponse else if
-        */
-        else if (obj instanceof LobbyJoinRequest) {
-            
+         */
+        else if (obj instanceof LobbyJoinRequest)
+        {
+
             forwardMessage(new LobbyUpdateResponse(
-                lobbies.get(((LobbyJoinRequest)obj).getLobbyId())), 
+                    lobbies.get(((LobbyJoinRequest) obj).getLobbyId())),
                     connection, false);
         }
-       /**
+        /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
          */
-        else if (obj instanceof LobbyCreateRequest) {
-            Lobby temp = new Lobby(((LobbyCreateRequest)obj).getLobbyName(), 
+        else if (obj instanceof LobbyCreateRequest)
+        {
+            Lobby temp = new Lobby(((LobbyCreateRequest) obj).getLobbyName(),
                     (games.get(connection)).getGameId());
             lobbies.put(temp.getLobbyId(), temp);
             forwardMessage(new LobbyCreateResponse(temp), connection, false);
         }
-       /**
+        /**
          * ActionRequest respond with ActionResponse else if
          */
-        else if (obj instanceof ActionRequest) 
+        else if (obj instanceof ActionRequest)
         {
-            ActionRequest temp = ((ActionRequest)obj);
-            forwardMessage(new ActionResponse(temp.getActionCard(), 
-                temp.getPlayerId()), connection, false);
+            ActionRequest temp = ((ActionRequest) obj);
+            forwardMessage(new ActionResponse(temp.getActionCard(),
+                    temp.getPlayerId()), connection, false);
         }
-        /** AddAIRequest?
+        /**
+         * AddAIRequest?
          */
-        else if (obj instanceof AddAIRequest) 
+        else if (obj instanceof AddAIRequest)
         {
-            AddAIRequest temp = ((AddAIRequest)obj);
+            AddAIRequest temp = ((AddAIRequest) obj);
             int num = (robots.keySet()).size();
             //need to create an AI
             games.get(connection).getServerPlayers().add(null);
             //update the mapping
             //forwardMessage(new ActionResponse(), connection, false);
         }
-        /** @TODO Add a response class? PlayersResponse? List of player names and
+        /**
+         * @TODO Add a response class? PlayersResponse? List of player names and
          * made up AI names? or Add a list of players to the
          * LobbyDiscoveryResponse?
          */
-        
-       /** else if EndTurnRequest respond with GameStateResponse
-        */
-        else if (obj instanceof EndTurnRequest) 
+
+        /**
+         * else if EndTurnRequest respond with GameStateResponse
+         */
+        else if (obj instanceof EndTurnRequest)
         {
             //forwardMessage(new GameStateResponse()), connection, false);
         }
-        /** else if RevealCardRequest(prompted by an ActionResponse) respond with
+        /**
+         * else if RevealCardRequest(prompted by an ActionResponse) respond with
          * a GameStateResponse
          */
-        else if (obj instanceof RevealCardRequest) 
+        else if (obj instanceof RevealCardRequest)
         {
             //forwardMessage(new GameStateResponse()), connection, false);
         }
-       /** Responses are made via the forwardMessage function.
+        /**
+         * Responses are made via the forwardMessage function.
          */
     }
 
@@ -141,8 +184,9 @@ public class ServerController
         /**
          * Using the robots Map find the Game instance of the AI robot.
          */
-        
-        /** Check instanceOf obj to determine what change needs to be made the AI
+
+        /**
+         * Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
          *
          * If the Object obj instance designates an action that a human player
@@ -155,9 +199,14 @@ public class ServerController
          */
     }
     
+    public void informAI(Object obj, List<AI> ai) 
+    {
+        
+    }
+
     /**
      * Provides a hook to send a single message to a networked client.
-     * 
+     *
      * @param obj Object to send to network hooks
      * @param client The connection to send the object to
      */
@@ -180,10 +229,11 @@ public class ServerController
          * If only one client needs to be notified by the response then call
          * ServerNetwork.sendMessageToClient().
          */
-        network.sendMessageToClients((ServerResponse)obj, clients);
+        network.sendMessageToClients((ServerResponse) obj, clients);
     }
-    
-    private boolean isHuman(ServerPlayer player) {
+
+    private boolean isHuman(ServerPlayer player)
+    {
         return humans.containsKey(player);
     }
 }

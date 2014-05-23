@@ -1,10 +1,11 @@
 package com.outtatech.server;
 
+import com.outtatech.common.ActionCard;
+import com.outtatech.common.DestinationID;
+import com.outtatech.common.HintCard;
+import com.outtatech.common.Solution;
 import java.util.List;
 import java.util.Map;
-import com.outtatech.common.ActionCard;
-import com.outtatech.common.HintCard;
-import com.outtatech.common.DestinationID;
 
 /**
  * The Game class contains functions that provide information on the state of an
@@ -20,7 +21,7 @@ public class Game
     private ServerPlayer current;
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
-    private List<HintCard> solution;
+    private Solution solution;
     private Map<DestinationID, Integer> destToPlayerId;
 
     /**
@@ -39,7 +40,7 @@ public class Game
             ServerPlayer current,
             List<ActionCard> drawPile,
             List<ActionCard> discardPile,
-            List<HintCard> solution,
+            Solution solution,
             Map<DestinationID, Integer> destToPlayerId)
     {
         this.players = players;
@@ -135,7 +136,7 @@ public class Game
      *
      * @param solution The new solution for this game
      */
-    public void setSolution(List<HintCard> solution)
+    public void setSolution(Solution solution)
     {
         this.solution = solution;
     }
@@ -145,7 +146,7 @@ public class Game
      *
      * @return The solution of this game.
      */
-    public List<HintCard> getSolution()
+    public Solution getSolution()
     {
         return solution;
     }
