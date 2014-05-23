@@ -79,19 +79,43 @@ public class AI extends ServerPlayer
     { 
         // List playableCards to return
         ArrayList<HintCard> playableCards = new ArrayList();
-
+        SuperSleuth sleuthCard;
+        boolean all;
+        
+        
+           
         // typeCardRequired = type of card required // E.g. male suspect, southern location, etc.
         // numCardsToShow = number of cards to show // can either be 1 or all cards of the type
         
-        if (card instanceof SuperSleuth || card instanceof PrivateTip)
+        if (card instanceof SuperSleuth)
         {
+            sleuthCard = (SuperSleuth)card;
+            SuperSleuthType sleuthType = sleuthCard.getType();
+            
             for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++) 
             {
-           //     if (hintCardsHand.get(i).getHintType() == typeCardRequired) {
-           //           playableCards.add(hintCardsHand.get(i));
-           //           if numCardsToShow == 1
-           //                 break;
-           //     }
+                HintCard curHintCard = hintCardsHand.get(cardInHand);
+                HintCardType curHintType = hintCardsHand.get(cardInHand).getHintType();
+                
+               switch (sleuthType)
+               {
+                   case AIR_VEHICLE:
+                       if (curHintType == HintCardType.VEHICLE) 
+                       {
+                           if ((VehicleCard)curHintCard.//isAirVehicle;)
+                                   playableCards.add(curHintCard);
+                       }
+                   case BLUE_CARD:
+                       if (curHintType == HintCardType.VEHICLE)
+                       {
+                           if((VehicleCard)curHintCard.getCardColor() == CardColor.BLUE) {
+                               
+                           }
+                       }
+               }
+               
+               // AIR_VEHICLE, BLUE_CARD, FEMALE_SUSPECT, MALE_SUSPECT, SOUTHERN_DESTINATION,
+   // WESTERN_DESTINATION;
             }
         }
         
