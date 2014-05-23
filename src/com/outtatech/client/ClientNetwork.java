@@ -42,6 +42,13 @@ public class ClientNetwork extends AbstractClient
     public void sendMessageToServer(Object obj)
     {
         // Call OCSF's sendToServer method
+        try
+        {
+            sendToServer(obj);
+        } catch (Exception ex)
+        {
+            // handle exception
+        }
     }
 
     /**
@@ -52,8 +59,7 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void handleMessageFromServer(Object msg)
     {
-        // Switch over the type of server response and handle
-        // each response accordingly by updating the game state.
+        ctrl.reactToMessage(msg);
     }
 
     /**

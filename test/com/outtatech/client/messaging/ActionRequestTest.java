@@ -62,7 +62,7 @@ public class ActionRequestTest
         list.add(new Card(CardType.HINT));
         Snoop s = new Snoop();
         
-        ActionRequest instance = new ActionRequest(s, list);
+        ActionRequest instance = new ActionRequest(s, list, 2);
         ActionCard expResult = s;
         ActionCard result = instance.getActionCard();
         assertEquals(expResult, result);
@@ -80,9 +80,27 @@ public class ActionRequestTest
         list.add(new Card(CardType.HINT));
         Snoop s = new Snoop();
         
-        ActionRequest instance = new ActionRequest(s, list);
+        ActionRequest instance = new ActionRequest(s, list, 2);
         List<Card> expResult = list;
         List<Card> result = instance.getCards();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getPlayerId method, of class ActionRequest.
+     */
+    @Test
+    public void testGetPlayerId()
+    {
+        System.out.println("getCards");
+        
+        List<Card> list = new ArrayList<Card>();
+        list.add(new Card(CardType.HINT));
+        Snoop s = new Snoop();
+        
+        ActionRequest instance = new ActionRequest(s, list, 2);
+        Integer expResult = 2;
+        Integer result = instance.getPlayerId();
         assertEquals(expResult, result);
     }
 }

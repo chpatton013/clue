@@ -56,7 +56,7 @@ public class LobbyTest
         System.out.println("getLobbyId");
         
         Lobby instance = new Lobby("lobby", new Integer(5));
-        Integer expResult = new Integer(3);
+        Integer expResult = new Integer(2);
         Integer result = instance.getLobbyId();
         assertEquals(expResult, result);
     }

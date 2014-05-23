@@ -20,6 +20,7 @@ public class ServerController
 {
     private Map<ConnectionToClient, Game> games;
     private Map<ServerPlayer, ConnectionToClient> humans;
+    //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
     private Map<Integer, Lobby> lobbies;
     private ServerNetwork network;
@@ -57,7 +58,7 @@ public class ServerController
         if (obj instanceof LobbyListRequest) {
             forwardMessage(new 
                 LobbyDiscoveryResponse(new ArrayList(lobbies.values())), 
-                    connection);
+                    connection, false);
         }
         /* 
          * LobbyJoinRequest respond with LobbyUpdateResponse else if
@@ -66,7 +67,7 @@ public class ServerController
             
             forwardMessage(new LobbyUpdateResponse(
                 lobbies.get(((LobbyJoinRequest)obj).getLobbyId())), 
-                    connection);
+                    connection, false);
         }
        /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
@@ -75,23 +76,47 @@ public class ServerController
             Lobby temp = new Lobby(((LobbyCreateRequest)obj).getLobbyName(), 
                     (games.get(connection)).getGameId());
             lobbies.put(temp.getLobbyId(), temp);
-            forwardMessage(new LobbyCreateResponse(temp), connection);
+            forwardMessage(new LobbyCreateResponse(temp), connection, false);
         }
        /**
-         * ActionRequest respond with ActionResponse
-         *
-         * else if AddAIRequest?
-         *
-         * @TODO Add a response class? PlayersResponse? List of player names and
+         * ActionRequest respond with ActionResponse else if
+         */
+        else if (obj instanceof ActionRequest) 
+        {
+            ActionRequest temp = ((ActionRequest)obj);
+            forwardMessage(new ActionResponse(temp.getActionCard(), 
+                temp.getPlayerId()), connection, false);
+        }
+        /** AddAIRequest?
+         */
+        else if (obj instanceof AddAIRequest) 
+        {
+            AddAIRequest temp = ((AddAIRequest)obj);
+            int num = (robots.keySet()).size();
+            //need to create an AI
+            games.get(connection).getServerPlayers().add(null);
+            //update the mapping
+            //forwardMessage(new ActionResponse(), connection, false);
+        }
+        /** @TODO Add a response class? PlayersResponse? List of player names and
          * made up AI names? or Add a list of players to the
          * LobbyDiscoveryResponse?
-         *
-         * else if EndTurnRequest respond with GameStateResponse
-         *
-         * else if RevealCardRequest(prompted by an ActionResponse) respond with
+         */
+        
+       /** else if EndTurnRequest respond with GameStateResponse
+        */
+        else if (obj instanceof EndTurnRequest) 
+        {
+            //forwardMessage(new GameStateResponse()), connection, false);
+        }
+        /** else if RevealCardRequest(prompted by an ActionResponse) respond with
          * a GameStateResponse
-         *
-         * Responses are made via the forwardMessage function.
+         */
+        else if (obj instanceof RevealCardRequest) 
+        {
+            //forwardMessage(new GameStateResponse()), connection, false);
+        }
+       /** Responses are made via the forwardMessage function.
          */
     }
 
@@ -106,7 +131,6 @@ public class ServerController
         /**
          * Using the robots Map find the Game instance of the AI robot.
          */
-        
         
         /** Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
@@ -127,7 +151,8 @@ public class ServerController
      * @param obj Object to send to network hooks
      * @param connection The connection to send the object to
      */
-    public void forwardMessage(Object obj, ConnectionToClient connection)
+    public void forwardMessage(Object obj, ConnectionToClient connection, 
+            boolean flag)
     {
         /**
          * @TODO instead of checking the instanceOf on this object maybe we
@@ -139,5 +164,16 @@ public class ServerController
          * If only one client needs to be notified by the response then call
          * ServerNetwork.sendMessageToClient().
          */
+        if(flag) {
+            network.sendMessageToClients((ServerResponse)obj, 
+                    new ArrayList<ConnectionToClient>(games.keySet()));
+        }
+        else {
+            network.sendMessageToClient((ServerResponse)obj, connection);
+        }
+    }
+    
+    private boolean isHuman(ServerPlayer player) {
+        return humans.containsKey(player);
     }
 }
