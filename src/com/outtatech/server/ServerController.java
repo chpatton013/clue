@@ -84,7 +84,8 @@ public class ServerController
         else if (obj instanceof ActionRequest) 
         {
             ActionRequest temp = ((ActionRequest)obj);
-            //forwardMessage(new ActionResponse(), connection, false);
+            forwardMessage(new ActionResponse(temp.getActionCard(), 
+                temp.getPlayerId()), connection, false);
         }
         /** AddAIRequest?
          */

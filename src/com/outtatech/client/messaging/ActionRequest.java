@@ -19,6 +19,7 @@ public class ActionRequest extends ClientRequest
 {
     private ActionCard actionCard;
     private List<Card> cards;
+    private Integer playerId;
 
     /**
      * Returns a new ActionRequest object.
@@ -26,10 +27,11 @@ public class ActionRequest extends ClientRequest
      * @param actionCard the action card that the client is playing
      * @param cards the cards involved in the action
      */
-    public ActionRequest(ActionCard actionCard, List<Card> cards)
+    public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
     {
         this.actionCard = actionCard;
         this.cards = cards;
+        this.playerId = playerId;
     }
 
     /**
@@ -50,5 +52,14 @@ public class ActionRequest extends ClientRequest
     public List<Card> getCards()
     {
         return cards;
+    }
+    
+    /**
+     * Returns the Id of the player requested
+     * 
+     * @return the integer ID of the player
+     */
+    public Integer getPlayerId() {
+        return playerId;
     }
 }
