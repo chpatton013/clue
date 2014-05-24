@@ -24,16 +24,9 @@ public class AI extends ServerPlayer
      * @param difficulty the Difficulty instance to drive the AI
      * @param ctrl the Server Controller instance needing an AI
      */
-    public AI(int playerId,
-            Object notes,
-            String name,
-            Color color,
-            List<HintCard> hintCardsHand,
-            List<ActionCard> actionCardsHand,
-            Difficulty difficulty, 
-            ServerController ctrl)
+    public AI(Difficulty difficulty, ServerController ctrl)
     {
-        super(playerId, notes, name, color, hintCardsHand, actionCardsHand);
+        super();
         this.difficulty = difficulty;
         this.ctrl = ctrl;
     }

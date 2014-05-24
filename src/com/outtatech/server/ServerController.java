@@ -22,6 +22,7 @@ import java.util.Map;
 public class ServerController
 {
     private Map<ConnectionToClient, Game> games;
+    private Map<Integer, Game> gameIdToGame;
     private Map<Game, ArrayList<ConnectionToClient>> players;
     private Map<ServerPlayer, ConnectionToClient> humans;
     //maybe mapped differently? AI are serverplayers
@@ -74,12 +75,29 @@ public class ServerController
             AccusationRequest accusationReq = (AccusationRequest) obj;
             handleAccusation(accusationReq, connection);
         }
+        /*
+         * AddAIRequest respond with AddAIResponse
+         */
+        else if (obj instanceof AddAIRequest)
+        {
+            AddAIRequest addAIReq = (AddAIRequest) obj;
+            
+            // Get the requestor's lobby
+            Lobby lobby = lobbies.get(addAIReq.getLobbyId());
+            // Get the game associated with the lobby
+            Game lobbyGame = gameIdToGame.get(lobby.getGameId());
+            // Add the AI
+            lobbyGame.addServerPlayer(new AI(addAIReq.getDifficulty(), this));
+            // Inform game players
+            informPlayers(lobbyGame, new LobbyUpdateResponse(lobby));
+                
+        }
         /* 
          * LobbyJoinRequest respond with LobbyUpdateResponse else if
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-            
+
 //            forwardMessage(new LobbyUpdateResponse(
 //                    lobbies.get(((LobbyJoinRequest) obj).getLobbyId())),
 //                    connection, false);
@@ -141,44 +159,80 @@ public class ServerController
          */
     }
     
-    private void handleAccusation(AccusationRequest accusationReq,
-            ConnectionToClient connection) 
+    /**
+     * Given a game and a message, distributes the message to AI and Players
+     * 
+     * @param game the game that contains the players the msg should be sent to
+     * @param msg the message that should be sent to the players in the game
+     */
+    private void informPlayers(Game game, ServerResponse msg)
     {
-            ArrayList<ConnectionToClient> gamePlayers
-                    = new ArrayList<ConnectionToClient>();
-            ArrayList<AI> aiPlayers = new ArrayList<AI>();
-            
-            Solution accusation = accusationReq.getSolution();
-            //Get the clients game
-            Game clientGame = games.get(connection);
+        ArrayList<ConnectionToClient> gamePlayers
+                = new ArrayList<ConnectionToClient>();
+        
+        ArrayList<AI> aiPlayers = new ArrayList<AI>();
+        
+        //Get all players in game
+        List<ServerPlayer> gameServerPlayers
+                = game.getServerPlayers();
 
-            //Get all players in game
-            List<ServerPlayer> gameServerPlayers
-                    = clientGame.getServerPlayers();
-
-            //Build a list of human client connections to send accusation
-            //response to
-            for (ServerPlayer serverPlayer : gameServerPlayers)
+        // Build a list of human client connections to send 
+        // LobbyUpdateResponse to
+        for (ServerPlayer serverPlayer : gameServerPlayers)
+        {
+            if (!humans.containsKey(serverPlayer))
             {
-                if (!humans.containsKey(serverPlayer))
-                {
-                    aiPlayers.add(robots.get(serverPlayer));
-                }
-                else
-                {
-                    gamePlayers.add(humans.get(serverPlayer));
-                }
+                aiPlayers.add(robots.get(serverPlayer));
             }
+            else
+            {
+                gamePlayers.add(humans.get(serverPlayer));
+            }
+        }
 
-            //Create accusation response
-            AccusationResponse accResp = new AccusationResponse(
-                    accusation.equals(clientGame.getSolution()));
-            
-            //Send to humans
-            forwardMessage(accResp, gamePlayers);
-            
-            //Send to AI
-            informAI(accResp, aiPlayers);
+        // Send all human players in the lobby a LobbyUpdateResponse
+        forwardMessage(msg, gamePlayers);
+        informAI(msg, aiPlayers);
+    }
+
+    private void handleAccusation(AccusationRequest accusationReq,
+            ConnectionToClient connection)
+    {
+        ArrayList<ConnectionToClient> gamePlayers
+                = new ArrayList<ConnectionToClient>();
+        ArrayList<AI> aiPlayers = new ArrayList<AI>();
+
+        Solution accusation = accusationReq.getSolution();
+        //Get the clients game
+        Game clientGame = games.get(connection);
+
+        //Get all players in game
+        List<ServerPlayer> gameServerPlayers
+                = clientGame.getServerPlayers();
+
+        //Build a list of human client connections to send accusation
+        //response to
+        for (ServerPlayer serverPlayer : gameServerPlayers)
+        {
+            if (!humans.containsKey(serverPlayer))
+            {
+                aiPlayers.add(robots.get(serverPlayer));
+            }
+            else
+            {
+                gamePlayers.add(humans.get(serverPlayer));
+            }
+        }
+
+        //Create accusation response
+        AccusationResponse accResp = new AccusationResponse(
+                accusation.equals(clientGame.getSolution()));
+
+        //Send to humans
+        forwardMessage(accResp, gamePlayers);
+
+        //Send to AI
+        informAI(accResp, aiPlayers);
     }
 
     /**
@@ -206,10 +260,10 @@ public class ServerController
          * forwardMessage() and this will call (sendMessageToClients()).
          */
     }
-    
-    public void informAI(Object obj, List<AI> ai) 
+
+    public void informAI(Object obj, List<AI> ai)
     {
-        
+
     }
 
     /**

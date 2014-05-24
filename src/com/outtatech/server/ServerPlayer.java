@@ -1,8 +1,9 @@
 package com.outtatech.server;
 
-import java.awt.Color;
-import java.util.List;
 import com.outtatech.common.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The ServerPlayer class represents a player in a game... TODO!
@@ -12,6 +13,7 @@ import com.outtatech.common.*;
  */
 public class ServerPlayer
 {
+    private static int playerIdCount = 0;
     private int playerId;
     private Object notes;
     private String name;
@@ -30,19 +32,14 @@ public class ServerPlayer
      * @param hintCardsHand List of Card Objects representing a players hand of Hint Cards
      * @param actionCardsHand List of Card Objects representing a players hand of Action Cards
      */
-    public ServerPlayer(int playerId,
-            Object notes,
-            String name,
-            Color color,
-            List<HintCard> hintCardsHand,
-            List<ActionCard> actionCardsHand)
+    public ServerPlayer()
     {
-        this.playerId = playerId;
-        this.notes = notes;
-        this.name = name;
-        this.color = color;
-        this.hintCardsHand = hintCardsHand;
-        this.actionCardsHand = actionCardsHand;
+        this.playerId = playerIdCount++;
+        this.notes = new String();
+//        this.name = name;
+//        this.color = color;
+        this.hintCardsHand = new ArrayList<HintCard>();
+        this.actionCardsHand = new ArrayList<ActionCard>();
     }
 
     public int getPlayerId()
@@ -70,25 +67,25 @@ public class ServerPlayer
         this.notes = notes;
     }
 
-    /**
-     * Gets the name of this player.
-     *
-     * @return The name of this player.
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * Sets the name of this player.
-     *
-     * @param name The name of the player.
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+//    /**
+//     * Gets the name of this player.
+//     *
+//     * @return The name of this player.
+//     */
+//    public String getName()
+//    {
+//        return name;
+//    }
+//
+//    /**
+//     * Sets the name of this player.
+//     *
+//     * @param name The name of the player.
+//     */
+//    public void setName(String name)
+//    {
+//        this.name = name;
+//    }
 
     /**
      * Gets the color associated with this player.

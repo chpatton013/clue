@@ -13,7 +13,7 @@ import com.outtatech.server.*;
  *
  * @author jbilous
  */
-public class LobbyUpdateResponse
+public class LobbyUpdateResponse extends ServerResponse
 {
     private Lobby lobby;
     
