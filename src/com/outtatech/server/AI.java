@@ -160,22 +160,26 @@ public class AI extends ServerPlayer
                        {
                           playableCards.add(curHintCard);
                        }
+                   break;
                    case ALL_VEHICLES:
                        if (curHintType == HintCardType.VEHICLE)
                        {
                                playableCards.add(curHintCard);
                        }
+                   break;
                    case ALL_SUSPECTS:
                        if (curHintType == HintCardType.SUSPECT) 
                        {
                           playableCards.add(curHintCard);
                        }
+                   break;
                     case ONE_FEMALE_SUSPECT:
                        if (curHintType == HintCardType.DESTINATION) 
                        {
                            if (((SuspectCard)curHintCard).getGender() == Gender.FEMALE)
                                    playableCards.add(curHintCard);
                        }
+                    break;
                      case ONE_NORTHERN_DESTINATION:
                        if (curHintType == HintCardType.DESTINATION) 
                        {
@@ -183,12 +187,14 @@ public class AI extends ServerPlayer
                                    playableCards.add(curHintCard);
 
                        }
+                     break;
                       case ONE_RED_VEHICLE:
                        if (curHintType == HintCardType.VEHICLE) 
                        {
                           if (((VehicleCard)curHintCard).getCardColor() == CardColor.RED)
                                    playableCards.add(curHintCard);
                        }
+                      break;
                }
                
             }
