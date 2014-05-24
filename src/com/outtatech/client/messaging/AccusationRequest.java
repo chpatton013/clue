@@ -27,8 +27,6 @@ public class AccusationRequest extends ClientRequest
      */
     public AccusationRequest(Solution accusation)
     {
-        // Ensure that accusationCards contains a Suspect, Vehicle and
-        // Destination card.
         this.accusation = accusation;
     }
 

@@ -15,7 +15,7 @@ public class LobbyJoinResponse extends ServerResponse
 {
     private Integer joinedPlayerId;
 
-    public LobbyJoinResponse(int joinedPlayerId)
+    public LobbyJoinResponse(Integer joinedPlayerId)
     {
         this.joinedPlayerId = joinedPlayerId;
     }
