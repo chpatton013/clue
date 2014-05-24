@@ -4,6 +4,7 @@ import com.outtatech.common.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The ServerPlayer class represents a player in a game... TODO!
@@ -11,9 +12,10 @@ import java.util.List;
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
-public class ServerPlayer
+public class ServerPlayer implements Player
 {
     private static int playerIdCount = 0;
+    private static Color nextColor = Color.RED;
     private int playerId;
     private Object notes;
     private String name;
@@ -37,7 +39,8 @@ public class ServerPlayer
         this.playerId = playerIdCount++;
         this.notes = new String();
 //        this.name = name;
-//        this.color = color;
+        this.color = nextColor;
+        changeNextColor();
         this.hintCardsHand = new ArrayList<HintCard>();
         this.actionCardsHand = new ArrayList<ActionCard>();
     }
@@ -146,5 +149,15 @@ public class ServerPlayer
     {
     
         this.hintCardsHand = hintCardsHand;
+    }
+    
+    private void changeNextColor() 
+    {
+        Random rand = new Random();
+        int r = rand.nextInt(255);
+        int g = rand.nextInt(255);
+        int b = rand.nextInt(255);
+        
+        nextColor = new Color(r, g, b);
     }
 }

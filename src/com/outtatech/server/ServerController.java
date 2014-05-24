@@ -3,6 +3,7 @@ package com.outtatech.server;
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
 import com.outtatech.common.Card;
+import com.outtatech.common.Player;
 import com.outtatech.common.Solution;
 import com.outtatech.server.messaging.*;
 import java.util.ArrayList;
@@ -81,27 +82,31 @@ public class ServerController
         else if (obj instanceof AddAIRequest)
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
+            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this);
             
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
             // Get the game associated with the lobby
             Game lobbyGame = gameIdToGame.get(lobby.getGameId());
             // Add the AI
-            lobbyGame.addServerPlayer(new AI(addAIReq.getDifficulty(), this));
+            lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
-            informPlayers(lobbyGame, new LobbyUpdateResponse(lobby));
-                
+            informPlayers(lobbyGame, new LobbyJoinResponse(lobby,newPlayer));
         }
+        
         /* 
-         * LobbyJoinRequest respond with LobbyUpdateResponse else if
+         * LobbyJoinRequest respond with LobbyJoinResponse
+         * notify all clients.
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-
-//            forwardMessage(new LobbyUpdateResponse(
-//                    lobbies.get(((LobbyJoinRequest) obj).getLobbyId())),
-//                    connection, false);
+            Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
+            ServerPlayer serverPlayer = new ServerPlayer();
+            games.get(lobby.getGameId()).addServerPlayer(serverPlayer);
+            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer),
+                    getGameClients(lobby.gameId));
         }
+        
         /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
          */
@@ -297,5 +302,12 @@ public class ServerController
     private boolean isHuman(ServerPlayer player)
     {
         return humans.containsKey(player);
+    }
+    
+    private ArrayList<ConnectionToClient> getGameClients(Integer gameId)
+    {
+        Game game = gameIdToGame.get(gameId);
+        
+        return this.players.get(game);
     }
 }

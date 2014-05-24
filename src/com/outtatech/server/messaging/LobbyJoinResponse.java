@@ -5,6 +5,9 @@
  */
 package com.outtatech.server.messaging;
 
+import com.outtatech.common.Player;
+import com.outtatech.server.Lobby;
+
 /**
  * Message sent from the server to the client when a new user joins a lobby that
  * a client is part of.
@@ -13,11 +16,18 @@ package com.outtatech.server.messaging;
  */
 public class LobbyJoinResponse extends ServerResponse
 {
-    private Integer joinedPlayerId;
+    private Lobby lobby;
+    private final Player player;
 
-    public LobbyJoinResponse(Integer joinedPlayerId)
+    /**
+     * Used to respond to a human player request.
+     * @param lobby
+     * @param player 
+     */
+    public LobbyJoinResponse(Lobby lobby, Player player)
     {
-        this.joinedPlayerId = joinedPlayerId;
+        this.lobby = lobby;
+        this.player = player;
     }
 
     /**
@@ -26,8 +36,17 @@ public class LobbyJoinResponse extends ServerResponse
      *
      * @return the id of the player who has joined the lobby
      */
-    public Integer getJoinedPlayerId()
+    public Lobby getLobby()
     {
-        return joinedPlayerId;
+        return lobby;
+    }
+    
+    /**
+     * Get the player object created by the game server.
+     * @return 
+     */
+    public Player getPlayer()
+    {
+        return player;
     }
 }
