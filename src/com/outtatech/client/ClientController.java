@@ -8,7 +8,9 @@ package com.outtatech.client;
 import java.util.List;
 
 import com.outtatech.common.*;
+import com.outtatech.client.*;
 import com.outtatech.client.messaging.*;
+import com.outtatech.server.*;
 import com.outtatech.server.messaging.*;
 
 /**
@@ -24,7 +26,7 @@ public class ClientController
 {
     private State state;
     private ClientNetwork network;
-    private ClientRequest staged;
+    private boolean creator = false;
 
     /**
      * Constructor for the ClientController. Requires an initialized State
@@ -37,7 +39,6 @@ public class ClientController
     {
         this.state = state;
         this.network = network;
-        this.staged = null;
     }
 
     /**
@@ -59,35 +60,13 @@ public class ClientController
     {
         this.state = state;
     }
-    
-    /**
-     * Initiates a message to the server that indicates the client has ended
-     * their current turn.
-     */
-    public void endTurn() {
-        // create new EndTurnRequest
-        // send the EndTurnRequest message to the server.
-    }
 
     /**
-     * Get the ClientNetwork that the ClientController is using.
-     *
-     * @return ClientNetwork instance that is currently in use.
-     */
-    public ClientNetwork getNetwork()
-    {
-        return network;
-    }
-
-    /**
-     * Start the single player game mode. Alerts game server. Changes to Client
-     * to next logical state
+     * Start the single player game mode.
      */
     public void startSinglePlayerGame()
     {
-        // create new SinglePlayerGameRequest
-        // send request to server
-        // signal to GUI that we are waiting for a response
+        this.forwardMessage(new SinglePlayerGameRequest());
     }
 
     /**
@@ -95,9 +74,15 @@ public class ClientController
      */
     public void searchForGames()
     {
-        // create new LobbyListRequest
-        // send request to server
-        // signal to GUI that we are waiting for a response
+        this.forwardMessage(new LobbyListRequest());
+    }
+
+    /**
+     * Start the single player game mode.
+     */
+    public void startMultiPlayerGame(String lobbyName)
+    {
+        this.forwardMessage(new LobbyCreateRequest(lobbyName));
     }
 
     /**
@@ -107,9 +92,35 @@ public class ClientController
      */
     public void joinGame(Integer lobbyId)
     {
-        // create new LobbyJoinRequest
-        // send request to server
-        // signal to GUI that we are waiting for a response
+        this.forwardMessage(new LobbyJoinRequest(lobbyId));
+    }
+
+    /**
+     * Sends a request to the game server to add an AI player.
+     *
+     * @param difficulty Difficulty the difficulty for this AI player
+     */
+    public void addAIPlayer(Difficulty difficulty)
+    {
+        this.forwardMessage(new AddAIRequest(difficulty));
+    }
+
+    /**
+     * Sends a request to the game server to remove yourself from the lobby.
+     */
+    public void leaveLobby()
+    {
+        this.forwardMessage(new LeaveLobbyRequest());
+    }
+
+    /**
+     * Sends a request to the game server to remove a player from the lobby.
+     *
+     * @param Integer playerId the id of the player to kick
+     */
+    public void kickPlayer(Integer playerId)
+    {
+        this.forwardMessage(new KickPlayerRequest(playerId));
     }
 
     /**
@@ -117,86 +128,26 @@ public class ClientController
      */
     public void startGame()
     {
-        // create new GameStartRequest
-        // send request to server
-        // signal to GUI that we are waiting for a response
+        this.forwardMessage(new GameStartRequest());
     }
 
     /**
-     * Sends a request to the game server to add an AI player.
+     * Initiates a message to the server that indicates the client has ended
+     * their current turn.
      */
-    public void addAIPlayer()
-    {
-        // create new AddAIRequest
-        // send request to server
-        // signal to GUI that we are waiting for a response
+    public void endTurn() {
+        this.forwardMessage(new EndTurnRequest());
     }
 
-    /**
-     * A hook allowing a client extension to message into the controller, ie an
-     * object from a GUI.
-     *
-     * @param obj Object from a client extension
-     */
-    public void requestUse(Object obj)
-    {
-        if (obj instanceof ActionCard)
-        {
-            // this.forwardMessage(new ActionRequest((ActionCard)obj));
-        }
-        else if (obj instanceof List)
-        {
-            // this.forwardMessage(new RevealCardRequest((List<Card>)obj);
-
-        }
-    }
-    
     /**
      * Called when the client would like to make an accusation during their
      * turn.
-     * 
+     *
      * @param accusationCards list containing the Destination, Vehicle and
      * Suspect card required to make an accusation.
      */
-    public void makeAccusation(List<Card> accusationCards) {
-        // Create an AccusationRequest message
-        // Send AccusationRequest message to the server
-    }
-    
-    /**
-     * A hook to prompt a client extension, Controller sends a message out. ie.
-     * the Controller will prompt a GUI extension.
-     *
-     * @param obj Object that requiring examination
-     */
-    public void promptViews(Object obj)
-    {
-        if (obj instanceof ActionResponse)
-        {
-            // switch response.actionCard.type
-            // case SUGGESTION
-            //     if (playing this card)
-            //     {
-            //         present all hint cards
-            //     }
-            //     else
-            //     {
-            //         calculate (hand intersect desired)
-            //         present intersection to user
-            //     }
-            // case SNOOP
-            //     open window with all players
-            //     ...
-            //     open window with player's hand face down
-            // case ALL_SNOOP
-            //     open window with all player's hands
-            //     ...
-            //     open window with selected cards face up
-            // case SUPER_SLEUTH
-            //     N/A
-            // case PRIVATE_TIP
-            //     open window with all players
-        }
+    public void makeAccusation(Solution accusation) {
+        this.forwardMessage(new AccusationRequest(accusation));
     }
 
     /**
@@ -204,32 +155,111 @@ public class ClientController
      *
      * @param obj Object message from the ClientNetwork
      */
-    public void reactToMessage(Object obj)
+    public void reactToMessage(ServerResponse obj)
     {
-        if (obj instanceof ActionResponse)
+        if (obj instanceof LobbyDiscoveryResponse)
         {
-            this.reactToActionResponse((ActionResponse) obj);
-        }
-        else if (obj instanceof CardDealResponse)
-        {
-            this.reactToCardDealResponse((CardDealResponse) obj);
-        }
-        else if (obj instanceof GameStateResponse)
-        {
-            this.reactToGameStateResponse((GameStateResponse) obj);
+            this.reactToLobbyDiscoveryResponse((LobbyDiscoveryResponse) obj);
         }
         else if (obj instanceof LobbyCreateResponse)
         {
             this.reactToLobbyCreateResponse((LobbyCreateResponse) obj);
         }
-        else if (obj instanceof LobbyDiscoveryResponse)
+        else if (obj instanceof LobbyJoinResponse)
         {
-            this.reactToLobbyDiscoveryResponse((LobbyDiscoveryResponse) obj);
+            this.reactToLobbyJoinResponse((LobbyJoinResponse) obj);
         }
-        else if (obj instanceof LobbyUpdateResponse)
+        else if (obj instanceof LeaveLobbyResponse)
         {
-            this.reactToLobbyUpdateResponse((LobbyUpdateResponse) obj);
+            this.reactToLobbyLeaveResponse((LobbyLeaveResponse) obj);
         }
+        else if (obj instanceof KickPlayerResponse)
+        {
+            this.reactToKickPlayerResponse((KickPlayerResponse) obj);
+        }
+        else if (obj instanceof GameStateResponse)
+        {
+            this.reactToGameStateResponse((GameStateResponse) obj);
+        }
+        else if (obj instanceof CardDealResponse)
+        {
+            this.reactToCardDealResponse((CardDealResponse) obj);
+        }
+        else if (obj instanceof ActionResponse)
+        {
+            this.reactToActionResponse((ActionResponse) obj);
+        }
+        else if (obj instanceof AccusationResponse)
+        {
+            this.reactToAccusationResponse((AccusationResponse) obj);
+        }
+    }
+
+    private void reactToLobbyDiscoveryResponse(LobbyDiscoveryResponse rsp)
+    {
+        this.setState(new ClientLobbyDiscoveryState(rsp.getLobbies()));
+    }
+
+    private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
+    {
+        this.creator = true;
+        this.joinGame(rsp.getLobby().getLobbyId());
+    }
+
+    private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
+    {
+        if (this.state instanceof ClientLobbyDiscoveryState) {
+            Player me = rsp.getPlayer();
+            List<Player> players = new ArrayList<Player>();
+            players.add(me);
+
+            this.setState(new ClientLobbyState(me, players, this.creator));
+            this.creator = false;
+        }
+        else if (!(this.state instanceof ClientLobbyState))
+        {
+            System.err.println("Received LobbyJoinResponse while not in " +
+                    "ClientLobbyDiscoveryState or ClientLobbyState.");
+        }
+        else
+        {
+            ((ClientLobbyState)this.state).addPlayer(rsp.getPlayer());
+        }
+    }
+
+    private void reactToLobbyLeaveResponse(LobbyLeaveResponse rsp)
+    {
+        if (!(this.state instanceof ClientLobbyState))
+        {
+            System.err.println("Received LobbyLeaveResponse while not in " +
+                    "ClientLobbyState.");
+            return;
+        }
+
+        this.removePlayerFromClientLobbyState(rsp.getPlayer());
+    }
+
+    private void reactToKickPlayerResponse(KickPlayerResponse rsp)
+    {
+       // remove player from state
+        if (!(this.state instanceof ClientLobbyState))
+        {
+            System.err.println("Received KickPlayerResponse while not in " +
+                    "ClientLobbyState.");
+            return;
+        }
+
+        this.removePlayerFromClientLobbyState(rsp.getPlayer());
+    }
+
+    private void reactToGameStateResponse(GameStateResponse rsp)
+    {
+        // override game state
+    }
+
+    private void reactToCardDealResponse(CardDealResponse rsp)
+    {
+        // add dealt card to hand
     }
 
     private void reactToActionResponse(ActionResponse rsp)
@@ -238,43 +268,28 @@ public class ClientController
         // this.promptViews(rsp);
     }
 
-    private void reactToCardDealResponse(CardDealResponse rsp)
+    private void reactToAccusationResponse(AccusationResponse rsp)
     {
-        // add dealt card to hand
     }
 
-    private void reactToGameStateResponse(GameStateResponse rsp)
-    {
-        // override game state
-    }
+    private void removePlayerFromClientLobbyState(Player player) {
+        ClientLobbyState state = (ClientLobbyState)this.state;
 
-    private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
-    {
-        if(!(this.getState() instanceof ClientLobbyDiscoveryState)) {
-            System.out.println("Not in correct state!");
-        } else {
-            ClientLobbyDiscoveryState lds = (ClientLobbyDiscoveryState)state;
-            lds.setLobbyList(lds.getLobbyList());
+        Integer playerId = rsp.getPlayerId();
+        if (playerId == state.getPlayer().getPlayerId()) {
+            this.searchForGames();
         }
-    }
 
-    private void reactToLobbyDiscoveryResponse(LobbyDiscoveryResponse rsp)
-    {
-        setState(new ClientLobbyDiscoveryState(rsp.getLobbies()));
-    }
-
-    private void reactToLobbyUpdateResponse(LobbyUpdateResponse rsp)
-    {
-        // add new player to player list
+        state.getPlayers().remove(rsp.getPlayerId());
     }
 
     /**
      * Send a message via the ClientNetwork instance.
      *
-     * @param obj Object the message object to send via the Client network
+     * @param obj ClientRequest the message object to send via the ClientNetwork
      * instance.
      */
-    public void forwardMessage(Object obj)
+    public void forwardMessage(ClientRequest obj)
     {
         this.network.sendMessageToServer(obj);
     }

@@ -7,6 +7,9 @@ package com.outtatech.client;
 
 import java.util.List;
 
+import com.outtatech.client.*;
+import com.outtatech.common.*;
+
 /**
  * ClientPreGameState instances will hold information about other players
  * waiting to join the same game of Indication.
@@ -15,36 +18,26 @@ import java.util.List;
  */
 public class ClientLobbyState extends State
 {
-    private int playerId;
-    private List<Integer> playerIdList;
+    private Player player;
+    private List<Player> players;
     private boolean gameOwner;
 
-    public ClientLobbyState(int playerId, List<Integer> playerIdList,
+    public ClientLobbyState(Player player, List<Player> players,
             boolean gameOwner)
     {
-        this.playerId = playerId;
-        this.playerIdList = playerIdList;
+        this.player = player;
+        this.players = players;
         this.gameOwner = gameOwner;
     }
 
     /**
-     * Returns the playerId associated with this instance.
+     * Returns the player associated with this instance.
      *
-     * @return int playerId
+     * @return Player
      */
-    public int getPlayerId()
+    public Player getPlayer()
     {
-        return playerId;
-    }
-
-    /**
-     * Sets the playerId of this instance.
-     *
-     * @param id int playerId
-     */
-    public void setPlayerId(int id)
-    {
-        this.playerId = id;
+        return this.player;
     }
 
     /**
@@ -53,9 +46,14 @@ public class ClientLobbyState extends State
      *
      * @return List of Integer Objects representing player ids.
      */
-    public List<Integer> getPlayerIdList()
+    public List<Player> getPlayers()
     {
-        return playerIdList;
+        return this.players;
+    }
+
+    public void addPlayer(Player player)
+    {
+        this.players.add(player);
     }
 
     /**
@@ -67,16 +65,5 @@ public class ClientLobbyState extends State
     public boolean getGameOwner()
     {
         return gameOwner;
-
-    }
-
-    /**
-     * Make the playerId that created this game the game owner.
-     *
-     * @param owner boolean true sets the owner to the instances player id.
-     */
-    public void setGameOwner(boolean owner)
-    {
-        this.gameOwner = owner;
     }
 }
