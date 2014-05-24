@@ -79,7 +79,7 @@ public class DestinationCardTest
     
     public void testNiagraFalls()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.NIAGRA_FALLS);
+        DestinationCard instance = new DestinationCard(DestinationID.NIAGRA_FALLS, CardColor.RED);
         DestinationID expResult = DestinationID.NIAGRA_FALLS;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -87,7 +87,7 @@ public class DestinationCardTest
     
     public void testGoldenGateBridge()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
+        DestinationCard instance = new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, CardColor.RED);
         DestinationID expResult = DestinationID.GOLDEN_GATE_BRIDGE;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -95,7 +95,7 @@ public class DestinationCardTest
     
     public void testOldFaithful()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.OLD_FAITHFUL);
+        DestinationCard instance = new DestinationCard(DestinationID.OLD_FAITHFUL, CardColor.RED);
         DestinationID expResult = DestinationID.OLD_FAITHFUL;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -103,7 +103,7 @@ public class DestinationCardTest
     
     public void testConeyIsland()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.CONEY_ISLAND);
+        DestinationCard instance = new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED);
         DestinationID expResult = DestinationID.CONEY_ISLAND;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -111,7 +111,7 @@ public class DestinationCardTest
     
     public void testTheAlamo()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
+        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO, CardColor.RED);
         DestinationID expResult = DestinationID.THE_ALAMO;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -119,7 +119,7 @@ public class DestinationCardTest
     
     public void testHooverDam()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.HOOVER_DAM);
+        DestinationCard instance = new DestinationCard(DestinationID.HOOVER_DAM, CardColor.RED);
         DestinationID expResult = DestinationID.HOOVER_DAM;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -127,7 +127,7 @@ public class DestinationCardTest
     
     public void testLincolnMemorial()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
+        DestinationCard instance = new DestinationCard(DestinationID.LINCOLN_MEMORIAL, CardColor.RED);
         DestinationID expResult = DestinationID.LINCOLN_MEMORIAL;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -135,7 +135,7 @@ public class DestinationCardTest
     
     public void testMiamiBeach()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
+        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH, CardColor.RED);
         DestinationID expResult = DestinationID.MIAMI_BEACH;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -143,7 +143,7 @@ public class DestinationCardTest
     
     public void testMtRushmore()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.MT_RUSHMORE);
+        DestinationCard instance = new DestinationCard(DestinationID.MT_RUSHMORE, CardColor.RED);
         DestinationID expResult = DestinationID.MT_RUSHMORE;
         DestinationID result = instance.getDestination();
         assertEquals(expResult, result);
@@ -185,7 +185,7 @@ public class DestinationCardTest
     public void testisNorthNiagraFalls()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.NIAGRA_FALLS);
+                new DestinationCard(DestinationID.NIAGRA_FALLS, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -194,7 +194,7 @@ public class DestinationCardTest
     public void testIsNorthConeyIsland()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.CONEY_ISLAND);
+                new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -203,7 +203,7 @@ public class DestinationCardTest
     public void testIsNorthMtRushmore()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.MT_RUSHMORE);
+                new DestinationCard(DestinationID.MT_RUSHMORE, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -212,7 +212,7 @@ public class DestinationCardTest
     public void testIsNorthOldFaithful()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.OLD_FAITHFUL);
+                new DestinationCard(DestinationID.OLD_FAITHFUL, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -221,7 +221,7 @@ public class DestinationCardTest
     public void testIsNorthGoldenGateBridge()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -230,7 +230,7 @@ public class DestinationCardTest
     public void testIsNorthHooverDam()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.HOOVER_DAM);
+                new DestinationCard(DestinationID.HOOVER_DAM, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -238,7 +238,7 @@ public class DestinationCardTest
     
     public void testIsNorthTheAlamo()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
+        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -247,7 +247,7 @@ public class DestinationCardTest
     public void testIsNorthLincolnMemorial()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
+                new DestinationCard(DestinationID.LINCOLN_MEMORIAL, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -255,7 +255,7 @@ public class DestinationCardTest
     
     public void testIsNorthMiamiBeach()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
+        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsNorth();
         assertEquals(expResult, result);
@@ -297,7 +297,7 @@ public class DestinationCardTest
     public void testisWestNiagraFalls()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.NIAGRA_FALLS);
+                new DestinationCard(DestinationID.NIAGRA_FALLS, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -306,7 +306,7 @@ public class DestinationCardTest
     public void testIsWestConeyIsland()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.CONEY_ISLAND);
+                new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -315,7 +315,7 @@ public class DestinationCardTest
     public void testIsWestMtRushmore()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.MT_RUSHMORE);
+                new DestinationCard(DestinationID.MT_RUSHMORE, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -324,7 +324,7 @@ public class DestinationCardTest
     public void testIsWestOldFaithful()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.OLD_FAITHFUL);
+                new DestinationCard(DestinationID.OLD_FAITHFUL, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -333,7 +333,7 @@ public class DestinationCardTest
     public void testIsWestGoldenGateBridge()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -342,7 +342,7 @@ public class DestinationCardTest
     public void testIsWestHooverDam()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.HOOVER_DAM);
+                new DestinationCard(DestinationID.HOOVER_DAM, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -350,7 +350,7 @@ public class DestinationCardTest
     
     public void testIsWestTheAlamo()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
+        DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO, CardColor.RED);
         boolean expResult = true;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -359,7 +359,7 @@ public class DestinationCardTest
     public void testIsWestLincolnMemorial()
     {
         DestinationCard instance = 
-                new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
+                new DestinationCard(DestinationID.LINCOLN_MEMORIAL, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);
@@ -367,7 +367,7 @@ public class DestinationCardTest
     
     public void testIsWestMiamiBeach()
     {
-        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
+        DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH, CardColor.RED);
         boolean expResult = false;
         boolean result = instance.getIsWest();
         assertEquals(expResult, result);

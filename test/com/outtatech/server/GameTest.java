@@ -39,9 +39,11 @@ public class GameTest
     
     public GameTest()
     {
-        List<Card> hand = new ArrayList<Card>();
-        hand.add(new DestinationCard(DestinationID.CONEY_ISLAND));
-        hand.add(new Snoop());
+        List<HintCard> hintCardsHand = new ArrayList<HintCard>();
+        hintCardsHand.add(new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED));
+        
+        List<ActionCard> actionCardsHand = new ArrayList<ActionCard>();
+        actionCardsHand.add(new Snoop());
         
         List<ActionCard> drawPile = new ArrayList<ActionCard>();
         drawPile.add(new Snoop());
@@ -51,15 +53,16 @@ public class GameTest
         discardPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
         discardPile.add(new Suggestion(SuggestionType.ANY));
         
-        ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), hand);
+        ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), 
+                hintCardsHand, actionCardsHand);
         
         List<ServerPlayer> players = new ArrayList<ServerPlayer>();
         players.add(sp);
         
         List<HintCard> solution = new ArrayList<HintCard>();
-        solution.add(new DestinationCard(DestinationID.CONEY_ISLAND));
-        solution.add(new SuspectCard(SuspectID.WHITE));
-        solution.add(new VehicleCard(VehicleID.AIRLINER));
+        solution.add(new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED));
+        solution.add(new SuspectCard(SuspectID.WHITE, CardColor.RED));
+        solution.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
         
         Map<DestinationID, Integer> destToPlayerId = 
                 new HashMap<DestinationID, Integer>();

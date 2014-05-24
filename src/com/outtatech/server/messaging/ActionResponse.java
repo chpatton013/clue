@@ -17,15 +17,15 @@ public class ActionResponse extends ServerResponse
 {
 
     private ActionCard actionCard;
-
     private Integer playerId;
 
     /**
      * Creates a new ActionResponse object
      */
-    public ActionResponse()
+    public ActionResponse(ActionCard actionCard, Integer playerId)
     {
-
+        this.actionCard = actionCard;
+        this.playerId = playerId;
     }
 
     /**

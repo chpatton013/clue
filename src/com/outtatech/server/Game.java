@@ -1,10 +1,11 @@
 package com.outtatech.server;
 
+import com.outtatech.common.ActionCard;
+import com.outtatech.common.DestinationID;
+import com.outtatech.common.HintCard;
+import com.outtatech.common.Solution;
 import java.util.List;
 import java.util.Map;
-import com.outtatech.common.ActionCard;
-import com.outtatech.common.HintCard;
-import com.outtatech.common.DestinationID;
 
 /**
  * The Game class contains functions that provide information on the state of an
@@ -15,12 +16,12 @@ import com.outtatech.common.DestinationID;
  */
 public class Game
 {
-
+    private Integer gameId;
     private List<ServerPlayer> players;
     private ServerPlayer current;
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
-    private List<HintCard> solution;
+    private Solution solution;
     private Map<DestinationID, Integer> destToPlayerId;
 
     /**
@@ -39,7 +40,7 @@ public class Game
             ServerPlayer current,
             List<ActionCard> drawPile,
             List<ActionCard> discardPile,
-            List<HintCard> solution,
+            Solution solution,
             Map<DestinationID, Integer> destToPlayerId)
     {
         this.players = players;
@@ -50,11 +51,36 @@ public class Game
         this.destToPlayerId = destToPlayerId;
     }
 
+    /**
+     * Add a ServerPlayer to the List of ServerPlayers in this game.
+     *
+     * @param newPlayer The ServerPlayer to add to the Game
+     */
+    public void addServerPlayer(ServerPlayer newPlayer)
+    {
+        players.add(newPlayer);
+    }
+    
+    /**
+     * Gets the List of ServerPlayers in this game.
+     *
+     * @return The List of ServerPlayers in this game.
+     */
     public List<ServerPlayer> getServerPlayers()
     {
         return players;
     }
 
+    /**
+     * Sets the current ServerPlayer in this game.
+     *
+     * @param current The ServerPlayer to make current in the Game
+     */
+    public void setCurrentServerPlayer(ServerPlayer current)
+    {
+        this.current = current;
+    }
+    
     /**
      * Gets the current ServerPlayer associated with this game.
      *
@@ -63,6 +89,16 @@ public class Game
     public ServerPlayer getCurrentServerPlayer()
     {
         return current;
+    }
+    
+    /**
+     * Sets the drawPile of this game.
+     *
+     * @param drawPile The new drawPile for this Game
+     */
+    public void setDrawPile(List<ActionCard> drawPile)
+    {
+        this.drawPile = drawPile;
     }
 
     /**
@@ -74,7 +110,17 @@ public class Game
     {
         return drawPile;
     }
-
+    
+    /**
+     * Sets the discardPile of this game.
+     *
+     * @param discardPile The new discardPile for this Game
+     */
+    public void setDiscardPile(List<ActionCard> discardPile)
+    {
+        this.discardPile = discardPile;
+    }
+    
     /**
      * Gets the solution of this game.
      *
@@ -86,17 +132,47 @@ public class Game
     }
 
     /**
-     * Gets the discardPile of this game.
+     * Sets the solution of this game.
+     *
+     * @param solution The new solution for this game
+     */
+    public void setSolution(Solution solution)
+    {
+        this.solution = solution;
+    }
+
+    /**
+     * Gets the solution of this game.
      *
      * @return The solution of this game.
      */
-    public List<HintCard> getSolution()
+    public Solution getSolution()
     {
         return solution;
     }
 
+    /**
+     * Sets the Map between destination Ids and playerIds for this game.
+     *
+     * @param destToPlayerId The new Map of destination Ids and PlayerIds for 
+     * this game
+     */
+    public void setDestToPlayerId(Map<DestinationID, Integer> destToPlayerId)
+    {
+        this.destToPlayerId = destToPlayerId;
+    }
+    
+    /**
+     * Gets the Map between destination Ids and playerIds for this game.
+     *
+     * @return The Map of destination Ids and PlayerIds for this game
+     */
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
         return destToPlayerId;
+    }
+    
+    public Integer getGameId() {
+        return gameId;
     }
 }

@@ -2,6 +2,7 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
+import com.outtatech.server.messaging.ServerResponse;
 import java.util.List;
 
 /**
@@ -29,28 +30,60 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
-     * Sends an Object to all client connections provide in the client list.
+     * Sets this instance's server controller
+     * @param ctrl the ServerController object.
+     */
+    public void setServerController(ServerController ctrl)
+    {
+        this.ctrl = ctrl;
+    }
+
+    /**
+     * Sends a Message object to all client connections provide in the client
+     * list.
      *
-     * @param obj Object to send to client connections
+     * @param msg ServerResponse to send to client connections
      * @param clientList list of client connections
      */
-    public void sendMessageToClients(Object obj,
+    public void sendMessageToClients(ServerResponse msg,
             List<ConnectionToClient> clientList)
     {
-        // For each ConnectionToClient in clientList
-        //    Call sendMessageToClient on obj
+        try
+        {
+            // For each ConnectionToClient in clientList
+            for (ConnectionToClient client : clientList)
+            {
+                // Call sendMessageToClient on obj
+                client.sendToClient(msg);
+            }
+        }
+        catch (Exception e)
+        {
+            // Handle Exception
+            System.out.println("Error sending message to client");
+        }
     }
 
     /**
      * Sends an Object to the provided client connection.
      *
-     * @param obj Object to send to client connections
+     * @param msg ServerResponse to send to client connections
      * @param client the client connection
      */
-    public void sendMessageToClient(Object obj, ConnectionToClient client)
+    public void sendMessageToClient(Object msg,
+            ConnectionToClient client)
     {
         // Ensure the obj is instanceof ServerMessage
-        // Call OCSF's sendToClient on obj
+        try
+        {
+            // Call OCSF's sendToClient on obj
+            client.sendToClient(msg);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error sending message to client");
+
+        }
     }
 
     /**
@@ -63,8 +96,8 @@ public class ServerNetwork extends AbstractServer
     public void handleMessageFromClient(Object message,
             ConnectionToClient client)
     {
-        // Ensure message is an instance of ClientMessage
         // Cast message to the appropriate ClientMessage type
         // Update server state based on message as appropriate.
+        ctrl.reactToNetwork(message, client);
     }
 }

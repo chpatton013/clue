@@ -23,10 +23,12 @@ public class HintCard extends Card
      *
      * @param type The type of HintCard this Card is.
      */
-    public HintCard(HintCardType type)
+    public HintCard(HintCardType type, CardColor cardColor)
     {
         super(CardType.HINT);
         this.type = type;
+        
+        this.cardColor = cardColor;
     }
 
     /**

@@ -21,9 +21,9 @@ public class SuspectCard extends HintCard
      *
      * @param suspect A unique suspect ID
      */
-    public SuspectCard(SuspectID suspect)
+    public SuspectCard(SuspectID suspect, CardColor cardColor)
     {
-        super(HintCardType.SUSPECT);
+        super(HintCardType.SUSPECT, cardColor);
         this.suspect = suspect;
 
         if (suspect == SuspectID.WHITE || suspect == SuspectID.PEACOCK
@@ -53,4 +53,5 @@ public class SuspectCard extends HintCard
     {
         return gender;
     }
+    
 }

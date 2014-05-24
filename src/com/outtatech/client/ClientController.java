@@ -250,12 +250,17 @@ public class ClientController
 
     private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
     {
-        // change state to new ClientPreGameState
+        if(!(this.getState() instanceof ClientLobbyDiscoveryState)) {
+            System.out.println("Not in correct state!");
+        } else {
+            ClientLobbyDiscoveryState lds = (ClientLobbyDiscoveryState)state;
+            lds.setLobbyList(lds.getLobbyList());
+        }
     }
 
     private void reactToLobbyDiscoveryResponse(LobbyDiscoveryResponse rsp)
     {
-        // push list of lobbies to GUI
+        setState(new ClientLobbyDiscoveryState(rsp.getLobbies()));
     }
 
     private void reactToLobbyUpdateResponse(LobbyUpdateResponse rsp)

@@ -20,31 +20,6 @@ import static org.junit.Assert.*;
 public class LobbyTest
 {
     
-    public LobbyTest()
-    {
-        
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
-    }
-
     /**
      * Test of getLobbyName method, of class Lobby.
      */
@@ -53,7 +28,7 @@ public class LobbyTest
     {
         System.out.println("getLobbyName");
         
-        Lobby instance = new Lobby("lobby", new Integer(5), new Integer(3));
+        Lobby instance = new Lobby("lobby", new Integer(5));
         String expResult = "lobby";
         String result = instance.getLobbyName();
         assertEquals(expResult, result);
@@ -66,7 +41,7 @@ public class LobbyTest
     public void testGetGameId()
     {
         System.out.println("getGameId");
-        Lobby instance = new Lobby("lobby", new Integer(5), new Integer(3));
+        Lobby instance = new Lobby("lobby", new Integer(5));
         Integer expResult = new Integer(5);
         Integer result = instance.getGameId();
         assertEquals(expResult, result);
@@ -80,8 +55,8 @@ public class LobbyTest
     {
         System.out.println("getLobbyId");
         
-        Lobby instance = new Lobby("lobby", new Integer(5), new Integer(3));
-        Integer expResult = new Integer(3);
+        Lobby instance = new Lobby("lobby", new Integer(5));
+        Integer expResult = new Integer(2);
         Integer result = instance.getLobbyId();
         assertEquals(expResult, result);
     }
