@@ -1,6 +1,7 @@
 package com.outtatech.client;
 
 import com.lloseng.ocsf.client.AbstractClient;
+import com.outtatech.server.messaging.ServerResponse;
 
 /**
  * The networking layer for the client application. Handles all incoming and
@@ -69,7 +70,7 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void handleMessageFromServer(Object msg)
     {
-        ctrl.reactToMessage(msg);
+        ctrl.reactToMessage((ServerResponse)msg);
     }
 
     /**

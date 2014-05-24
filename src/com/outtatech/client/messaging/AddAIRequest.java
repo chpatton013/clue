@@ -16,15 +16,17 @@ public class AddAIRequest extends ClientRequest
 {
 
     private Difficulty difficulty;
+    private Integer lobbyId;
 
     /**
      * Creates a new AddAIRequest object.
      *
      * @param difficulty the difficulty of the new AI player
      */
-    public AddAIRequest(Difficulty difficulty)
+    public AddAIRequest(Difficulty difficulty, Integer lobbyId)
     {
         this.difficulty = difficulty;
+        this.lobbyId = lobbyId;
     }
 
     /**
@@ -35,5 +37,10 @@ public class AddAIRequest extends ClientRequest
     public Difficulty getDifficulty()
     {
         return difficulty;
+    }
+    
+    public Integer getLobbyId() 
+    {
+        return this.lobbyId;
     }
 }

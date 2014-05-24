@@ -6,6 +6,7 @@
 package com.outtatech.client;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import com.outtatech.common.*;
 import com.outtatech.client.*;
@@ -100,9 +101,9 @@ public class ClientController
      *
      * @param difficulty Difficulty the difficulty for this AI player
      */
-    public void addAIPlayer(Difficulty difficulty)
+    public void addAIPlayer(Difficulty difficulty, Integer lobbyId)
     {
-        this.forwardMessage(new AddAIRequest(difficulty));
+        this.forwardMessage(new AddAIRequest(difficulty, lobbyId));
     }
 
     /**
@@ -110,7 +111,7 @@ public class ClientController
      */
     public void leaveLobby()
     {
-        this.forwardMessage(new LeaveLobbyRequest());
+        this.forwardMessage(new LobbyLeaveRequest());
     }
 
     /**
@@ -169,7 +170,7 @@ public class ClientController
         {
             this.reactToLobbyJoinResponse((LobbyJoinResponse) obj);
         }
-        else if (obj instanceof LeaveLobbyResponse)
+        else if (obj instanceof LobbyLeaveResponse)
         {
             this.reactToLobbyLeaveResponse((LobbyLeaveResponse) obj);
         }
@@ -236,7 +237,7 @@ public class ClientController
             return;
         }
 
-        this.removePlayerFromClientLobbyState(rsp.getPlayer());
+        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToKickPlayerResponse(KickPlayerResponse rsp)
@@ -249,7 +250,7 @@ public class ClientController
             return;
         }
 
-        this.removePlayerFromClientLobbyState(rsp.getPlayer());
+        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToGameStateResponse(GameStateResponse rsp)

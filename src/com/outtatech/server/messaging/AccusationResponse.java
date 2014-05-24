@@ -11,7 +11,7 @@ package com.outtatech.server.messaging;
  * 
  * @author jbilous
  */
-public class AccusationResponse
+public class AccusationResponse extends ServerResponse
 {
     private boolean correctAccusation;
     
