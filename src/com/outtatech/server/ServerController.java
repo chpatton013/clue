@@ -66,6 +66,9 @@ public class ServerController
                     values())),
                     connection);
         }
+        /* 
+         * AccusationRequest respond with AccusationResponse
+         */
         else if (obj instanceof AccusationRequest)
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
@@ -76,7 +79,7 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-
+            
 //            forwardMessage(new LobbyUpdateResponse(
 //                    lobbies.get(((LobbyJoinRequest) obj).getLobbyId())),
 //                    connection, false);
