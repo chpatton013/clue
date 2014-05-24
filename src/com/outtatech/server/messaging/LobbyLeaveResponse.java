@@ -5,23 +5,23 @@
  */
 package com.outtatech.server.messaging;
 
-import com.outtatech.server.*;
-
 /**
  * Message passed from the server to the client in response to a player joining
- * or leaving an existing lobby.
+ * an existing lobby.
  *
  * @author jbilous
  */
-public class LobbyUpdateResponse extends ServerResponse
+public class LobbyLeaveResponse extends ServerResponse
 {
-    private Lobby lobby;
-    
-    public LobbyUpdateResponse(Lobby lobby) {
-        this.lobby = lobby;
+    private Integer playerId;
+
+    public LobbyLeaveResponse(Integer playerId)
+    {
+        this.playerId = playerId;
     }
-    
-    public Lobby getLobby() {
-        return lobby;
+
+    public Integer getPlayerId()
+    {
+        return this.playerId;
     }
 }
