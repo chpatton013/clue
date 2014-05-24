@@ -13,6 +13,8 @@ import java.awt.List;
  * @author Thomas
  */
 public class RevealedCardsScreen extends javax.swing.JFrame {
+    
+    private int curCards = 0;
 
     /**
      * Creates new form RevealedCardsScreen
@@ -26,9 +28,12 @@ public class RevealedCardsScreen extends javax.swing.JFrame {
      * @param cardType
      */
     public void addCard(int cardType) {
-        //increments curCards
-        
-        //sets the curCards panel to the specified card image
+        if(curCards < 5) {
+            //increments curCards
+            curCards++;
+
+            //sets the curCards panel to the specified card image
+        }
     }
 
     /**

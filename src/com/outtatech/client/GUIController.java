@@ -36,6 +36,17 @@ public class GUIController implements Observer{
     public static void main(String[] args) {
     }
     
+    public void initWindows(GUIController ctrl){
+        introScreen = new IntroScreen(ctrl);
+        optionsScreen = new OptionsScreen(ctrl);
+        instructionScreen = new InstructionsScreen();
+        gameSelectScreen = new GameSelectScreen(ctrl);
+        lobbyScreen = new LobbyScreen(ctrl);
+        revealedCardsScreen = new RevealedCardsScreen();
+        accusationScreen = new AccusationScreen(ctrl);
+        mainGameScreen = new MainGameScreen(ctrl);
+    }
+    
     public void update(Observable obs, Object obj) {
         //check the state
         
@@ -74,8 +85,17 @@ public class GUIController implements Observer{
      */
     public void exitWindow() {
         //hide all windows except intro screen
+        introScreen.setVisible(true);
+        optionsScreen.setVisible(false);
+        instructionScreen.setVisible(false);
+        gameSelectScreen.setVisible(false);
+        lobbyScreen.setVisible(false);
+        revealedCardsScreen.setVisible(false);
+        accusationScreen.setVisible(false);
+        mainGameScreen.setVisible(false);
         
         //set state to INTRO
+        state = CurrentWindow.INTRO;
     }
     
     /**
@@ -83,6 +103,7 @@ public class GUIController implements Observer{
      */
     public void showInstructions() {
         //make the instructions window visible
+        instructionScreen.setVisible(true);
     }
     
     /**
@@ -90,6 +111,7 @@ public class GUIController implements Observer{
      */
     public void showOptions() {
         //make the options window visible
+        optionsScreen.setVisible(true);
     }
     
     /**
@@ -100,8 +122,11 @@ public class GUIController implements Observer{
         //a parameter of new ClientLobbyState()
         
         //set state to LOBBY
+        state = CurrentWindow.LOBBY;
         
         //hide the Intro screen and display the lobby screen
+        introScreen.setVisible(false);
+        lobbyScreen.setVisible(true);
     }
     
     /**

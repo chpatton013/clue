@@ -27,7 +27,7 @@ public class IntroScreen extends javax.swing.JFrame {
      */
     public IntroScreen(GUIController ctrl) {
         //set controller to ctrl
-        
+        controller = ctrl;
         initComponents();
     }
 
@@ -131,10 +131,12 @@ public class IntroScreen extends javax.swing.JFrame {
 
     private void InformationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InformationButtonMouseClicked
         //call controller's showInstructions method
+        controller.showInstructions();
     }//GEN-LAST:event_InformationButtonMouseClicked
 
     private void OptionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsButtonMouseClicked
         //call controller's showOptions method
+        controller.showOptions();
     }//GEN-LAST:event_OptionsButtonMouseClicked
 
     /**

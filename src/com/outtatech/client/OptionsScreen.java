@@ -12,10 +12,18 @@ package com.outtatech.client;
  */
 public class OptionsScreen extends javax.swing.JFrame {
 
+    GUIController controller;
+    
     /**
      * Creates new form OptionsScreen
      */
     public OptionsScreen() {
+        initComponents();
+    }
+    
+    public OptionsScreen(GUIController ctrl) {
+        controller = ctrl;
+        
         initComponents();
     }
 
@@ -28,6 +36,7 @@ public class OptionsScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -81,6 +90,7 @@ public class OptionsScreen extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setLabel("Greece");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,8 +98,10 @@ public class OptionsScreen extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setLabel("White House");
 
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setLabel("Pirate");
 
         jButton1.setLabel("Apply");
@@ -192,6 +204,7 @@ public class OptionsScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
