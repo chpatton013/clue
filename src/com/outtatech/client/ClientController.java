@@ -242,7 +242,6 @@ public class ClientController
 
     private void reactToKickPlayerResponse(KickPlayerResponse rsp)
     {
-       // remove player from state
         if (!(this.state instanceof ClientLobbyState))
         {
             System.err.println("Received KickPlayerResponse while not in " +
@@ -260,7 +259,14 @@ public class ClientController
 
     private void reactToCardDealResponse(CardDealResponse rsp)
     {
-        // add dealt card to hand
+        if (!(this.state instanceof ClientGameState))
+        {
+            System.err.println("Received CardDealResponse while not in " +
+                    "ClientGameState.");
+            return;
+        }
+
+        ((ClientGameState)this.getState()).getHand().addAll(rsp.getCards());
     }
 
     private void reactToActionResponse(ActionResponse rsp)
