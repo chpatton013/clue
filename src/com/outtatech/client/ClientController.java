@@ -279,15 +279,20 @@ public class ClientController
     {
     }
 
-    private void removePlayerFromClientLobbyState(Player player) {
+    private void removePlayerFromClientLobbyState(Integer playerId) {
         ClientLobbyState state = (ClientLobbyState)this.state;
 
-        Integer playerId = rsp.getPlayerId();
         if (playerId == state.getPlayer().getPlayerId()) {
             this.searchForGames();
         }
 
-        state.getPlayers().remove(rsp.getPlayerId());
+        List<Player> players = state.getPlayers();
+        for (int index = 0; index < players.size(); ++index) {
+           if (playerId == players.get(index).getPlayerId()) {
+              players.remove(index);
+              break;
+           }
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author dmangin
  */
-public class ClientGameState
+public class ClientGameState extends State
 {
     private int playerID;
     private Object notes;
