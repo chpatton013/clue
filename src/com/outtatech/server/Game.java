@@ -14,7 +14,7 @@ import java.util.Map;
  * The Game class contains functions that provide information on the state of an
  * Indication Game and provide functions that can change the state of the Game.
  *
- * @author Steven Chiu
+ * @author Steven Chiu, Brian Schacherer
  * @version 1.0 - May 11, 2014
  */
 public class Game
@@ -25,6 +25,7 @@ public class Game
     private ServerPlayer current;
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
+    private List<HintCard> listHintCards;
     private Solution solution;
     private Map<DestinationID, Integer> destToPlayerId;
 
@@ -61,10 +62,10 @@ public class Game
     {
         this.players = new ArrayList<ServerPlayer>();
         this.current = null;
-        this.drawPile = new ArrayList<ActionCard>();
-        initializeDrawPile(drawPile);
+        this.drawPile = initializeDrawPile();
         this.discardPile = new ArrayList<ActionCard>();
-        this.solution = null;
+        this.listHintCards = initializeHintCards();
+        this.solution = pickSolution();
         this.destToPlayerId = null;
         this.gameId = ++gameIdCounter;
     }
@@ -195,8 +196,9 @@ public class Game
         return gameId;
     }
     
-    private void initializeDrawPile(List<ActionCard> drawPile) 
+    private List<ActionCard> initializeDrawPile() 
     {
+        List<ActionCard> drawPileT = new ArrayList<ActionCard>();
         int countSuggestionANY = 10;
         int countSuggestionCURRENT = 9;
         int countSnoop = 4;
@@ -206,43 +208,143 @@ public class Game
         
         for(int index = 0; index < countSuggestionANY; index++)
         {
-            drawPile.add(new Suggestion(SuggestionType.ANY));
+            drawPileT.add(new Suggestion(SuggestionType.ANY));
         }
         
         for(int index = 0; index < countSuggestionCURRENT; index++)
         {
-            drawPile.add(new Suggestion(SuggestionType.CURRENT));   
+            drawPileT.add(new Suggestion(SuggestionType.CURRENT));   
         }
         
         for(int index = 0; index < countSnoop; index++)
         {
-            drawPile.add(new Snoop());
+            drawPileT.add(new Snoop());
         }
         
         for(int index = 0; index < countAllSnoopLEFT; index++)
         {
-            drawPile.add(new AllSnoop(!right));
+            drawPileT.add(new AllSnoop(!right));
         }
         
         for(int index = 0; index < countAllSnoopRIGHT; index++)
         {
-            drawPile.add(new AllSnoop(right));
+            drawPileT.add(new AllSnoop(right));
         }
                 
-        drawPile.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
-        drawPile.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
-        drawPile.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
-        drawPile.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
-        drawPile.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
-        drawPile.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
+        drawPileT.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
 
-        drawPile.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
-        drawPile.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
-        drawPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
-        drawPile.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
-        drawPile.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
-        drawPile.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
+        drawPileT.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
+        drawPileT.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
+        drawPileT.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
+        drawPileT.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
+        drawPileT.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
+        drawPileT.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
         
-        Collections.shuffle(drawPile);
+        Collections.shuffle(drawPileT);
+        return drawPileT;
+    }
+    
+    /**
+     * Creates a list of HintCards for the game to 
+     * first pick a solution then for the game to deal.
+     * @param hintCards 
+     */
+    private List<HintCard> initializeHintCards()
+    {
+        List<HintCard> hintCards = new ArrayList<HintCard>();
+        CardColor dc = CardColor.BLUE;
+        
+        //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.
+        hintCards.add(new SuspectCard(SuspectID.GREEN, dc));
+        hintCards.add(new SuspectCard(SuspectID.MUSTARD, dc));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK, dc));
+        hintCards.add(new SuspectCard(SuspectID.PLUM, dc));
+        hintCards.add(new SuspectCard(SuspectID.SCARLET, dc));
+        hintCards.add(new SuspectCard(SuspectID.WHITE, dc));
+        
+        hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
+        hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
+        hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, dc));
+        hintCards.add(new VehicleCard(VehicleID.LIMOUSINE, dc));
+        hintCards.add(new VehicleCard(VehicleID.SEAPLANE, dc));
+        hintCards.add(new VehicleCard(VehicleID.TRAIN, dc));
+        
+        hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND, dc));
+        hintCards.add(
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, dc));
+        hintCards.add(new DestinationCard(DestinationID.HOOVER_DAM, dc));
+        hintCards.add(new DestinationCard(DestinationID.LINCOLN_MEMORIAL, dc));
+        hintCards.add(new DestinationCard(DestinationID.MIAMI_BEACH, dc));
+        hintCards.add(new DestinationCard(DestinationID.MT_RUSHMORE, dc));
+        hintCards.add(new DestinationCard(DestinationID.NIAGRA_FALLS, dc));
+        hintCards.add(new DestinationCard(DestinationID.OLD_FAITHFUL, dc));
+        hintCards.add(new DestinationCard(DestinationID.THE_ALAMO, dc));
+        
+        Collections.shuffle(hintCards);
+        return hintCards;
+    }
+    
+    public HintCard popHintCard()
+    {
+        HintCard hintCard = null;
+                
+        if (listHintCards.size() > 0)
+        {
+            hintCard = listHintCards.remove(0);
+        }
+        
+        return hintCard;
+    }
+    
+    /**
+     * Pre condition listHintCards has been shuffled.
+     * @param hintCards
+     * @return 
+     */
+    private Solution pickSolution()
+    {
+        Solution solution = null;
+        DestinationID did = null;
+        VehicleID vid = null;
+        SuspectID sid = null;
+        boolean hasDid = false;
+        boolean hasVid = false;
+        boolean hasSid = false;
+                
+        if (listHintCards != null)
+        {
+            for(HintCard hc : listHintCards)
+            {
+                if(hc.getHintType() == HintCardType.DESTINATION && !hasDid)
+                {
+                    did = ((DestinationCard)hc).getDestination();
+                    listHintCards.remove(hc);
+                    hasDid = true;
+                }
+                
+                if(hc.getHintType() == HintCardType.VEHICLE && !hasVid)
+                {
+                    vid = ((VehicleCard)hc).getVehicle();
+                    listHintCards.remove(hc);
+                    hasVid = true;
+                }
+                
+                if(hc.getHintType() == HintCardType.SUSPECT && !hasSid)
+                {
+                    sid = ((SuspectCard)hc).getSuspect();
+                    listHintCards.remove(hc);
+                    hasSid = true;
+                }
+            }
+            
+            solution = new Solution(did, vid, sid);
+        }
+        
+        return solution;
     }
 }

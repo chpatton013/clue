@@ -11,7 +11,7 @@ import java.util.List;
  * An instance of this class will hold a collection of connected clients and a
  * game controller. The class facilitates communication to and from the clients.
  *
- * @author Steven Chiu
+ * @author Steven Chiu, Brian Schacherer
  * @version 1.0 - May 11, 2014
  */
 public class ServerNetwork extends AbstractServer

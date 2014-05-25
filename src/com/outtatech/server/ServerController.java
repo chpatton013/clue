@@ -129,13 +129,7 @@ public class ServerController
          */
         else if (obj instanceof GameStartRequest)
         {
-            //For the appropriate Game instance:
-            //set solution
-            //deal Indication cards
-            //deal one Action card to each player
-            //draw pile is already shuffled
-            //on deal of Action Card pop remove from top
-            //of draw pile(item at index 0 getFirst ) and push to client
+            handleGameStartRequest();
         }
         /**
          * ActionRequest respond with ActionResponse else if
@@ -335,4 +329,17 @@ public class ServerController
     {
         return games.get(client).getGameId();
     }
+    
+    /**
+     * Brian Schacherer TODO
+     * For the appropriate Game instance:
+            //deal Hint cards
+            //deal one Action card to each player
+            //draw pile is already shuffled
+            //on deal of Action Card pop remove from top
+            //of draw pile(item at index 0 getFirst ) and push to client
+        */
+    private void handleGameStartRequest()
+    {
+    } 
 }

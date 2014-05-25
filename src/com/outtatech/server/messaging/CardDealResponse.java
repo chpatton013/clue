@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CardDealResponse extends ServerResponse
 {
-    List<Card> cards;
+    private final List<Card> cards;
 
     /**
      * Creates a new CardDealResponse object.

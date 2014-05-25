@@ -4,7 +4,7 @@ package com.outtatech.server;
  * The Difficulty class models the intelligence of an AI and the likeliness an
  * AI is to take risks.
  *
- * @author Steven Chiu
+ * @author Steven Chiu, Brian Schacherer
  * @version 1.0 - May 11, 2014
  */
 public class Difficulty
