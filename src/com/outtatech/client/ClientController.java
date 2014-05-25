@@ -248,7 +248,7 @@ public class ClientController
             return;
         }
 
-        //this.removePlayerFromClientLobbyState(rsp.getPlayerId());
+        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToKickPlayerResponse(KickPlayerResponse rsp)
@@ -260,7 +260,7 @@ public class ClientController
             return;
         }
 
-        //this.removePlayerFromClientLobbyState(rsp.getPlayerId());
+        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToGameStateResponse(GameStateResponse rsp)
