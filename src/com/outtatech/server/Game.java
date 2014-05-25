@@ -4,7 +4,10 @@ import com.outtatech.common.ActionCard;
 import com.outtatech.common.DestinationID;
 import com.outtatech.common.HintCard;
 import com.outtatech.common.Solution;
+import com.outtatech.common.*;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -16,6 +19,7 @@ import java.util.Map;
  */
 public class Game
 {
+    private static Integer gameIdCounter = 0;
     private Integer gameId;
     private List<ServerPlayer> players;
     private ServerPlayer current;
@@ -49,6 +53,20 @@ public class Game
         this.discardPile = discardPile;
         this.solution = solution;
         this.destToPlayerId = destToPlayerId;
+        this.gameId = ++gameIdCounter;
+    }
+    
+    
+    public Game()
+    {
+        this.players = new ArrayList<ServerPlayer>();
+        this.current = null;
+        this.drawPile = new ArrayList<ActionCard>();
+        initializeDrawPile(drawPile);
+        this.discardPile = new ArrayList<ActionCard>();
+        this.solution = null;
+        this.destToPlayerId = null;
+        this.gameId = ++gameIdCounter;
     }
 
     /**
@@ -172,7 +190,59 @@ public class Game
         return destToPlayerId;
     }
     
-    public Integer getGameId() {
+    public Integer getGameId() 
+    {
         return gameId;
+    }
+    
+    private void initializeDrawPile(List<ActionCard> drawPile) 
+    {
+        int countSuggestionANY = 10;
+        int countSuggestionCURRENT = 9;
+        int countSnoop = 4;
+        int countAllSnoopLEFT = 2;
+        int countAllSnoopRIGHT = 2;
+        boolean right = true;
+        
+        for(int index = 0; index < countSuggestionANY; index++)
+        {
+            drawPile.add(new Suggestion(SuggestionType.ANY));
+        }
+        
+        for(int index = 0; index < countSuggestionCURRENT; index++)
+        {
+            drawPile.add(new Suggestion(SuggestionType.CURRENT));   
+        }
+        
+        for(int index = 0; index < countSnoop; index++)
+        {
+            drawPile.add(new Snoop());
+        }
+        
+        for(int index = 0; index < countAllSnoopLEFT; index++)
+        {
+            drawPile.add(new AllSnoop(!right));
+        }
+        
+        for(int index = 0; index < countAllSnoopRIGHT; index++)
+        {
+            drawPile.add(new AllSnoop(right));
+        }
+                
+        drawPile.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
+        drawPile.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
+        drawPile.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
+        drawPile.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
+        drawPile.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
+        drawPile.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
+
+        drawPile.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
+        drawPile.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
+        drawPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
+        drawPile.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
+        drawPile.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
+        drawPile.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
+        
+        Collections.shuffle(drawPile);
     }
 }

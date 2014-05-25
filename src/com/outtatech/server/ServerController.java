@@ -112,10 +112,30 @@ public class ServerController
          */
         else if (obj instanceof LobbyCreateRequest)
         {
-//            Lobby temp = new Lobby(((LobbyCreateRequest) obj).getLobbyName(),
-//                    (games.get(connection)).getGameId());
-//            lobbies.put(temp.getLobbyId(), temp);
-//            forwardMessage(new LobbyCreateResponse(temp), connection, false);
+            LobbyCreateRequest lcr = (LobbyCreateRequest)obj;
+            Game game = new Game();
+            Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId());
+            games.put(connection, game);
+            gameIdToGame.put(game.getGameId(), game);
+            lobbies.put(game.getGameId(), lobby);
+            
+            //@TODO Only the requesting client will be updated.  Other clients
+            //will need to send a lobby discovery response to refresh.
+            forwardMessage(new LobbyCreateResponse(lobby), connection);
+        }
+        
+        /**
+         * 
+         */
+        else if (obj instanceof GameStartRequest)
+        {
+            //For the appropriate Game instance:
+            //set solution
+            //deal Indication cards
+            //deal one Action card to each player
+            //draw pile is already shuffled
+            //on deal of Action Card pop remove from top
+            //of draw pile(item at index 0 getFirst ) and push to client
         }
         /**
          * ActionRequest respond with ActionResponse else if
