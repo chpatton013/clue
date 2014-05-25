@@ -3,6 +3,7 @@ package com.outtatech.server;
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.server.messaging.ServerResponse;
+import com.outtatech.client.messaging.AddAIRequest;
 import java.util.List;
 
 /**
@@ -99,5 +100,22 @@ public class ServerNetwork extends AbstractServer
         // Cast message to the appropriate ClientMessage type
         // Update server state based on message as appropriate.
         ctrl.reactToNetwork(message, client);
+    }
+    
+    /**
+     * Method called each time a client disconnects.
+     * The client is guaranteed to be disconnected but the thread
+     * is still active until it is asynchronously removed from the thread group. 
+     *
+     * @param client the connection with the client.
+     */
+    synchronized protected void clientDisconnected(
+      ConnectionToClient client) 
+    {
+        Integer lobbyId = ctrl.getLobbyId(client);
+        Difficulty difficulty = new Difficulty(Difficulty.DUMBDUMB,
+                Difficulty.CAREFUL);
+        AddAIRequest air = new AddAIRequest(difficulty, lobbyId);
+        ctrl.reactToNetwork(air, client);
     }
 }

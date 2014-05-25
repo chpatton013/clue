@@ -17,7 +17,7 @@ import java.util.Map;
  * object. This association is tracked with a map of Connection to Game. This
  * implies that multiple Connection keys will point to the same Game value.
  *
- * @author Steven Chiu, James Bilous
+ * @author Steven Chiu, James Bilous, Brian Schacherer
  * @version 1.0 - May 11, 2014
  */
 public class ServerController
@@ -329,5 +329,10 @@ public class ServerController
         Game game = gameIdToGame.get(gameId);
         
         return this.players.get(game);
+    }
+    
+    public Integer getLobbyId(ConnectionToClient client) 
+    {
+        return games.get(client).getGameId();
     }
 }
