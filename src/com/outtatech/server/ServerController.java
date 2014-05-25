@@ -129,7 +129,7 @@ public class ServerController
          */
         else if (obj instanceof GameStartRequest)
         {
-            handleGameStartRequest();
+            handleGameStartRequest(games.get(connection));
         }
         /**
          * ActionRequest respond with ActionResponse else if
@@ -282,6 +282,14 @@ public class ServerController
 
     public void informAI(Object obj, List<AI> ai)
     {
+        for(AI bot : ai)
+        {
+            informAI(obj, ai);
+        }
+    }
+    
+    public void informAI(Object obj, AI ai)
+    {
 
     }
 
@@ -331,15 +339,53 @@ public class ServerController
     }
     
     /**
-     * Brian Schacherer TODO
-     * For the appropriate Game instance:
-            //deal Hint cards
-            //deal one Action card to each player
-            //draw pile is already shuffled
-            //on deal of Action Card pop remove from top
-            //of draw pile(item at index 0 getFirst ) and push to client
-        */
-    private void handleGameStartRequest()
+     * Using the provided Game instance deal hint cards to the Server Players.
+     * Deal out all HintCards for the Game instance.
+     * Deal out one ActionCard to each player
+     * @TODO also send out a GameStateResponse??
+     * @param game 
+     */
+    private void handleGameStartRequest(Game game)
     {
+        ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
+        
+        //Get all players in game
+        List<ServerPlayer> gameServerPlayers
+                = game.getServerPlayers();
+        
+        Integer playerCount = gameServerPlayers.size();
+
+        for (ServerPlayer serverPlayer : gameServerPlayers)
+        {
+            playerHands.add(new ArrayList<Card>());
+        }
+        
+        //Deal out all hint cards
+        for (int index = 0; game.getHintCardsSize() > 0; index++)
+        {
+            playerHands.get(index % (playerCount - 1)).add(game.popHintCard());
+        }
+        
+        //Add one action card to each hand.
+        for(ArrayList<Card> alc : playerHands)
+        {
+            alc.add(game.popActionCard());
+        }
+        
+        for (ServerPlayer serverPlayer : gameServerPlayers)
+        {
+            CardDealResponse msg = new CardDealResponse(playerHands.remove(0));
+            if (!humans.containsKey(serverPlayer))
+            {
+                //Send to AI
+                informAI(msg, robots.get(serverPlayer));
+            }
+            else
+            {
+                //Send to human
+                forwardMessage(msg, humans.get(serverPlayer));
+            }
+        }
+        
     } 
 }

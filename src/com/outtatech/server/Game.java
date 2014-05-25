@@ -249,6 +249,18 @@ public class Game
         return drawPileT;
     }
     
+    public ActionCard popActionCard()
+    {
+        ActionCard ac = null;
+        
+        if(drawPile.size() > 0)
+        {
+            ac = drawPile.remove(0);
+        }
+            
+        return ac;
+    }
+    
     /**
      * Creates a list of HintCards for the game to 
      * first pick a solution then for the game to deal.
@@ -289,6 +301,19 @@ public class Game
         return hintCards;
     }
     
+    /**
+     * Get the number of hint cards to be dealt
+     * @return List of HintCards
+     */
+    public Integer getHintCardsSize()
+    {
+        return this.listHintCards.size();
+    }
+    
+    /**
+     * Return the first Hint Card in the List
+     * @return HintCard
+     */
     public HintCard popHintCard()
     {
         HintCard hintCard = null;
