@@ -55,11 +55,20 @@ public class ClientController
     /**
      * Set the player's current state
      *
-     * @param state an initialized instance of State
+     * @param newState an initialized instance of State
      */
-    public void setState(State state)
+    public void setState(State newState)
     {
-        this.state = state;
+        if ( this.state != null) 
+        {
+            newState.addOldStatesObservers(this.state.getObservers());
+            this.state = newState;
+            this.state.triggerChange();
+        }
+        else
+        {
+            this.state = newState;
+        }
     }
 
     /**
@@ -79,7 +88,7 @@ public class ClientController
     }
 
     /**
-     * Start the single player game mode.
+     * Start the multi player game mode.
      */
     public void startMultiPlayerGame(String lobbyName)
     {
@@ -204,7 +213,7 @@ public class ClientController
     private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
     {
         this.creator = true;
-        this.joinGame(rsp.getLobby().getLobbyId());
+        //this.joinGame(rsp.getLobby().getLobbyId());
     }
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
@@ -237,7 +246,7 @@ public class ClientController
             return;
         }
 
-        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
+        //this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToKickPlayerResponse(KickPlayerResponse rsp)
@@ -249,7 +258,7 @@ public class ClientController
             return;
         }
 
-        this.removePlayerFromClientLobbyState(rsp.getPlayerId());
+        //this.removePlayerFromClientLobbyState(rsp.getPlayerId());
     }
 
     private void reactToGameStateResponse(GameStateResponse rsp)
@@ -301,7 +310,7 @@ public class ClientController
      * @param obj ClientRequest the message object to send via the ClientNetwork
      * instance.
      */
-    public void forwardMessage(ClientRequest obj)
+    public void forwardMessage(Object obj)
     {
         this.network.sendMessageToServer(obj);
     }

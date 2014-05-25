@@ -6,6 +6,8 @@
 package com.outtatech.client;
 
 import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * State is basic class composed of functions to get and set a host name.
@@ -17,7 +19,9 @@ import java.util.Observable;
 public class State extends Observable
 {
     private String hostname;
-
+    private CopyOnWriteArrayList<Observer> observers
+            = new CopyOnWriteArrayList<Observer>();
+    
     /**
      * Get the host name associated with this instance.
      *
@@ -36,5 +40,33 @@ public class State extends Observable
     public void setHostName(String hostname)
     {
         this.hostname = hostname;
+    }
+    
+    /**
+     * Override parent method to enable storing observers.
+     * @param o 
+     */
+    @Override
+    public void addObserver(Observer o)
+    {
+        observers.add(o);
+        super.addObserver(o);
+    }
+    
+    public CopyOnWriteArrayList<Observer> getObservers()
+    {
+        return observers;
+    }
+    
+    public void addOldStatesObservers(CopyOnWriteArrayList<Observer> observers)
+    {
+        for(Observer o : observers)
+           this.addObserver(o);
+    }
+    
+    public void triggerChange()
+    {
+        this.setChanged();
+        this.notifyObservers();
     }
 }

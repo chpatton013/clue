@@ -2,6 +2,7 @@ package com.outtatech.client;
 
 import com.lloseng.ocsf.client.AbstractClient;
 import com.outtatech.server.messaging.ServerResponse;
+import java.io.IOException;
 
 /**
  * The networking layer for the client application. Handles all incoming and
@@ -19,9 +20,10 @@ public class ClientNetwork extends AbstractClient
      * @param host String value server name or ip
      * @param port the port number to connect to the server on
      */
-    public ClientNetwork(String host, int port)
+    public ClientNetwork(String host, int port) throws IOException
     {
         super(host, port);
+        this.openConnection();
     }
     
     /**
@@ -58,7 +60,7 @@ public class ClientNetwork extends AbstractClient
         }
         catch (Exception ex)
         {
-            // handle exception
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -91,5 +93,6 @@ public class ClientNetwork extends AbstractClient
     protected void connectionException(Exception exception)
     {
         // Prompt an error popup on the GUI
+        System.out.println(exception.getMessage());
     }
 }

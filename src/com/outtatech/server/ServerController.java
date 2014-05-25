@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The ServerController controls every game being played. Each game has a set of
@@ -24,7 +25,7 @@ public class ServerController
 {
     private Map<ConnectionToClient, Game> games;
     private Map<Integer, Game> gameIdToGame;
-    private Map<Game, ArrayList<ConnectionToClient>> players;
+    private Map<Game, CopyOnWriteArrayList<ConnectionToClient>> players;
     private Map<ServerPlayer, ConnectionToClient> humans;
     //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
@@ -44,10 +45,11 @@ public class ServerController
     {
         this.network = network;
         this.games = new HashMap<ConnectionToClient, Game>();
-        this.players = new HashMap<Game, ArrayList<ConnectionToClient>>();
+        this.players = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
         this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
         this.robots = new HashMap<ServerPlayer, AI>();
         this.lobbies = new HashMap<Integer, Lobby>();
+        this.gameIdToGame = new HashMap<Integer, Game>();
     }
 
     /**
@@ -326,7 +328,7 @@ public class ServerController
         return humans.containsKey(player);
     }
     
-    private ArrayList<ConnectionToClient> getGameClients(Integer gameId)
+    private CopyOnWriteArrayList<ConnectionToClient> getGameClients(Integer gameId)
     {
         Game game = gameIdToGame.get(gameId);
         

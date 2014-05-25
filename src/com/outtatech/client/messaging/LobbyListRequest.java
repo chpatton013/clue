@@ -5,6 +5,8 @@
  */
 package com.outtatech.client.messaging;
 
+import java.io.Serializable;
+
 /**
  * Message sent from the client to the server when the client desires a list of
  * currently active games.
@@ -13,12 +15,4 @@ package com.outtatech.client.messaging;
  */
 public class LobbyListRequest extends ClientRequest
 {
-
-    /**
-     * Creates a new LobbyListRequest object.
-     */
-    public LobbyListRequest()
-    {
-
-    }
 }
