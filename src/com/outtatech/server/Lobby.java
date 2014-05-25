@@ -5,12 +5,13 @@
  */
 package com.outtatech.server;
 
+import java.io.Serializable;
 /**
  * Represents a game that is waiting for players to join in order to be started.
  *
  * @author jbilous
  */
-public class Lobby
+public class Lobby implements Serializable
 {
     //IMPORTANT: check if issue with lobbyID
     protected static Integer lobbyIdCounter = 0;

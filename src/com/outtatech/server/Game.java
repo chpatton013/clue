@@ -7,6 +7,7 @@ import com.outtatech.common.Solution;
 import com.outtatech.common.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Collections;
 import java.util.Map;
 
@@ -60,10 +61,10 @@ public class Game
     
     public Game()
     {
-        this.players = new ArrayList<ServerPlayer>();
+        this.players = new CopyOnWriteArrayList<ServerPlayer>();
         this.current = null;
         this.drawPile = initializeDrawPile();
-        this.discardPile = new ArrayList<ActionCard>();
+        this.discardPile = new CopyOnWriteArrayList<ActionCard>();
         this.listHintCards = initializeHintCards();
         this.solution = pickSolution();
         this.destToPlayerId = null;
@@ -198,7 +199,7 @@ public class Game
     
     private List<ActionCard> initializeDrawPile() 
     {
-        List<ActionCard> drawPileT = new ArrayList<ActionCard>();
+        List<ActionCard> drawPileT = new CopyOnWriteArrayList<ActionCard>();
         int countSuggestionANY = 10;
         int countSuggestionCURRENT = 9;
         int countSnoop = 4;
@@ -268,7 +269,7 @@ public class Game
      */
     private List<HintCard> initializeHintCards()
     {
-        List<HintCard> hintCards = new ArrayList<HintCard>();
+        List<HintCard> hintCards = new CopyOnWriteArrayList<HintCard>();
         CardColor dc = CardColor.BLUE;
         
         //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.

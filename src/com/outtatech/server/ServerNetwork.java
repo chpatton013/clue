@@ -109,6 +109,7 @@ public class ServerNetwork extends AbstractServer
      *
      * @param client the connection with the client.
      */
+    @Override
     synchronized protected void clientDisconnected(
       ConnectionToClient client) 
     {
