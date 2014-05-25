@@ -50,6 +50,16 @@ public class AI extends ServerPlayer
     {
         this.difficulty = difficulty;
     }
+    
+   /**
+     * Gets the ServerController associated with this AI.
+     *
+     * @return ctrl The ServerController of this AI.
+     */
+    public ServerController getServerController()
+    {
+        return ctrl;
+    }
 
     /**
      * Sets the ServerController associated with this AI.
@@ -74,7 +84,6 @@ public class AI extends ServerPlayer
         ArrayList<HintCard> playableCards = new ArrayList();
         SuperSleuth sleuthCard;
         PrivateTip privateTipCard;
-        boolean all = false;
         
         if (card instanceof SuperSleuth)
         {
@@ -126,7 +135,7 @@ public class AI extends ServerPlayer
                       case WESTERN_DESTINATION:
                        if (curHintType == HintCardType.DESTINATION) 
                        {
-                          if (!((DestinationCard)curHintCard).getIsWest())
+                          if (((DestinationCard)curHintCard).getIsWest())
                                    playableCards.add(curHintCard);
                        }
                       break;
@@ -216,35 +225,34 @@ public class AI extends ServerPlayer
     /**
      * Method invoked when another player or bot makes a suggestion.
      *
-     * @param sc The suspect in the suggestion.
-     * @param vc The vehicle in the suggestion.
-     * @param dc The location in the suggestion.
-     * @return Card The card that refutes the suggestion.
+     * @param suspect The ID of suspect in the suggestion.
+     * @param vehicle The ID of vehicle in the suggestion.
+     * @param destination The ID of location in the suggestion.
+     * @return HintCard The card that refutes the suggestion.
      */
 
-    public Card aiRefuteSuggestion(SuspectCard sc, VehicleCard vc,
-            DestinationCard dc)
+    public HintCard aiRefuteSuggestion(SuspectID suspect, VehicleID vehicle,
+            DestinationID destination)
     {   
-        SuspectID scType = sc.getSuspect();
-        VehicleID vcType = vc.getVehicle();
-        DestinationID dcType = dc.getDestination();
         
         for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++ ) 
         {
-            if (hintCardsHand.get(hintCard) instanceof SuspectCard)
+            HintCard card = hintCardsHand.get(hintCard);
+            
+            if (card instanceof SuspectCard)
             {
-                if (((SuspectCard)hintCardsHand.get(hintCard)).getSuspect() == scType)
-                    return hintCardsHand.get(hintCard);
+                if (((SuspectCard)card).getSuspect() == suspect)
+                    return card;
             }
-            if (hintCardsHand.get(hintCard) instanceof DestinationCard)
+            else if (card instanceof DestinationCard)
             {
-                if (((DestinationCard)hintCardsHand.get(hintCard)).getDestination() == dcType)
-                    return hintCardsHand.get(hintCard);
+                if (((DestinationCard)card).getDestination() == destination)
+                    return card;
             }
-            if (hintCardsHand.get(hintCard) instanceof VehicleCard)
+            else if (card instanceof VehicleCard)
             {
-                if (((VehicleCard)hintCardsHand.get(hintCard)).getVehicle() == vcType)
-                    return hintCardsHand.get(hintCard);
+                if (((VehicleCard)card).getVehicle() == vehicle)
+                    return card;
             }
         }
         return null;
