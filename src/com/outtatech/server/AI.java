@@ -267,10 +267,14 @@ public class AI extends ServerPlayer
      */
     private boolean aiMakeAccusation()
     { // void for sake of complitation w/pseudocde. should return a boolean
-
         // knowledge = (add number of known cards in each category / number of cards in each category) / 3
+        float knowledge = (suspectCardsSeen.size()/6 + 
+                vehicleCardsSeen.size()/6 + 
+                locationsSeen.size()/9) / 3;
         // if knowledge < riskiness of AI
-        // 	return false
+        if(knowledge < difficulty.getRiskiness())
+            // 	return false
+            return false;
         // else {
         // 	for each category {
         // 		while true {
@@ -281,7 +285,83 @@ public class AI extends ServerPlayer
         // 		    	break
         // 		}
         // 	reactToServer(list)
-         	return true;
+        else {
+            SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
+            VehicleID choice2 = (getVehicleChoice(vehicleCardsSeen));
+            DestinationID choice3 = (getLocationChoice(locationsSeen));
+            ctrl.reactToRobot(new AccusationRequest(
+                    new Solution(choice3, choice2, choice1)), this);
+        }
+        return true;
         // }
+    }
+    //Tim minshim
+    private SuspectID getSuspectChoice(EnumSet cards) {
+        EnumSet complement = EnumSet.complementOf(cards);
+        boolean flag = false;
+        while(!flag) {
+            double choice = Math.random();
+            if(choice * (cards.size() + complement.size()) > cards.size()) {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (SuspectID) complement.toArray()[(int)choice - cards.size()];
+                }
+            }
+            else
+            {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (SuspectID) 
+                            cards.toArray()[(int)choice - cards.size()];
+                }
+            }
+        }
+        return (SuspectID) cards.toArray()[0];
+    }
+    
+    private VehicleID getVehicleChoice(EnumSet cards) {
+        EnumSet complement = EnumSet.complementOf(cards);
+        boolean flag = false;
+        while(!flag) {
+            double choice = Math.random();
+            if(choice * (cards.size() + complement.size()) > cards.size()) {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (VehicleID) 
+                            complement.toArray()[(int)choice - cards.size()];
+                }
+            }
+            else
+            {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (VehicleID) 
+                            cards.toArray()[(int)choice - cards.size()];
+                }
+            }
+        }
+        return (VehicleID) cards.toArray()[0];
+    }
+    
+    private DestinationID getLocationChoice(EnumSet cards) {
+        EnumSet complement = EnumSet.complementOf(cards);
+        boolean flag = false;
+        while(!flag) {
+            double choice = Math.random();
+            if(choice * (cards.size() + complement.size()) > cards.size()) {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (DestinationID) 
+                            complement.toArray()[(int)choice - cards.size()];
+                }
+            }
+            else
+            {
+                if(difficulty.getIntelligence() < Math.random()) {
+                    return (DestinationID) 
+                            cards.toArray()[(int)choice - cards.size()];
+                }
+            }
+        }
+        return (DestinationID) cards.toArray()[0];
+    }
+    
+    public void reactToServer(Object obj) {
+        
     }
 }
