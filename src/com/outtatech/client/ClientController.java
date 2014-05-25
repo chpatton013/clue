@@ -28,6 +28,7 @@ public class ClientController
     private State state;
     private ClientNetwork network;
     private boolean creator = false;
+    private boolean accused = false;
 
     /**
      * Constructor for the ClientController. Requires an initialized State
@@ -157,6 +158,7 @@ public class ClientController
      * Suspect card required to make an accusation.
      */
     public void makeAccusation(Solution accusation) {
+        this.accused = true;
         this.forwardMessage(new AccusationRequest(accusation));
     }
 
@@ -286,6 +288,35 @@ public class ClientController
 
     private void reactToAccusationResponse(AccusationResponse rsp)
     {
+        Solution solution = rsp.getSolution();
+
+        if (this.accused)
+        {
+            if (rsp.getCorrectAccusation())
+            {
+                // you win!
+                // show correct solution
+            }
+            else
+            {
+                // you lose! you get nothing! good day sir!
+                // show wrong solution
+                // remove from game
+            }
+
+            return;
+        }
+
+        if (rsp.getCorrectAccusation())
+        {
+            // you lose! you get nothing! good day sir!
+            // show correct solution
+            // give option to leave game
+        }
+        else
+        {
+            // show wrong solution
+        }
     }
 
     private void removePlayerFromClientLobbyState(Integer playerId) {

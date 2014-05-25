@@ -13,6 +13,7 @@ package com.outtatech.server.messaging;
  */
 public class AccusationResponse extends ServerResponse
 {
+    private Solution solution;
     private boolean correctAccusation;
     
     /**
@@ -20,8 +21,14 @@ public class AccusationResponse extends ServerResponse
      * 
      * @param correctAccusation 
      */
-    public AccusationResponse(boolean correctAccusation) {
+    public AccusationResponse(Solution solution, boolean correctAccusation) {
+        this.solution = solution;
         this.correctAccusation = correctAccusation;
+    }
+
+    public Solution getSolution()
+    {
+        return this.solution;
     }
     
     /**
