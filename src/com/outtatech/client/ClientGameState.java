@@ -27,6 +27,10 @@ public class ClientGameState extends State
     private boolean newAccusation;
     private boolean accusationStatus;
 
+    private Integer deckCardCount;
+    private List<Integer> playerTurnOrder;
+    private Integer currentActivePlayer;
+
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
      */
@@ -172,4 +176,35 @@ public class ClientGameState extends State
     {
         return destToPlayerId;
     }
+
+    public Integer getDeckCardCount()
+    {
+        return this.deckCardCount;
+    }
+
+    public List<Integer> getPlayerTurnOrder()
+    {
+        return this.playerTurnOrder;
+    }
+
+    public Integer getCurrentActivePlayer()
+    {
+        return this.currentActivePlayer;
+    }
+
+    public void setDeckCardCount(Integer deckCardCount)
+    {
+        this.deckCardCount = deckCardCount;
+    }
+
+    public void setPlayerTurnOrder(List<Integer> playerTurnOrder)
+    {
+        this.playerTurnOrder = playerTurnOrder;
+    }
+
+    public void setCurrentActivePlayer(Integer currectActivePlayer)
+    {
+        this.currentActivePlayer = currentActivePlayer;
+    }
+
 }

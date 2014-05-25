@@ -265,7 +265,17 @@ public class ClientController
 
     private void reactToGameStateResponse(GameStateResponse rsp)
     {
-        // override game state
+        if (!(this.state instanceof ClientGameState))
+        {
+            System.err.println("Received GameStateResponse while not in " +
+                    "ClientGameState.");
+            return;
+        }
+
+        ClientGameState state = (ClientGameState)this.state;
+        state.setDeckCardCount(rsp.getDeckCardCount());
+        state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
+        state.setCurrectActivePlayer(rsp.getCurrectActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
