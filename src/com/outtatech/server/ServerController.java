@@ -198,7 +198,8 @@ public class ServerController
             int num = (robots.keySet()).size();
             AI bot = new AI(new Difficulty(100, 100), this);
             bot.setName("CLUEBot" + num);
-            games.get(connection).getServerPlayers().add(bot);
+            games.get(connection).getServerPlayers()
+                    .put(bot.getPlayerId(), bot);
             //update the mapping
             forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()),
                     bot.getPlayerId(), games.get(connection).getPlayers()),
@@ -244,7 +245,7 @@ public class ServerController
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
 
         //Get all players in game
-        List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
+        List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
         // Build a list of human client connections to send 
         // LobbyUpdateResponse to
@@ -278,7 +279,7 @@ public class ServerController
 
         //Get all players in game
         List<ServerPlayer> gameServerPlayers
-                = clientGame.getServerPlayers();
+                = clientGame.getServerPlayersList();
 
         //Build a list of human client connections to send accusation
         //response to
@@ -311,7 +312,7 @@ public class ServerController
      * @param obj Object signaling an action.
      * @param robot AI instance that triggered the action.
      */
-    public void reactToRobot(Object obj, AI robot)
+    public void reactToRobot(ClientRequest obj, AI robot)
     {
         /**
          * Using the robots Map find the Game instance of the AI robot.
@@ -403,7 +404,7 @@ public class ServerController
         ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
 
         //Get all players in game
-        List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
+        List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
         Integer playerCount = gameServerPlayers.size();
 
@@ -485,13 +486,15 @@ public class ServerController
     {
         // Get the requestor's game
         Game curGame = games.get(connection);
-        
+        ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
+        Integer randomCard = new Random().nextInt(
+                opponent.getHintCardsHand().size());
+
+        List<Card> snoopedCards = new ArrayList();
+        snoopedCards.add(opponent.hintCardsHand.get(randomCard));
         // Find the player with the given ID
-//        curGame.getServerPlayers()
-//        // Show a random card from playerId's hand
-//        RevealCardResponse response
-//                = new RevealCardResponse()
-//        forwardMessage
+        RevealCardResponse response 
+                = new RevealCardResponse(card, snoopedCards);
         
     }
 
@@ -511,7 +514,7 @@ public class ServerController
         ActionCard card = actionReq.getActionCard();
         //Get the players game
         Game game = games.get(connection);
-        List<ServerPlayer> players = game.getServerPlayers();
+        List<ServerPlayer> players = game.getServerPlayersList();
 
         if (card instanceof AllSnoop)
         {
@@ -525,7 +528,7 @@ public class ServerController
         else if (card instanceof Snoop)
         {
             Snoop snoopCard = (Snoop) card;
-            handleSnoop(snoopCard, actionReq.getPlayerId());
+            handleSnoop(snoopCard, actionReq.getPlayerId(), connection);
         }
         else if (card instanceof Suggestion)
         {
