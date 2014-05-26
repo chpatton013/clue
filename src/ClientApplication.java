@@ -16,7 +16,8 @@ public class ClientApplication {
     
     public ClientApplication () {
         ClientController client = new ClientController();
-        GUIController gui = new GUIController(client, client.getState());
+        GUIController gui = new GUIController(client);
+        client.getState().addObserver(gui);
         gui.initWindows(gui);
         gui.exitWindow();
     }
