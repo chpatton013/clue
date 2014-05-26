@@ -64,6 +64,12 @@ public class LobbyScreen extends javax.swing.JFrame {
             gameStartButton.setEnabled(true);
     }
     
+    public void setLeader(boolean isLeader){
+        createAIButton.setEnabled(isLeader);
+        kickPlayerButton.setEnabled(isLeader);
+        gameStartButton.setEnabled(isLeader);
+    }
+    
     /**
      *Clears all players from the lobby
      */
