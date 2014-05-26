@@ -7,10 +7,11 @@ package com.outtatech.client;
 
 import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
+import com.outtatech.common.Player;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +30,7 @@ public class ClientGameState extends State
     private boolean newAccusation;
     private boolean accusationStatus;
     private Deque<String> gameLog;
+    private List<Player> players;
 
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
@@ -39,8 +41,9 @@ public class ClientGameState extends State
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
-    public ClientGameState(int playerID, List<Card> hand)
+    public ClientGameState(int playerID, List<Card> hand, List<Player> players)
     {
+        this.players = players;
         this.playerID = playerID;
         this.hand = hand;
         this.revealed = new ArrayList<Card>();
@@ -91,6 +94,26 @@ public class ClientGameState extends State
     public int getPlayerId()
     {
         return playerID;
+    }
+    
+    /**
+     * Sets the players in this game
+     * 
+     * @param players the players in this game.
+     */
+    public void setPlayers(List<Player> players)
+    {
+        this.players = players;
+    }
+    
+    /**
+     * Returns the list of players in this game
+     * 
+     * @return the list of players in this game
+     */
+    public List<Player> getPlayers()
+    {
+        return players;
     }
 
     /**

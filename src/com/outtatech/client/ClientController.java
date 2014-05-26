@@ -152,12 +152,14 @@ public class ClientController
      * Initiates a message to the server that indicates the client has ended
      * their current turn.
      */
-    public void endTurn() {
+    public void endTurn()
+    {
         this.forwardMessage(new EndTurnRequest());
     }
 
     public void playActionCard(ActionCard actionCard, List<Card> cards,
-            Integer playerId) {
+            Integer playerId)
+    {
         this.forwardMessage(new ActionRequest(actionCard, cards, playerId));
     }
 
@@ -173,7 +175,8 @@ public class ClientController
      * @param accusationCards list containing the Destination, Vehicle and
      * Suspect card required to make an accusation.
      */
-    public void makeAccusation(Solution accusation) {
+    public void makeAccusation(Solution accusation)
+    {
         this.accused = true;
         this.forwardMessage(new AccusationRequest(accusation));
     }
@@ -259,12 +262,12 @@ public class ClientController
         }
         else if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received LobbyJoinResponse while not in " +
-                    "ClientLobbyDiscoveryState or ClientLobbyState.");
+            System.err.println("Received LobbyJoinResponse while not in "
+                    + "ClientLobbyDiscoveryState or ClientLobbyState.");
         }
         else
         {
-            ((ClientLobbyState)this.state).setPlayers(rsp.getPlayers());
+            ((ClientLobbyState) this.state).setPlayers(rsp.getPlayers());
         }
     }
 
@@ -272,8 +275,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received LobbyLeaveResponse while not in " +
-                    "ClientLobbyState.");
+            System.err.println("Received LobbyLeaveResponse while not in "
+                    + "ClientLobbyState.");
             return;
         }
 
@@ -284,8 +287,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received KickPlayerResponse while not in " +
-                    "ClientLobbyState.");
+            System.err.println("Received KickPlayerResponse while not in "
+                    + "ClientLobbyState.");
             return;
         }
 
@@ -296,42 +299,44 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received GameStateResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received GameStateResponse while not in "
+                    + "ClientGameState.");
             return;
         }
 
-        ClientGameState state = (ClientGameState)this.state;
+        ClientGameState state = (ClientGameState) this.state;
         state.setDeckCardCount(rsp.getDeckCardCount());
+        state.setPlayers(rsp.getPlayers());
         state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
         state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
 
-        state.pushGameLog("Game state updated:" +
-                "\n   Deck Card Count: " + rsp.getDeckCardCount() +
-                "\n   Player Turn Order: " + rsp.getDeckCardCount() +
-                "\n   Current Active Player: " + rsp.getCurrentActivePlayer());
+        state.pushGameLog("Game state updated:" + "\n   Deck Card Count: "
+                + rsp.getDeckCardCount() + "\n   Player Turn Order: " + rsp.
+                getDeckCardCount() + "\n   Current Active Player: " + rsp.
+                getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
     {
         if (this.state instanceof ClientLobbyState)
         {
-            ClientLobbyState state = (ClientLobbyState)this.state;
+            ClientLobbyState state = (ClientLobbyState) this.state;
             Player me = state.getPlayer();
-            this.setState(new ClientGameState(me.getPlayerId(), rsp.getCards()));
+            this.setState(new ClientGameState(me.getPlayerId(), rsp.getCards(),
+                    state.getPlayers()));
 
-            ((ClientGameState)this.state).pushGameLog("Game Started");
+            ((ClientGameState) this.state).pushGameLog("Game Started");
         }
         else if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received CardDealResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received CardDealResponse while not in "
+                    + "ClientGameState.");
         }
         else
         {
-            ((ClientGameState)this.state).getHand().addAll(rsp.getCards());
+            ((ClientGameState) this.state).getHand().addAll(rsp.getCards());
 
-            ((ClientGameState)this.state).pushGameLog(
+            ((ClientGameState) this.state).pushGameLog(
                     "Cards dealt: " + rsp.getCards());
         }
     }
@@ -340,26 +345,26 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received ActionResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received ActionResponse while not in "
+                    + "ClientGameState.");
             return;
         }
 
-        ((ClientGameState)this.state).pushGameLog(
-                 "Player " + rsp.getPlayerId() + " played card " +
-                 rsp.getActionCard());
+        ((ClientGameState) this.state).pushGameLog(
+                "Player " + rsp.getPlayerId() + " played card " + rsp.
+                getActionCard());
     }
 
     private void reactToRevealCardRequest(RevealCardResponse rsp)
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received RevealCardRequest while not in " +
-                    "ClientGameState.");
+            System.err.println("Received RevealCardRequest while not in "
+                    + "ClientGameState.");
             return;
         }
 
-        ClientGameState state = (ClientGameState)this.state;
+        ClientGameState state = (ClientGameState) this.state;
 
         ActionCardType type = rsp.getActionCard().getActionType();
         if (type == ActionCardType.SUGGESTION)
@@ -368,8 +373,8 @@ public class ClientController
             // TODO: GUI
             // tell GUI to present cards
         }
-        else if (type == ActionCardType.SNOOP ||
-              type == ActionCardType.ALL_SNOOP)
+        else if (type == ActionCardType.SNOOP || type
+                == ActionCardType.ALL_SNOOP)
         {
             List<Card> hints = new ArrayList<Card>(state.getHand());
             int index = 0;
@@ -443,19 +448,23 @@ public class ClientController
         }
     }
 
-    private void removePlayerFromClientLobbyState(Integer playerId) {
-        ClientLobbyState state = (ClientLobbyState)this.state;
+    private void removePlayerFromClientLobbyState(Integer playerId)
+    {
+        ClientLobbyState state = (ClientLobbyState) this.state;
 
-        if (playerId == state.getPlayer().getPlayerId()) {
+        if (playerId == state.getPlayer().getPlayerId())
+        {
             this.searchForGames();
         }
 
         List<Player> players = state.getPlayers();
-        for (int index = 0; index < players.size(); ++index) {
-           if (playerId == players.get(index).getPlayerId()) {
-              players.remove(index);
-              break;
-           }
+        for (int index = 0; index < players.size(); ++index)
+        {
+            if (playerId == players.get(index).getPlayerId())
+            {
+                players.remove(index);
+                break;
+            }
         }
     }
 
