@@ -86,6 +86,7 @@ public class GUIController implements Observer{
             //  add each player back
             List<Player> playList = ((ClientLobbyState)obs).getPlayers();
             lobbyScreen.setId(((ClientLobbyState)obs).getId());
+            lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
             for(int indx = 0; indx < playList.size(); indx++) {
                 lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
             }
