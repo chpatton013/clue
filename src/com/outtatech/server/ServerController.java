@@ -2,25 +2,7 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
-import com.outtatech.common.ActionCard;
-import com.outtatech.common.ActionCardType;
-import com.outtatech.common.AllSnoop;
-import com.outtatech.common.Card;
-import com.outtatech.common.CardColor;
-import com.outtatech.common.DestinationCard;
-import com.outtatech.common.Gender;
-import com.outtatech.common.HintCard;
-import com.outtatech.common.HintCardType;
-import com.outtatech.common.Player;
-import com.outtatech.common.PrivateTip;
-import com.outtatech.common.PrivateTipType;
-import com.outtatech.common.Snoop;
-import com.outtatech.common.Solution;
-import com.outtatech.common.Suggestion;
-import com.outtatech.common.SuperSleuth;
-import com.outtatech.common.SuperSleuthType;
-import com.outtatech.common.SuspectCard;
-import com.outtatech.common.VehicleCard;
+import com.outtatech.common.*;
 import com.outtatech.server.messaging.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -120,6 +102,14 @@ public class ServerController
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
             handleAccusation(accusationReq, connection);
+        }
+        /*
+         * SuggestionRequest respond with SuggestionResponse
+         */
+        else if(obj instanceof SuggestionRequest)
+        {
+            SuggestionRequest suggestionReq = (SuggestionRequest) obj;
+            handleSuggestion(suggestionReq, connection);
         }
         /*
          * AddAIRequest respond with AddAIResponse
@@ -276,6 +266,68 @@ public class ServerController
         informAI(msg, aiPlayers);
     }
 
+    private void handleSuggestion(SuggestionRequest suggestionReq,
+            ConnectionToClient connection)
+    {
+        ArrayList<ConnectionToClient> gamePlayers
+                = new ArrayList<ConnectionToClient>();
+        ArrayList<AI> aiPlayers = new ArrayList<AI>();
+
+        Solution suggestion = suggestionReq.getSuggestion();
+        //Get the clients game
+        Game clientGame = games.get(connection);
+
+        //Get all players in game
+        List<ServerPlayer> gameServerPlayers
+                = clientGame.getServerPlayersList();
+
+        //Build a list of human client connections to send accusation
+        //response to
+        for (ServerPlayer serverPlayer : gameServerPlayers)
+        {
+            if (!humans.containsKey(serverPlayer))
+            {
+                aiPlayers.add(robots.get(serverPlayer));
+            }
+            else
+            {
+                gamePlayers.add(humans.get(serverPlayer));
+            }
+        }
+        
+        if(suggestion.equals(clientGame.getSolution()))
+        {
+            SuggestionResponse sugResp = new SuggestionResponse(true);
+        }
+        else
+        {
+            SuggestionResponse sugResp = new SuggestionResponse(false);
+            //Find a refuting card
+            for(ServerPlayer player : gameServerPlayers)
+            {
+                for(HintCard card : player.getHintCardsHand())
+                {
+                    if(card instanceof DestinationCard)
+                    {
+                        
+                    }
+                    suggestion.getDestination();
+                }
+            }
+            sugResp.setRefutingCard(null);
+        }
+
+        //Create accusation response
+        AccusationResponse accResp = new AccusationResponse(suggestion,
+                suggestion.equals(clientGame.getSolution()));
+
+        //Send to humans
+        forwardMessage(accResp, gamePlayers);
+
+        //Send to AI
+        informAI(accResp, aiPlayers);
+    }
+    
     private void handleAccusation(AccusationRequest accusationReq,
             ConnectionToClient connection)
     {
@@ -315,6 +367,7 @@ public class ServerController
         //Send to AI
         informAI(accResp, aiPlayers);
     }
+    
 
     /**
      * Handles a request made by an AI player.
