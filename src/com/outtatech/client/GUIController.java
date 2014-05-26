@@ -168,15 +168,7 @@ public class GUIController implements Observer{
     public void singlePlayerSelected() {
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyState()
-        
-        lobbyScreen.clearPlayers();
-        
-        //set state to LOBBY
-        state = CurrentWindow.LOBBY;
-        
-        //hide the Intro screen and display the lobby screen
-        introScreen.setVisible(false);
-        lobbyScreen.setVisible(true);
+        clientController.startSinglePlayerGame();
     }
     
     /**
