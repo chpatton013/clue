@@ -21,13 +21,15 @@ public class ClientLobbyState extends State
     private Player player;
     private List<Player> players;
     private boolean gameOwner;
+    private int id;
 
     public ClientLobbyState(Player player, List<Player> players,
-            boolean gameOwner)
+            boolean gameOwner, int lobbyId)
     {
         this.player = player;
         this.players = players;
         this.gameOwner = gameOwner;
+        this.id = lobbyId;
     }
 
     /**
@@ -38,6 +40,10 @@ public class ClientLobbyState extends State
     public Player getPlayer()
     {
         return this.player;
+    }
+    
+    public int getId() {
+        return this.id;
     }
 
     /**

@@ -7,6 +7,7 @@
 package com.outtatech.client;
 
 import com.outtatech.common.Player;
+import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import java.util.List;
 import java.util.Observable;
@@ -84,6 +85,7 @@ public class GUIController implements Observer{
             lobbyScreen.clearPlayers();
             //  add each player back
             List<Player> playList = ((ClientLobbyState)obs).getPlayers();
+            lobbyScreen.setId(((ClientLobbyState)obs).getId());
             for(int indx = 0; indx < playList.size(); indx++) {
                 lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
             }
@@ -222,8 +224,9 @@ public class GUIController implements Observer{
     /**
      *Notifies client controller that player wants to create an AI player
      */
-    public void createAI() {
+    public void createAI(int lobbyId) {
         //call Client Controller's addAIPlayer method
+        clientController.addAIPlayer(new Difficulty(100, 100), lobbyId);
     }
     
     /**
@@ -234,6 +237,7 @@ public class GUIController implements Observer{
         //call Client Controller kickPlayer method with the id of the selected
         //player
         if(playerId >= 0) {
+            clientController.kickPlayer(playerId);
         }
     }
     
