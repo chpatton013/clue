@@ -6,12 +6,14 @@
 
 package com.outtatech.common;
 
+import java.io.Serializable;
+
 /**
  * Object that represents a solution set to a clue game.
  * 
  * @author jbilous
  */
-public class Solution
+public class Solution implements Serializable
 {
     private DestinationID destSolution;
     private VehicleID vehicleSolution;

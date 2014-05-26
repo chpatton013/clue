@@ -1,11 +1,13 @@
 package com.outtatech.common;
 
+import java.io.Serializable;
+
 /**
  * The Card models represents any Clue card.
  *
  * @author bennettschalich
  */
-public class Card
+public class Card implements Serializable
 {
     private static int id = -1;
     CardType cardType;
