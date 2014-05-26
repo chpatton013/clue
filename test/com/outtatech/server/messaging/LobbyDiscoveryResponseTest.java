@@ -38,8 +38,8 @@ public class LobbyDiscoveryResponseTest {
         System.out.println("Testing getLobbies");
         
         List<Lobby> expResult = new ArrayList();
-        expResult.add(new Lobby("Lobby 1", 1));
-        expResult.add(new Lobby("Lobby 2", 2));
+        expResult.add(new Lobby("Lobby 1", 1, true));
+        expResult.add(new Lobby("Lobby 2", 2, false));
         
         LobbyDiscoveryResponse lobbyDiscovery = new LobbyDiscoveryResponse(expResult);
         List<Lobby> result = lobbyDiscovery.getLobbies();
