@@ -96,25 +96,33 @@ public class GUIController implements Observer{
         }
         
         //if state is MAINGAME
-        //  call mainGameScreen's clearFields method
-        //  add each hand card and location back
-        //  if it is the client's turn, call startTurn and clearGameLog methods
-        //  add any applicable messages to game log through updateGameLog method
-        //  check client controller's reveal flag
-        //
-        //  if set
-        //    add applicable card to revealCardsScreen
-        //    show revealCardsScreen
-        //  
-        //  check clientController's correctAccusation flag
-        //
-        //  if set
-        //    add applicable message to mainGameScreen's game log
-        //  
-        //  check clientController's falseAccusation flag
-        //    
-        //  if set
-        //    add applicable message to mainGameScreen's game log
+        if(obs instanceof ClientGameState) {
+            state = CurrentWindow.MAINGAME;
+        
+            lobbyScreen.setVisible(false);
+            mainGameScreen.setVisible(true);
+            
+            //  call mainGameScreen's clearFields method
+            //  add each hand card and location back
+            //  if it is the client's turn, call startTurn and clearGameLog methods
+            //  add any applicable messages to game log through updateGameLog method
+            //  check client controller's reveal flag
+            //
+            //  if set
+            //    add applicable card to revealCardsScreen
+            //    show revealCardsScreen
+            //  
+            //  check clientController's correctAccusation flag
+            //
+            //  if set
+            //    add applicable message to mainGameScreen's game log
+            //  
+            //  check clientController's falseAccusation flag
+            //    
+            //  if set
+            //    add applicable message to mainGameScreen's game log
+        }
+        
     }
     
     /**
@@ -195,16 +203,6 @@ public class GUIController implements Observer{
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyState()
         clientController.startMultiPlayerGame("LOBBYGAME!!!");
-        
-        //populate the lobby screen
-        //lobbyScreen.clearPlayers();
-        
-        //Set state to LOBBY
-        state = CurrentWindow.LOBBY;
-        
-        //hide the game select screen and display the lobby screen
-        gameSelectScreen.setVisible(false);
-        lobbyScreen.setVisible(true);
     }
     
     /**
@@ -218,10 +216,7 @@ public class GUIController implements Observer{
     }
     
     public void startGame() {
-        state = CurrentWindow.MAINGAME;
-        
-        lobbyScreen.setVisible(false);
-        mainGameScreen.setVisible(true);
+        clientController.startGame();
     }
     
     /**
