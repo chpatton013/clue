@@ -45,6 +45,8 @@ public class ServerController
     public ServerController(ServerNetwork network)
     {
         this.network = network;
+        this.network.setServerController(this);
+
         this.games = new HashMap<ConnectionToClient, Game>();
         this.players = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
         this.humans = new HashMap<ServerPlayer, ConnectionToClient>();

@@ -46,6 +46,8 @@ public class ClientController
             System.err.println("Unable to connect to server");
             System.exit(1);
         }
+
+        network.setClientController(this);
     }
 
     /**

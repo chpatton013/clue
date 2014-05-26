@@ -15,7 +15,6 @@ public class ServerApplication {
     public ServerApplication() {
         ServerNetwork network = new ServerNetwork(55555);
         ServerController server = new ServerController(network);
-        network.setServerController(server);
     }
     
     public static void main(String[] args) {
