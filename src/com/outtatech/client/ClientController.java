@@ -32,16 +32,16 @@ public class ClientController
     private boolean accused = false;
 
     /**
-     * Constructor for the ClientController. Requires an initialized State
-     * object and an initialized ClientNetwork object
-     *
-     * @param state State of the client
-     * @param network ClientNetwork instance to handle communication
+     * Constructor for the ClientController.
      */
-    public ClientController(State state, ClientNetwork network)
+    public ClientController()
     {
-        this.state = state;
-        this.network = network;
+        this.state = new ClientMenuState();
+    }
+
+    public void setNetwork(String host, int port)
+    {
+        this.network = new ClientNetwork(host, port);
     }
 
     /**
