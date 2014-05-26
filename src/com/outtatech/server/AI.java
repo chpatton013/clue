@@ -78,7 +78,7 @@ public class AI extends ServerPlayer
      * @param card The card to respond to.
      * @return playableCards The list of cards to show or null if there are no compatible cards found.
      */
-    public ArrayList<HintCard> aiRespond(ActionCard card)
+       public ArrayList<HintCard> aiRespond(ActionCard card)
     { 
         // List playableCards to return
         ArrayList<HintCard> playableCards = new ArrayList();
@@ -105,11 +105,9 @@ public class AI extends ServerPlayer
                        }
                        break;
                    case BLUE_CARD:
-                       if (curHintType == HintCardType.VEHICLE)
+                       if(curHintCard.getCardColor() == CardColor.BLUE) 
                        {
-                           if(((VehicleCard)curHintCard).getCardColor() == CardColor.BLUE) {
-                               playableCards.add(curHintCard);
-                           }
+                            playableCards.add(curHintCard);
                        }
                    break;
                    case FEMALE_SUSPECT:
