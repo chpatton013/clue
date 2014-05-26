@@ -44,7 +44,7 @@ public class LobbyCreateResponseTest {
      */
     @Test
     public void testGetLobby() {
-        Lobby temp = new Lobby("TestLobby", 12);
+        Lobby temp = new Lobby("TestLobby", 12, true);
         LobbyCreateResponse instance = new LobbyCreateResponse(temp);
         Lobby expResult = temp;
         Lobby result = instance.getLobby();

@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.*;
+import com.outtatech.common.*;
+import com.outtatech.server.*;
 
 /**
  *
@@ -41,10 +44,33 @@ public class LobbyJoinResponseTest {
      */
     @Test
     public void testGetJoinedPlayerId() {
-        System.out.println("getJoinedPlayerId");
+        System.out.println("getPlayerId");
         Integer expResult = 99999;
-        LobbyJoinResponse instance = new LobbyJoinResponse(expResult);
-        Integer result = instance.getJoinedPlayerId();
+        List<Player> players = new ArrayList<Player>();
+        LobbyJoinResponse instance = new LobbyJoinResponse(new Lobby("Lobby 1", 1, true),
+                expResult, players);
+        Integer result = instance.getPlayerId();
         assertEquals(expResult, result);
     }
+    
+    public void testGetLobby() {
+        System.out.println("getLobby");
+        Lobby expResult = new Lobby("Lobby 1", 1, true);
+        List<Player> players = new ArrayList<Player>();
+        LobbyJoinResponse instance = new LobbyJoinResponse(expResult,
+                9999, players);
+        Lobby result = instance.getLobby();
+        assertEquals(expResult, result);
+    }
+    
+    public void testGetPlayers() {
+        System.out.println("getPlayers");
+        Lobby lobby = new Lobby("Lobby 1", 1, true);
+        List<Player> expResult = new ArrayList<Player>();
+        LobbyJoinResponse instance = new LobbyJoinResponse(lobby,
+                9999, expResult);
+        List<Player> result = instance.getPlayers();
+        assertEquals(expResult, result);
+    }
+    
 }

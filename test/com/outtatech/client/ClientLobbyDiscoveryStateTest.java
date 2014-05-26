@@ -6,6 +6,7 @@
 
 package com.outtatech.client;
 
+import com.outtatech.server.Lobby;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,23 +41,31 @@ public class ClientLobbyDiscoveryStateTest {
    public void tearDown() {
    }
 
-   /**
-    * Test of getGameList method, of class ClientLobbyDiscoveryState.
-    */
-   @Test
-   public void testGetGameList() {
-      System.out.println("getGameList");
-      List<Integer> input = new ArrayList<Integer>();
-      input.add(5);
-      input.add(4);
-      input.add(666);
-      ClientLobbyDiscoveryState instance = new ClientLobbyDiscoveryState(input);
-      List<Integer> expResult = new ArrayList<Integer>();
-      expResult.add(5);
-      expResult.add(4);
-      expResult.add(666);
-      List<Integer> result = instance.getGameList();
-      assertEquals(expResult, result);
-   }
+    /**
+     * Test of getLobbyList method, of class ClientLobbyDiscoveryState.
+     */
+    @Test
+    public void testGetLobbyList() {
+        System.out.println("getLobbyList");
+        ClientLobbyDiscoveryState instance = null;
+        List expResult = null;
+        List result = instance.getLobbyList();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setLobbyList method, of class ClientLobbyDiscoveryState.
+     */
+    @Test
+    public void testSetLobbyList() {
+        System.out.println("setLobbyList");
+        List<Lobby> newLobbyList = null;
+        ClientLobbyDiscoveryState instance = null;
+        instance.setLobbyList(newLobbyList);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
    
 }
