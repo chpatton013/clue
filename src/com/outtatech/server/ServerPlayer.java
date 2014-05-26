@@ -22,6 +22,7 @@ public class ServerPlayer implements Player, Serializable
     private Object notes;
     private String name;
     private Color color;
+    private DestinationID location;
     public List<HintCard> hintCardsHand;
     public List<ActionCard> actionCardsHand;
     public EnumSet suspectCardsSeen = EnumSet.noneOf(SuspectID.class);
@@ -36,8 +37,10 @@ public class ServerPlayer implements Player, Serializable
      * @param notes Object representing notes for the player
      * @param name String representation of player
      * @param color Color object to help differentiate players
-     * @param hintCardsHand List of Card Objects representing a players hand of Hint Cards
-     * @param actionCardsHand List of Card Objects representing a players hand of Action Cards
+     * @param hintCardsHand List of Card Objects representing a players hand of
+     * Hint Cards
+     * @param actionCardsHand List of Card Objects representing a players hand
+     * of Action Cards
      */
     public ServerPlayer()
     {
@@ -54,8 +57,19 @@ public class ServerPlayer implements Player, Serializable
     {
         return playerId;
     }
+
+    public DestinationID getLocation()
+    {
+        return location;
+    }
     
-    public void setName(String name) {
+    public void setLocation(DestinationID location)
+    {
+        this.location = location;
+    }
+
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -98,7 +112,6 @@ public class ServerPlayer implements Player, Serializable
 //    {
 //        this.name = name;
 //    }
-
     /**
      * Gets the color associated with this player.
      *
@@ -128,7 +141,8 @@ public class ServerPlayer implements Player, Serializable
     {
         return actionCardsHand;
     }
-     /**
+
+    /**
      * Gets the hint cards hand of this player.
      *
      * @return The hint cards hand of this player.
@@ -145,28 +159,28 @@ public class ServerPlayer implements Player, Serializable
      */
     public void setActionCardsHand(List<ActionCard> actionCardsHand)
     {
-    
+
         this.actionCardsHand = actionCardsHand;
     }
-    
-     /**
+
+    /**
      * Sets the hint cards hand of this player.
      *
      * @param hintCardsHand of the player.
      */
     public void setHintCardsHand(List<HintCard> hintCardsHand)
     {
-    
+
         this.hintCardsHand = hintCardsHand;
     }
-    
-    private void changeNextColor() 
+
+    private void changeNextColor()
     {
         Random rand = new Random();
         int r = rand.nextInt(255);
         int g = rand.nextInt(255);
         int b = rand.nextInt(255);
-        
+
         nextColor = new Color(r, g, b);
     }
 }
