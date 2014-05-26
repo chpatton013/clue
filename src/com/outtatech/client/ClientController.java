@@ -37,11 +37,7 @@ public class ClientController
     public ClientController()
     {
         this.state = new ClientMenuState();
-    }
-
-    public void setNetwork(String host, int port)
-    {
-        this.network = new ClientNetwork(host, port);
+        this.network = new ClientNetwork("localhost", 55555);
     }
 
     /**
@@ -61,7 +57,7 @@ public class ClientController
      */
     public void setState(State newState)
     {
-        if ( this.state != null)
+        if (this.state != null)
         {
             newState.addOldStatesObservers(this.state.getObservers());
             this.state = newState;
