@@ -68,8 +68,7 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, new Object(), list, 
-                map);
+        ClientGameState instance = new ClientGameState(4, list);
         int expResult = 4;
         int result = instance.getPlayerId();
         assertEquals(expResult, result);
@@ -97,8 +96,7 @@ public class ClientGameStateTest
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
         Object obj = new Object();
-        ClientGameState instance = new ClientGameState(4, obj, list, 
-                map);
+        ClientGameState instance = new ClientGameState(4, list);
         
         Object expResult = obj;
         Object result = instance.getNotes();
@@ -121,9 +119,7 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-//        ClientGameState instance = new ClientGameState(4, new Object(), list, 
-//                map);
-        
+        ClientGameState instance = new ClientGameState(4, list);
         List<Card> expResult = list;
         List<Card> result = instance.getHand();
         assertEquals(expResult, result);
@@ -145,8 +141,7 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, new Object(), list, 
-                map);
+        ClientGameState instance = new ClientGameState(4, list);
         Map<DestinationID, Integer> expResult = map;
         Map<DestinationID, Integer> result = instance.getDestToPlayerId();
         assertEquals(expResult, result);
