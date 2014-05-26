@@ -72,10 +72,19 @@ public class ServerController
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
          */
+        System.out.println("Recieved Packet");
         if (obj instanceof LobbyListRequest)
         {
-            forwardMessage(new LobbyDiscoveryResponse(new ArrayList(lobbies.
-                    values())),
+            System.out.println("LobbyListRequest");
+            List<Lobby> publicLobbies = new ArrayList<Lobby>();
+            for (Lobby lobby : lobbies.values())
+            {
+                if (lobby.isVisible())
+                {
+                    publicLobbies.add(lobby);
+                }
+            }
+            forwardMessage(new LobbyDiscoveryResponse(publicLobbies),
                     connection);
         }
         /* 
@@ -124,7 +133,7 @@ public class ServerController
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest)obj;
             Game game = new Game();
-            Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId());
+            Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
             lobbies.put(game.getGameId(), lobby);

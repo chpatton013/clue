@@ -36,12 +36,15 @@ public class ClientController
      */
     public ClientController()
     {
-        this.state = new ClientMenuState();
-        try {
+        this.setState(new ClientMenuState());
+        try
+        {
             this.network = new ClientNetwork("localhost", 55555);
         }
-        catch (IOException ex) {
-            
+        catch (IOException ex)
+        {
+            System.err.println("Unable to connect to server");
+            System.exit(1);
         }
     }
 
@@ -212,6 +215,10 @@ public class ClientController
         else if (obj instanceof ActionResponse)
         {
             this.reactToActionResponse((ActionResponse) obj);
+        }
+        else if (obj instanceof RevealCardRequest)
+        {
+            this.reactToRevealCardRequest((RevealCardRequest) obj);
         }
         else if (obj instanceof AccusationResponse)
         {
