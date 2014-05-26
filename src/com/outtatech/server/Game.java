@@ -1,15 +1,16 @@
 package com.outtatech.server;
 
+import com.outtatech.common.*;
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.DestinationID;
 import com.outtatech.common.HintCard;
 import com.outtatech.common.Solution;
-import com.outtatech.common.*;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The Game class contains functions that provide information on the state of an
@@ -22,7 +23,7 @@ public class Game
 {
     private static Integer gameIdCounter = 0;
     private Integer gameId;
-    private List<ServerPlayer> players;
+    private Map <Integer, ServerPlayer> players;
     private ServerPlayer current;
     private List<ActionCard> drawPile;
     private List<ActionCard> discardPile;
@@ -42,7 +43,7 @@ public class Game
      * @param destToPlayerId Map of DestinationID to Integer represents which
      * player is on which DestinationID
      */
-    public Game(List<ServerPlayer> players,
+    public Game(Map<Integer, ServerPlayer> players,
             ServerPlayer current,
             List<ActionCard> drawPile,
             List<ActionCard> discardPile,
@@ -61,7 +62,7 @@ public class Game
     
     public Game()
     {
-        this.players = new CopyOnWriteArrayList<ServerPlayer>();
+        this.players = new ConcurrentHashMap<Integer, ServerPlayer>();
         this.current = null;
         this.drawPile = initializeDrawPile();
         this.discardPile = new CopyOnWriteArrayList<ActionCard>();
@@ -78,22 +79,27 @@ public class Game
      */
     public void addServerPlayer(ServerPlayer newPlayer)
     {
-        players.add(newPlayer);
+        players.put(newPlayer.getPlayerId(), newPlayer);
     }
     
     /**
-     * Gets the List of ServerPlayers in this game.
+     * Gets the Map of ServerPlayers in this game.
      *
-     * @return The List of ServerPlayers in this game.
+     * @return The Map of ServerPlayers in this game.
      */
-    public List<ServerPlayer> getServerPlayers()
+    public Map<Integer, ServerPlayer> getServerPlayers()
     {
         return players;
     }
-
+    
+    public List<ServerPlayer> getServerPlayersList()
+    {
+        return new ArrayList(players.values());
+    }
+    
     public List<Player> getPlayers() {
         List<Player> players = new ArrayList<Player>();
-        for (Player player : this.getServerPlayers()) {
+        for (Player player : this.getServerPlayers().values()) {
            players.add(player);
         }
         return players;

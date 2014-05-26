@@ -480,9 +480,19 @@ public class ServerController
 
     }
 
-    private void handleSnoop()
+    private void handleSnoop(Snoop card, Integer playerId, 
+            ConnectionToClient connection)
     {
-
+        // Get the requestor's game
+        Game curGame = games.get(connection);
+        
+        // Find the player with the given ID
+//        curGame.getServerPlayers()
+//        // Show a random card from playerId's hand
+//        RevealCardResponse response
+//                = new RevealCardResponse()
+//        forwardMessage
+        
     }
 
     private void handleSuggestion()
@@ -514,7 +524,8 @@ public class ServerController
         }
         else if (card instanceof Snoop)
         {
-            handleSnoop();
+            Snoop snoopCard = (Snoop) card;
+            handleSnoop(snoopCard, actionReq.getPlayerId());
         }
         else if (card instanceof Suggestion)
         {

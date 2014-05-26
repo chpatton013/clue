@@ -121,8 +121,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, new Object(), list, 
-                map);
+//        ClientGameState instance = new ClientGameState(4, new Object(), list, 
+//                map);
         
         List<Card> expResult = list;
         List<Card> result = instance.getHand();
