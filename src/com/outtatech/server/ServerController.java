@@ -77,10 +77,8 @@ public class ServerController
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
          */
-        System.out.println("Recieved Packet");
         if (obj instanceof LobbyListRequest)
         {
-            System.out.println("LobbyListRequest");
             List<Lobby> publicLobbies = new ArrayList<Lobby>();
             for (Lobby lobby : lobbies.values())
             {
@@ -125,7 +123,6 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-            System.out.println("reactToLobbyJoinRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             serverPlayer.setName("xXDragonDildos69Xx");
@@ -386,8 +383,7 @@ public class ServerController
         ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
         
         //Get all players in game
-        List<ServerPlayer> gameServerPlayers
-                = game.getServerPlayers();
+        List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
         
         Integer playerCount = gameServerPlayers.size();
 

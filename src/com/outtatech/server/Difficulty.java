@@ -1,5 +1,7 @@
 package com.outtatech.server;
 
+import java.io.Serializable;
+
 /**
  * The Difficulty class models the intelligence of an AI and the likeliness an
  * AI is to take risks.
@@ -7,7 +9,7 @@ package com.outtatech.server;
  * @author Steven Chiu, Brian Schacherer
  * @version 1.0 - May 11, 2014
  */
-public class Difficulty
+public class Difficulty implements Serializable
 {
     private int intelligence;
     private int riskiness;
