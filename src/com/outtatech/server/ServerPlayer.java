@@ -3,6 +3,7 @@ package com.outtatech.server;
 import com.outtatech.common.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +23,9 @@ public class ServerPlayer implements Player
     private Color color;
     public List<HintCard> hintCardsHand;
     public List<ActionCard> actionCardsHand;
+    public EnumSet suspectCardsSeen = EnumSet.noneOf(SuspectID.class);
+    public EnumSet locationsSeen = EnumSet.noneOf(DestinationID.class);
+    public EnumSet vehicleCardsSeen = EnumSet.noneOf(VehicleID.class);
 
     /**
      * Construct a sever player to keep track of client and server player

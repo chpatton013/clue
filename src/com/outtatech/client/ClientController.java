@@ -286,7 +286,7 @@ public class ClientController
         ClientGameState state = (ClientGameState)this.state;
         state.setDeckCardCount(rsp.getDeckCardCount());
         state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
-        state.setCurrectActivePlayer(rsp.getCurrectActivePlayer());
+        state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)

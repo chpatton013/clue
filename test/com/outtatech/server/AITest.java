@@ -67,7 +67,7 @@ public class AITest {
      * Test of aiRespond method, of class AI.
      */
     @Test
-    public void testAiRespond() {
+     public void testAiRespond() {
         System.out.println("Testing aiRespond");
         
         ArrayList<HintCard> hintCards = new ArrayList();
@@ -84,7 +84,7 @@ public class AITest {
         ActionCard privateTipCardAll = new PrivateTip(PrivateTipType.ALL_VEHICLES);
         
         ArrayList<HintCard> expResult = new ArrayList();
-        expResult.add(new VehicleCard(VehicleID.AIRLINER, CardColor.BLUE));
+        expResult.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
         expResult.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
         ArrayList<HintCard> result = ai.aiRespond(privateTipCardAll);
         
