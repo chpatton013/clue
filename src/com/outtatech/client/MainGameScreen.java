@@ -33,6 +33,7 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public MainGameScreen(GUIController ctrl) {
         //set controller to ctrl
+        controller = ctrl;
         
         initComponents();
     }
@@ -43,6 +44,7 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public void updateGameLog(String updateString) {
         //set game log's text to the current text + updateString
+        gameLog.setText(gameLog.getText() + "\n" + updateString);
     }
     
     /**
@@ -50,6 +52,7 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public void clearGameLog() {
         //set game log's test to ""
+        gameLog.setText("");
     }
     
     /**
@@ -95,6 +98,8 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public void startTurn() {
         //sets the endTurnButton and accuseButton to active
+        endTurnButton.setEnabled(true);
+        accuseButton.setEnabled(true);
     }
     
     /**
@@ -102,6 +107,9 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public void endTurn() {
         //sets the endTurnButton and accuseButton to inactive
+        endTurnButton.setEnabled(false);
+        accuseButton.setEnabled(false);
+        
     }
 
     /**
@@ -162,6 +170,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         jCheckBox19 = new javax.swing.JCheckBox();
         jCheckBox20 = new javax.swing.JCheckBox();
         jCheckBox21 = new javax.swing.JCheckBox();
+        leaveGameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -495,6 +504,13 @@ public class MainGameScreen extends javax.swing.JFrame {
 
         jCheckBox21.setText("jCheckBox21");
 
+        leaveGameButton.setText("Leave Game");
+        leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                leaveGameButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -590,7 +606,8 @@ public class MainGameScreen extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(endTurnButton)
                                         .addComponent(accuseButton))))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leaveGameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -637,7 +654,6 @@ public class MainGameScreen extends javax.swing.JFrame {
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCheckBox1)
@@ -679,8 +695,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox12)
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                        .addComponent(jCheckBox12))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(leaveGameButton)
                 .addContainerGap())
         );
 
@@ -689,20 +707,25 @@ public class MainGameScreen extends javax.swing.JFrame {
 
     private void instructionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instructionsButtonMouseClicked
         //call controller's showInstructions method
+        controller.showInstructions();
     }//GEN-LAST:event_instructionsButtonMouseClicked
 
     private void optionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optionsButtonMouseClicked
         //call controller's showOptions method
+        controller.showOptions();
     }//GEN-LAST:event_optionsButtonMouseClicked
 
     private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's accuse method
+        controller.accuse();
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMouseClicked
         //call controller's endTurn method
+        endTurn();
         
         //call this's endTurn method
+        controller.endTurn();
     }//GEN-LAST:event_endTurnButtonMouseClicked
 
     private void actionCardPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionCardPanel2MouseClicked
@@ -720,6 +743,11 @@ public class MainGameScreen extends javax.swing.JFrame {
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
     }//GEN-LAST:event_playerListMouseClicked
+
+    private void leaveGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGameButtonMouseClicked
+        //call controller's exitWindow method
+        controller.exitWindow();
+    }//GEN-LAST:event_leaveGameButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -804,6 +832,7 @@ public class MainGameScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton leaveGameButton;
     private javax.swing.JButton optionsButton;
     private javax.swing.JTable playerList;
     // End of variables declaration//GEN-END:variables

@@ -24,6 +24,13 @@ public class GUIController implements Observer{
     AccusationScreen accusationScreen;
     MainGameScreen mainGameScreen;
     
+    int imageIndex = 0;
+    
+    String[] imagePaths = {
+        "images\\greece\\",
+        "images\\whiteHouse\\",
+        "images\\pirate\\"};
+    
     private enum CurrentWindow {
         INTRO, GAMESELECT, LOBBY, MAINGAME
     }
@@ -121,6 +128,8 @@ public class GUIController implements Observer{
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyState()
         
+        lobbyScreen.clearPlayers();
+        
         //set state to LOBBY
         state = CurrentWindow.LOBBY;
         
@@ -138,10 +147,14 @@ public class GUIController implements Observer{
         
         //populate the GameSelectScreen's text box with the lobbies from the
         //state
+        gameSelectScreen.clearGames();
         
         //set state to GAMESELECT
+        state = CurrentWindow.GAMESELECT;
         
         //hide the intro screen and show the game select screen
+        introScreen.setVisible(false);
+        gameSelectScreen.setVisible(true);
     }
     
     /**
@@ -152,10 +165,14 @@ public class GUIController implements Observer{
         //a parameter of new ClientLobbyState()
         
         //populate the lobby screen
+        lobbyScreen.clearPlayers();
         
         //Set state to LOBBY
+        state = CurrentWindow.LOBBY;
         
         //hide the game select screen and display the lobby screen
+        gameSelectScreen.setVisible(false);
+        lobbyScreen.setVisible(true);
     }
     
     /**
@@ -167,10 +184,21 @@ public class GUIController implements Observer{
         //id
         
         //populate the lobby screen with the appropriate player names
+        lobbyScreen.clearPlayers();
         
         //Set state to LOBBY
+        state = CurrentWindow.LOBBY;
         
         //hide the game select screen and display the lobby screen
+        gameSelectScreen.setVisible(false);
+        lobbyScreen.setVisible(true);
+    }
+    
+    public void startGame() {
+        state = CurrentWindow.MAINGAME;
+        
+        lobbyScreen.setVisible(false);
+        mainGameScreen.setVisible(true);
     }
     
     /**
@@ -187,13 +215,17 @@ public class GUIController implements Observer{
     public void kickPlayer(int playerId) {
         //call Client Controller kickPlayer method with the id of the selected
         //player
+        if(playerId >= 0) {
+        }
     }
     
     /**
-     *Begins the accusation proccess
+     *Begins the accusation process
      */
     public void accuse(){
         //show the accusation window
+        accusationScreen = new AccusationScreen(this);
+        accusationScreen.setVisible(true);
     }
     
     /**
@@ -205,6 +237,7 @@ public class GUIController implements Observer{
     public void makeAccusation(int cardType1, int cardType2, int cardType3) {
         //call client controller's makeAccusation method with the 3 cards
         //specified
+        
     }
     
     /**
@@ -223,6 +256,27 @@ public class GUIController implements Observer{
      *Notifies client controller that player has ended their turn
      */
     public void endTurn() {
+        revealedCardsScreen.setVisible(false);
+        accusationScreen.setVisible(false);
+        
         //call client controller's end turn method
+    }
+    
+    public void setImageIndex(int indx){
+        imageIndex = indx;
+    }
+    
+    public int getImageIndex() {
+        return imageIndex;
+    }
+    
+    public String getImagePath(){
+        return imagePaths[imageIndex];
+    }
+    
+    public String getImagePath(int indx){
+        if(indx < 3) 
+            return imagePaths[indx];
+        else return null;
     }
 }

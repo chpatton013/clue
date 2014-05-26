@@ -33,6 +33,7 @@ public class GameSelectScreen extends javax.swing.JFrame {
      */
     public GameSelectScreen(GUIController ctrl) {
         //set controller to ctrl
+        controller = ctrl;
         
         initComponents();
     }
@@ -44,8 +45,10 @@ public class GameSelectScreen extends javax.swing.JFrame {
      */
     public void addGame(String gameName, int lobbyId) {
         //set game list to current text + gameName
+        gameList.setValueAt(gameName, lobbyIds.size(), 0);
         
         //add lobbyId to lobbyIds
+        lobbyIds.add(lobbyId);
     }
     
     /**
@@ -53,8 +56,12 @@ public class GameSelectScreen extends javax.swing.JFrame {
      */
     public void clearGames() {
         //set game list's text to ""
+        for(int curRow = 0; curRow < lobbyIds.size(); curRow++){
+            gameList.setValueAt("", curRow, 0);
+        }
         
         //clear lobbyIds
+        lobbyIds = new ArrayList();
     }
 
     /**
@@ -70,9 +77,9 @@ public class GameSelectScreen extends javax.swing.JFrame {
         joinGameButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gameList = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         createGameButton.setText("Create Game");
         createGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,7 +104,7 @@ public class GameSelectScreen extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gameList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -140,10 +147,10 @@ public class GameSelectScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jScrollPane2.setViewportView(jTable1);
+        gameList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        gameList.setShowHorizontalLines(false);
+        gameList.setShowVerticalLines(false);
+        jScrollPane2.setViewportView(gameList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,14 +188,21 @@ public class GameSelectScreen extends javax.swing.JFrame {
 
     private void createGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGameButtonMouseClicked
         //call controller's createGame method
+        controller.createGame();
     }//GEN-LAST:event_createGameButtonMouseClicked
 
     private void joinGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinGameButtonMouseClicked
         //call controller's joinGame method with the selected lobby's lobby id
+        int row = gameList.getSelectedRow();
+        
+        if(row >= 0 && row < lobbyIds.size()) {
+            controller.joinGame((int)lobbyIds.get(row));
+        }
     }//GEN-LAST:event_joinGameButtonMouseClicked
 
     private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
         //call controller's exitWindow method
+        controller.exitWindow();
     }//GEN-LAST:event_closeButtonMouseClicked
 
     /**
@@ -229,8 +243,8 @@ public class GameSelectScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JButton createGameButton;
+    private javax.swing.JTable gameList;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton joinGameButton;
     // End of variables declaration//GEN-END:variables
 }

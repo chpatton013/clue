@@ -123,10 +123,12 @@ public class IntroScreen extends javax.swing.JFrame {
 
     private void SinglePlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SinglePlayerButtonMouseClicked
         //call controller's singlePlayerSelected method
+        controller.singlePlayerSelected();
     }//GEN-LAST:event_SinglePlayerButtonMouseClicked
 
     private void MultiPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MultiPlayerButtonMouseClicked
         //call controller's multiplayerSelected method
+        controller.multiplayerSelected();
     }//GEN-LAST:event_MultiPlayerButtonMouseClicked
 
     private void InformationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InformationButtonMouseClicked

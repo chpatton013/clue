@@ -12,7 +12,7 @@ package com.outtatech.client;
  */
 public class LobbyScreen extends javax.swing.JFrame {
     
-    private int numPlayers = 1, selectedRow = -1;
+    private int numPlayers = 0, selectedRow = -1;
     
     private int[] playerIds = {-1, -1, -1, -1, -1};
     
@@ -31,8 +31,11 @@ public class LobbyScreen extends javax.swing.JFrame {
      */
     public LobbyScreen(GUIController ctrl) {
         //set controller to ctrl
+        controller = ctrl;
         
         initComponents();
+        
+        gameStartButton.setEnabled(false);
     }
     
     /**
@@ -42,12 +45,17 @@ public class LobbyScreen extends javax.swing.JFrame {
      */
     public void addPlayer(String playerName, int playerId) {
         //set player list text to current text + playerName + "waiting..."
+        playerList.setValueAt(playerName, numPlayers, 0);
         
         //set playerIds[numPlayers] to the player's id
+        playerIds[numPlayers] = playerId;
         
         //increment numPlayers
+        numPlayers++;
         
         //if numPlayers is >= 4 make the start game button active
+        if(numPlayers >= 4)
+            gameStartButton.setEnabled(true);
     }
     
     /**
@@ -55,10 +63,23 @@ public class LobbyScreen extends javax.swing.JFrame {
      */
     public void clearPlayers() {
         //set the player list text to ""
+        playerList.setValueAt("", 0, 0);
+        playerList.setValueAt("", 1, 0);
+        playerList.setValueAt("", 2, 0);
+        playerList.setValueAt("", 3, 0);
+        playerList.setValueAt("", 4, 0);
         
         //set numPlayers to 0
+        numPlayers = 0;
         
         //set playerIds to -1 at all indicies
+        playerIds[0] = -1;
+        playerIds[1] = -1;
+        playerIds[2] = -1;
+        playerIds[3] = -1;
+        playerIds[4] = -1;
+        
+        gameStartButton.setEnabled(false);
     }
 
     /**
@@ -75,9 +96,9 @@ public class LobbyScreen extends javax.swing.JFrame {
         kickPlayerButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        playerList = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         gameStartButton.setText("START!");
         gameStartButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,7 +128,7 @@ public class LobbyScreen extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        playerList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -127,10 +148,10 @@ public class LobbyScreen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jScrollPane2.setViewportView(jTable1);
+        playerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        playerList.setShowHorizontalLines(false);
+        playerList.setShowVerticalLines(false);
+        jScrollPane2.setViewportView(playerList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,18 +192,26 @@ public class LobbyScreen extends javax.swing.JFrame {
 
     private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameStartButtonMouseClicked
         //call controller's startGame method
+        controller.startGame();
     }//GEN-LAST:event_gameStartButtonMouseClicked
 
     private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
         //call controller's createAI method
+        controller.createAI();
     }//GEN-LAST:event_createAIButtonMouseClicked
 
     private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kickPlayerButtonMouseClicked
         //call controller's kickPlayer method with the selected player's id
+        int indx = playerList.getSelectedRow();
+        
+        if(indx >= 0) {
+            controller.kickPlayer(playerIds[indx]);
+        }
     }//GEN-LAST:event_kickPlayerButtonMouseClicked
 
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
         //call controller's exitWindow method
+        controller.exitWindow();
     }//GEN-LAST:event_exitButtonMouseClicked
 
     /**
@@ -225,7 +254,7 @@ public class LobbyScreen extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JButton gameStartButton;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton kickPlayerButton;
+    private javax.swing.JTable playerList;
     // End of variables declaration//GEN-END:variables
 }
