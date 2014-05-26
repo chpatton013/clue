@@ -160,7 +160,7 @@ public class GUIController implements Observer{
     public void multiplayerSelected() {
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyDiscoveryState()
-        clientController.setState(new ClientLobbyDiscoveryState());
+        clientController.searchForGames();
         
         //populate the GameSelectScreen's text box with the lobbies from the
         //state
@@ -180,6 +180,7 @@ public class GUIController implements Observer{
     public void createGame() {
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyState()
+        clientController.startMultiPlayerGame("LOBBYGAME!!!");
         
         //populate the lobby screen
         lobbyScreen.clearPlayers();

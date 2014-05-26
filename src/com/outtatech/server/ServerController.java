@@ -179,7 +179,7 @@ public class ServerController
          * else if RevealCardRequest(prompted by an ActionResponse) respond with
          * a GameStateResponse
          */
-        else if (obj instanceof RevealCardRequest)
+        else if (obj instanceof RevealCardResponse)
         {
             //forwardMessage(new GameStateResponse()), connection, false);
         }
