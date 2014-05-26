@@ -241,8 +241,8 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
-        System.out.println("reactToLobbyJoin");
-        if (this.state instanceof ClientLobbyDiscoveryState) {
+        if (this.state instanceof ClientLobbyDiscoveryState)
+        {
             Integer myId = rsp.getPlayerId();
             List<Player> players = rsp.getPlayers();
             Player me = null;
@@ -309,14 +309,21 @@ public class ClientController
 
     private void reactToCardDealResponse(CardDealResponse rsp)
     {
-        if (!(this.state instanceof ClientGameState))
+        if (this.state instanceof ClientLobbyState)
+        {
+            ClientLobbyState state = (ClientLobbyState)this.state;
+            Player me = state.getPlayer();
+            this.setState(new ClientGameState(me.getPlayerId(), rsp.getCards()));
+        }
+        else if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received CardDealResponse while not in " +
                     "ClientGameState.");
-            return;
         }
-
-        ((ClientGameState)this.getState()).getHand().addAll(rsp.getCards());
+        else
+        {
+            ((ClientGameState)this.getState()).getHand().addAll(rsp.getCards());
+        }
     }
 
     private void reactToActionResponse(ActionResponse rsp)

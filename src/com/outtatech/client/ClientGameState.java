@@ -36,13 +36,10 @@ public class ClientGameState extends State
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
-    public ClientGameState(int playerID, Object notes, List<Card> hand,
-            Map<DestinationID, Integer> destToPlayerId)
+    public ClientGameState(int playerID, List<Card> hand)
     {
         this.playerID = playerID;
-        this.notes = notes;
         this.hand = hand;
-        this.destToPlayerId = destToPlayerId;
         this.revealed = new ArrayList<Card>();
         this.revealStatus = false;
         this.newAccusation = false;
