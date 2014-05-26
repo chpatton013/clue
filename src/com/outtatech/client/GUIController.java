@@ -6,6 +6,7 @@
 
 package com.outtatech.client;
 
+import com.outtatech.common.Player;
 import com.outtatech.server.Lobby;
 import java.util.List;
 import java.util.Observable;
@@ -78,8 +79,21 @@ public class GUIController implements Observer{
         }
         
         //if state is LOBBY
-        //  clear all players
-        //  add each player back
+        if(obs instanceof ClientLobbyState) {
+            //  clear all players
+            lobbyScreen.clearPlayers();
+            //  add each player back
+            List<Player> playList = ((ClientLobbyState)obs).getPlayers();
+            for(int indx = 0; indx < playList.size(); indx++) {
+                lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
+            }
+            //Set state to LOBBY
+            state = CurrentWindow.LOBBY;
+
+            //hide the game select screen and display the lobby screen
+            gameSelectScreen.setVisible(false);
+            lobbyScreen.setVisible(true);
+        }
         
         //if state is MAINGAME
         //  call mainGameScreen's clearFields method
@@ -183,7 +197,7 @@ public class GUIController implements Observer{
         clientController.startMultiPlayerGame("LOBBYGAME!!!");
         
         //populate the lobby screen
-        lobbyScreen.clearPlayers();
+        //lobbyScreen.clearPlayers();
         
         //Set state to LOBBY
         state = CurrentWindow.LOBBY;
@@ -200,16 +214,7 @@ public class GUIController implements Observer{
     public void joinGame(int lobbyId) {
         //call Client controller's joinLobby method with the selected lobby's
         //id
-        
-        //populate the lobby screen with the appropriate player names
-        lobbyScreen.clearPlayers();
-        
-        //Set state to LOBBY
-        state = CurrentWindow.LOBBY;
-        
-        //hide the game select screen and display the lobby screen
-        gameSelectScreen.setVisible(false);
-        lobbyScreen.setVisible(true);
+        clientController.joinGame(lobbyId);
     }
     
     public void startGame() {
