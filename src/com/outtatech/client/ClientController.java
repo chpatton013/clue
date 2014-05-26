@@ -5,15 +5,15 @@
  */
 package com.outtatech.client;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-
-import com.outtatech.common.*;
 import com.outtatech.client.*;
 import com.outtatech.client.messaging.*;
+import com.outtatech.common.*;
 import com.outtatech.server.*;
 import com.outtatech.server.messaging.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The ClientController class facilitates changes to the clients State,
@@ -41,7 +41,12 @@ public class ClientController
 
     public void setNetwork(String host, int port)
     {
-        this.network = new ClientNetwork(host, port);
+        try {
+            this.network = new ClientNetwork(host, port);
+        }
+        catch (IOException ex) {
+            
+        }
     }
 
     /**
