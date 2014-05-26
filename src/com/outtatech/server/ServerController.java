@@ -122,8 +122,10 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
+            System.out.println("LobbyListRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
+            serverPlayer.setName("xXDragonDildos69Xx");
             games.get(lobby.getGameId()).addServerPlayer(serverPlayer);
             forwardMessage(new LobbyJoinResponse(lobby, serverPlayer),
                     getGameClients(lobby.gameId));
@@ -170,6 +172,7 @@ public class ServerController
             AddAIRequest temp = ((AddAIRequest) obj);
             int num = (robots.keySet()).size();
             AI bot = new AI(new Difficulty(100, 100), this);
+            bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers().add(bot);
             //update the mapping
             forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()), 
