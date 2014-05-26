@@ -241,6 +241,7 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
+        System.out.println("reactToLobbyJoin");
         if (this.state instanceof ClientLobbyDiscoveryState) {
             Player me = rsp.getPlayer();
             List<Player> players = new ArrayList<Player>();

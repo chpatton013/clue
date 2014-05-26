@@ -55,10 +55,12 @@ public class ServerController
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
         
-        try {
+        try
+        {
             network.listen();
         }
-        catch (IOException ex) {
+        catch (IOException ex)
+        {
             
         }
     }
@@ -122,10 +124,14 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-            System.out.println("LobbyListRequest");
+            System.out.println("reactToLobbyListRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             serverPlayer.setName("xXDragonDildos69Xx");
+
+           Game game = this.gameIdToGame.get(lobby.getGameId());
+           this.players.get(game).add(this.humans.get(serverPlayer));
+
             games.get(lobby.getGameId()).addServerPlayer(serverPlayer);
             forwardMessage(new LobbyJoinResponse(lobby, serverPlayer),
                     getGameClients(lobby.gameId));
