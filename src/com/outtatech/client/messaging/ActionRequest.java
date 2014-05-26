@@ -26,6 +26,7 @@ public class ActionRequest extends ClientRequest
      *
      * @param actionCard the action card that the client is playing
      * @param cards the cards involved in the action
+     * @param playerID the id of the player the action is targeting
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
     {
@@ -33,6 +34,20 @@ public class ActionRequest extends ClientRequest
         this.cards = cards;
         this.playerId = playerId;
     }
+    
+    /**
+     * Returns a new ActionRequest object.
+     *
+     * @param actionCard the action card that the client is playing
+     * @param cards the cards involved in the action
+     */
+    public ActionRequest(ActionCard actionCard, List<Card> cards)
+    {
+        this.actionCard = actionCard;
+        this.cards = cards;
+        this.playerId = playerId;
+    }
+
 
     /**
      * Returns the action card involved in the user action.

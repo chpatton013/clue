@@ -2,6 +2,7 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
+import com.outtatech.common.ActionCardType;
 import com.outtatech.common.Card;
 import com.outtatech.common.Player;
 import com.outtatech.common.Solution;
@@ -89,6 +90,11 @@ public class ServerController
             }
             forwardMessage(new LobbyDiscoveryResponse(publicLobbies),
                     connection);
+        }
+        else if (obj instanceof ActionRequest)
+        {
+            ActionRequest actionReq = (ActionRequest)obj;
+            handleActionRequest(actionReq, connection);
         }
         /* 
          * AccusationRequest respond with AccusationResponse
@@ -420,4 +426,31 @@ public class ServerController
         }
         
     } 
+
+    private void handleActionRequest(ActionRequest actionReq,
+            ConnectionToClient connection)
+    {
+        ActionCardType type = actionReq.getActionCard().getActionType();
+        
+        if(type == ActionCardType.ALL_SNOOP)
+        {
+            
+        }
+        else if(type == ActionCardType.PRIVATE_TIP)
+        {
+            
+        }
+        else if(type == ActionCardType.SNOOP)
+        {
+            
+        }
+        else if(type == ActionCardType.SUGGESTION)
+        {
+            
+        }
+        else if(type == ActionCardType.SUPER_SLEUTH)
+        {
+            
+        }
+    }
 }
