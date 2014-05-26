@@ -246,7 +246,7 @@ public class ServerController
         }
 
         //Create accusation response
-        AccusationResponse accResp = new AccusationResponse(
+        AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()));
 
         //Send to humans

@@ -6,6 +6,8 @@
 
 package com.outtatech.server.messaging;
 
+import com.outtatech.common.*;
+
 /**
  * Message sent from the server to the client when an accusation is made.
  * 
