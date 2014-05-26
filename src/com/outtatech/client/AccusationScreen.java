@@ -27,6 +27,7 @@ public class AccusationScreen extends javax.swing.JFrame {
      */
     public AccusationScreen(GUIController ctrl) {
         //set controller = ctrl
+        controller = ctrl;
         
         initComponents();
     }
@@ -49,8 +50,6 @@ public class AccusationScreen extends javax.swing.JFrame {
         accuseButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cardImage1.setPreferredSize(new java.awt.Dimension(70, 100));
 
@@ -91,6 +90,7 @@ public class AccusationScreen extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        cardDropDown1.setMaximumRowCount(9);
         cardDropDown1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cardDropDown1.setPreferredSize(new java.awt.Dimension(70, 20));
         cardDropDown1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,6 +188,7 @@ public class AccusationScreen extends javax.swing.JFrame {
 
     private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
         //close the window
+        this.setVisible(false);
     }//GEN-LAST:event_closeButtonMouseClicked
 
     private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked

@@ -6,6 +6,8 @@
 
 package com.outtatech.client;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Thomas
@@ -24,7 +26,22 @@ public class OptionsScreen extends javax.swing.JFrame {
     public OptionsScreen(GUIController ctrl) {
         controller = ctrl;
         
+        int indx = controller.getImageIndex();
+        
         initComponents();
+        
+        cardImage1.setText("");
+        cardImage2.setText("");
+        cardImage3.setText("");
+        
+        updateCards(indx);
+    }
+    
+    private void updateCards(int indx){
+        String path = controller.getImagePath(indx);
+        cardImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
+        cardImage2.setIcon(new ImageIcon(path + "Suspect-1.jpg"));
+        cardImage3.setIcon(new ImageIcon(path + "Transportation-1.jpg"));
     }
 
     /**
@@ -37,78 +54,68 @@ public class OptionsScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        greeceButton = new javax.swing.JRadioButton();
+        whiteHouseButton = new javax.swing.JRadioButton();
+        pirateButton = new javax.swing.JRadioButton();
+        applyButton = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cardImage1 = new javax.swing.JLabel();
+        cardImage2 = new javax.swing.JLabel();
+        cardImage3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Options");
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(70, 100));
-        jPanel1.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setLabel("Greece");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(greeceButton);
+        greeceButton.setLabel("Greece");
+        greeceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                greeceButtonMouseClicked(evt);
+            }
+        });
+        greeceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                greeceButtonActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setLabel("White House");
+        buttonGroup1.add(whiteHouseButton);
+        whiteHouseButton.setLabel("White House");
+        whiteHouseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                whiteHouseButtonActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setLabel("Pirate");
+        buttonGroup1.add(pirateButton);
+        pirateButton.setLabel("Pirate");
+        pirateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pirateButtonActionPerformed(evt);
+            }
+        });
 
-        jButton1.setLabel("Apply");
+        applyButton.setLabel("Apply");
+        applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                applyButtonMouseClicked(evt);
+            }
+        });
 
-        jButton2.setLabel("Return");
+        closeButton.setLabel("Return");
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeButtonMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Select Theme:");
+
+        cardImage1.setText("1");
+
+        cardImage2.setText("2");
+
+        cardImage3.setText("3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,57 +123,86 @@ public class OptionsScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(cardImage1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cardImage2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cardImage3))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jLabel1))
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(greeceButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(whiteHouseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addComponent(pirateButton)))
+                .addContainerGap(185, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(applyButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(closeButton)
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(28, 28, 28)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton3)))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(greeceButton)
+                    .addComponent(whiteHouseButton)
+                    .addComponent(pirateButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardImage1)
+                    .addComponent(cardImage2)
+                    .addComponent(cardImage3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(applyButton)
+                    .addComponent(closeButton))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void greeceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greeceButtonActionPerformed
+        if(greeceButton.isSelected())
+            updateCards(0);
+    }//GEN-LAST:event_greeceButtonActionPerformed
+
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+        this.setVisible(false);
+    }//GEN-LAST:event_closeButtonMouseClicked
+
+    private void applyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applyButtonMouseClicked
+        if(greeceButton.isSelected())
+            controller.setImageIndex(0);
+        else if(whiteHouseButton.isSelected())
+            controller.setImageIndex(1);
+        else
+            controller.setImageIndex(2);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_applyButtonMouseClicked
+
+    private void whiteHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteHouseButtonActionPerformed
+        if(whiteHouseButton.isSelected())
+            updateCards(1);
+    }//GEN-LAST:event_whiteHouseButtonActionPerformed
+
+    private void pirateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pirateButtonActionPerformed
+        if(pirateButton.isSelected())
+            updateCards(2);
+    }//GEN-LAST:event_pirateButtonActionPerformed
+
+    private void greeceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_greeceButtonMouseClicked
+        
+    }//GEN-LAST:event_greeceButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -204,15 +240,15 @@ public class OptionsScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton applyButton;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel cardImage1;
+    private javax.swing.JLabel cardImage2;
+    private javax.swing.JLabel cardImage3;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JRadioButton greeceButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton pirateButton;
+    private javax.swing.JRadioButton whiteHouseButton;
     // End of variables declaration//GEN-END:variables
 }
