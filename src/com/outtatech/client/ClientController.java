@@ -5,6 +5,7 @@
  */
 package com.outtatech.client;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -60,7 +61,7 @@ public class ClientController
      */
     public void setState(State newState)
     {
-        if ( this.state != null) 
+        if ( this.state != null)
         {
             newState.addOldStatesObservers(this.state.getObservers());
             this.state = newState;
@@ -150,6 +151,16 @@ public class ClientController
         this.forwardMessage(new EndTurnRequest());
     }
 
+    public void playActionCard(ActionCard actionCard, List<Card> cards,
+            Integer playerId) {
+        this.forwardMessage(new ActionRequest(actionCard, cards, playerId));
+    }
+
+    public void revealCards(List<Card> cards)
+    {
+        this.forwardMessage(new RevealCardResponse(cards));
+    }
+
     /**
      * Called when the client would like to make an accusation during their
      * turn.
@@ -215,7 +226,7 @@ public class ClientController
     private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
     {
         this.creator = true;
-        //this.joinGame(rsp.getLobby().getLobbyId());
+        this.joinGame(rsp.getLobby().getLobbyId());
     }
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
@@ -292,8 +303,71 @@ public class ClientController
 
     private void reactToActionResponse(ActionResponse rsp)
     {
-        // prepare RevealCardRequest
-        // this.promptViews(rsp);
+        if (!(this.state instanceof ClientGameState))
+        {
+            System.err.println("Received ActionResponse while not in " +
+                    "ClientGameState.");
+            return;
+        }
+
+        // TODO: GUI
+        // display that player rsp.getPlayerId() played card rsp.getActionCard()
+    }
+
+    private void reactToRevealCardRequest(RevealCardRequest rsp)
+    {
+        if (!(this.state instanceof ClientGameState))
+        {
+            System.err.println("Received RevealCardRequest while not in " +
+                    "ClientGameState.");
+            return;
+        }
+
+        ClientGameState state = (ClientGameState)this.state;
+
+        ActionCardType type = rsp.getActionCard().getActionType();
+        if (type == ActionCardType.SUGGESTION)
+        {
+            List<Card> cards = rsp.getCards();
+            // TODO: GUI
+            // tell GUI to present cards
+        }
+        else if (type == ActionCardType.SNOOP ||
+              type == ActionCardType.ALL_SNOOP)
+        {
+            List<Card> hints = new ArrayList<Card>(state.getHand());
+            int index = 0;
+            while (index < hints.size())
+            {
+                if (hints.get(index) instanceof ActionCard)
+                {
+                    hints.remove(index);
+                }
+                else
+                {
+                    ++index;
+                }
+            }
+            Collections.shuffle(hints);
+            Card card = hints.get(0);
+
+            // TODO: GUI
+            // tell GUI card was shown to user rsp.getPlayerId()
+        }
+        else if (type == ActionCardType.SUPER_SLEUTH)
+        {
+            // get condition from this card
+            // TODO: GUI
+            // prompt GUI to present user with choice of cards that match
+            //  condition
+        }
+        else if (type == ActionCardType.PRIVATE_TIP)
+        {
+            // get condition from this card
+            // TODO: GUI
+            // prompt GUI to present user with choice of cards that match
+            //  condition
+        }
     }
 
     private void reactToAccusationResponse(AccusationResponse rsp)
@@ -305,11 +379,13 @@ public class ClientController
             if (rsp.getCorrectAccusation())
             {
                 // you win!
+                // TODO: GUI
                 // show correct solution
             }
             else
             {
                 // you lose! you get nothing! good day sir!
+                // TODO: GUI
                 // show wrong solution
                 // remove from game
             }
@@ -320,11 +396,13 @@ public class ClientController
         if (rsp.getCorrectAccusation())
         {
             // you lose! you get nothing! good day sir!
+            // TODO: GUI
             // show correct solution
             // give option to leave game
         }
         else
         {
+            // TODO: GUI
             // show wrong solution
         }
     }
@@ -351,7 +429,7 @@ public class ClientController
      * @param obj ClientRequest the message object to send via the ClientNetwork
      * instance.
      */
-    public void forwardMessage(Object obj)
+    private void forwardMessage(Object obj)
     {
         this.network.sendMessageToServer(obj);
     }
