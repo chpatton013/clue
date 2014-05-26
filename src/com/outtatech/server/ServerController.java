@@ -119,7 +119,7 @@ public class ServerController
         else if (obj instanceof AddAIRequest)
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
-            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this);
+            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this, games.get(connection));
 
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
@@ -196,7 +196,7 @@ public class ServerController
         {
             AddAIRequest temp = ((AddAIRequest) obj);
             int num = (robots.keySet()).size();
-            AI bot = new AI(new Difficulty(100, 100), this);
+            AI bot = new AI(new Difficulty(100, 100), this, games.get(connection));
             bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers()
                     .put(bot.getPlayerId(), bot);
