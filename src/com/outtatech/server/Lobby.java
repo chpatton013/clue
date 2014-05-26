@@ -18,6 +18,7 @@ public class Lobby implements Serializable
     String lobbyName;
     Integer gameId;
     Integer lobbyId;
+    boolean visible;
 
     /**
      * Constructs a new Lobby
@@ -25,11 +26,12 @@ public class Lobby implements Serializable
      * @param lobbyName String designating the lobby name.
      * @param gameId Integer that differentiates one game from the next.
      */
-    public Lobby(String lobbyName, Integer gameId)
+    public Lobby(String lobbyName, Integer gameId, boolean visible)
     {
         this.lobbyName = lobbyName;
         this.gameId = gameId;
         this.lobbyId = lobbyIdCounter++;
+        this.visible = visible;
     }
 
     /**
@@ -60,5 +62,15 @@ public class Lobby implements Serializable
     public Integer getLobbyId()
     {
         return lobbyId;
+    }
+
+    /**
+     * Returns whether or not this lobby should be made visible.
+     *
+     * @return whether or not this lobby should be made visible.
+     */
+    public boolean isVisible()
+    {
+        return this.visible;
     }
 }
