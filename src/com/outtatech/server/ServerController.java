@@ -31,6 +31,7 @@ public class ServerController
     //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
     private Map<Integer, Lobby> lobbies;
+    private Map<ServerPlayer, Lobby> waiting;
     private ServerNetwork network;
 
     /**
@@ -168,10 +169,11 @@ public class ServerController
         {
             AddAIRequest temp = ((AddAIRequest) obj);
             int num = (robots.keySet()).size();
-            //need to create an AI
-            games.get(connection).getServerPlayers().add(null);
+            AI bot = new AI(new Difficulty(100, 100), this);
+            games.get(connection).getServerPlayers().add(bot);
             //update the mapping
-            //forwardMessage(new ActionResponse(), connection, false);
+            forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()), 
+                    bot), connection);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and

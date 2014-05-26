@@ -53,6 +53,10 @@ public class ServerPlayer implements Player
     {
         return playerId;
     }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Gets the notes of this player.
