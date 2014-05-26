@@ -17,9 +17,7 @@ public class GameStateResponse extends ServerResponse
 {
 
     private Integer deckCardCount;
-
     private List<Integer> playerTurnOrder;
-
     private Integer currentActivePlayer;
 
     /**
@@ -32,7 +30,9 @@ public class GameStateResponse extends ServerResponse
     public GameStateResponse(Integer deckCardCount,
             List<Integer> playerTurnOrder, Integer currentActivePlayer)
     {
-
+        this.deckCardCount = deckCardCount;
+        this.playerTurnOrder = playerTurnOrder;
+        this.currentActivePlayer = currentActivePlayer;
     }
 
     /**

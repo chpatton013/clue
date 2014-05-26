@@ -9,6 +9,8 @@ import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -26,6 +28,7 @@ public class ClientGameState extends State
     private List<Card> revealed;
     private boolean newAccusation;
     private boolean accusationStatus;
+    private Deque<String> gameLog;
 
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
@@ -44,6 +47,7 @@ public class ClientGameState extends State
         this.revealStatus = false;
         this.newAccusation = false;
         this.accusationStatus = false;
+        this.gameLog = new LinkedList<String>();
     }
 
     /**
@@ -204,4 +208,13 @@ public class ClientGameState extends State
         this.currentActivePlayer = currentActivePlayer;
     }
 
+    public void pushGameLog(String message)
+    {
+        this.gameLog.addLast(message);
+    }
+
+    public String pollGameLog()
+    {
+        return this.gameLog.poll();
+    }
 }

@@ -253,7 +253,8 @@ public class ClientController
                 }
             }
 
-            this.setState(new ClientLobbyState(me, players, this.creator, rsp.getLobby().getLobbyId()));
+            this.setState(new ClientLobbyState(me, players, this.creator,
+                    rsp.getLobby().getLobbyId()));
             this.creator = false;
         }
         else if (!(this.state instanceof ClientLobbyState))
@@ -304,6 +305,11 @@ public class ClientController
         state.setDeckCardCount(rsp.getDeckCardCount());
         state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
         state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+
+        state.pushGameLog("Game state updated:" +
+                "\n   Deck Card Count: " + rsp.getDeckCardCount() +
+                "\n   Player Turn Order: " + rsp.getDeckCardCount() +
+                "\n   Current Active Player: " + rsp.getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
@@ -313,6 +319,8 @@ public class ClientController
             ClientLobbyState state = (ClientLobbyState)this.state;
             Player me = state.getPlayer();
             this.setState(new ClientGameState(me.getPlayerId(), rsp.getCards()));
+
+            ((ClientGameState)this.state).pushGameLog("Game Started");
         }
         else if (!(this.state instanceof ClientGameState))
         {
@@ -321,7 +329,10 @@ public class ClientController
         }
         else
         {
-            ((ClientGameState)this.getState()).getHand().addAll(rsp.getCards());
+            ((ClientGameState)this.state).getHand().addAll(rsp.getCards());
+
+            ((ClientGameState)this.state).pushGameLog(
+                    "Cards dealt: " + rsp.getCards());
         }
     }
 
@@ -334,8 +345,9 @@ public class ClientController
             return;
         }
 
-        // TODO: GUI
-        // display that player rsp.getPlayerId() played card rsp.getActionCard()
+        ((ClientGameState)this.state).pushGameLog(
+                 "Player " + rsp.getPlayerId() + " played card " +
+                 rsp.getActionCard());
     }
 
     private void reactToRevealCardRequest(RevealCardResponse rsp)
