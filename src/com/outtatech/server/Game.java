@@ -91,6 +91,14 @@ public class Game
         return players;
     }
 
+    public List<Player> getPlayers() {
+        List<Player> players = new ArrayList<Player>();
+        for (Player player : this.getServerPlayers()) {
+           players.add(player);
+        }
+        return players;
+    }
+
     /**
      * Sets the current ServerPlayer in this game.
      *

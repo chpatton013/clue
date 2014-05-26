@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
+import java.io.Serializable;
 
 /**
  * The ServerPlayer class represents a player in a game... TODO!
@@ -13,7 +14,7 @@ import java.util.Random;
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
  */
-public class ServerPlayer implements Player
+public class ServerPlayer implements Player, Serializable
 {
     private static int playerIdCount = 0;
     private static Color nextColor = Color.RED;

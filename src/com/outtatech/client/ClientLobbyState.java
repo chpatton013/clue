@@ -54,6 +54,12 @@ public class ClientLobbyState extends State
     public void addPlayer(Player player)
     {
         this.players.add(player);
+        this.triggerChange();
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+        this.triggerChange();
     }
 
     /**

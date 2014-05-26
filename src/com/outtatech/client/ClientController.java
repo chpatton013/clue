@@ -243,9 +243,16 @@ public class ClientController
     {
         System.out.println("reactToLobbyJoin");
         if (this.state instanceof ClientLobbyDiscoveryState) {
-            Player me = rsp.getPlayer();
-            List<Player> players = new ArrayList<Player>();
-            players.add(me);
+            Integer myId = rsp.getPlayerId();
+            List<Player> players = rsp.getPlayers();
+            Player me = null;
+            for (Player player : players)
+            {
+                if (player.getPlayerId() == myId)
+                {
+                    me = player;
+                }
+            }
 
             this.setState(new ClientLobbyState(me, players, this.creator));
             this.creator = false;
@@ -257,7 +264,7 @@ public class ClientController
         }
         else
         {
-            ((ClientLobbyState)this.state).addPlayer(rsp.getPlayer());
+            ((ClientLobbyState)this.state).setPlayers(rsp.getPlayers());
         }
     }
 

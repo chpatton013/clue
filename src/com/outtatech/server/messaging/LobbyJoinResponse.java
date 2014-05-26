@@ -8,6 +8,8 @@ package com.outtatech.server.messaging;
 import com.outtatech.common.Player;
 import com.outtatech.server.Lobby;
 
+import java.util.List;
+
 /**
  * Message sent from the server to the client when a new user joins a lobby that
  * a client is part of.
@@ -17,17 +19,19 @@ import com.outtatech.server.Lobby;
 public class LobbyJoinResponse extends ServerResponse
 {
     private Lobby lobby;
-    private final Player player;
+    private final Integer playerId;
+    private final List<Player> players;
 
     /**
      * Used to respond to a human player request.
      * @param lobby
-     * @param player 
+     * @param player
      */
-    public LobbyJoinResponse(Lobby lobby, Player player)
+    public LobbyJoinResponse(Lobby lobby, Integer playerId, List<Player> players)
     {
         this.lobby = lobby;
-        this.player = player;
+        this.playerId = playerId;
+        this.players = players;
     }
 
     /**
@@ -40,13 +44,22 @@ public class LobbyJoinResponse extends ServerResponse
     {
         return lobby;
     }
-    
+
     /**
      * Get the player object created by the game server.
-     * @return 
+     * @return
      */
-    public Player getPlayer()
+    public Integer getPlayerId()
     {
-        return player;
+        return playerId;
+    }
+
+    /**
+     * Get the list of player objects in this lobby.
+     * @return
+     */
+    public List<Player> getPlayers()
+    {
+        return players;
     }
 }

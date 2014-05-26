@@ -115,7 +115,8 @@ public class ServerController
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
-            informPlayers(lobbyGame, new LobbyJoinResponse(lobby,newPlayer));
+            informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
+             newPlayer.getPlayerId(), lobbyGame.getPlayers()));
         }
         
         /* 
@@ -124,17 +125,20 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
-            System.out.println("reactToLobbyListRequest");
+            System.out.println("reactToLobbyJoinRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             serverPlayer.setName("xXDragonDildos69Xx");
 
-           Game game = this.gameIdToGame.get(lobby.getGameId());
-           this.players.get(game).add(this.humans.get(serverPlayer));
+            this.humans.put(serverPlayer, connection);
+            List<ConnectionToClient> cxns = this.getGameClients(lobby.getLobbyId());
+            cxns.add(this.humans.get(serverPlayer));
 
-            games.get(lobby.getGameId()).addServerPlayer(serverPlayer);
-            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer),
-                    getGameClients(lobby.gameId));
+            Game game = gameIdToGame.get(lobby.getGameId());
+            game.addServerPlayer(serverPlayer);
+
+            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.getPlayerId(), game.getPlayers()),
+                  cxns);
         }
         
         /**
@@ -148,6 +152,7 @@ public class ServerController
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
             lobbies.put(game.getGameId(), lobby);
+            players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
             
             //@TODO Only the requesting client will be updated.  Other clients
             //will need to send a lobby discovery response to refresh.
@@ -182,7 +187,7 @@ public class ServerController
             games.get(connection).getServerPlayers().add(bot);
             //update the mapping
             forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()), 
-                    bot), connection);
+                    bot.getPlayerId(), games.get(connection).getPlayers()), connection);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -224,8 +229,7 @@ public class ServerController
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
         
         //Get all players in game
-        List<ServerPlayer> gameServerPlayers
-                = game.getServerPlayers();
+        List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
 
         // Build a list of human client connections to send 
         // LobbyUpdateResponse to

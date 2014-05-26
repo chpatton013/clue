@@ -30,7 +30,7 @@ public class Lobby implements Serializable
     {
         this.lobbyName = lobbyName;
         this.gameId = gameId;
-        this.lobbyId = lobbyIdCounter++;
+        this.lobbyId = gameId;
         this.visible = visible;
     }
 
