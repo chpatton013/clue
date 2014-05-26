@@ -24,6 +24,9 @@ public class GUIController implements Observer{
     AccusationScreen accusationScreen;
     MainGameScreen mainGameScreen;
     
+    ClientController clientController;
+    ClientGameState gameState;
+    
     int imageIndex = 0;
     
     String[] imagePaths = {
@@ -36,6 +39,11 @@ public class GUIController implements Observer{
     }
     
     private CurrentWindow state = CurrentWindow.INTRO;
+    
+    public GUIController(ClientController cCtrl, ClientGameState cState){
+        clientController = cCtrl;
+        gameState = cState;
+    }
 
     /**
      * @param args the command line arguments
