@@ -6,13 +6,21 @@ import com.outtatech.common.ActionCard;
 import com.outtatech.common.ActionCardType;
 import com.outtatech.common.AllSnoop;
 import com.outtatech.common.Card;
+import com.outtatech.common.CardColor;
+import com.outtatech.common.DestinationCard;
+import com.outtatech.common.Gender;
 import com.outtatech.common.HintCard;
+import com.outtatech.common.HintCardType;
 import com.outtatech.common.Player;
 import com.outtatech.common.PrivateTip;
+import com.outtatech.common.PrivateTipType;
 import com.outtatech.common.Snoop;
 import com.outtatech.common.Solution;
 import com.outtatech.common.Suggestion;
 import com.outtatech.common.SuperSleuth;
+import com.outtatech.common.SuperSleuthType;
+import com.outtatech.common.SuspectCard;
+import com.outtatech.common.VehicleCard;
 import com.outtatech.server.messaging.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -119,7 +127,8 @@ public class ServerController
         else if (obj instanceof AddAIRequest)
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
-            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this, games.get(connection));
+            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
+                    games.get(connection));
 
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
@@ -196,7 +205,8 @@ public class ServerController
         {
             AddAIRequest temp = ((AddAIRequest) obj);
             int num = (robots.keySet()).size();
-            AI bot = new AI(new Difficulty(100, 100), this, games.get(connection));
+            AI bot = new AI(new Difficulty(100, 100), this, games.
+                    get(connection));
             bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers()
                     .put(bot.getPlayerId(), bot);
@@ -470,18 +480,120 @@ public class ServerController
                     otherPlayer.getHintCardsHand().size());
 
             revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
-            RevealCardResponse response 
+            RevealCardResponse response
                     = new RevealCardResponse(card, revealed);
             forwardMessage(response, humans.get(curPlayer));
         }
     }
 
-    private void handlePrivateTip()
+    private void handlePrivateTip(PrivateTip card, Integer playerId,
+            ConnectionToClient connection)
     {
+        // Get the requestor's game
+        Game curGame = games.get(connection);
+        ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
 
+        // List playableCards to return
+        ArrayList<HintCard> playableCards = new ArrayList();
+        List<HintCard> hintCardsHand = opponent.getHintCardsHand();
+        PrivateTipType privateTipType = card.getType();
+
+        for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++)
+        {
+            HintCard curHintCard = hintCardsHand.get(cardInHand);
+            HintCardType curHintType = hintCardsHand.get(cardInHand).
+                    getHintType();
+
+            switch (privateTipType)
+            {
+                case ALL_DESTINATIONS:
+                    if (curHintType == HintCardType.DESTINATION)
+                    {
+                        playableCards.add(curHintCard);
+                    }
+                    break;
+                case ALL_VEHICLES:
+                    if (curHintType == HintCardType.VEHICLE)
+                    {
+                        playableCards.add(curHintCard);
+                    }
+                    break;
+                case ALL_SUSPECTS:
+                    if (curHintType == HintCardType.SUSPECT)
+                    {
+                        playableCards.add(curHintCard);
+                    }
+                    break;
+                case ONE_FEMALE_SUSPECT:
+                    if (curHintType == HintCardType.DESTINATION)
+                    {
+                        if (((SuspectCard) curHintCard).getGender()
+                                == Gender.FEMALE)
+                        {
+                            playableCards.add(curHintCard);
+                        }
+                    }
+                    break;
+                case ONE_NORTHERN_DESTINATION:
+                    if (curHintType == HintCardType.DESTINATION)
+                    {
+                        if (((DestinationCard) curHintCard).getIsNorth())
+                        {
+                            playableCards.add(curHintCard);
+                        }
+
+                    }
+                    break;
+                case ONE_RED_VEHICLE:
+                    if (curHintType == HintCardType.VEHICLE)
+                    {
+                        if (((VehicleCard) curHintCard).getCardColor()
+                                == CardColor.RED)
+                        {
+                            playableCards.add(curHintCard);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        List<Card> revealed = new ArrayList<Card>();
+        Integer randomCard;
+
+        switch (privateTipType)
+        {
+            case ALL_DESTINATIONS:
+                revealed.addAll(playableCards);
+                break;
+            case ALL_VEHICLES:
+                revealed.addAll(playableCards);
+                break;
+            case ALL_SUSPECTS:
+                revealed.addAll(playableCards);
+                break;
+            case ONE_FEMALE_SUSPECT:
+                randomCard = new Random().nextInt(
+                        playableCards.size());
+                revealed.add(playableCards.get(randomCard));
+                break;
+            case ONE_NORTHERN_DESTINATION:
+                randomCard = new Random().nextInt(
+                        playableCards.size());
+                revealed.add(playableCards.get(randomCard));
+                break;
+            case ONE_RED_VEHICLE:
+                randomCard = new Random().nextInt(
+                        playableCards.size());
+                revealed.add(playableCards.get(randomCard));
+                break;
+        }
+
+        // Create a new CardDealResponse
+        RevealCardResponse response = new RevealCardResponse(card, revealed);
+        forwardMessage(response, connection);
     }
 
-    private void handleSnoop(Snoop card, Integer playerId, 
+    private void handleSnoop(Snoop card, Integer playerId,
             ConnectionToClient connection)
     {
         // Get the requestor's game
@@ -493,18 +605,99 @@ public class ServerController
         List<Card> snoopedCards = new ArrayList();
         snoopedCards.add(opponent.hintCardsHand.get(randomCard));
         // Find the player with the given ID
-        RevealCardResponse response 
+        RevealCardResponse response
                 = new RevealCardResponse(card, snoopedCards);
-        
-    }
-
-    private void handleSuggestion()
-    {
+        forwardMessage(response, connection);
 
     }
 
-    private void handleSuperSleuth()
+    private void handleSuperSleuth(SuperSleuth sleuthCard,
+            ConnectionToClient connection)
     {
+        // Get the requestor's game
+        Game curGame = games.get(connection);
+        List<ServerPlayer> opponents = curGame.getServerPlayersList();
+        List<Card> revealedCards = new ArrayList<Card>();
+        // List playableCards to return
+        for (ServerPlayer opponent : opponents)
+        {
+            ArrayList<HintCard> playableCards = new ArrayList();
+            List<HintCard> hintCardsHand = opponent.getHintCardsHand();
+            SuperSleuthType sleuthType = sleuthCard.getType();
+
+            for (int cardInHand = 0; cardInHand < hintCardsHand.size();
+                    cardInHand++)
+            {
+                HintCard curHintCard = hintCardsHand.get(cardInHand);
+                HintCardType curHintType = hintCardsHand.get(cardInHand).
+                        getHintType();
+
+                switch (sleuthType)
+                {
+                    case AIR_VEHICLE:
+                        if (curHintType == HintCardType.VEHICLE)
+                        {
+                            if (((VehicleCard) curHintCard).getIsAir())
+                            {
+                                playableCards.add(curHintCard);
+                            }
+                        }
+                        break;
+                    case BLUE_CARD:
+                        if (curHintType == HintCardType.VEHICLE)
+                        {
+                            if (curHintCard.getCardColor() == CardColor.BLUE)
+                            {
+                                playableCards.add(curHintCard);
+                            }
+                        }
+                        break;
+                    case FEMALE_SUSPECT:
+                        if (curHintType == HintCardType.SUSPECT)
+                        {
+                            if (((SuspectCard) curHintCard).getGender()
+                                    == Gender.FEMALE)
+                            {
+                                playableCards.add(curHintCard);
+                            }
+                        }
+                    case MALE_SUSPECT:
+                        if (curHintType == HintCardType.SUSPECT)
+                        {
+                            if (((SuspectCard) curHintCard).getGender()
+                                    == Gender.MALE)
+                            {
+                                playableCards.add(curHintCard);
+                            }
+                        }
+                        break;
+                    case SOUTHERN_DESTINATION:
+                        if (curHintType == HintCardType.DESTINATION)
+                        {
+                            if (!((DestinationCard) curHintCard).getIsNorth())
+                            {
+                                playableCards.add(curHintCard);
+                            }
+
+                        }
+                    case WESTERN_DESTINATION:
+                        if (curHintType == HintCardType.DESTINATION)
+                        {
+                            if (((DestinationCard) curHintCard).getIsWest())
+                            {
+                                playableCards.add(curHintCard);
+                            }
+                        }
+                        break;
+                }
+            }
+            revealedCards.addAll(playableCards);
+        }
+
+        RevealCardResponse response = new RevealCardResponse(sleuthCard,
+                revealedCards);
+
+        forwardMessage(response, connection);
 
     }
 
@@ -523,20 +716,18 @@ public class ServerController
         }
         else if (card instanceof PrivateTip)
         {
-            handlePrivateTip();
+            PrivateTip privTipCard = (PrivateTip) card;
+            handlePrivateTip(privTipCard, actionReq.getPlayerId(), connection);
         }
         else if (card instanceof Snoop)
         {
             Snoop snoopCard = (Snoop) card;
             handleSnoop(snoopCard, actionReq.getPlayerId(), connection);
         }
-        else if (card instanceof Suggestion)
-        {
-            handleSuggestion();
-        }
         else if (card instanceof SuperSleuth)
         {
-            handleSuperSleuth();
+            SuperSleuth superSleuthCard = (SuperSleuth) card;
+            handleSuperSleuth(superSleuthCard, connection);
         }
     }
 }
