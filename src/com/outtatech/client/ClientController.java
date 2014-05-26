@@ -216,6 +216,10 @@ public class ClientController
         {
             this.reactToActionResponse((ActionResponse) obj);
         }
+        else if (obj instanceof RevealCardRequest)
+        {
+            this.reactToRevealCardRequest((RevealCardRequest) obj);
+        }
         else if (obj instanceof AccusationResponse)
         {
             this.reactToAccusationResponse((AccusationResponse) obj);
