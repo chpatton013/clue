@@ -3,6 +3,7 @@ package com.outtatech.server;
 import com.outtatech.common.*;
 import java.awt.Color;
 import java.util.*;
+import java.util.Random;
 import com.outtatech.client.messaging.*;
 
 /**
@@ -16,6 +17,7 @@ public class AI extends ServerPlayer
 {
     private Difficulty difficulty;
     private ServerController ctrl;
+    private Game game;
 
     /**
      * Construct an AI instance, requires instantiated instances of Difficulty
@@ -24,11 +26,12 @@ public class AI extends ServerPlayer
      * @param difficulty the Difficulty instance to drive the AI
      * @param ctrl the Server Controller instance needing an AI
      */
-    public AI(Difficulty difficulty, ServerController ctrl)
+    public AI(Difficulty difficulty, ServerController ctrl, Game game)
     {
         super();
         this.difficulty = difficulty;
         this.ctrl = ctrl;
+        this.game = game;
     }
 
     /**
@@ -78,7 +81,7 @@ public class AI extends ServerPlayer
      * @param card The card to respond to.
      * @return playableCards The list of cards to show or null if there are no compatible cards found.
      */
-       public ArrayList<HintCard> aiRespond(ActionCard card)
+    public ArrayList<HintCard> aiRespond(ActionCard card)
     { 
         // List playableCards to return
         ArrayList<HintCard> playableCards = new ArrayList();
@@ -105,9 +108,12 @@ public class AI extends ServerPlayer
                        }
                        break;
                    case BLUE_CARD:
-                       if(curHintCard.getCardColor() == CardColor.BLUE) 
+                       if (curHintType == HintCardType.VEHICLE) 
                        {
-                            playableCards.add(curHintCard);
+                            if(curHintCard.getCardColor() == CardColor.BLUE) 
+                            {
+                                 playableCards.add(curHintCard);
+                            }
                        }
                    break;
                    case FEMALE_SUSPECT:
@@ -142,7 +148,7 @@ public class AI extends ServerPlayer
             }
         }
         
-         if (card instanceof PrivateTip)
+        if (card instanceof PrivateTip)
         {
             privateTipCard = (PrivateTip)card;
             PrivateTipType privateTipType = privateTipCard.getType();
@@ -211,37 +217,50 @@ public class AI extends ServerPlayer
     public void aiTurn()
     {
         // If not time to make an accusation, play an action card randomly determined.
+        
+        int index = (int)Math.random() * game.getServerPlayersList().size();
+        Integer playerID = game.getServerPlayersList().get(index).getPlayerId();
+         
         if (!aiMakeAccusation())
         {
             ActionCard cardToPlay = actionCardsHand.get((int)Math.random());
+            
             if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
-                aiMakeSuggestion(((Suggestion)cardToPlay).getType());
+                aiMakeSuggestion(cardToPlay);
+            else if (cardToPlay.getActionType() == ActionCardType.SNOOP || 
+                   cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP )
+                ctrl.reactToRobot(new ActionRequest(cardToPlay, null, playerID), this);
             else
-                ctrl.reactToRobot(cardToPlay, this);     
+                ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);     
         }
 
         ctrl.reactToRobot(new EndTurnRequest(), this);
         
     }
     
-    private void aiMakeSuggestion(SuggestionType suggestionType)
+    private void aiMakeSuggestion(ActionCard card)
     {
-        if (suggestionType == SuggestionType.ANY)
+        SuspectID choice1;
+        VehicleID choice2;
+        DestinationID choice3;
+        
+        if (((Suggestion)card).getType() == SuggestionType.ANY)
         {
-            SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
-            VehicleID choice2 = getVehicleChoice(vehicleCardsSeen);
-            DestinationID choice3 = (getLocationChoice(locationsSeen));
+            choice1 = getSuspectChoice(suspectCardsSeen);
+            choice2 = getVehicleChoice(vehicleCardsSeen);
+            choice3 = (getLocationChoice(locationsSeen));
             
-            //TO DO: call to some suggestion request function? 
-            //TO DO: Swap locations with another player
+            ctrl.reactToRobot(new SuggestionRequest(
+                    new Solution(choice3, choice2, choice1)), this);
+            
         }
-        else if (suggestionType == SuggestionType.CURRENT)
+        else 
         {
-            SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
-            VehicleID choice2 = (getVehicleChoice(vehicleCardsSeen));
-            //TO DO: Determine what current location is
-            //TO DO: call to some suggestion request function?
+            choice1 = getSuspectChoice(suspectCardsSeen);
+            choice2 = (getVehicleChoice(vehicleCardsSeen));
             
+            ctrl.reactToRobot(new SuggestionRequest(
+                    new Solution(this.getLocation(), choice2, choice1)), this);
         }
         
     }
@@ -297,18 +316,18 @@ public class AI extends ServerPlayer
                 locationsSeen.size()/9) / 3;
         // if knowledge < riskiness of AI
         if(knowledge < difficulty.getRiskiness())
-            // 	return false
+            //  return false
             return false;
         // else {
-        // 	for each category {
-        // 		while true {
-        // 			pick random array index
-        // 		    check if flip array bit
-        // 		    if bit at array index still 0
-        // 		    	add card to list
-        // 		    	break
-        // 		}
-        // 	reactToServer(list)
+        //  for each category {
+        //    while true {
+        //      pick random array index
+        //        check if flip array bit
+        //        if bit at array index still 0
+        //          add card to list
+        //          break
+        //    }
+        //  reactToServer(list)
         else {
             SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
             VehicleID choice2 = (getVehicleChoice(vehicleCardsSeen));
