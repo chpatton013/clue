@@ -25,7 +25,7 @@ public class GUIController implements Observer{
     MainGameScreen mainGameScreen;
     
     ClientController clientController;
-    ClientGameState gameState;
+    State gameState;
     
     int imageIndex = 0;
     
@@ -40,7 +40,7 @@ public class GUIController implements Observer{
     
     private CurrentWindow state = CurrentWindow.INTRO;
     
-    public GUIController(ClientController cCtrl, ClientGameState cState){
+    public GUIController(ClientController cCtrl, State cState){
         clientController = cCtrl;
         gameState = cState;
     }
