@@ -2,16 +2,24 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.ConnectionToClient;
 import com.outtatech.client.messaging.*;
+import com.outtatech.common.ActionCard;
 import com.outtatech.common.ActionCardType;
+import com.outtatech.common.AllSnoop;
 import com.outtatech.common.Card;
+import com.outtatech.common.HintCard;
 import com.outtatech.common.Player;
+import com.outtatech.common.PrivateTip;
+import com.outtatech.common.Snoop;
 import com.outtatech.common.Solution;
+import com.outtatech.common.Suggestion;
+import com.outtatech.common.SuperSleuth;
 import com.outtatech.server.messaging.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -50,19 +58,20 @@ public class ServerController
         this.network.setServerController(this);
 
         this.games = new HashMap<ConnectionToClient, Game>();
-        this.players = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
+        this.players
+                = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
         this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
         this.robots = new HashMap<ServerPlayer, AI>();
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
-        
+
         try
         {
             network.listen();
         }
         catch (IOException ex)
         {
-            
+
         }
     }
 
@@ -93,7 +102,7 @@ public class ServerController
         }
         else if (obj instanceof ActionRequest)
         {
-            ActionRequest actionReq = (ActionRequest)obj;
+            ActionRequest actionReq = (ActionRequest) obj;
             handleActionRequest(actionReq, connection);
         }
         /* 
@@ -111,7 +120,7 @@ public class ServerController
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this);
-            
+
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
             // Get the game associated with the lobby
@@ -120,9 +129,9 @@ public class ServerController
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
-             newPlayer.getPlayerId(), lobbyGame.getPlayers()));
+                    newPlayer.getPlayerId(), lobbyGame.getPlayers()));
         }
-        
+
         /* 
          * LobbyJoinRequest respond with LobbyJoinResponse
          * notify all clients.
@@ -134,36 +143,38 @@ public class ServerController
             serverPlayer.setName("xXDragonDildos69Xx");
 
             this.humans.put(serverPlayer, connection);
-            List<ConnectionToClient> cxns = this.getGameClients(lobby.getLobbyId());
+            List<ConnectionToClient> cxns = this.getGameClients(lobby.
+                    getLobbyId());
             cxns.add(this.humans.get(serverPlayer));
 
             Game game = gameIdToGame.get(lobby.getGameId());
             game.addServerPlayer(serverPlayer);
 
-            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.getPlayerId(), game.getPlayers()),
-                  cxns);
+            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.
+                    getPlayerId(), game.getPlayers()),
+                    cxns);
         }
-        
+
         /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
          */
         else if (obj instanceof LobbyCreateRequest)
         {
-            LobbyCreateRequest lcr = (LobbyCreateRequest)obj;
+            LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
             Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
             lobbies.put(game.getGameId(), lobby);
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
-            
+
             //@TODO Only the requesting client will be updated.  Other clients
             //will need to send a lobby discovery response to refresh.
             forwardMessage(new LobbyCreateResponse(lobby), connection);
         }
-        
+
         /**
-         * 
+         *
          */
         else if (obj instanceof GameStartRequest)
         {
@@ -189,8 +200,9 @@ public class ServerController
             bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers().add(bot);
             //update the mapping
-            forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()), 
-                    bot.getPlayerId(), games.get(connection).getPlayers()), connection);
+            forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()),
+                    bot.getPlayerId(), games.get(connection).getPlayers()),
+                    connection);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -217,10 +229,10 @@ public class ServerController
          * Responses are made via the forwardMessage function.
          */
     }
-    
+
     /**
      * Given a game and a message, distributes the message to AI and Players
-     * 
+     *
      * @param game the game that contains the players the msg should be sent to
      * @param msg the message that should be sent to the players in the game
      */
@@ -228,9 +240,9 @@ public class ServerController
     {
         ArrayList<ConnectionToClient> gamePlayers
                 = new ArrayList<ConnectionToClient>();
-        
+
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
-        
+
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
 
@@ -283,7 +295,7 @@ public class ServerController
         }
 
         //Create accusation response
-        AccusationResponse accResp = new AccusationResponse(accusation, 
+        AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()));
 
         //Send to humans
@@ -321,12 +333,12 @@ public class ServerController
 
     public void informAI(Object obj, List<AI> ai)
     {
-        for(AI bot : ai)
+        for (AI bot : ai)
         {
             informAI(obj, ai);
         }
     }
-    
+
     public void informAI(Object obj, AI ai)
     {
 
@@ -364,52 +376,54 @@ public class ServerController
     {
         return humans.containsKey(player);
     }
-    
-    private CopyOnWriteArrayList<ConnectionToClient> getGameClients(Integer gameId)
+
+    private CopyOnWriteArrayList<ConnectionToClient> getGameClients(
+            Integer gameId)
     {
         Game game = gameIdToGame.get(gameId);
-        
+
         return this.players.get(game);
     }
-    
-    public Integer getLobbyId(ConnectionToClient client) 
+
+    public Integer getLobbyId(ConnectionToClient client)
     {
         return games.get(client).getGameId();
     }
-    
+
     /**
      * Using the provided Game instance deal hint cards to the Server Players.
-     * Deal out all HintCards for the Game instance.
-     * Deal out one ActionCard to each player
+     * Deal out all HintCards for the Game instance. Deal out one ActionCard to
+     * each player
+     *
      * @TODO also send out a GameStateResponse??
-     * @param game 
+     * @param game
      */
     private void handleGameStartRequest(Game game)
     {
         ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
-        
+
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayers();
-        
+
         Integer playerCount = gameServerPlayers.size();
 
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
             playerHands.add(new ArrayList<Card>());
         }
-        
+
         //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
             playerHands.get(index % (playerCount - 1)).add(game.popHintCard());
         }
-        
+
         //Add one action card to each hand.
-        for(ArrayList<Card> alc : playerHands)
+        for (ArrayList<Card> alc : playerHands)
         {
             alc.add(game.popActionCard());
         }
-        
+
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
             CardDealResponse msg = new CardDealResponse(playerHands.remove(0));
@@ -424,33 +438,91 @@ public class ServerController
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
-        
-    } 
+
+    }
+
+    private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
+    {
+        for (int playerNum = 0; playerNum < players.size(); playerNum++)
+        {
+            ServerPlayer curPlayer = players.get(playerNum);
+            ServerPlayer otherPlayer;
+            if (!card.getDirection())
+            {
+                if (playerNum == 0)
+                {
+                    otherPlayer = players.get(players.size() - 1);
+                }
+                else
+                {
+                    otherPlayer = players.get(playerNum - 1);
+                }
+            }
+            else
+            {
+                otherPlayer = players.get((playerNum + 1) % players.size());
+            }
+
+            List<HintCard> cards = otherPlayer.getHintCardsHand();
+            List<Card> revealed = new ArrayList<Card>();
+            Integer randomCard = new Random().nextInt(
+                    otherPlayer.getHintCardsHand().size());
+
+            revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
+            RevealCardResponse response 
+                    = new RevealCardResponse(card, revealed);
+            forwardMessage(response, humans.get(curPlayer));
+        }
+    }
+
+    private void handlePrivateTip()
+    {
+
+    }
+
+    private void handleSnoop()
+    {
+
+    }
+
+    private void handleSuggestion()
+    {
+
+    }
+
+    private void handleSuperSleuth()
+    {
+
+    }
 
     private void handleActionRequest(ActionRequest actionReq,
             ConnectionToClient connection)
     {
-        ActionCardType type = actionReq.getActionCard().getActionType();
-        
-        if(type == ActionCardType.ALL_SNOOP)
+        ActionCard card = actionReq.getActionCard();
+        //Get the players game
+        Game game = games.get(connection);
+        List<ServerPlayer> players = game.getServerPlayers();
+
+        if (card instanceof AllSnoop)
         {
-            
+            AllSnoop allSnoopCard = (AllSnoop) card;
+            handleAllSnoop(allSnoopCard, players);
         }
-        else if(type == ActionCardType.PRIVATE_TIP)
+        else if (card instanceof PrivateTip)
         {
-            
+            handlePrivateTip();
         }
-        else if(type == ActionCardType.SNOOP)
+        else if (card instanceof Snoop)
         {
-            
+            handleSnoop();
         }
-        else if(type == ActionCardType.SUGGESTION)
+        else if (card instanceof Suggestion)
         {
-            
+            handleSuggestion();
         }
-        else if(type == ActionCardType.SUPER_SLEUTH)
+        else if (card instanceof SuperSleuth)
         {
-            
+            handleSuperSleuth();
         }
     }
 }

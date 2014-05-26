@@ -15,10 +15,9 @@ import java.util.List;
  *
  * @author jbilous
  */
-public class RevealCardRequest extends ServerResponse
+public class RevealCardResponse extends ServerResponse
 {
 
-    private Integer revealToId;
     private ActionCard actionCard;
     private List<Card> cards;
 
@@ -29,22 +28,11 @@ public class RevealCardRequest extends ServerResponse
      * @param actionCard the card that has triggered this reveal action.
      * @param cards the list of cards that this reveal action may want.
      */
-    public RevealCardRequest(Integer playerId, ActionCard actionCard,
+    public RevealCardResponse(ActionCard actionCard,
           List<Card> cards)
     {
-        this.revealToId = playerId;
         this.actionCard = actionCard;
         this.cards = cards;
-    }
-
-    /**
-     * Returns the id of the player the cards will be revealed to.
-     *
-     * @return the id of the player the cards will be revealed to
-     */
-    public Integer getPlayerId()
-    {
-        return this.revealToId;
     }
 
     /**

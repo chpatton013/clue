@@ -5,7 +5,6 @@
  */
 package com.outtatech.client;
 
-import com.outtatech.client.*;
 import com.outtatech.client.messaging.*;
 import com.outtatech.common.*;
 import com.outtatech.server.*;
@@ -164,7 +163,7 @@ public class ClientController
 
     public void revealCards(List<Card> cards)
     {
-        this.forwardMessage(new RevealCardResponse(cards));
+        this.forwardMessage(new RevealCardsRequest(cards));
     }
 
     /**
@@ -218,9 +217,9 @@ public class ClientController
         {
             this.reactToActionResponse((ActionResponse) obj);
         }
-        else if (obj instanceof RevealCardRequest)
+        else if (obj instanceof RevealCardResponse)
         {
-            this.reactToRevealCardRequest((RevealCardRequest) obj);
+            this.reactToRevealCardRequest((RevealCardResponse) obj);
         }
         else if (obj instanceof AccusationResponse)
         {
@@ -339,7 +338,7 @@ public class ClientController
         // display that player rsp.getPlayerId() played card rsp.getActionCard()
     }
 
-    private void reactToRevealCardRequest(RevealCardRequest rsp)
+    private void reactToRevealCardRequest(RevealCardResponse rsp)
     {
         if (!(this.state instanceof ClientGameState))
         {

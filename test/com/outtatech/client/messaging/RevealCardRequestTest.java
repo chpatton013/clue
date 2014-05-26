@@ -59,7 +59,7 @@ public class RevealCardRequestTest
         list.add(new Card(CardType.HINT));
         list.add(new Card(CardType.ACTION));
         
-        RevealCardRequest instance = new RevealCardRequest(new Integer(5), list);
+        RevealCardsRequest instance = new RevealCardsRequest(new Integer(5), list);
         Integer expResult = new Integer(5);
         Integer result = instance.getPlayerId();
         assertEquals(expResult, result);
@@ -77,7 +77,7 @@ public class RevealCardRequestTest
         list.add(new Card(CardType.HINT));
         list.add(new Card(CardType.ACTION));
         
-        RevealCardRequest instance = new RevealCardRequest(new Integer(4), list);
+        RevealCardsRequest instance = new RevealCardsRequest(new Integer(4), list);
         List<Card> expResult = list;
         List<Card> result = instance.getCards();
         assertEquals(expResult, result);

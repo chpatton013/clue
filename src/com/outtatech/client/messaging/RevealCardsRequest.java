@@ -7,7 +7,7 @@ import java.util.List;
  * Message sent from the client to the server when the client is asked to show
  * one or more of their cards.
  */
-public class RevealCardResponse extends ClientRequest
+public class RevealCardsRequest extends ClientRequest
 {
     private List<Card> cards;
 
@@ -16,7 +16,7 @@ public class RevealCardResponse extends ClientRequest
      *
      * @param cards the cards that will be revealed to the other player.
      */
-    public RevealCardResponse(List<Card> cards)
+    public RevealCardsRequest(List<Card> cards)
     {
         this.cards = cards;
     }
