@@ -160,7 +160,7 @@ public class GUIController implements Observer{
     public void multiplayerSelected() {
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyDiscoveryState()
-        clientController.setState(new ClientLobbyDiscoveryState());
+        clientController.searchForGames();
         
         //populate the GameSelectScreen's text box with the lobbies from the
         //state
