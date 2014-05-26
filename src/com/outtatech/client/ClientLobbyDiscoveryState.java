@@ -31,11 +31,6 @@ public class ClientLobbyDiscoveryState extends State
         this.lobbyList = lobbyList;
     }
 
-    ClientLobbyDiscoveryState()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Get the current list of lobbies associated with the instance of
      * ClientLobbyState.

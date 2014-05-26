@@ -6,6 +6,7 @@ import com.outtatech.common.Card;
 import com.outtatech.common.Player;
 import com.outtatech.common.Solution;
 import com.outtatech.server.messaging.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,13 @@ public class ServerController
         this.robots = new HashMap<ServerPlayer, AI>();
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
+        
+        try {
+            network.listen();
+        }
+        catch (IOException ex) {
+            
+        }
     }
 
     /**
