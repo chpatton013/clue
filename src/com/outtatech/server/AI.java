@@ -211,12 +211,38 @@ public class AI extends ServerPlayer
     public void aiTurn()
     {
         // If not time to make an accusation, play an action card randomly determined.
-        if (!aiMakeAccusation()) 
+        if (!aiMakeAccusation())
         {
-           ctrl.reactToRobot(actionCardsHand.get((int)(Math.random())), this);     
+            ActionCard cardToPlay = actionCardsHand.get((int)Math.random());
+            if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
+                aiMakeSuggestion(((Suggestion)cardToPlay).getType());
+            else
+                ctrl.reactToRobot(cardToPlay, this);     
         }
 
         ctrl.reactToRobot(new EndTurnRequest(), this);
+        
+    }
+    
+    private void aiMakeSuggestion(SuggestionType suggestionType)
+    {
+        if (suggestionType == SuggestionType.ANY)
+        {
+            SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
+            VehicleID choice2 = getVehicleChoice(vehicleCardsSeen);
+            DestinationID choice3 = (getLocationChoice(locationsSeen));
+            
+            //TO DO: call to some suggestion request function? 
+            //TO DO: Swap locations with another player
+        }
+        else if (suggestionType == SuggestionType.CURRENT)
+        {
+            SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
+            VehicleID choice2 = (getVehicleChoice(vehicleCardsSeen));
+            //TO DO: Determine what current location is
+            //TO DO: call to some suggestion request function?
+            
+        }
         
     }
 
