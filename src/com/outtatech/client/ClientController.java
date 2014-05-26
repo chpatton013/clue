@@ -36,12 +36,15 @@ public class ClientController
      */
     public ClientController()
     {
-        this.state = new ClientMenuState();
-        try {
+        this.setState(new ClientMenuState());
+        try
+        {
             this.network = new ClientNetwork("localhost", 55555);
         }
-        catch (IOException ex) {
-            
+        catch (IOException ex)
+        {
+            System.err.println("Unable to connect to server");
+            System.exit(1);
         }
     }
 
