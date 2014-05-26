@@ -6,6 +6,8 @@
 
 package com.outtatech.client;
 
+import com.outtatech.server.Lobby;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -40,9 +42,8 @@ public class GUIController implements Observer{
     
     private CurrentWindow state = CurrentWindow.INTRO;
     
-    public GUIController(ClientController cCtrl, State cState){
+    public GUIController(ClientController cCtrl){
         clientController = cCtrl;
-        gameState = cState;
     }
 
     /**
@@ -66,8 +67,15 @@ public class GUIController implements Observer{
         //check the state
         
         //if state is GAMESELECT
-        //  clear all lobbies
-        //  add each lobby back
+        if(obs instanceof ClientLobbyDiscoveryState) {
+            //  clear all lobbies
+            gameSelectScreen.clearGames();
+            //  add each lobby back
+            List<Lobby> lobList = ((ClientLobbyDiscoveryState)obs).getLobbyList();
+            for(int indx = 0; indx < lobList.size(); indx++) {
+                gameSelectScreen.addGame(lobList.get(indx).getLobbyName(), lobList.get(indx).getLobbyId());
+            }
+        }
         
         //if state is LOBBY
         //  clear all players
