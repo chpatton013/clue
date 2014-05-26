@@ -254,7 +254,7 @@ public class ClientController
                 }
             }
 
-            this.setState(new ClientLobbyState(me, players, this.creator));
+            this.setState(new ClientLobbyState(me, players, this.creator, rsp.getLobby().getLobbyId()));
             this.creator = false;
         }
         else if (!(this.state instanceof ClientLobbyState))

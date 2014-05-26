@@ -7,6 +7,7 @@
 package com.outtatech.client;
 
 import com.outtatech.common.Player;
+import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import java.util.List;
 import java.util.Observable;
@@ -84,6 +85,7 @@ public class GUIController implements Observer{
             lobbyScreen.clearPlayers();
             //  add each player back
             List<Player> playList = ((ClientLobbyState)obs).getPlayers();
+            lobbyScreen.setId(((ClientLobbyState)obs).getId());
             for(int indx = 0; indx < playList.size(); indx++) {
                 lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
             }
@@ -96,25 +98,33 @@ public class GUIController implements Observer{
         }
         
         //if state is MAINGAME
-        //  call mainGameScreen's clearFields method
-        //  add each hand card and location back
-        //  if it is the client's turn, call startTurn and clearGameLog methods
-        //  add any applicable messages to game log through updateGameLog method
-        //  check client controller's reveal flag
-        //
-        //  if set
-        //    add applicable card to revealCardsScreen
-        //    show revealCardsScreen
-        //  
-        //  check clientController's correctAccusation flag
-        //
-        //  if set
-        //    add applicable message to mainGameScreen's game log
-        //  
-        //  check clientController's falseAccusation flag
-        //    
-        //  if set
-        //    add applicable message to mainGameScreen's game log
+        if(obs instanceof ClientGameState) {
+            state = CurrentWindow.MAINGAME;
+        
+            lobbyScreen.setVisible(false);
+            mainGameScreen.setVisible(true);
+            
+            //  call mainGameScreen's clearFields method
+            //  add each hand card and location back
+            //  if it is the client's turn, call startTurn and clearGameLog methods
+            //  add any applicable messages to game log through updateGameLog method
+            //  check client controller's reveal flag
+            //
+            //  if set
+            //    add applicable card to revealCardsScreen
+            //    show revealCardsScreen
+            //  
+            //  check clientController's correctAccusation flag
+            //
+            //  if set
+            //    add applicable message to mainGameScreen's game log
+            //  
+            //  check clientController's falseAccusation flag
+            //    
+            //  if set
+            //    add applicable message to mainGameScreen's game log
+        }
+        
     }
     
     /**
@@ -195,16 +205,6 @@ public class GUIController implements Observer{
         //call Client Controller's setState method with 
         //a parameter of new ClientLobbyState()
         clientController.startMultiPlayerGame("LOBBYGAME!!!");
-        
-        //populate the lobby screen
-        //lobbyScreen.clearPlayers();
-        
-        //Set state to LOBBY
-        state = CurrentWindow.LOBBY;
-        
-        //hide the game select screen and display the lobby screen
-        gameSelectScreen.setVisible(false);
-        lobbyScreen.setVisible(true);
     }
     
     /**
@@ -218,17 +218,15 @@ public class GUIController implements Observer{
     }
     
     public void startGame() {
-        state = CurrentWindow.MAINGAME;
-        
-        lobbyScreen.setVisible(false);
-        mainGameScreen.setVisible(true);
+        clientController.startGame();
     }
     
     /**
      *Notifies client controller that player wants to create an AI player
      */
-    public void createAI() {
+    public void createAI(int lobbyId) {
         //call Client Controller's addAIPlayer method
+        clientController.addAIPlayer(new Difficulty(100, 100), lobbyId);
     }
     
     /**
@@ -239,6 +237,7 @@ public class GUIController implements Observer{
         //call Client Controller kickPlayer method with the id of the selected
         //player
         if(playerId >= 0) {
+            clientController.kickPlayer(playerId);
         }
     }
     

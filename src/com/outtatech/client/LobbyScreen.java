@@ -16,6 +16,8 @@ public class LobbyScreen extends javax.swing.JFrame {
     
     private int[] playerIds = {-1, -1, -1, -1, -1};
     
+    private int id = -1;
+    
     GUIController controller;
 
     /**
@@ -36,6 +38,10 @@ public class LobbyScreen extends javax.swing.JFrame {
         initComponents();
         
         gameStartButton.setEnabled(false);
+    }
+    
+    public void setId(int lobbyId) {
+        id = lobbyId;
     }
     
     /**
@@ -197,7 +203,7 @@ public class LobbyScreen extends javax.swing.JFrame {
 
     private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
         //call controller's createAI method
-        controller.createAI();
+        controller.createAI(id);
     }//GEN-LAST:event_createAIButtonMouseClicked
 
     private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kickPlayerButtonMouseClicked
