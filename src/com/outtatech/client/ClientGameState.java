@@ -154,7 +154,7 @@ public class ClientGameState extends State
     /**
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check, set to false after access.
-     * @return 
+     * @return
      */
     public boolean getRevealStatus()
     {

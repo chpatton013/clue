@@ -83,7 +83,7 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void connectionClosed()
     {
-        // Call OCSF close 
+        // Call OCSF close
     }
 
     /**

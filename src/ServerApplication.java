@@ -5,7 +5,7 @@ import com.outtatech.server.*;
  * @author dmangin
  */
 public class ServerApplication {
-    
+
     /**
      *
      */
@@ -13,7 +13,7 @@ public class ServerApplication {
         ServerNetwork network = new ServerNetwork(55555);
         ServerController server = new ServerController(network);
     }
-    
+
     /**
      *
      * @param args

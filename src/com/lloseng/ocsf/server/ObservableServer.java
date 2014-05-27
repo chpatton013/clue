@@ -124,7 +124,7 @@ public class ObservableServer extends Observable
 
   /**
    * Used to find out if the server is accepting new clients.
-     * @return 
+     * @return
    */
   final public boolean isListening()
   {

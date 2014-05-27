@@ -47,7 +47,7 @@ public class AddAIRequest extends ClientRequest
 
     /**
      * Sets the difficulty of the AI player.
-     * @return 
+     * @return
      */
 
     public Integer getLobbyId()

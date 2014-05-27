@@ -102,7 +102,7 @@ public class ServerController
             ActionRequest actionReq = (ActionRequest) obj;
             handleActionRequest(actionReq, connection);
         }
-        /* 
+        /*
          * AccusationRequest respond with AccusationResponse
          */
         else if (obj instanceof AccusationRequest)
@@ -167,7 +167,7 @@ public class ServerController
                     connection);
         }
 
-        /* 
+        /*
          * LobbyJoinRequest respond with LobbyJoinResponse
          * notify all clients.
          */
@@ -310,7 +310,7 @@ public class ServerController
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
-        // Build a list of human client connections to send 
+        // Build a list of human client connections to send
         // LobbyUpdateResponse to
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {

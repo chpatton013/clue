@@ -171,14 +171,14 @@ public class GUIController implements Observer
             //  if set
             //    add applicable card to revealCardsScreen
             //    show revealCardsScreen
-            //  
+            //
             //  check clientController's correctAccusation flag
             //
             //  if set
             //    add applicable message to mainGameScreen's game log
-            //  
+            //
             //  check clientController's falseAccusation flag
-            //    
+            //
             //  if set
             //    add applicable message to mainGameScreen's game log
             state = CurrentWindow.MAINGAME;
@@ -232,7 +232,7 @@ public class GUIController implements Observer
      */
     public void singlePlayerSelected()
     {
-        //call Client Controller's setState method with 
+        //call Client Controller's setState method with
         //a parameter of new ClientLobbyState()
         clientController.startSinglePlayerGame();
     }
@@ -243,7 +243,7 @@ public class GUIController implements Observer
      */
     public void multiplayerSelected()
     {
-        //call Client Controller's setState method with 
+        //call Client Controller's setState method with
         //a parameter of new ClientLobbyDiscoveryState()
         clientController.searchForGames();
 
@@ -264,7 +264,7 @@ public class GUIController implements Observer
      */
     public void createGame()
     {
-        //call Client Controller's setState method with 
+        //call Client Controller's setState method with
         //a parameter of new ClientLobbyState()
         clientController.startMultiPlayerGame("LOBBYGAME!!!");
     }
@@ -350,8 +350,8 @@ public class GUIController implements Observer
         {
             //check type of card
 
-            //call client controller's requestUse method with an action card of 
-            //type cardType and selected playerId from game window if 
+            //call client controller's requestUse method with an action card of
+            //type cardType and selected playerId from game window if
             //it is a snoop card
         }
     }

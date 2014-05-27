@@ -84,7 +84,7 @@ public class ObservableClient extends Observable
 // ACCESSING METHODS ------------------------------------------------
     /**
      * Used to find out if the client is connnected.
-     * @return 
+     * @return
      */
     final public boolean isConnected()
     {

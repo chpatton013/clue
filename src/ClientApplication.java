@@ -7,7 +7,7 @@ import com.outtatech.common.*;
  * @author dmangin
  */
 public class ClientApplication {
-    
+
     /**
      *
      */
@@ -18,7 +18,7 @@ public class ClientApplication {
         gui.initWindows(gui);
         gui.exitWindow();
     }
-    
+
     /**
      *
      * @param args

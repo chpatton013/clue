@@ -38,7 +38,7 @@ import java.util.*;
 * </ul>
 * The modifications made to this class in version 2.31 are:
 * <ul>
-* <li> The <code>run()</code> method now calls the <code>clientException</code> 
+* <li> The <code>run()</code> method now calls the <code>clientException</code>
 * server callback when an object of unknown class is received from the input stream
 * or when the message handler throw a <code>RuntimeException</code>
 * <li> The <code>clientDisconnected</code> callback might be called after
@@ -158,7 +158,7 @@ public class ConnectionToClient extends Thread
   {
     if (clientSocket == null || output == null)
       throw new SocketException("socket does not exist");
-    
+
     output.reset();
     output.writeObject(msg);
   }
@@ -172,7 +172,7 @@ public class ConnectionToClient extends Thread
    */
   final public void close() throws IOException
   {
-  
+
     readyToStop = true; // Set the flag that tells the thread to stop
     closeAll();
   }
@@ -218,7 +218,7 @@ public class ConnectionToClient extends Thread
    * Based on a hash map.
    *
    * @param infoType   identifies the type of information
-     * @return 
+     * @return
    */
   public Object getInfo(String infoType)
   {
@@ -247,23 +247,23 @@ public class ConnectionToClient extends Thread
       {
         // This block waits until it reads a message from the client
         // and then sends it for handling by the server
-        
+
         try { // Added in version 2.31
-        
+
           // wait to receive an object
           msg = input.readObject();
-                  
+
           if (!readyToStop && handleMessageFromClient(msg)) // Added in version 2.2
           {
             server.receiveMessageFromClient(msg, this);
           }
-          
+
         } catch(ClassNotFoundException ex) { // when an unknown class is received
-        
+
           server.clientException(this, ex);
-          
+
         } catch (RuntimeException ex) { // thrown by handleMessageFromClient or receiveMessageFromClient
-        
+
           server.clientException(this, ex);
         }
       }
@@ -281,7 +281,7 @@ public class ConnectionToClient extends Thread
         server.clientException(this, exception);
       }
     } finally {
-    
+
         server.clientDisconnected(this);   // moved here in version 2.31
     }
   }
@@ -296,7 +296,7 @@ public class ConnectionToClient extends Thread
    * The default implementation simply returns true.
    *
    * @param message   the message sent.
-     * @return 
+     * @return
    */
   protected boolean handleMessageFromClient(Object message)
   {
