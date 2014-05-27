@@ -163,10 +163,10 @@ public class ClientController
         this.forwardMessage(new ActionRequest(actionCard, cards, playerId));
     }
 
-    public void revealCards(List<Card> cards)
-    {
-        this.forwardMessage(new RevealCardsRequest(cards));
-    }
+//    public void revealCards(List<Card> cards)
+//    {
+//        this.forwardMessage(new RevealCardsRequest(cards));
+//    }
 
     /**
      * Called when the client would like to make an accusation during their
