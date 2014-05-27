@@ -19,7 +19,8 @@ public class SuggestionResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Constructs a new SuggestionResponse object
      *
-     * @param correctAccusation whether or not the accusation was correct. method parameter
+     * @param correctAccusation whether or not the accusation was correct. 
+     * method parameter
      */
     public SuggestionResponse(boolean correctAccusation)
     {

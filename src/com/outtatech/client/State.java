@@ -16,7 +16,7 @@ public class State extends Observable
 {
     private String hostname;
     private CopyOnWriteArrayList<Observer> observers
-            = new CopyOnWriteArrayList<Observer>();
+        = new CopyOnWriteArrayList<Observer>();
 
     /**
      * Version-latenightpizzaparty
@@ -73,9 +73,9 @@ public class State extends Observable
     public void addOldStatesObservers(CopyOnWriteArrayList<Observer> observers)
     {
         // Iterate over this set
-        for (Observer o : observers)
+        for (Observer obs : observers)
         {
-            this.addObserver(o);
+            this.addObserver(obs);
         }
     }
 

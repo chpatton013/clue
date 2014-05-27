@@ -88,7 +88,8 @@ public class AI extends ServerPlayer
      * participation.
      *
      * @param card The card to respond to. method parameter
-     * @return playableCards The list of cards to show or null if there are no return value
+     * @return playableCards The list of cards to show or null if there are no
+     * return value
      * compatible cards found.
      */
     public ArrayList<HintCard> aiRespond(ActionCard card)
@@ -185,6 +186,8 @@ public class AI extends ServerPlayer
                             }
                         }
                         break;
+                    default:
+                        break;
                 }
 
             }
@@ -263,6 +266,8 @@ public class AI extends ServerPlayer
                                 playableCards.add(curHintCard);
                             }
                         }
+                        break;
+                    default:
                         break;
                 }
 

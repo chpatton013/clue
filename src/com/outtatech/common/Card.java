@@ -17,7 +17,8 @@ public class Card implements Serializable
      * Version-latenightpizzaparty
      * Constructs a new Card.
      *
-     * @param cardType Describes whether the card is of the type Hint or Action. method parameter
+     * @param cardType Describes whether the card is of the type Hint or Action.
+     * method parameter
      */
     public Card(CardType cardType)
     {

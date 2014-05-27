@@ -41,7 +41,10 @@ public class GUIController implements Observer
         "./images/whiteHouse/",
         "./images/pirate/"
     };
-
+    
+    /**
+     * Version-latenightpizzaparty
+     */
     private enum CurrentWindow
     {
         INTRO, GAMESELECT, LOBBY, MAINGAME
@@ -83,7 +86,11 @@ public class GUIController implements Observer
         accusationScreen = new AccusationScreen(ctrl);
         mainGameScreen = new MainGameScreen(ctrl);
     }
-
+    /**
+     * Version-latenightpizzaparty
+     * @param obs method parameter
+     * @param obj method parameter
+     */
     public void update(Observable obs, Object obj)
     {
         //check the state
@@ -95,8 +102,8 @@ public class GUIController implements Observer
             //  clear all lobbies
             gameSelectScreen.clearGames();
             //  add each lobby back
-            List<Lobby> lobList = ((ClientLobbyDiscoveryState) obs).
-                    getLobbyList();
+            List<Lobby> lobList = 
+                    ((ClientLobbyDiscoveryState) obs).getLobbyList();
             // Iterate over this set
             for (int indx = 0; indx < lobList.size(); indx++)
             {
@@ -120,8 +127,8 @@ public class GUIController implements Observer
             // Iterate over this set
             for (int indx = 0; indx < playList.size(); indx++)
             {
-                lobbyScreen.addPlayer(playMap.
-                        get(((Integer) playList.get(indx))),
+                lobbyScreen.addPlayer(playMap.get((
+                        (Integer) playList.get(indx))),
                         ((Integer) playList.get(indx)), ((Integer) playList.get(
                                 indx)) == curPlayerId);
             }
@@ -169,8 +176,8 @@ public class GUIController implements Observer
 
             //  if it is the client's turn, call startTurn and clearGameLog methods
             isTurn = false;
-            Integer currentActive = ((ClientGameState) obs).
-                    getCurrentActivePlayer();
+            Integer currentActive = 
+                ((ClientGameState) obs).getCurrentActivePlayer();
             // Guard against this
             if (currentActive != null && currentActive == curPlayerId)
             {

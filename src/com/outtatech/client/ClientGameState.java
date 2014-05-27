@@ -128,6 +128,10 @@ public class ClientGameState extends State
      * Getter method for the cards that have been revealed to the client.
      *
      * @return a list that contains cards that have been revealed to the client.
+<<<<<<< HEAD
+=======
+     * return value
+>>>>>>> 7af8a8b0c28bdab833deebdabe18a56bbb0bf199
      */
     public List<Card> getRevealed()
     {
@@ -138,7 +142,12 @@ public class ClientGameState extends State
      * Setter method for the list of cards that have been revealed to the
      * client.
      *
+<<<<<<< HEAD
      * @param revealed the list of cards that have been revealed to the client.
+=======
+     * @param revealed the list of cards that have been revealed to the client. 
+     * method parameter
+>>>>>>> 7af8a8b0c28bdab833deebdabe18a56bbb0bf199
      */
     public void setRevealed(List<Card> revealed)
     {
