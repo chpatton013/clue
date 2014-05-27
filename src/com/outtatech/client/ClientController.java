@@ -239,7 +239,8 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
-        if (this.state instanceof ClientLobbyDiscoveryState)
+        if (this.state instanceof ClientMenuState ||
+                this.state instanceof ClientLobbyDiscoveryState)
         {
             Integer myId = rsp.getPlayerId();
             Map<Integer, String> players = rsp.getPlayers();
@@ -248,14 +249,15 @@ public class ClientController
                     rsp.getLobby().getLobbyId()));
             this.creator = false;
         }
-        else if (!(this.state instanceof ClientLobbyState))
+        else if (this.state instanceof ClientLobbyState)
         {
-            System.err.println("Received LobbyJoinResponse while not in "
-                    + "ClientLobbyDiscoveryState or ClientLobbyState.");
+            ((ClientLobbyState) this.state).setPlayers(rsp.getPlayers());
         }
         else
         {
-            ((ClientLobbyState) this.state).setPlayers(rsp.getPlayers());
+            System.err.println("Received LobbyJoinResponse while not in " +
+                    "ClientMenuState, ClientLobbyDiscoveryState, or " +
+                    "ClientLobbyState.");
         }
     }
 
