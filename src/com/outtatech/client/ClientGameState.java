@@ -92,6 +92,16 @@ public class ClientGameState extends State
     }
     
     /**
+     * Setter method that sets the mapping from destination IDs to player IDs
+     * @param map 
+     */
+    public void setDestToPlayerId(Map<DestinationID, Integer> map)
+    {
+        this.destToPlayerId = map;
+    }
+    
+    
+    /**
      * Sets the players in this game
      * 
      * @param players the players in this game.
@@ -163,6 +173,16 @@ public class ClientGameState extends State
     {
         this.playerID = playerID;
     }
+    
+    /**
+     * Sets this players hand.
+     * 
+     * @param hand 
+     */
+    public void setPlayerHand(List<Card> hand)
+    {
+        this.hand = hand;
+    }
 
     /**
      * Returns an Object representing the players notes.
@@ -172,6 +192,16 @@ public class ClientGameState extends State
     public Object getNotes()
     {
         return notes;
+    }
+    
+    /**
+     * Sets this players notes.
+     * 
+     * @param notes 
+     */
+    public void setNotes(Object notes)
+    {
+        this.notes = notes;
     }
 
     /**
