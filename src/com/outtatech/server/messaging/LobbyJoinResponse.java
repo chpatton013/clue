@@ -7,8 +7,8 @@ package com.outtatech.server.messaging;
 
 import com.outtatech.common.Player;
 import com.outtatech.server.Lobby;
-
 import java.util.List;
+import java.util.Map;
 
 /**
  * Message sent from the server to the client when a new user joins a lobby that
@@ -20,14 +20,14 @@ public class LobbyJoinResponse extends ServerResponse
 {
     private Lobby lobby;
     private final Integer playerId;
-    private final List<Player> players;
+    private final Map<Integer, String> players;
 
     /**
      * Used to respond to a human player request.
      * @param lobby
      * @param player
      */
-    public LobbyJoinResponse(Lobby lobby, Integer playerId, List<Player> players)
+    public LobbyJoinResponse(Lobby lobby, Integer playerId, Map<Integer, String> players)
     {
         this.lobby = lobby;
         this.playerId = playerId;
@@ -58,7 +58,7 @@ public class LobbyJoinResponse extends ServerResponse
      * Get the list of player objects in this lobby.
      * @return
      */
-    public List<Player> getPlayers()
+    public Map<Integer, String> getPlayers()
     {
         return players;
     }
