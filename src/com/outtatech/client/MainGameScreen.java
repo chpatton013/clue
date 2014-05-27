@@ -33,6 +33,8 @@ public class MainGameScreen extends javax.swing.JFrame {
     int selectedPlayer = -1;
     
     GUIController controller;
+    
+    ActionCard[] actionCards = {null, null};
 
     /**
      * Creates new form MainGameScreen
@@ -89,6 +91,8 @@ public class MainGameScreen extends javax.swing.JFrame {
         String image;
         boolean[] filled = {false, false, false, false, false, false, false};
         Card card;
+        actionCards[0] = null;
+        actionCards[1] = null;
         for(int indx = 0; indx < cards.size(); indx++) {
             card = cards.get(indx);
             if(card.getCardType() == CardType.ACTION) {
@@ -99,10 +103,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
                         }
                     }
                     else if(((PrivateTip)card).getType() == PrivateTipType.ALL_SUSPECTS) {
@@ -110,10 +116,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_SUSPECTS);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_SUSPECTS);
                         }
                     }
                     else if(((PrivateTip)card).getType() == PrivateTipType.ALL_VEHICLES) {
@@ -121,10 +129,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_VEHICLES);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_VEHICLES);
                         }
                     }
                     else if(((PrivateTip)card).getType() == PrivateTipType.ONE_FEMALE_SUSPECT) {
@@ -132,10 +142,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
                     }
                     else if(((PrivateTip)card).getType() == PrivateTipType.ONE_NORTHERN_DESTINATION) {
@@ -143,10 +155,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
                     }
                     else if(((PrivateTip)card).getType() == PrivateTipType.ONE_RED_VEHICLE) {
@@ -154,10 +168,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_RED_VEHICLE);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_RED_VEHICLE);
                         }
                     }
                 }
@@ -167,10 +183,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new Suggestion(SuggestionType.ANY);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new Suggestion(SuggestionType.ANY);
                         }
                     }
                     else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
@@ -178,34 +196,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new Suggestion(SuggestionType.CURRENT);
                         }
                         else if(!filled[1]) {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                        }
-                    }
-                }
-                else if(((ActionCard)card).getActionType() == ActionCardType.SUGGESTION) {
-                    if(((Suggestion)card).getType() == SuggestionType.ANY) {
-                        image = "Action-SuggestionAny.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
-                        }
-                    }
-                    else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
-                        image = "Action-SuggestionCurrent.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new Suggestion(SuggestionType.CURRENT);
                         }
                     }
                 }
@@ -214,10 +210,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                     if(!filled[0]) {
                         filled[0] = true;
                         actionImage1.setIcon(new ImageIcon(path + image));
+                        actionCards[0] = new ActionCard(ActionCardType.SNOOP);
                     }
                     else if(!filled[1]) {
                         filled[1] = true;
                         actionImage2.setIcon(new ImageIcon(path + image));
+                        actionCards[1] = new ActionCard(ActionCardType.SNOOP);
                     }
                 }
                 else if(((ActionCard)card).getActionType() == ActionCardType.ALL_SNOOP) {
@@ -225,10 +223,12 @@ public class MainGameScreen extends javax.swing.JFrame {
                     if(!filled[0]) {
                         filled[0] = true;
                         actionImage1.setIcon(new ImageIcon(path + image));
+                        actionCards[0] = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
                     else if(!filled[1]) {
                         filled[1] = true;
                         actionImage2.setIcon(new ImageIcon(path + image));
+                        actionCards[1] = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
                 }
             }
@@ -1022,8 +1022,18 @@ public class MainGameScreen extends javax.swing.JFrame {
         locationImage9.setText("L9");
 
         actionImage1.setText("AC1");
+        actionImage1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                actionImage1MouseClicked(evt);
+            }
+        });
 
         actionImage2.setText("AC2");
+        actionImage2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                actionImage2MouseClicked(evt);
+            }
+        });
 
         hintImage1.setText("HC1");
 
@@ -1261,6 +1271,28 @@ public class MainGameScreen extends javax.swing.JFrame {
         //call controller's exitWindow method
         controller.exitWindow();
     }//GEN-LAST:event_leaveGameButtonMouseClicked
+
+    private void actionImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage1MouseClicked
+        if(actionCards[0] != null) {
+            if(actionCards[0].getActionType() == ActionCardType.SUGGESTION) {
+                
+            }
+            else {
+                controller.playCard(actionCards[0]);
+            }
+        }
+    }//GEN-LAST:event_actionImage1MouseClicked
+
+    private void actionImage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage2MouseClicked
+        if(actionCards[1] != null) {
+            if(actionCards[1].getActionType() == ActionCardType.SUGGESTION) {
+                
+            }
+            else {
+                controller.playCard(actionCards[1]);
+            }
+        }
+    }//GEN-LAST:event_actionImage2MouseClicked
 
     /**
      * @param args the command line arguments

@@ -518,11 +518,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="AC1"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="actionImage1MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="actionImage2">
       <Properties>
         <Property name="text" type="java.lang.String" value="AC2"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="actionImage2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="hintImage1">
       <Properties>
