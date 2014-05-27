@@ -311,6 +311,7 @@ public class GUIController implements Observer{
     
     public void setImageIndex(int indx){
         imageIndex = indx;
+        clientController.triggerChange();
     }
     
     public int getImageIndex() {
