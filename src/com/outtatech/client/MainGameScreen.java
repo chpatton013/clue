@@ -861,9 +861,12 @@ public class MainGameScreen extends javax.swing.JFrame {
      * @param playerName
      * @param playerId
      */
-    public void addPlayer(String playerName, int playerId) {
+    public void addPlayer(String playerName, int playerId, boolean isPlayer) {
         //set player list to current text + playerName
-        playerList.setValueAt(playerName, playerIds.size(), 0);
+        String name = playerName;
+        if(isPlayer)
+            name = name + "(You)";
+        playerList.setValueAt(name, playerIds.size(), 0);
         
         //add player id to playerIds
         playerIds.add(playerId);
