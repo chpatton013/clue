@@ -208,23 +208,7 @@ public class ServerController
             lobbies.put(game.getGameId(), lobby);
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
 
-            ServerPlayer serverPlayer = new ServerPlayer();
-            serverPlayer.setName("single_player_host");
-            this.humans.put(serverPlayer, connection);
-            this.connectionToPlayer.put(connection, serverPlayer);
-            List<ConnectionToClient> cxns = this.getGameClients(
-                    lobby.getLobbyId());
-            cxns.add(this.humans.get(serverPlayer));
-
-            List<Player> players = game.getPlayers();
-            Map<Integer, String> names = new HashMap<Integer, String>();
-            for (Player temp : players)
-            {
-                names.put(temp.getPlayerId(), temp.getName());
-            }
-
-            forwardMessage(new LobbyJoinResponse(lobby,
-                    serverPlayer.getPlayerId(), names), connection);
+            forwardMessage(new LobbyCreateResponse(lobby), connection);
         }
 
         /**
