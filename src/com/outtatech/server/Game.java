@@ -287,12 +287,12 @@ public class Game
         CardColor dc = CardColor.BLUE;
         
         //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.
-        hintCards.add(new SuspectCard(SuspectID.GREEN, dc));
-        hintCards.add(new SuspectCard(SuspectID.MUSTARD, dc));
-        hintCards.add(new SuspectCard(SuspectID.PEACOCK, dc));
-        hintCards.add(new SuspectCard(SuspectID.PLUM, dc));
-        hintCards.add(new SuspectCard(SuspectID.SCARLET, dc));
-        hintCards.add(new SuspectCard(SuspectID.WHITE, dc));
+        hintCards.add(new SuspectCard(SuspectID.GREEN));
+        hintCards.add(new SuspectCard(SuspectID.MUSTARD));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
+        hintCards.add(new SuspectCard(SuspectID.PLUM));
+        hintCards.add(new SuspectCard(SuspectID.SCARLET));
+        hintCards.add(new SuspectCard(SuspectID.WHITE));
         
         hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
         hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
@@ -301,16 +301,16 @@ public class Game
         hintCards.add(new VehicleCard(VehicleID.SEAPLANE, dc));
         hintCards.add(new VehicleCard(VehicleID.TRAIN, dc));
         
-        hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND, dc));
+        hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND));
         hintCards.add(
-                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, dc));
-        hintCards.add(new DestinationCard(DestinationID.HOOVER_DAM, dc));
-        hintCards.add(new DestinationCard(DestinationID.LINCOLN_MEMORIAL, dc));
-        hintCards.add(new DestinationCard(DestinationID.MIAMI_BEACH, dc));
-        hintCards.add(new DestinationCard(DestinationID.MT_RUSHMORE, dc));
-        hintCards.add(new DestinationCard(DestinationID.NIAGRA_FALLS, dc));
-        hintCards.add(new DestinationCard(DestinationID.OLD_FAITHFUL, dc));
-        hintCards.add(new DestinationCard(DestinationID.THE_ALAMO, dc));
+                new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE));
+        hintCards.add(new DestinationCard(DestinationID.HOOVER_DAM));
+        hintCards.add(new DestinationCard(DestinationID.LINCOLN_MEMORIAL));
+        hintCards.add(new DestinationCard(DestinationID.MIAMI_BEACH));
+        hintCards.add(new DestinationCard(DestinationID.MT_RUSHMORE));
+        hintCards.add(new DestinationCard(DestinationID.NIAGRA_FALLS));
+        hintCards.add(new DestinationCard(DestinationID.OLD_FAITHFUL));
+        hintCards.add(new DestinationCard(DestinationID.THE_ALAMO));
         
         Collections.shuffle(hintCards);
         return hintCards;
