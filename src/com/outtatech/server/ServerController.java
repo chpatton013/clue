@@ -127,8 +127,15 @@ public class ServerController
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
+            
+            List<Player> players = lobbyGame.getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player temp : players) {
+                names.put(temp.getPlayerId(), temp.getName());
+            }
+            
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
-                    newPlayer.getPlayerId(), lobbyGame.getPlayers()));
+                    newPlayer.getPlayerId(), names));
         }
 
         /* 
@@ -139,8 +146,8 @@ public class ServerController
         {
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
-            serverPlayer.setName("xXDragonDildos69Xx");
-
+            int num = humans.keySet().size();
+            serverPlayer.setName("xXDragonDildos69Xx" + num);
             this.humans.put(serverPlayer, connection);
             List<ConnectionToClient> cxns = this.getGameClients(lobby.
                     getLobbyId());
@@ -148,9 +155,15 @@ public class ServerController
 
             Game game = gameIdToGame.get(lobby.getGameId());
             game.addServerPlayer(serverPlayer);
-
+            
+            List<Player> players = game.getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player temp : players) {
+                names.put(temp.getPlayerId(), temp.getName());
+            }
+            
             forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.
-                    getPlayerId(), game.getPlayers()),
+                    getPlayerId(), names),
                     cxns);
         }
 
@@ -191,9 +204,16 @@ public class ServerController
             bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers()
                     .put(bot.getPlayerId(), bot);
+            
+            List<Player> players = games.get(connection).getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player play : players) {
+                names.put(play.getPlayerId(), play.getName());
+            }
+            
             //update the mapping
             forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()),
-                    bot.getPlayerId(), games.get(connection).getPlayers()),
+                    bot.getPlayerId(), names),
                     connection);
         }
         /**
@@ -492,7 +512,7 @@ public class ServerController
         //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
-            playerHands.get(index % (playerCount - 1)).add(game.popHintCard());
+            playerHands.get(index % (playerCount)).add(game.popHintCard());
         }
 
         //Add one action card to each hand.

@@ -1,10 +1,11 @@
 package com.outtatech.server;
 
+import com.outtatech.client.messaging.*;
 import com.outtatech.common.*;
+import com.outtatech.server.messaging.*;
 import java.awt.Color;
 import java.util.*;
 import java.util.Random;
-import com.outtatech.client.messaging.*;
 
 /**
  * AI Class can be used to replace a human player. An AI instance will have its
@@ -216,12 +217,7 @@ public class AI extends ServerPlayer
      */
 
     public void aiTurn()
-    {
-        // If not time to make an accusation, play an action card randomly determined.
-        
-        int index = (int)Math.random() * game.getServerPlayersList().size();
-        Integer playerID = game.getServerPlayersList().get(index).getPlayerId();
-         
+    {         
         if (!aiMakeAccusation())
         {
             ActionCard cardToPlay = actionCardsHand.get((int)Math.random());
@@ -230,13 +226,33 @@ public class AI extends ServerPlayer
                 aiMakeSuggestion(cardToPlay);
             else if (cardToPlay.getActionType() == ActionCardType.SNOOP || 
                    cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP )
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null, playerID), this);
+            {
+                ctrl.reactToRobot(new ActionRequest(cardToPlay, null, getRandomPlayerID()), this);
+            }
+               
             else
                 ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);     
         }
 
         ctrl.reactToRobot(new EndTurnRequest(), this);
         
+    }
+    
+    /**
+     * Returns ID of random player in game.
+     * @return playerID ID of random player in game. 
+     */
+    private Integer getRandomPlayerID()
+    {
+        Integer playerID = -1;
+      
+        while (playerID == this.getPlayerId())
+        {
+           int index = (int)Math.random() * game.getServerPlayersList().size();
+           playerID = game.getServerPlayersList().get(index).getPlayerId();
+        }
+        
+      return playerID;
     }
     
     private void aiMakeSuggestion(ActionCard card)
@@ -316,7 +332,7 @@ public class AI extends ServerPlayer
                 vehicleCardsSeen.size()/6 + 
                 locationsSeen.size()/9) / 3;
         // if knowledge < riskiness of AI
-        if(knowledge < difficulty.getRiskiness())
+        if((knowledge * 5) < difficulty.getRiskiness())
             //  return false
             return false;
         // else {
@@ -346,13 +362,13 @@ public class AI extends ServerPlayer
         while(!flag) {
             double choice = Math.random();
             if(choice * (cards.size() + complement.size()) > cards.size()) {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (SuspectID) complement.toArray()[(int)choice - cards.size()];
                 }
             }
             else
             {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (SuspectID) 
                             cards.toArray()[(int)choice - cards.size()];
                 }
@@ -367,14 +383,14 @@ public class AI extends ServerPlayer
         while(!flag) {
             double choice = Math.random();
             if(choice * (cards.size() + complement.size()) > cards.size()) {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (VehicleID) 
                             complement.toArray()[(int)choice - cards.size()];
                 }
             }
             else
             {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (VehicleID) 
                             cards.toArray()[(int)choice - cards.size()];
                 }
@@ -389,14 +405,14 @@ public class AI extends ServerPlayer
         while(!flag) {
             double choice = Math.random();
             if(choice * (cards.size() + complement.size()) > cards.size()) {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (DestinationID) 
                             complement.toArray()[(int)choice - cards.size()];
                 }
             }
             else
             {
-                if(difficulty.getIntelligence() < Math.random()) {
+                if(difficulty.getIntelligence() < Math.random() * 5) {
                     return (DestinationID) 
                             cards.toArray()[(int)choice - cards.size()];
                 }
@@ -405,7 +421,57 @@ public class AI extends ServerPlayer
         return (DestinationID) cards.toArray()[0];
     }
     
-    public void reactToServer(Object obj) {
-        
+    public void reactToServer(Object obj) 
+    {
+        if(obj instanceof AccusationResponse) 
+        {
+            //?
+        }
+        if(obj instanceof ActionResponse) 
+        {
+            ActionResponse card = (ActionResponse)obj;
+            aiRespond(card.getActionCard());
+        }
+        if(obj instanceof CardDealResponse) 
+        {
+            CardDealResponse rsp = (CardDealResponse)obj;
+            for(Card temp : rsp.getCards()) {
+                if(temp.getCardType() == CardType.ACTION)
+                {
+                    actionCardsHand.add((ActionCard)temp);
+                }
+                if(temp.getCardType() == CardType.HINT)
+                {
+                    hintCardsHand.add((HintCard)temp);
+                }
+            }
+        }
+        if(obj instanceof GameStateResponse) 
+        {
+            //?
+        }
+        if(obj instanceof KickPlayerResponse) 
+        {
+            System.out.println("lol dont give a fuck");
+        }
+        if(obj instanceof RevealCardResponse) 
+        {
+            RevealCardResponse rsp = (RevealCardResponse)obj;
+            for(Card temp : rsp.getCards()) 
+            {
+                if(((HintCard)temp).getHintType() == HintCardType.SUSPECT)
+                {
+                    suspectCardsSeen.add(((SuspectCard)temp).getSuspect());
+                }
+                if(((HintCard)temp).getHintType() == HintCardType.VEHICLE)
+                {
+                    vehicleCardsSeen.add(((VehicleCard)temp).getVehicle());
+                }
+                if(((HintCard)temp).getHintType() == HintCardType.DESTINATION)
+                {
+                    locationsSeen.add(((DestinationCard)temp).getDestination());
+                }
+            }
+        }
     }
 }

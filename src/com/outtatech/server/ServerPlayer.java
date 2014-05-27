@@ -72,6 +72,11 @@ public class ServerPlayer implements Player, Serializable
     {
         this.name = name;
     }
+    
+    public String getName()
+    {
+        return this.name;
+    }
 
     /**
      * Gets the notes of this player.

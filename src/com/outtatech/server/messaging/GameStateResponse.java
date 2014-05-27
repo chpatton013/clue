@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.outtatech.server.messaging;
 
 import com.outtatech.common.Player;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Message sent from the server to the client that encapsulates the server's
@@ -20,7 +16,7 @@ public class GameStateResponse extends ServerResponse
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
-    private List<Player> players;
+    private Map<Integer, String> players;
 
     /**
      * Constructs a new GameStateResponse object
@@ -31,7 +27,7 @@ public class GameStateResponse extends ServerResponse
      */
     public GameStateResponse(Integer deckCardCount,
             List<Integer> playerTurnOrder, Integer currentActivePlayer, 
-            List<Player> players)
+            Map<Integer, String> players)
     {
         this.deckCardCount = deckCardCount;
         this.players = players;
@@ -49,7 +45,7 @@ public class GameStateResponse extends ServerResponse
         return deckCardCount;
     }
     
-    public List<Player> getPlayers()
+    public Map<Integer, String> getPlayers()
     {
         return players;
     }

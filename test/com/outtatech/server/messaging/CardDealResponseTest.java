@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.outtatech.server.messaging;
 
 import com.outtatech.common.ActionCard;
@@ -35,9 +29,9 @@ public class CardDealResponseTest
         System.out.println("Testing getCards of CardDealResponse ");
         
         List<Card> list = new ArrayList<Card>();
-        list.add(new DestinationCard(DestinationID.NIAGRA_FALLS, CardColor.RED));
+        list.add(new DestinationCard(DestinationID.NIAGRA_FALLS));
         list.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
-        list.add(new SuspectCard(SuspectID.MUSTARD, CardColor.RED));
+        list.add(new SuspectCard(SuspectID.MUSTARD));
         
         CardDealResponse response = new CardDealResponse(list);
         List<Card> expResult = list;

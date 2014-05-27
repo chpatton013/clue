@@ -18,4 +18,5 @@ public interface Player
      * @return The unique id of the player
      */
     int getPlayerId();
+    String getName();
 }

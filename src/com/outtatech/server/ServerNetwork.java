@@ -114,8 +114,7 @@ public class ServerNetwork extends AbstractServer
       ConnectionToClient client) 
     {
         Integer lobbyId = ctrl.getLobbyId(client);
-        Difficulty difficulty = new Difficulty(Difficulty.DUMBDUMB,
-                Difficulty.CAREFUL);
+        Difficulty difficulty = new Difficulty(3, 3);
         AddAIRequest air = new AddAIRequest(difficulty, lobbyId);
         ctrl.reactToNetwork(air, client);
     }

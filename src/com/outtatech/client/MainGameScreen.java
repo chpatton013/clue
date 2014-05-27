@@ -1,12 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.outtatech.client;
 
+import com.outtatech.common.ActionCard;
+import com.outtatech.common.ActionCardType;
+import com.outtatech.common.Card;
+import com.outtatech.common.CardType;
+import com.outtatech.common.DestinationCard;
+import com.outtatech.common.DestinationID;
+import com.outtatech.common.HintCard;
+import com.outtatech.common.HintCardType;
+import com.outtatech.common.PrivateTip;
+import com.outtatech.common.PrivateTipType;
+import com.outtatech.common.Suggestion;
+import com.outtatech.common.SuggestionType;
+import com.outtatech.common.SuperSleuth;
+import com.outtatech.common.SuperSleuthType;
+import com.outtatech.common.SuspectCard;
+import com.outtatech.common.SuspectID;
+import com.outtatech.common.VehicleCard;
+import com.outtatech.common.VehicleID;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -36,6 +50,701 @@ public class MainGameScreen extends javax.swing.JFrame {
         controller = ctrl;
         
         initComponents();
+        
+        locationImage1.setText("");
+        locationImage2.setText("");
+        locationImage3.setText("");
+        locationImage4.setText("");
+        locationImage5.setText("");
+        locationImage6.setText("");
+        locationImage7.setText("");
+        locationImage8.setText("");
+        locationImage9.setText("");
+        
+        String path = controller.getImagePath();
+        locationImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
+        locationImage2.setIcon(new ImageIcon(path + "Location-2.jpg"));
+        locationImage3.setIcon(new ImageIcon(path + "Location-3.jpg"));
+        locationImage4.setIcon(new ImageIcon(path + "Location-4.jpg"));
+        locationImage5.setIcon(new ImageIcon(path + "Location-5.jpg"));
+        locationImage6.setIcon(new ImageIcon(path + "Location-6.jpg"));
+        locationImage7.setIcon(new ImageIcon(path + "Location-7.jpg"));
+        locationImage8.setIcon(new ImageIcon(path + "Location-8.jpg"));
+        locationImage9.setIcon(new ImageIcon(path + "Location-9.jpg"));
+        
+        actionImage1.setText("");
+        actionImage2.setText("");
+        
+        hintImage1.setText("");
+        hintImage2.setText("");
+        hintImage3.setText("");
+        hintImage4.setText("");
+        hintImage5.setText("");
+        
+        endTurn();
+    }
+    
+    public void updateHand(List<Card> cards) {
+        String path = controller.getImagePath();
+        String image;
+        boolean[] filled = {false, false, false, false, false, false, false};
+        Card card;
+        for(int indx = 0; indx < cards.size(); indx++) {
+            card = cards.get(indx);
+            if(card.getCardType() == CardType.ACTION) {
+                path = "images\\actionCards\\";
+                if(((ActionCard)card).getActionType() == ActionCardType.PRIVATE_TIP) {
+                    if(((PrivateTip)card).getType() == PrivateTipType.ALL_DESTINATIONS) {
+                        image = "Action-PrivateTipAllDestination.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((PrivateTip)card).getType() == PrivateTipType.ALL_SUSPECTS) {
+                        image = "Action-PrivateTipAllSuspect.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((PrivateTip)card).getType() == PrivateTipType.ALL_VEHICLES) {
+                        image = "Action-PrivateTipAllVehicle.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_FEMALE_SUSPECT) {
+                        image = "Action-PrivateTipFemale.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_NORTHERN_DESTINATION) {
+                        image = "Action-PrivateTipNorthern.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_RED_VEHICLE) {
+                        image = "Action-PrivateTipRed.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.SUGGESTION) {
+                    if(((Suggestion)card).getType() == SuggestionType.ANY) {
+                        image = "Action-SuggestionAny.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
+                        image = "Action-SuggestionCurrent.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.SUGGESTION) {
+                    if(((Suggestion)card).getType() == SuggestionType.ANY) {
+                        image = "Action-SuggestionAny.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
+                        image = "Action-SuggestionCurrent.jpg";
+                        if(!filled[0]) {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[1]) {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.SNOOP) {
+                    image = "Action-Snoop.jpg";
+                    if(!filled[0]) {
+                        filled[0] = true;
+                        actionImage1.setIcon(new ImageIcon(path + image));
+                    }
+                    else if(!filled[1]) {
+                        filled[1] = true;
+                        actionImage2.setIcon(new ImageIcon(path + image));
+                    }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.ALL_SNOOP) {
+                    image = "Action-AllSnoop.jpg";
+                    if(!filled[0]) {
+                        filled[0] = true;
+                        actionImage1.setIcon(new ImageIcon(path + image));
+                    }
+                    else if(!filled[1]) {
+                        filled[1] = true;
+                        actionImage2.setIcon(new ImageIcon(path + image));
+                    }
+                }
+            }
+            else if (card.getCardType() == CardType.HINT){
+                if(((HintCard)card).getHintType() == HintCardType.DESTINATION) {
+                    if(((DestinationCard)card).getDestination() == DestinationID.CONEY_ISLAND) {
+                        image = "Location-1.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.GOLDEN_GATE_BRIDGE) {
+                        image = "Location-2.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.HOOVER_DAM) {
+                        image = "Location-3.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.LINCOLN_MEMORIAL) {
+                        image = "Location-4.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.MIAMI_BEACH) {
+                        image = "Location-5.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.MT_RUSHMORE) {
+                        image = "Location-6.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.NIAGRA_FALLS) {
+                        image = "Location-7.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.OLD_FAITHFUL) {
+                        image = "Location-8.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((DestinationCard)card).getDestination() == DestinationID.THE_ALAMO) {
+                        image = "Location-9.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+                else if(((HintCard)card).getHintType() == HintCardType.SUSPECT) {
+                    if(((SuspectCard)card).getSuspect() == SuspectID.GREEN) {
+                        image = "GREEN.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((SuspectCard)card).getSuspect() == SuspectID.MUSTARD) {
+                        image = "MUSTARD.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((SuspectCard)card).getSuspect() == SuspectID.PEACOCK) {
+                        image = "PEACOCK.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((SuspectCard)card).getSuspect() == SuspectID.PLUM) {
+                        image = "PLUM.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((SuspectCard)card).getSuspect() == SuspectID.SCARLET) {
+                        image = "SCARLET.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((SuspectCard)card).getSuspect() == SuspectID.WHITE) {
+                        image = "WHITE.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+                else if(((HintCard)card).getHintType() == HintCardType.VEHICLE) {
+                    if(((VehicleCard)card).getVehicle() == VehicleID.AIRLINER) {
+                        image = "AIRLINER.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((VehicleCard)card).getVehicle() == VehicleID.AUTOMOBILE) {
+                        image = "AUTOMOBILE.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((VehicleCard)card).getVehicle() == VehicleID.HOT_AIR_BALLOON) {
+                        image = "HOTAIRBALLOON.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((VehicleCard)card).getVehicle() == VehicleID.LIMOUSINE) {
+                        image = "LIMOSINE.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((VehicleCard)card).getVehicle() == VehicleID.SEAPLANE) {
+                        image = "SEAPLANE.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                    else if(((VehicleCard)card).getVehicle() == VehicleID.TRAIN) {
+                        image = "TRAIN.jpg";
+                        if(!filled[2]) {
+                            filled[2] = true;
+                            hintImage1.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[3]) {
+                            filled[3] = true;
+                            hintImage2.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[4]) {
+                            filled[4] = true;
+                            hintImage3.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[5]) {
+                            filled[5] = true;
+                            hintImage4.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[6]) {
+                            filled[6] = true;
+                            hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                    }
+                }
+            }
+        }
+        if(!filled[0]) {
+            actionImage1.setIcon(new ImageIcon());
+        }
+        if(!filled[1]) {
+            actionImage2.setIcon(new ImageIcon());
+        }
+        if(!filled[2]) {
+            hintImage1.setIcon(new ImageIcon());
+        }
+        if(!filled[3]) {
+            hintImage2.setIcon(new ImageIcon());
+        }
+        if(!filled[4]) {
+            hintImage3.setIcon(new ImageIcon());
+        }
+        if(!filled[5]) {
+            hintImage4.setIcon(new ImageIcon());
+        }
+        if(!filled[6]) {
+            hintImage5.setIcon(new ImageIcon());
+        }
     }
     
     /**
@@ -62,25 +771,26 @@ public class MainGameScreen extends javax.swing.JFrame {
      */
     public void addPlayer(String playerName, int playerId) {
         //set player list to current text + playerName
+        playerList.setValueAt(playerName, playerIds.size(), 0);
         
         //add player id to playerIds
+        playerIds.add(playerId);
     }
     
     /**
      *Removes a player from the player list
      * @param playerId
      */
-    public void removePlayer(int playerId) {
+    public void clearPlayers() {
         //set player list to current text - playerName
+        playerList.setValueAt("", 0, 0);
+        playerList.setValueAt("", 1, 0);
+        playerList.setValueAt("", 2, 0);
+        playerList.setValueAt("", 3, 0);
+        playerList.setValueAt("", 4, 0);
         
         //remove player id from playerIds
-    }
-    
-    /**
-     *Clears player's hand and all locations 
-     */
-    public void clearFields() {
-        //clears the cards from the hand and removes player locations
+        playerIds.clear();
     }
     
     /**
@@ -128,22 +838,6 @@ public class MainGameScreen extends javax.swing.JFrame {
         instructionsButton = new javax.swing.JButton();
         accuseButton = new javax.swing.JButton();
         endTurnButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        actionCardPanel1 = new javax.swing.JPanel();
-        actionCardPanel2 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         playerList = new javax.swing.JTable();
@@ -171,6 +865,22 @@ public class MainGameScreen extends javax.swing.JFrame {
         jCheckBox20 = new javax.swing.JCheckBox();
         jCheckBox21 = new javax.swing.JCheckBox();
         leaveGameButton = new javax.swing.JButton();
+        locationImage1 = new javax.swing.JLabel();
+        locationImage2 = new javax.swing.JLabel();
+        locationImage3 = new javax.swing.JLabel();
+        locationImage4 = new javax.swing.JLabel();
+        locationImage5 = new javax.swing.JLabel();
+        locationImage6 = new javax.swing.JLabel();
+        locationImage7 = new javax.swing.JLabel();
+        locationImage8 = new javax.swing.JLabel();
+        locationImage9 = new javax.swing.JLabel();
+        actionImage1 = new javax.swing.JLabel();
+        actionImage2 = new javax.swing.JLabel();
+        hintImage1 = new javax.swing.JLabel();
+        hintImage2 = new javax.swing.JLabel();
+        hintImage3 = new javax.swing.JLabel();
+        hintImage4 = new javax.swing.JLabel();
+        hintImage5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,224 +918,6 @@ public class MainGameScreen extends javax.swing.JFrame {
                 endTurnButtonMouseClicked(evt);
             }
         });
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel6.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel7.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel8.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        actionCardPanel1.setPreferredSize(new java.awt.Dimension(70, 100));
-        actionCardPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                actionCardPanel1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout actionCardPanel1Layout = new javax.swing.GroupLayout(actionCardPanel1);
-        actionCardPanel1.setLayout(actionCardPanel1Layout);
-        actionCardPanel1Layout.setHorizontalGroup(
-            actionCardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        actionCardPanel1Layout.setVerticalGroup(
-            actionCardPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        actionCardPanel2.setPreferredSize(new java.awt.Dimension(70, 100));
-        actionCardPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                actionCardPanel2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout actionCardPanel2Layout = new javax.swing.GroupLayout(actionCardPanel2);
-        actionCardPanel2.setLayout(actionCardPanel2Layout);
-        actionCardPanel2Layout.setHorizontalGroup(
-            actionCardPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        actionCardPanel2Layout.setVerticalGroup(
-            actionCardPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel11.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel12.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel13.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel14.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel15.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel16.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jLabel3.setText("Your Hand:");
 
@@ -511,103 +1003,138 @@ public class MainGameScreen extends javax.swing.JFrame {
             }
         });
 
+        locationImage1.setText("L1");
+
+        locationImage2.setText("L2");
+
+        locationImage3.setText("L3");
+
+        locationImage4.setText("L4");
+
+        locationImage5.setText("L5");
+
+        locationImage6.setText("L6");
+
+        locationImage7.setText("L7");
+
+        locationImage8.setText("L8");
+
+        locationImage9.setText("L9");
+
+        actionImage1.setText("AC1");
+
+        actionImage2.setText("AC2");
+
+        hintImage1.setText("HC1");
+
+        hintImage2.setText("HC2");
+
+        hintImage3.setText("HC3");
+
+        hintImage4.setText("HC4");
+
+        hintImage5.setText("HC5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(optionsButton)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(instructionsButton))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(44, 44, 44)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(endTurnButton)
+                                                .addComponent(accuseButton))))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(leaveGameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(actionCardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(actionCardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
+                                .addGap(81, 81, 81)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jCheckBox1)
+                                                            .addComponent(jCheckBox2)
+                                                            .addComponent(jCheckBox3)
+                                                            .addComponent(jCheckBox4)
+                                                            .addComponent(jCheckBox5)
+                                                            .addComponent(jCheckBox6))
+                                                        .addGap(83, 83, 83))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jCheckBox7)
+                                                            .addComponent(jCheckBox8)
+                                                            .addComponent(jCheckBox9)
+                                                            .addComponent(jCheckBox10)
+                                                            .addComponent(jCheckBox11)
+                                                            .addComponent(jCheckBox12))
+                                                        .addGap(68, 68, 68)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jCheckBox21)
+                                                    .addComponent(jCheckBox20)
+                                                    .addComponent(jCheckBox18)
+                                                    .addComponent(jCheckBox17)
+                                                    .addComponent(jCheckBox16)
+                                                    .addComponent(jCheckBox15)
+                                                    .addComponent(jCheckBox14)
+                                                    .addComponent(jCheckBox13)
+                                                    .addComponent(jCheckBox19)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(actionImage1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(actionImage2)))
+                                        .addGap(8, 8, 8)
+                                        .addComponent(hintImage1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hintImage2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hintImage3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hintImage4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hintImage5))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox7)
-                                .addComponent(jCheckBox8)
-                                .addComponent(jCheckBox9)
-                                .addComponent(jCheckBox10)
-                                .addComponent(jCheckBox11)
-                                .addComponent(jCheckBox12))
-                            .addGap(75, 75, 75)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox21)
-                                .addComponent(jCheckBox20)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox1)
-                                .addComponent(jCheckBox2)
-                                .addComponent(jCheckBox3)
-                                .addComponent(jCheckBox4)
-                                .addComponent(jCheckBox5)
-                                .addComponent(jCheckBox6))
-                            .addGap(83, 83, 83)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCheckBox18)
-                                .addComponent(jCheckBox17)
-                                .addComponent(jCheckBox16)
-                                .addComponent(jCheckBox15)
-                                .addComponent(jCheckBox14)
-                                .addComponent(jCheckBox13)
-                                .addComponent(jCheckBox19)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(optionsButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(instructionsButton))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(44, 44, 44)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(endTurnButton)
-                                        .addComponent(accuseButton))))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(leaveGameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap()
+                                .addComponent(locationImage1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(locationImage9)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -628,31 +1155,29 @@ public class MainGameScreen extends javax.swing.JFrame {
                         .addComponent(accuseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(endTurnButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(locationImage1)
+                    .addComponent(locationImage2)
+                    .addComponent(locationImage3)
+                    .addComponent(locationImage4)
+                    .addComponent(locationImage5)
+                    .addComponent(locationImage6)
+                    .addComponent(locationImage7)
+                    .addComponent(locationImage8)
+                    .addComponent(locationImage9))
+                .addGap(91, 91, 91)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actionCardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(actionCardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(actionImage1)
+                    .addComponent(actionImage2)
+                    .addComponent(hintImage1)
+                    .addComponent(hintImage2)
+                    .addComponent(hintImage3)
+                    .addComponent(hintImage4)
+                    .addComponent(hintImage5))
+                .addGap(119, 119, 119)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -728,18 +1253,6 @@ public class MainGameScreen extends javax.swing.JFrame {
         controller.endTurn();
     }//GEN-LAST:event_endTurnButtonMouseClicked
 
-    private void actionCardPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionCardPanel2MouseClicked
-        //call controller's playCard method with actionCardPanel2's cardType
-        
-        //change card image to card back image
-    }//GEN-LAST:event_actionCardPanel2MouseClicked
-
-    private void actionCardPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionCardPanel1MouseClicked
-        //call controller's playCard method with actionCardPanel1's cardType
-        
-        //change card image to card back image
-    }//GEN-LAST:event_actionCardPanel1MouseClicked
-
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
     }//GEN-LAST:event_playerListMouseClicked
@@ -786,10 +1299,15 @@ public class MainGameScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accuseButton;
-    private javax.swing.JPanel actionCardPanel1;
-    private javax.swing.JPanel actionCardPanel2;
+    private javax.swing.JLabel actionImage1;
+    private javax.swing.JLabel actionImage2;
     private javax.swing.JButton endTurnButton;
     private javax.swing.JTextArea gameLog;
+    private javax.swing.JLabel hintImage1;
+    private javax.swing.JLabel hintImage2;
+    private javax.swing.JLabel hintImage3;
+    private javax.swing.JLabel hintImage4;
+    private javax.swing.JLabel hintImage5;
     private javax.swing.JButton instructionsButton;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
@@ -814,25 +1332,20 @@ public class MainGameScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton leaveGameButton;
+    private javax.swing.JLabel locationImage1;
+    private javax.swing.JLabel locationImage2;
+    private javax.swing.JLabel locationImage3;
+    private javax.swing.JLabel locationImage4;
+    private javax.swing.JLabel locationImage5;
+    private javax.swing.JLabel locationImage6;
+    private javax.swing.JLabel locationImage7;
+    private javax.swing.JLabel locationImage8;
+    private javax.swing.JLabel locationImage9;
     private javax.swing.JButton optionsButton;
     private javax.swing.JTable playerList;
     // End of variables declaration//GEN-END:variables

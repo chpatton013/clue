@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.outtatech.client;
 
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
+import com.outtatech.server.ServerPlayer;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,7 +28,9 @@ public class GUIController implements Observer{
     ClientController clientController;
     State gameState;
     
-    int imageIndex = 0;
+    int imageIndex = 0, curPlayerId = -1;
+    
+    boolean isTurn = false;
     
     String[] imagePaths = {
         "images\\greece\\",
@@ -84,11 +83,12 @@ public class GUIController implements Observer{
             //  clear all players
             lobbyScreen.clearPlayers();
             //  add each player back
-            List<Player> playList = ((ClientLobbyState)obs).getPlayers();
+            Map<Integer, String> playMap = ((ClientLobbyState)obs).getPlayers();
+            ArrayList playList = new ArrayList(playMap.keySet());
             lobbyScreen.setId(((ClientLobbyState)obs).getId());
             lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
             for(int indx = 0; indx < playList.size(); indx++) {
-                lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
+                lobbyScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
             }
             //Set state to LOBBY
             state = CurrentWindow.LOBBY;
@@ -100,15 +100,33 @@ public class GUIController implements Observer{
         
         //if state is MAINGAME
         if(obs instanceof ClientGameState) {
-            state = CurrentWindow.MAINGAME;
-        
-            lobbyScreen.setVisible(false);
-            mainGameScreen.setVisible(true);
-            
+            curPlayerId = ((ClientGameState)obs).getPlayerId();
             //  call mainGameScreen's clearFields method
+            mainGameScreen.clearPlayers();
             //  add each hand card and location back
-            //  if it is the client's turn, call startTurn and clearGameLog methods
+            Map<Integer, String> playMap = ((ClientGameState)obs).getPlayers();
+            ArrayList playList = new ArrayList(playMap.keySet());
+            for(int indx = 0; indx < playList.size(); indx++) {
+                mainGameScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
+            }
+            
+            mainGameScreen.updateHand(((ClientGameState)obs).getHand());
+            
             //  add any applicable messages to game log through updateGameLog method
+            String logUpdate = ((ClientGameState)obs).pollGameLog();
+            
+            while(logUpdate != null) {
+                mainGameScreen.updateGameLog(logUpdate);
+                logUpdate = ((ClientGameState)obs).pollGameLog();
+            }
+            
+            //  if it is the client's turn, call startTurn and clearGameLog methods
+            isTurn = false;
+            if(((ClientGameState)obs).getCurrentActivePlayer() == curPlayerId) {
+                mainGameScreen.startTurn();
+                isTurn = true;
+            }
+            
             //  check client controller's reveal flag
             //
             //  if set
@@ -124,6 +142,10 @@ public class GUIController implements Observer{
             //    
             //  if set
             //    add applicable message to mainGameScreen's game log
+            state = CurrentWindow.MAINGAME;
+        
+            lobbyScreen.setVisible(false);
+            mainGameScreen.setVisible(true);
         }
         
     }
@@ -219,7 +241,7 @@ public class GUIController implements Observer{
      */
     public void createAI(int lobbyId) {
         //call Client Controller's addAIPlayer method
-        clientController.addAIPlayer(new Difficulty(100, 100), lobbyId);
+        clientController.addAIPlayer(new Difficulty(5, 5), lobbyId);
     }
     
     /**
@@ -260,11 +282,13 @@ public class GUIController implements Observer{
      * @param cardType
      */
     public void playCard(int cardType) {
-        //check type of card
-        
-        //call client controller's requestUse method with an action card of 
-        //type cardType and selected playerId from game window if 
-        //it is a snoop card
+        if(isTurn) {
+            //check type of card
+
+            //call client controller's requestUse method with an action card of 
+            //type cardType and selected playerId from game window if 
+            //it is a snoop card
+        }
     }
     
     /**
