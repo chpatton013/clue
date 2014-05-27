@@ -16,7 +16,6 @@ import com.outtatech.common.HintCard;
 import com.outtatech.common.HintCardType;
 import com.outtatech.common.PrivateTip;
 import com.outtatech.common.PrivateTipType;
-import com.outtatech.common.Snoop;
 import com.outtatech.common.Suggestion;
 import com.outtatech.common.SuggestionType;
 import com.outtatech.common.SuperSleuth;
