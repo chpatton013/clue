@@ -73,6 +73,11 @@ public class ClientController
             this.state = newState;
         }
     }
+    
+    private void triggerChange()
+    {
+        this.state.triggerChange();
+    }
 
     /**
      * Start the single player game mode.
