@@ -229,8 +229,6 @@ public class ServerController
             lobbies.put(game.getGameId(), lobby);
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
 
-            //@TODO Only the requesting client will be updated.  Other clients
-            //will need to send a lobby discovery response to refresh.
             // Iterate over this set
             forwardMessage(new LobbyCreateResponse(lobby), connection);
         }

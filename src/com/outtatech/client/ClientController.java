@@ -15,8 +15,7 @@ import java.util.Map;
  * facilitates sending requests to the Networking classes, and reacts to
  * responses received from the Networking classes.
  *
- * @author bschache TODO: make a notification class to send to the GUI contains
- * message triggers display of message and loading animation
+ * @author bschache
  * @author jbilous added accusation methods
  */
 public class ClientController
@@ -395,7 +394,6 @@ public class ClientController
         if (type == ActionCardType.SUGGESTION)
         {
             List<Card> cards = rsp.getCards();
-            // TODO: GUI
             // tell GUI to present cards
         }
         // Otherwise...
@@ -421,14 +419,12 @@ public class ClientController
             Collections.shuffle(hints);
             Card card = hints.get(0);
 
-            // TODO: GUI
             // tell GUI card was shown to user rsp.getPlayerId()
         }
         // Otherwise...
         else if (type == ActionCardType.SUPER_SLEUTH)
         {
             // get condition from this card
-            // TODO: GUI
             // prompt GUI to present user with choice of cards that match
             //  condition
         }
@@ -436,7 +432,6 @@ public class ClientController
         else if (type == ActionCardType.PRIVATE_TIP)
         {
             // get condition from this card
-            // TODO: GUI
             // prompt GUI to present user with choice of cards that match
             //  condition
         }
@@ -453,14 +448,12 @@ public class ClientController
             if (rsp.getCorrectAccusation())
             {
                 // you win!
-                // TODO: GUI
                 // show correct solution
             }
             // Otherwise...
             else
             {
                 // you lose! you get nothing! good day sir!
-                // TODO: GUI
                 // show wrong solution
                 // remove from game
             }
@@ -472,14 +465,12 @@ public class ClientController
         if (rsp.getCorrectAccusation())
         {
             // you lose! you get nothing! good day sir!
-            // TODO: GUI
             // show correct solution
             // give option to leave game
         }
         // Otherwise...
         else
         {
-            // TODO: GUI
             // show wrong solution
         }
     }

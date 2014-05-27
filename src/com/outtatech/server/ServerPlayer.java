@@ -9,7 +9,7 @@ import java.util.Random;
 import java.io.Serializable;
 
 /**
- * The ServerPlayer class represents a player in a game... TODO!
+ * The ServerPlayer class represents a player in a game.
  *
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
