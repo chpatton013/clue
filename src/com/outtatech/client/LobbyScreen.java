@@ -61,6 +61,7 @@ public class LobbyScreen extends javax.swing.JFrame
     {
         //set player list text to current text + playerName + "waiting..."
         String name = playerName;
+        // Guard against this
         if (isPlayer)
         {
             name = name + "(You)";
@@ -82,6 +83,7 @@ public class LobbyScreen extends javax.swing.JFrame
     {
         createAIButton.setEnabled(isLeader);
         kickPlayerButton.setEnabled(isLeader);
+        // Guard against this
         if (numPlayers >= 3)
         {
             gameStartButton.setEnabled(isLeader);
@@ -222,6 +224,7 @@ public class LobbyScreen extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameStartButtonMouseClicked
+        // Guard against this
         if (gameStartButton.isEnabled())
         {
             //call controller's startGame method
@@ -230,6 +233,7 @@ public class LobbyScreen extends javax.swing.JFrame
     }//GEN-LAST:event_gameStartButtonMouseClicked
 
     private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
+        // Guard against this
         if (createAIButton.isEnabled())
         {
             //call controller's createAI method
@@ -241,6 +245,7 @@ public class LobbyScreen extends javax.swing.JFrame
         //call controller's kickPlayer method with the selected player's id
         int indx = playerList.getSelectedRow();
 
+        // Guard against this
         if (indx >= 0 && kickPlayerButton.isEnabled())
         {
             controller.kickPlayer(playerIds[indx]);
@@ -262,11 +267,14 @@ public class LobbyScreen extends javax.swing.JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+        // Just in case...
         try
         {
+            // Iterate over this set
             for (javax.swing.UIManager.LookAndFeelInfo info
                     : javax.swing.UIManager.getInstalledLookAndFeels())
             {
+                // Guard against this
                 if ("Nimbus".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

@@ -23,6 +23,7 @@ public class DestinationCard extends HintCard
         super(HintCardType.DESTINATION);
         this.destination = destination;
 
+        // Guard against this
         if (this.destination == DestinationID.NIAGRA_FALLS || this.destination
                 == DestinationID.CONEY_ISLAND || this.destination
                 == DestinationID.MT_RUSHMORE || this.destination
@@ -31,11 +32,13 @@ public class DestinationCard extends HintCard
             north = true;
         }
 
+        // Otherwise...
         else
         {
             north = false;
         }
 
+        // Guard against this
         if (this.destination == DestinationID.MT_RUSHMORE || this.destination
                 == DestinationID.OLD_FAITHFUL || this.destination
                 == DestinationID.GOLDEN_GATE_BRIDGE || this.destination
@@ -45,6 +48,7 @@ public class DestinationCard extends HintCard
             west = true;
         }
 
+        // Otherwise...
         else
         {
             west = false;

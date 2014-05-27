@@ -117,19 +117,24 @@ public class MainGameScreen extends javax.swing.JFrame
         Card card;
         actionCards[0] = null;
         actionCards[1] = null;
+        // Iterate over this set
         for (int indx = 0; indx < cards.size(); indx++)
         {
             card = cards.get(indx);
+            // Guard against this
             if (card.getCardType() == CardType.ACTION)
             {
                 path = "./images/actionCards/";
+                // Guard against this
                 if (((ActionCard) card).getActionType()
                         == ActionCardType.PRIVATE_TIP)
                 {
+                    // Guard against this
                     if (((PrivateTip) card).getType()
                             == PrivateTipType.ALL_DESTINATIONS)
                     {
                         image = "Action-PrivateTipAllDestination.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -137,6 +142,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ALL_DESTINATIONS);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -145,10 +151,12 @@ public class MainGameScreen extends javax.swing.JFrame
                                     PrivateTipType.ALL_DESTINATIONS);
                         }
                     }
+                    // Otherwise...
                     else if (((PrivateTip) card).getType()
                             == PrivateTipType.ALL_SUSPECTS)
                     {
                         image = "Action-PrivateTipAllSuspect.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -156,6 +164,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ALL_SUSPECTS);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -164,10 +173,12 @@ public class MainGameScreen extends javax.swing.JFrame
                                     PrivateTipType.ALL_SUSPECTS);
                         }
                     }
+                    // Otherwise...
                     else if (((PrivateTip) card).getType()
                             == PrivateTipType.ALL_VEHICLES)
                     {
                         image = "Action-PrivateTipAllVehicle.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -175,6 +186,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ALL_VEHICLES);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -183,10 +195,12 @@ public class MainGameScreen extends javax.swing.JFrame
                                     PrivateTipType.ALL_VEHICLES);
                         }
                     }
+                    // Otherwise...
                     else if (((PrivateTip) card).getType()
                             == PrivateTipType.ONE_FEMALE_SUSPECT)
                     {
                         image = "Action-PrivateTipFemale.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -194,6 +208,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -202,10 +217,12 @@ public class MainGameScreen extends javax.swing.JFrame
                                     PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
                     }
+                    // Otherwise...
                     else if (((PrivateTip) card).getType()
                             == PrivateTipType.ONE_NORTHERN_DESTINATION)
                     {
                         image = "Action-PrivateTipNorthern.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -213,6 +230,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -221,10 +239,12 @@ public class MainGameScreen extends javax.swing.JFrame
                                     PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
                     }
+                    // Otherwise...
                     else if (((PrivateTip) card).getType()
                             == PrivateTipType.ONE_RED_VEHICLE)
                     {
                         image = "Action-PrivateTipRed.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -232,6 +252,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new PrivateTip(
                                     PrivateTipType.ONE_RED_VEHICLE);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -241,18 +262,22 @@ public class MainGameScreen extends javax.swing.JFrame
                         }
                     }
                 }
+                // Otherwise...
                 else if (((ActionCard) card).getActionType()
                         == ActionCardType.SUGGESTION)
                 {
+                    // Guard against this
                     if (((Suggestion) card).getType() == SuggestionType.ANY)
                     {
                         image = "Action-SuggestionAny.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
                             actionCards[0] = new Suggestion(SuggestionType.ANY);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -260,10 +285,12 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[1] = new Suggestion(SuggestionType.ANY);
                         }
                     }
+                    // Otherwise...
                     else if (((Suggestion) card).getType()
                             == SuggestionType.CURRENT)
                     {
                         image = "Action-SuggestionCurrent.jpg";
+                        // Guard against this
                         if (!filled[0])
                         {
                             filled[0] = true;
@@ -271,6 +298,7 @@ public class MainGameScreen extends javax.swing.JFrame
                             actionCards[0] = new Suggestion(
                                     SuggestionType.CURRENT);
                         }
+                        // Otherwise...
                         else if (!filled[1])
                         {
                             filled[1] = true;
@@ -280,16 +308,19 @@ public class MainGameScreen extends javax.swing.JFrame
                         }
                     }
                 }
+                // Otherwise...
                 else if (((ActionCard) card).getActionType()
                         == ActionCardType.SNOOP)
                 {
                     image = "Action-Snoop.jpg";
+                    // Guard against this
                     if (!filled[0])
                     {
                         filled[0] = true;
                         actionImage1.setIcon(new ImageIcon(path + image));
                         actionCards[0] = new ActionCard(ActionCardType.SNOOP);
                     }
+                    // Otherwise...
                     else if (!filled[1])
                     {
                         filled[1] = true;
@@ -297,10 +328,12 @@ public class MainGameScreen extends javax.swing.JFrame
                         actionCards[1] = new ActionCard(ActionCardType.SNOOP);
                     }
                 }
+                // Otherwise...
                 else if (((ActionCard) card).getActionType()
                         == ActionCardType.ALL_SNOOP)
                 {
                     image = "Action-AllSnoop.jpg";
+                    // Guard against this
                     if (!filled[0])
                     {
                         filled[0] = true;
@@ -308,6 +341,7 @@ public class MainGameScreen extends javax.swing.JFrame
                         actionCards[0]
                                 = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
+                    // Otherwise...
                     else if (!filled[1])
                     {
                         filled[1] = true;
@@ -317,319 +351,384 @@ public class MainGameScreen extends javax.swing.JFrame
                     }
                 }
             }
+            // Otherwise...
             else if (card.getCardType() == CardType.HINT)
             {
+                // Guard against this
                 if (((HintCard) card).getHintType() == HintCardType.DESTINATION)
                 {
+                    // Guard against this
                     if (((DestinationCard) card).getDestination()
                             == DestinationID.CONEY_ISLAND)
                     {
                         image = "Location-1.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.GOLDEN_GATE_BRIDGE)
                     {
                         image = "Location-2.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.HOOVER_DAM)
                     {
                         image = "Location-3.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.LINCOLN_MEMORIAL)
                     {
                         image = "Location-4.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.MIAMI_BEACH)
                     {
                         image = "Location-5.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.MT_RUSHMORE)
                     {
                         image = "Location-6.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.NIAGRA_FALLS)
                     {
                         image = "Location-7.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.OLD_FAITHFUL)
                     {
                         image = "Location-8.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((DestinationCard) card).getDestination()
                             == DestinationID.THE_ALAMO)
                     {
                         image = "Location-9.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
@@ -637,210 +736,253 @@ public class MainGameScreen extends javax.swing.JFrame
                         }
                     }
                 }
+                // Otherwise...
                 else if (((HintCard) card).getHintType() == HintCardType.SUSPECT)
                 {
+                    // Guard against this
                     if (((SuspectCard) card).getSuspect() == SuspectID.GREEN)
                     {
                         image = "GREEN.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((SuspectCard) card).getSuspect()
                             == SuspectID.MUSTARD)
                     {
                         image = "MUSTARD.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((SuspectCard) card).getSuspect()
                             == SuspectID.PEACOCK)
                     {
                         image = "PEACOCK.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((SuspectCard) card).getSuspect() == SuspectID.PLUM)
                     {
                         image = "PLUM.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((SuspectCard) card).getSuspect()
                             == SuspectID.SCARLET)
                     {
                         image = "SCARLET.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((SuspectCard) card).getSuspect()
                             == SuspectID.WHITE)
                     {
                         image = "WHITE.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
@@ -848,211 +990,254 @@ public class MainGameScreen extends javax.swing.JFrame
                         }
                     }
                 }
+                // Otherwise...
                 else if (((HintCard) card).getHintType() == HintCardType.VEHICLE)
                 {
+                    // Guard against this
                     if (((VehicleCard) card).getVehicle() == VehicleID.AIRLINER)
                     {
                         image = "AIRLINER.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((VehicleCard) card).getVehicle()
                             == VehicleID.AUTOMOBILE)
                     {
                         image = "AUTOMOBILE.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((VehicleCard) card).getVehicle()
                             == VehicleID.HOT_AIR_BALLOON)
                     {
                         image = "HOTAIRBALLOON.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((VehicleCard) card).getVehicle()
                             == VehicleID.LIMOUSINE)
                     {
                         image = "LIMOSINE.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((VehicleCard) card).getVehicle()
                             == VehicleID.SEAPLANE)
                     {
                         image = "SEAPLANE.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
+                    // Otherwise...
                     else if (((VehicleCard) card).getVehicle()
                             == VehicleID.TRAIN)
                     {
                         image = "TRAIN.jpg";
+                        // Guard against this
                         if (!filled[2])
                         {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[3])
                         {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[4])
                         {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[5])
                         {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[6])
                         {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        // Otherwise...
                         else if (!filled[7])
                         {
                             filled[7] = true;
@@ -1062,34 +1247,42 @@ public class MainGameScreen extends javax.swing.JFrame
                 }
             }
         }
+        // Guard against this
         if (!filled[0])
         {
             actionImage1.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[1])
         {
             actionImage2.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[2])
         {
             hintImage1.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[3])
         {
             hintImage2.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[4])
         {
             hintImage3.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[5])
         {
             hintImage4.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[6])
         {
             hintImage5.setIcon(new ImageIcon());
         }
+        // Guard against this
         if (!filled[7])
         {
             hintImage6.setIcon(new ImageIcon());
@@ -1127,6 +1320,7 @@ public class MainGameScreen extends javax.swing.JFrame
     {
         //set player list to current text + playerName
         String name = playerName;
+        // Guard against this
         if (isPlayer)
         {
             name = name + "(You)";
@@ -1623,6 +1817,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's accuse method
+        // Guard against this
         if (accuseButton.isEnabled())
         {
             controller.accuse();
@@ -1630,6 +1825,7 @@ public class MainGameScreen extends javax.swing.JFrame
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMouseClicked
+        // Guard against this
         if (endTurnButton.isEnabled())
         {
             //call controller's endTurn method
@@ -1650,12 +1846,15 @@ public class MainGameScreen extends javax.swing.JFrame
     }//GEN-LAST:event_leaveGameButtonMouseClicked
 
     private void actionImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage1MouseClicked
+        // Guard against this
         if (actionCards[0] != null)
         {
+            // Guard against this
             if (actionCards[0].getActionType() == ActionCardType.SUGGESTION)
             {
 
             }
+            // Otherwise...
             else
             {
                 controller.playCard(actionCards[0]);
@@ -1664,12 +1863,15 @@ public class MainGameScreen extends javax.swing.JFrame
     }//GEN-LAST:event_actionImage1MouseClicked
 
     private void actionImage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage2MouseClicked
+        // Guard against this
         if (actionCards[1] != null)
         {
+            // Guard against this
             if (actionCards[1].getActionType() == ActionCardType.SUGGESTION)
             {
 
             }
+            // Otherwise...
             else
             {
                 controller.playCard(actionCards[1]);
@@ -1687,11 +1889,14 @@ public class MainGameScreen extends javax.swing.JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+        // Just in case...
         try
         {
+            // Iterate over this set
             for (javax.swing.UIManager.LookAndFeelInfo info
                     : javax.swing.UIManager.getInstalledLookAndFeels())
             {
+                // Guard against this
                 if ("Nimbus".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

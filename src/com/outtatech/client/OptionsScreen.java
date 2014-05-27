@@ -173,6 +173,7 @@ public class OptionsScreen extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void greeceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greeceButtonActionPerformed
+        // Guard against this
         if (greeceButton.isSelected())
         {
             updateCards(0);
@@ -184,14 +185,17 @@ public class OptionsScreen extends javax.swing.JFrame
     }//GEN-LAST:event_closeButtonMouseClicked
 
     private void applyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applyButtonMouseClicked
+        // Guard against this
         if (greeceButton.isSelected())
         {
             controller.setImageIndex(0);
         }
+        // Otherwise...
         else if (whiteHouseButton.isSelected())
         {
             controller.setImageIndex(1);
         }
+        // Otherwise...
         else
         {
             controller.setImageIndex(2);
@@ -201,6 +205,7 @@ public class OptionsScreen extends javax.swing.JFrame
     }//GEN-LAST:event_applyButtonMouseClicked
 
     private void whiteHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteHouseButtonActionPerformed
+        // Guard against this
         if (whiteHouseButton.isSelected())
         {
             updateCards(1);
@@ -208,6 +213,7 @@ public class OptionsScreen extends javax.swing.JFrame
     }//GEN-LAST:event_whiteHouseButtonActionPerformed
 
     private void pirateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pirateButtonActionPerformed
+        // Guard against this
         if (pirateButton.isSelected())
         {
             updateCards(2);
@@ -228,11 +234,14 @@ public class OptionsScreen extends javax.swing.JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+        // Just in case...
         try
         {
+            // Iterate over this set
             for (javax.swing.UIManager.LookAndFeelInfo info
                     : javax.swing.UIManager.getInstalledLookAndFeels())
             {
+                // Guard against this
                 if ("Nimbus".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

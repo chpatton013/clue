@@ -32,6 +32,7 @@ public class ClientController
     public ClientController()
     {
         this.setState(new ClientMenuState());
+        // Just in case...
         try
         {
             this.network = new ClientNetwork("localhost", 55555);
@@ -62,12 +63,14 @@ public class ClientController
      */
     public void setState(State newState)
     {
+        // Guard against this
         if (this.state != null)
         {
             newState.addOldStatesObservers(this.state.getObservers());
             this.state = newState;
             this.state.triggerChange();
         }
+        // Otherwise...
         else
         {
             this.state = newState;
@@ -199,30 +202,37 @@ public class ClientController
      */
     public void reactToMessage(ServerResponse obj)
     {
+        // Guard against this
         if (obj instanceof LobbyDiscoveryResponse)
         {
             this.reactToLobbyDiscoveryResponse((LobbyDiscoveryResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof LobbyCreateResponse)
         {
             this.reactToLobbyCreateResponse((LobbyCreateResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof LobbyJoinResponse)
         {
             this.reactToLobbyJoinResponse((LobbyJoinResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof LobbyLeaveResponse)
         {
             this.reactToLobbyLeaveResponse((LobbyLeaveResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof KickPlayerResponse)
         {
             this.reactToKickPlayerResponse((KickPlayerResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof GameStateResponse)
         {
             this.reactToGameStateResponse((GameStateResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof CardDealResponse)
         {
             this.reactToCardDealResponse((CardDealResponse) obj);
@@ -231,10 +241,12 @@ public class ClientController
 //        {
 //            this.reactToActionResponse((ActionResponse) obj);
 //        }
+        // Otherwise...
         else if (obj instanceof RevealCardResponse)
         {
             this.reactToRevealCardRequest((RevealCardResponse) obj);
         }
+        // Otherwise...
         else if (obj instanceof AccusationResponse)
         {
             this.reactToAccusationResponse((AccusationResponse) obj);
@@ -254,6 +266,7 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
+        // Guard against this
         if (this.state instanceof ClientMenuState
                 || this.state instanceof ClientLobbyDiscoveryState)
         {
@@ -264,10 +277,12 @@ public class ClientController
                     rsp.getLobby().getLobbyId()));
             this.creator = false;
         }
+        // Otherwise...
         else if (this.state instanceof ClientLobbyState)
         {
             ((ClientLobbyState) this.state).setPlayers(rsp.getPlayers());
         }
+        // Otherwise...
         else
         {
             System.err.println("Received LobbyJoinResponse while not in "
@@ -278,6 +293,7 @@ public class ClientController
 
     private void reactToLobbyLeaveResponse(LobbyLeaveResponse rsp)
     {
+        // Guard against this
         if (!(this.state instanceof ClientLobbyState))
         {
             System.err.println("Received LobbyLeaveResponse while not in "
@@ -290,6 +306,7 @@ public class ClientController
 
     private void reactToKickPlayerResponse(KickPlayerResponse rsp)
     {
+        // Guard against this
         if (!(this.state instanceof ClientLobbyState))
         {
             System.err.println("Received KickPlayerResponse while not in "
@@ -302,6 +319,7 @@ public class ClientController
 
     private void reactToGameStateResponse(GameStateResponse rsp)
     {
+        // Guard against this
         if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received GameStateResponse while not in "
@@ -319,6 +337,7 @@ public class ClientController
 
     private void reactToCardDealResponse(CardDealResponse rsp)
     {
+        // Guard against this
         if (this.state instanceof ClientLobbyState)
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
@@ -330,11 +349,13 @@ public class ClientController
 
             this.forwardMessage(new GameStateRequest());
         }
+        // Otherwise...
         else if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received CardDealResponse while not in "
                     + "ClientGameState.");
         }
+        // Otherwise...
         else
         {
             ((ClientGameState) this.state).getHand().addAll(rsp.getCards());
@@ -359,6 +380,7 @@ public class ClientController
 //    }
     private void reactToRevealCardRequest(RevealCardResponse rsp)
     {
+        // Guard against this
         if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received RevealCardRequest while not in "
@@ -369,23 +391,28 @@ public class ClientController
         ClientGameState state = (ClientGameState) this.state;
 
         ActionCardType type = rsp.getActionCard().getActionType();
+        // Guard against this
         if (type == ActionCardType.SUGGESTION)
         {
             List<Card> cards = rsp.getCards();
             // TODO: GUI
             // tell GUI to present cards
         }
+        // Otherwise...
         else if (type == ActionCardType.SNOOP || type
                 == ActionCardType.ALL_SNOOP)
         {
             List<Card> hints = new ArrayList<Card>(state.getHand());
             int index = 0;
+            // Iterate until false
             while (index < hints.size())
             {
+                // Guard against this
                 if (hints.get(index) instanceof ActionCard)
                 {
                     hints.remove(index);
                 }
+                // Otherwise...
                 else
                 {
                     ++index;
@@ -397,6 +424,7 @@ public class ClientController
             // TODO: GUI
             // tell GUI card was shown to user rsp.getPlayerId()
         }
+        // Otherwise...
         else if (type == ActionCardType.SUPER_SLEUTH)
         {
             // get condition from this card
@@ -404,6 +432,7 @@ public class ClientController
             // prompt GUI to present user with choice of cards that match
             //  condition
         }
+        // Otherwise...
         else if (type == ActionCardType.PRIVATE_TIP)
         {
             // get condition from this card
@@ -417,14 +446,17 @@ public class ClientController
     {
         Solution solution = rsp.getSolution();
 
+        // Guard against this
         if (this.accused)
         {
+            // Guard against this
             if (rsp.getCorrectAccusation())
             {
                 // you win!
                 // TODO: GUI
                 // show correct solution
             }
+            // Otherwise...
             else
             {
                 // you lose! you get nothing! good day sir!
@@ -436,6 +468,7 @@ public class ClientController
             return;
         }
 
+        // Guard against this
         if (rsp.getCorrectAccusation())
         {
             // you lose! you get nothing! good day sir!
@@ -443,6 +476,7 @@ public class ClientController
             // show correct solution
             // give option to leave game
         }
+        // Otherwise...
         else
         {
             // TODO: GUI
@@ -456,6 +490,7 @@ public class ClientController
 
         state.getPlayers().remove(playerId);
 
+        // Guard against this
         if (playerId == state.getPlayerId())
         {
             this.searchForGames();

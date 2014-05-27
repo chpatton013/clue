@@ -65,6 +65,7 @@ public class Solution implements Serializable
      */
     public boolean equals(Object obj)
     {
+        // Guard against this
         if (obj instanceof Solution)
         {
             Solution otherSol = (Solution) obj;

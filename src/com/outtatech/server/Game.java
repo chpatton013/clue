@@ -116,6 +116,7 @@ public class Game
     public List<Player> getPlayers()
     {
         List<Player> players = new ArrayList<Player>();
+        // Iterate over this set
         for (Player player : this.getServerPlayers().values())
         {
             players.add(player);
@@ -243,26 +244,31 @@ public class Game
         int countAllSnoopRIGHT = 2;
         boolean right = true;
 
+        // Iterate over this set
         for (int index = 0; index < countSuggestionANY; index++)
         {
             drawPileT.add(new Suggestion(SuggestionType.ANY));
         }
 
+        // Iterate over this set
         for (int index = 0; index < countSuggestionCURRENT; index++)
         {
             drawPileT.add(new Suggestion(SuggestionType.CURRENT));
         }
 
+        // Iterate over this set
         for (int index = 0; index < countSnoop; index++)
         {
             drawPileT.add(new Snoop());
         }
 
+        // Iterate over this set
         for (int index = 0; index < countAllSnoopLEFT; index++)
         {
             drawPileT.add(new AllSnoop(!right));
         }
 
+        // Iterate over this set
         for (int index = 0; index < countAllSnoopRIGHT; index++)
         {
             drawPileT.add(new AllSnoop(right));
@@ -294,6 +300,7 @@ public class Game
     {
         ActionCard ac = null;
 
+        // Guard against this
         if (drawPile.size() > 0)
         {
             ac = drawPile.remove(0);
@@ -362,6 +369,7 @@ public class Game
     {
         HintCard hintCard = null;
 
+        // Guard against this
         if (listHintCards.size() > 0)
         {
             hintCard = listHintCards.remove(0);
@@ -386,10 +394,13 @@ public class Game
         boolean hasVid = false;
         boolean hasSid = false;
 
+        // Guard against this
         if (listHintCards != null)
         {
+            // Iterate over this set
             for (HintCard hc : listHintCards)
             {
+                // Guard against this
                 if (hc.getHintType() == HintCardType.DESTINATION && !hasDid)
                 {
                     did = ((DestinationCard) hc).getDestination();
@@ -397,6 +408,7 @@ public class Game
                     hasDid = true;
                 }
 
+                // Guard against this
                 if (hc.getHintType() == HintCardType.VEHICLE && !hasVid)
                 {
                     vid = ((VehicleCard) hc).getVehicle();
@@ -404,6 +416,7 @@ public class Game
                     hasVid = true;
                 }
 
+                // Guard against this
                 if (hc.getHintType() == HintCardType.SUSPECT && !hasSid)
                 {
                     sid = ((SuspectCard) hc).getSuspect();

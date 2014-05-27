@@ -21,12 +21,14 @@ public class SuspectCard extends HintCard
         super(HintCardType.SUSPECT);
         this.suspect = suspect;
 
+        // Guard against this
         if (suspect == SuspectID.WHITE || suspect == SuspectID.PEACOCK
                 || suspect == SuspectID.SCARLET)
         {
             gender = Gender.FEMALE;
         }
 
+        // Otherwise...
         else if (suspect == SuspectID.GREEN || suspect == SuspectID.MUSTARD
                 || suspect == SuspectID.PLUM)
         {

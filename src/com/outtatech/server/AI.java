@@ -91,11 +91,13 @@ public class AI extends ServerPlayer
         SuperSleuth sleuthCard;
         PrivateTip privateTipCard;
 
+        // Guard against this
         if (card instanceof SuperSleuth)
         {
             sleuthCard = (SuperSleuth) card;
             SuperSleuthType sleuthType = sleuthCard.getType();
 
+            // Iterate over this set
             for (int cardInHand = 0; cardInHand < hintCardsHand.size();
                     cardInHand++)
             {
@@ -106,8 +108,10 @@ public class AI extends ServerPlayer
                 switch (sleuthType)
                 {
                     case AIR_VEHICLE:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
+                            // Guard against this
                             if (((VehicleCard) curHintCard).getIsAir())
                             {
                                 playableCards.add(curHintCard);
@@ -115,9 +119,11 @@ public class AI extends ServerPlayer
                         }
                         break;
                     case BLUE_CARD:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
                             VehicleCard vehicleHint = (VehicleCard) curHintCard;
+                            // Guard against this
                             if (vehicleHint.getCardColor() == CardColor.BLUE)
                             {
                                 playableCards.add(curHintCard);
@@ -125,8 +131,10 @@ public class AI extends ServerPlayer
                         }
                         break;
                     case FEMALE_SUSPECT:
+                        // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
                         {
+                            // Guard against this
                             if (((SuspectCard) curHintCard).getGender()
                                     == Gender.FEMALE)
                             {
@@ -134,8 +142,10 @@ public class AI extends ServerPlayer
                             }
                         }
                     case MALE_SUSPECT:
+                        // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
                         {
+                            // Guard against this
                             if (((SuspectCard) curHintCard).getGender()
                                     == Gender.MALE)
                             {
@@ -144,8 +154,10 @@ public class AI extends ServerPlayer
                         }
                         break;
                     case SOUTHERN_DESTINATION:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (!((DestinationCard) curHintCard).getIsNorth())
                             {
                                 playableCards.add(curHintCard);
@@ -153,8 +165,10 @@ public class AI extends ServerPlayer
 
                         }
                     case WESTERN_DESTINATION:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (((DestinationCard) curHintCard).getIsWest())
                             {
                                 playableCards.add(curHintCard);
@@ -166,11 +180,13 @@ public class AI extends ServerPlayer
             }
         }
 
+        // Guard against this
         if (card instanceof PrivateTip)
         {
             privateTipCard = (PrivateTip) card;
             PrivateTipType privateTipType = privateTipCard.getType();
 
+            // Iterate over this set
             for (int cardInHand = 0; cardInHand < hintCardsHand.size();
                     cardInHand++)
             {
@@ -181,26 +197,31 @@ public class AI extends ServerPlayer
                 switch (privateTipType)
                 {
                     case ALL_DESTINATIONS:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
                             playableCards.add(curHintCard);
                         }
                         break;
                     case ALL_VEHICLES:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
                             playableCards.add(curHintCard);
                         }
                         break;
                     case ALL_SUSPECTS:
+                        // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
                         {
                             playableCards.add(curHintCard);
                         }
                         break;
                     case ONE_FEMALE_SUSPECT:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (((SuspectCard) curHintCard).getGender()
                                     == Gender.FEMALE)
                             {
@@ -209,8 +230,10 @@ public class AI extends ServerPlayer
                         }
                         break;
                     case ONE_NORTHERN_DESTINATION:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (((DestinationCard) curHintCard).getIsNorth())
                             {
                                 playableCards.add(curHintCard);
@@ -219,8 +242,10 @@ public class AI extends ServerPlayer
                         }
                         break;
                     case ONE_RED_VEHICLE:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
+                            // Guard against this
                             if (((VehicleCard) curHintCard).getCardColor()
                                     == CardColor.RED)
                             {
@@ -242,14 +267,17 @@ public class AI extends ServerPlayer
      */
     public void aiTurn()
     {
+        // Guard against this
         if (!aiMakeAccusation())
         {
             ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
 
+            // Guard against this
             if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
             {
                 aiMakeSuggestion(cardToPlay);
             }
+            // Otherwise...
             else if (cardToPlay.getActionType() == ActionCardType.SNOOP
                     || cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
             {
@@ -257,6 +285,7 @@ public class AI extends ServerPlayer
                         getRandomPlayerID()), this);
             }
 
+            // Otherwise...
             else
             {
                 ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
@@ -276,6 +305,7 @@ public class AI extends ServerPlayer
     {
         Integer playerID = -1;
 
+        // Iterate until false
         while (playerID == this.getPlayerId())
         {
             int index = (int) Math.random() * game.getServerPlayersList().size();
@@ -291,6 +321,7 @@ public class AI extends ServerPlayer
         VehicleID choice2;
         DestinationID choice3;
 
+        // Guard against this
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
@@ -301,6 +332,7 @@ public class AI extends ServerPlayer
                     new Solution(choice3, choice2, choice1)), this);
 
         }
+        // Otherwise...
         else
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
@@ -324,26 +356,33 @@ public class AI extends ServerPlayer
             DestinationID destination)
     {
 
+        // Iterate over this set
         for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++)
         {
             HintCard card = hintCardsHand.get(hintCard);
 
+            // Guard against this
             if (card instanceof SuspectCard)
             {
+                // Guard against this
                 if (((SuspectCard) card).getSuspect() == suspect)
                 {
                     return card;
                 }
             }
+            // Otherwise...
             else if (card instanceof DestinationCard)
             {
+                // Guard against this
                 if (((DestinationCard) card).getDestination() == destination)
                 {
                     return card;
                 }
             }
+            // Otherwise...
             else if (card instanceof VehicleCard)
             {
+                // Guard against this
                 if (((VehicleCard) card).getVehicle() == vehicle)
                 {
                     return card;
@@ -366,6 +405,7 @@ public class AI extends ServerPlayer
         float knowledge = (suspectCardsSeen.size() / 6 + vehicleCardsSeen.size()
                 / 6 + locationsSeen.size() / 9) / 3;
         // if knowledge < riskiness of AI
+        // Guard against this
         if ((knowledge * 5) < difficulty.getRiskiness())
         //  return false
         {
@@ -381,6 +421,7 @@ public class AI extends ServerPlayer
         //          break
         //    }
         //  reactToServer(list)
+        // Otherwise...
         else
         {
             SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
@@ -399,19 +440,24 @@ public class AI extends ServerPlayer
     {
         EnumSet complement = EnumSet.complementOf(cards);
         boolean flag = false;
+        // Iterate until false
         while (!flag)
         {
             double choice = Math.random();
+            // Guard against this
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (SuspectID) complement.toArray()[(int) choice
                             - cards.size()];
                 }
             }
+            // Otherwise...
             else
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (SuspectID) cards.toArray()[(int) choice - cards.
@@ -426,19 +472,24 @@ public class AI extends ServerPlayer
     {
         EnumSet complement = EnumSet.complementOf(cards);
         boolean flag = false;
+        // Iterate until false
         while (!flag)
         {
             double choice = Math.random();
+            // Guard against this
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (VehicleID) complement.toArray()[(int) choice
                             - cards.size()];
                 }
             }
+            // Otherwise...
             else
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (VehicleID) cards.toArray()[(int) choice - cards.
@@ -453,19 +504,24 @@ public class AI extends ServerPlayer
     {
         EnumSet complement = EnumSet.complementOf(cards);
         boolean flag = false;
+        // Iterate until false
         while (!flag)
         {
             double choice = Math.random();
+            // Guard against this
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (DestinationID) complement.toArray()[(int) choice
                             - cards.size()];
                 }
             }
+            // Otherwise...
             else
             {
+                // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
                     return (DestinationID) cards.toArray()[(int) choice - cards.
@@ -482,19 +538,24 @@ public class AI extends ServerPlayer
      */
     public void reactToServer(Object obj)
     {
+        // Guard against this
         if (obj instanceof AccusationResponse)
         {
             //?
         }
+        // Guard against this
         if (obj instanceof CardDealResponse)
         {
             CardDealResponse rsp = (CardDealResponse) obj;
+            // Iterate over this set
             for (Card temp : rsp.getCards())
             {
+                // Guard against this
                 if (temp.getCardType() == CardType.ACTION)
                 {
                     actionCardsHand.add((ActionCard) temp);
                 }
+                // Guard against this
                 if (temp.getCardType() == CardType.HINT)
                 {
                     hintCardsHand.add((HintCard) temp);
@@ -503,27 +564,34 @@ public class AI extends ServerPlayer
             //playActionCard();
             ctrl.handleEndTurnRequest(game, this);
         }
+        // Guard against this
         if (obj instanceof GameStateResponse)
         {
             //?
         }
+        // Guard against this
         if (obj instanceof KickPlayerResponse)
         {
 
         }
+        // Guard against this
         if (obj instanceof RevealCardResponse)
         {
             RevealCardResponse rsp = (RevealCardResponse) obj;
+            // Iterate over this set
             for (Card temp : rsp.getCards())
             {
+                // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.SUSPECT)
                 {
                     suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
                 }
+                // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
                 {
                     vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
                 }
+                // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
                 {
                     locationsSeen.add(((DestinationCard) temp).getDestination());

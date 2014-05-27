@@ -50,9 +50,11 @@ public class ServerNetwork extends AbstractServer
     public void sendMessageToClients(ServerResponse msg,
             List<ConnectionToClient> clientList)
     {
+        // Just in case...
         try
         {
             // For each ConnectionToClient in clientList
+            // Iterate over this set
             for (ConnectionToClient client : clientList)
             {
                 // Call sendMessageToClient on obj
@@ -76,6 +78,7 @@ public class ServerNetwork extends AbstractServer
             ConnectionToClient client)
     {
         // Ensure the obj is instanceof ServerMessage
+        // Just in case...
         try
         {
             // Call OCSF's sendToClient on obj

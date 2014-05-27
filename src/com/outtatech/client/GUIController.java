@@ -85,6 +85,7 @@ public class GUIController implements Observer
         //check the state
 
         //if state is GAMESELECT
+        // Guard against this
         if (obs instanceof ClientLobbyDiscoveryState)
         {
             //  clear all lobbies
@@ -92,6 +93,7 @@ public class GUIController implements Observer
             //  add each lobby back
             List<Lobby> lobList = ((ClientLobbyDiscoveryState) obs).
                     getLobbyList();
+            // Iterate over this set
             for (int indx = 0; indx < lobList.size(); indx++)
             {
                 gameSelectScreen.addGame(lobList.get(indx).getLobbyName(),
@@ -100,6 +102,7 @@ public class GUIController implements Observer
         }
 
         //if state is LOBBY
+        // Guard against this
         if (obs instanceof ClientLobbyState)
         {
             curPlayerId = ((ClientLobbyState) obs).getPlayerId();
@@ -110,6 +113,7 @@ public class GUIController implements Observer
             ArrayList playList = new ArrayList(playMap.keySet());
             lobbyScreen.setId(((ClientLobbyState) obs).getId());
 
+            // Iterate over this set
             for (int indx = 0; indx < playList.size(); indx++)
             {
                 lobbyScreen.addPlayer(playMap.
@@ -129,6 +133,7 @@ public class GUIController implements Observer
         }
 
         //if state is MAINGAME
+        // Guard against this
         if (obs instanceof ClientGameState)
         {
             curPlayerId = ((ClientGameState) obs).getPlayerId();
@@ -137,6 +142,7 @@ public class GUIController implements Observer
             //  add each hand card and location back
             Map<Integer, String> playMap = ((ClientGameState) obs).getPlayers();
             ArrayList playList = new ArrayList(playMap.keySet());
+            // Iterate over this set
             for (int indx = 0; indx < playList.size(); indx++)
             {
                 mainGameScreen.addPlayer(playMap.get(((Integer) playList.get(
@@ -150,6 +156,7 @@ public class GUIController implements Observer
             //  add any applicable messages to game log through updateGameLog method
             String logUpdate = ((ClientGameState) obs).pollGameLog();
 
+            // Iterate until false
             while (logUpdate != null)
             {
                 mainGameScreen.updateGameLog(logUpdate);
@@ -160,6 +167,7 @@ public class GUIController implements Observer
             isTurn = false;
             Integer currentActive = ((ClientGameState) obs).
                     getCurrentActivePlayer();
+            // Guard against this
             if (currentActive != null && currentActive == curPlayerId)
             {
                 mainGameScreen.startTurn();
@@ -309,6 +317,7 @@ public class GUIController implements Observer
     {
         //call Client Controller kickPlayer method with the id of the selected
         //player
+        // Guard against this
         if (playerId >= 0)
         {
             clientController.kickPlayer(playerId);
@@ -346,6 +355,7 @@ public class GUIController implements Observer
      */
     public void playCard(ActionCard card)
     {
+        // Guard against this
         if (isTurn)
         {
             //check type of card
@@ -403,10 +413,12 @@ public class GUIController implements Observer
      */
     public String getImagePath(int indx)
     {
+        // Guard against this
         if (indx < 3)
         {
             return imagePaths[indx];
         }
+        // Otherwise...
         else
         {
             return null;

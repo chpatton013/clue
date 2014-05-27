@@ -56,6 +56,7 @@ public class ClientNetwork extends AbstractClient
     public void sendMessageToServer(Object obj)
     {
         // Call OCSF's sendToServer method
+        // Just in case...
         try
         {
             sendToServer(obj);

@@ -24,12 +24,14 @@ public class VehicleCard extends HintCard
         this.vehicle = vehicle;
         this.color = cardColor;
 
+        // Guard against this
         if (this.vehicle == VehicleID.SEAPLANE || this.vehicle
                 == VehicleID.AIRLINER || this.vehicle
                 == VehicleID.HOT_AIR_BALLOON)
         {
             isAir = true;
         }
+        // Otherwise...
         else
         {
             isAir = false;

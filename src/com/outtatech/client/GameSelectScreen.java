@@ -62,6 +62,7 @@ public class GameSelectScreen extends javax.swing.JFrame
     public void clearGames()
     {
         //set game list's text to ""
+        // Iterate over this set
         for (int curRow = 0; curRow < lobbyIds.size(); curRow++)
         {
             gameList.setValueAt("", curRow, 0);
@@ -202,6 +203,7 @@ public class GameSelectScreen extends javax.swing.JFrame
         //call controller's joinGame method with the selected lobby's lobby id
         int row = gameList.getSelectedRow();
 
+        // Guard against this
         if (row >= 0 && row < lobbyIds.size())
         {
             controller.joinGame((int) lobbyIds.get(row));
@@ -223,11 +225,14 @@ public class GameSelectScreen extends javax.swing.JFrame
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
+        // Just in case...
         try
         {
+            // Iterate over this set
             for (javax.swing.UIManager.LookAndFeelInfo info
                     : javax.swing.UIManager.getInstalledLookAndFeels())
             {
+                // Guard against this
                 if ("Nimbus".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());

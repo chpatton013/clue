@@ -56,6 +56,7 @@ public class ServerController
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
 
+        // Just in case...
         try
         {
             network.listen();
@@ -74,6 +75,7 @@ public class ServerController
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection)
     {
+        // Guard against this
         if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest rqst = (EndTurnRequest) obj;
@@ -84,19 +86,24 @@ public class ServerController
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
          */
+        // Guard against this
         if (obj instanceof LobbyListRequest)
         {
             List<Lobby> publicLobbies = new ArrayList<Lobby>();
+            // Iterate over this set
             for (Lobby lobby : lobbies.values())
             {
+                // Guard against this
                 if (lobby.isVisible())
                 {
                     publicLobbies.add(lobby);
                 }
             }
+            // Iterate over this set
             forwardMessage(new LobbyDiscoveryResponse(publicLobbies),
                     connection);
         }
+        // Otherwise...
         else if (obj instanceof ActionRequest)
         {
             ActionRequest actionReq = (ActionRequest) obj;
@@ -105,6 +112,7 @@ public class ServerController
         /*
          * AccusationRequest respond with AccusationResponse
          */
+        // Otherwise...
         else if (obj instanceof AccusationRequest)
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
@@ -113,6 +121,7 @@ public class ServerController
         /*
          * SuggestionRequest respond with SuggestionResponse
          */
+        // Otherwise...
         else if (obj instanceof SuggestionRequest)
         {
             SuggestionRequest suggestionReq = (SuggestionRequest) obj;
@@ -121,6 +130,7 @@ public class ServerController
         /*
          * AddAIRequest respond with AddAIResponse
          */
+        // Otherwise...
         else if (obj instanceof AddAIRequest)
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
@@ -139,6 +149,7 @@ public class ServerController
 
             List<Player> players = lobbyGame.getPlayers();
             Map<Integer, String> names = new HashMap<Integer, String>();
+            // Iterate over this set
             for (Player temp : players)
             {
                 names.put(temp.getPlayerId(), temp.getName());
@@ -148,6 +159,7 @@ public class ServerController
                     newPlayer.getPlayerId(), names));
         }
 
+        // Otherwise...
         else if (obj instanceof KickPlayerRequest)
         {
             KickPlayerRequest rqst = ((KickPlayerRequest) obj);
@@ -155,14 +167,17 @@ public class ServerController
             Game game = games.get(connection);
             List<Player> players = game.getPlayers();
             Map<Integer, ServerPlayer> map = game.getServerPlayers();
+            // Iterate over this set
             for (Player temp : players)
             {
+                // Guard against this
                 if (rqst.getPlayerId() == temp.getPlayerId())
                 {
                     map.remove(temp.getPlayerId());
                     player = temp;
                 }
             }
+            // Iterate over this set
             forwardMessage(new KickPlayerResponse(player.getPlayerId()),
                     connection);
         }
@@ -171,6 +186,7 @@ public class ServerController
          * LobbyJoinRequest respond with LobbyJoinResponse
          * notify all clients.
          */
+        // Otherwise...
         else if (obj instanceof LobbyJoinRequest)
         {
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
@@ -188,11 +204,13 @@ public class ServerController
 
             List<Player> players = game.getPlayers();
             Map<Integer, String> names = new HashMap<Integer, String>();
+            // Iterate over this set
             for (Player temp : players)
             {
                 names.put(temp.getPlayerId(), temp.getName());
             }
 
+            // Iterate over this set
             forwardMessage(new LobbyJoinResponse(lobby,
                     serverPlayer.getPlayerId(), names), cxns);
         }
@@ -200,6 +218,7 @@ public class ServerController
         /**
          * LobbyCreateRequest respond with LobbyCreateResponse else if
          */
+        // Otherwise...
         else if (obj instanceof LobbyCreateRequest)
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
@@ -212,12 +231,14 @@ public class ServerController
 
             //@TODO Only the requesting client will be updated.  Other clients
             //will need to send a lobby discovery response to refresh.
+            // Iterate over this set
             forwardMessage(new LobbyCreateResponse(lobby), connection);
         }
 
         /**
          * SinglePlayerGameRequest respond with LobbyJoinResponse else if
          */
+        // Otherwise...
         else if (obj instanceof SinglePlayerGameRequest)
         {
             String lobbyName = "single_player_lobby";
@@ -229,12 +250,14 @@ public class ServerController
             lobbies.put(game.getGameId(), lobby);
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
 
+            // Iterate over this set
             forwardMessage(new LobbyCreateResponse(lobby), connection);
         }
 
         /**
          *
          */
+        // Otherwise...
         else if (obj instanceof GameStartRequest)
         {
             handleGameStartRequest(games.get(connection));
@@ -245,6 +268,7 @@ public class ServerController
          * LobbyDiscoveryResponse?
          */
 
+        // Otherwise...
         else if (obj instanceof GameStateRequest)
         {
             this.handleGameStateRequest(games.get(connection), connection);
@@ -252,6 +276,7 @@ public class ServerController
         /**
          * else if EndTurnRequest respond with GameStateResponse
          */
+        // Otherwise...
         else if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest endTurnReq = (EndTurnRequest) obj;
@@ -283,13 +308,16 @@ public class ServerController
      */
     private void informPlayer(ServerPlayer player, ServerResponse msg)
     {
+        // Guard against this
         if (player instanceof AI)
         {
             AI aiPlayer = (AI) player;
             informAI(msg, aiPlayer);
         }
+        // Otherwise...
         else
         {
+            // Iterate over this set
             forwardMessage(msg, humans.get(player));
         }
     }
@@ -312,12 +340,15 @@ public class ServerController
 
         // Build a list of human client connections to send
         // LobbyUpdateResponse to
+        // Iterate over this set
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
+            // Guard against this
             if (!humans.containsKey(serverPlayer))
             {
                 aiPlayers.add(robots.get(serverPlayer));
             }
+            // Otherwise...
             else
             {
                 gamePlayers.add(humans.get(serverPlayer));
@@ -325,6 +356,7 @@ public class ServerController
         }
 
         // Send all human players in the lobby a LobbyUpdateResponse
+        // Iterate over this set
         forwardMessage(msg, gamePlayers);
         //informAI(msg, aiPlayers);
     }
@@ -333,29 +365,37 @@ public class ServerController
             Solution guess)
     {
 
+        // Iterate over this set
         for (ServerPlayer player : gameServerPlayers)
         {
+            // Iterate over this set
             for (HintCard card : player.getHintCardsHand())
             {
+                // Guard against this
                 if (card instanceof DestinationCard)
                 {
                     DestinationCard dest = (DestinationCard) card;
+                    // Guard against this
                     if (dest.getDestination().equals(guess.getDestination()))
                     {
                         return dest;
                     }
                 }
+                // Otherwise...
                 else if (card instanceof SuspectCard)
                 {
                     SuspectCard susp = (SuspectCard) card;
+                    // Guard against this
                     if (susp.getSuspect().equals(guess.getSuspect()))
                     {
                         return susp;
                     }
                 }
+                // Otherwise...
                 else if (card instanceof VehicleCard)
                 {
                     VehicleCard vehicle = (VehicleCard) card;
+                    // Guard against this
                     if (vehicle.getVehicle().equals(guess.getVehicle()))
                     {
                         return vehicle;
@@ -385,23 +425,28 @@ public class ServerController
 
         //Build a list of human client connections to send accusation
         //response to
+        // Iterate over this set
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
+            // Guard against this
             if (!humans.containsKey(serverPlayer))
             {
                 aiPlayers.add(robots.get(serverPlayer));
             }
+            // Otherwise...
             else
             {
                 gamePlayers.add(humans.get(serverPlayer));
             }
         }
 
+        // Guard against this
         if (suggestion.equals(clientGame.getSolution()))
         {
             SuggestionResponse suggResp = new SuggestionResponse(true);
 
         }
+        // Otherwise...
         else
         {
             SuggestionResponse suggResp = new SuggestionResponse(false);
@@ -410,6 +455,7 @@ public class ServerController
                     suggestion);
             suggResp.setRefutingCard(refutingCard);
             //Send to humans
+            // Iterate over this set
             forwardMessage(suggResp, gamePlayers);
 
             //Send to AI
@@ -435,12 +481,15 @@ public class ServerController
 
         //Build a list of human client connections to send accusation
         //response to
+        // Iterate over this set
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
+            // Guard against this
             if (!humans.containsKey(serverPlayer))
             {
                 aiPlayers.add(robots.get(serverPlayer));
             }
+            // Otherwise...
             else
             {
                 gamePlayers.add(humans.get(serverPlayer));
@@ -452,6 +501,7 @@ public class ServerController
                 accusation.equals(clientGame.getSolution()));
 
         //Send to humans
+        // Iterate over this set
         forwardMessage(accResp, gamePlayers);
 
         //Send to AI
@@ -491,6 +541,7 @@ public class ServerController
      */
     public void informAI(Object obj, List<AI> ai)
     {
+        // Iterate over this set
         for (AI bot : ai)
         {
             informAI(obj, ai);
@@ -575,34 +626,41 @@ public class ServerController
 
         Integer playerCount = gameServerPlayers.size();
 
+        // Iterate over this set
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
             playerHands.add(new ArrayList<Card>());
         }
 
         //Deal out all hint cards
+        // Iterate over this set
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
             playerHands.get(index % (playerCount)).add(game.popHintCard());
         }
 
         //Add one action card to each hand.
+        // Iterate over this set
         for (ArrayList<Card> alc : playerHands)
         {
             alc.add(game.popActionCard());
         }
 
+        // Iterate over this set
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
             CardDealResponse msg = new CardDealResponse(playerHands.remove(0));
+            // Guard against this
             if (!humans.containsKey(serverPlayer))
             {
                 //Send to AI
                 //informAI(msg, robots.get(serverPlayer));
             }
+            // Otherwise...
             else
             {
                 //Send to human
+                // Iterate over this set
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
@@ -618,6 +676,7 @@ public class ServerController
 
         Integer currentActivePlayer = game.getCurrentPlayer().getPlayerId();
         Map<Integer, String> names = new HashMap<Integer, String>();
+        // Iterate over this set
         for (Player player : game.getServerPlayers().values())
         {
             names.put(player.getPlayerId(), player.getName());
@@ -629,21 +688,26 @@ public class ServerController
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
     {
+        // Iterate over this set
         for (int playerNum = 0; playerNum < players.size(); playerNum++)
         {
             ServerPlayer curPlayer = players.get(playerNum);
             ServerPlayer otherPlayer;
+            // Guard against this
             if (!card.getDirection())
             {
+                // Guard against this
                 if (playerNum == 0)
                 {
                     otherPlayer = players.get(players.size() - 1);
                 }
+                // Otherwise...
                 else
                 {
                     otherPlayer = players.get(playerNum - 1);
                 }
             }
+            // Otherwise...
             else
             {
                 otherPlayer = players.get((playerNum + 1) % players.size());
@@ -657,6 +721,7 @@ public class ServerController
             revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
             RevealCardResponse response
                     = new RevealCardResponse(card, revealed);
+            // Iterate over this set
             forwardMessage(response, humans.get(curPlayer));
         }
     }
@@ -673,6 +738,7 @@ public class ServerController
         List<HintCard> hintCardsHand = opponent.getHintCardsHand();
         PrivateTipType privateTipType = card.getType();
 
+        // Iterate over this set
         for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++)
         {
             HintCard curHintCard = hintCardsHand.get(cardInHand);
@@ -682,26 +748,31 @@ public class ServerController
             switch (privateTipType)
             {
                 case ALL_DESTINATIONS:
+                    // Guard against this
                     if (curHintType == HintCardType.DESTINATION)
                     {
                         playableCards.add(curHintCard);
                     }
                     break;
                 case ALL_VEHICLES:
+                    // Guard against this
                     if (curHintType == HintCardType.VEHICLE)
                     {
                         playableCards.add(curHintCard);
                     }
                     break;
                 case ALL_SUSPECTS:
+                    // Guard against this
                     if (curHintType == HintCardType.SUSPECT)
                     {
                         playableCards.add(curHintCard);
                     }
                     break;
                 case ONE_FEMALE_SUSPECT:
+                    // Guard against this
                     if (curHintType == HintCardType.DESTINATION)
                     {
+                        // Guard against this
                         if (((SuspectCard) curHintCard).getGender()
                                 == Gender.FEMALE)
                         {
@@ -710,8 +781,10 @@ public class ServerController
                     }
                     break;
                 case ONE_NORTHERN_DESTINATION:
+                    // Guard against this
                     if (curHintType == HintCardType.DESTINATION)
                     {
+                        // Guard against this
                         if (((DestinationCard) curHintCard).getIsNorth())
                         {
                             playableCards.add(curHintCard);
@@ -720,8 +793,10 @@ public class ServerController
                     }
                     break;
                 case ONE_RED_VEHICLE:
+                    // Guard against this
                     if (curHintType == HintCardType.VEHICLE)
                     {
+                        // Guard against this
                         if (((VehicleCard) curHintCard).getCardColor()
                                 == CardColor.RED)
                         {
@@ -765,6 +840,7 @@ public class ServerController
 
         // Create a new CardDealResponse
         RevealCardResponse response = new RevealCardResponse(card, revealed);
+        // Iterate over this set
         forwardMessage(response, connection);
     }
 
@@ -782,6 +858,7 @@ public class ServerController
         // Find the player with the given ID
         RevealCardResponse response
                 = new RevealCardResponse(card, snoopedCards);
+        // Iterate over this set
         forwardMessage(response, connection);
 
     }
@@ -794,12 +871,14 @@ public class ServerController
         List<ServerPlayer> opponents = curGame.getServerPlayersList();
         List<Card> revealedCards = new ArrayList<Card>();
         // List playableCards to return
+        // Iterate over this set
         for (ServerPlayer opponent : opponents)
         {
             ArrayList<HintCard> playableCards = new ArrayList();
             List<HintCard> hintCardsHand = opponent.getHintCardsHand();
             SuperSleuthType sleuthType = sleuthCard.getType();
 
+            // Iterate over this set
             for (int cardInHand = 0; cardInHand < hintCardsHand.size();
                     cardInHand++)
             {
@@ -810,8 +889,10 @@ public class ServerController
                 switch (sleuthType)
                 {
                     case AIR_VEHICLE:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
+                            // Guard against this
                             if (((VehicleCard) curHintCard).getIsAir())
                             {
                                 playableCards.add(curHintCard);
@@ -819,9 +900,11 @@ public class ServerController
                         }
                         break;
                     case BLUE_CARD:
+                        // Guard against this
                         if (curHintType == HintCardType.VEHICLE)
                         {
                             VehicleCard vehicleHint = (VehicleCard) curHintCard;
+                            // Guard against this
                             if (vehicleHint.getCardColor() == CardColor.BLUE)
                             {
                                 playableCards.add(curHintCard);
@@ -829,8 +912,10 @@ public class ServerController
                         }
                         break;
                     case FEMALE_SUSPECT:
+                        // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
                         {
+                            // Guard against this
                             if (((SuspectCard) curHintCard).getGender()
                                     == Gender.FEMALE)
                             {
@@ -838,8 +923,10 @@ public class ServerController
                             }
                         }
                     case MALE_SUSPECT:
+                        // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
                         {
+                            // Guard against this
                             if (((SuspectCard) curHintCard).getGender()
                                     == Gender.MALE)
                             {
@@ -848,8 +935,10 @@ public class ServerController
                         }
                         break;
                     case SOUTHERN_DESTINATION:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (!((DestinationCard) curHintCard).getIsNorth())
                             {
                                 playableCards.add(curHintCard);
@@ -857,8 +946,10 @@ public class ServerController
 
                         }
                     case WESTERN_DESTINATION:
+                        // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
                         {
+                            // Guard against this
                             if (((DestinationCard) curHintCard).getIsWest())
                             {
                                 playableCards.add(curHintCard);
@@ -873,6 +964,7 @@ public class ServerController
         RevealCardResponse response = new RevealCardResponse(sleuthCard,
                 revealedCards);
 
+        // Iterate over this set
         forwardMessage(response, connection);
 
     }
@@ -885,21 +977,25 @@ public class ServerController
         Game game = games.get(connection);
         List<ServerPlayer> players = game.getServerPlayersList();
 
+        // Guard against this
         if (card instanceof AllSnoop)
         {
             AllSnoop allSnoopCard = (AllSnoop) card;
             handleAllSnoop(allSnoopCard, players);
         }
+        // Otherwise...
         else if (card instanceof PrivateTip)
         {
             PrivateTip privTipCard = (PrivateTip) card;
             handlePrivateTip(privTipCard, actionReq.getPlayerId(), connection);
         }
+        // Otherwise...
         else if (card instanceof Snoop)
         {
             Snoop snoopCard = (Snoop) card;
             handleSnoop(snoopCard, actionReq.getPlayerId(), connection);
         }
+        // Otherwise...
         else if (card instanceof SuperSleuth)
         {
             SuperSleuth superSleuthCard = (SuperSleuth) card;
