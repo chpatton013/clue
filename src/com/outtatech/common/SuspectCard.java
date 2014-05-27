@@ -21,9 +21,9 @@ public class SuspectCard extends HintCard
      *
      * @param suspect A unique suspect ID
      */
-    public SuspectCard(SuspectID suspect, CardColor cardColor)
+    public SuspectCard(SuspectID suspect)
     {
-        super(HintCardType.SUSPECT, cardColor);
+        super(HintCardType.SUSPECT);
         this.suspect = suspect;
 
         if (suspect == SuspectID.WHITE || suspect == SuspectID.PEACOCK

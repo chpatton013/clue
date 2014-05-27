@@ -30,14 +30,14 @@ public class AITest {
     @Test
     public void testGetSetDifficulty() {
         System.out.println("Testing getDifficulty and setDifficulty");
-        Difficulty expResult = new Difficulty (1,1);
+        Difficulty expResult = new Difficulty (2,3);
         ServerController cntrl = new ServerController(new ServerNetwork(5555));
-        AI newAI = new AI(expResult, cntrl);
+        AI newAI = new AI(expResult, cntrl, new Game());
         
         Difficulty result = newAI.getDifficulty();
         assertEquals(expResult, result);
         
-        Difficulty expResult2 = new Difficulty(2,1);
+        Difficulty expResult2 = new Difficulty(1,4);
         newAI.setDifficulty(expResult2);
         Difficulty result2 = newAI.getDifficulty();
         assertEquals(expResult2, result2);
@@ -51,12 +51,12 @@ public class AITest {
         System.out.println("Testing getServerController and setServerController");
         ServerController ctrl = new ServerController(new ServerNetwork(5555));
         Difficulty difficulty = new Difficulty(2,1);
-        AI ai = new AI(difficulty, ctrl);
+        AI ai = new AI(difficulty, ctrl, new Game());
         
         ServerController expResult = ai.getServerController();
         assertEquals(expResult, ctrl);
         
-        ServerController ctrl2 = new ServerController(new ServerNetwork(7000));
+        ServerController ctrl2 = new ServerController(new ServerNetwork(5555));
         ai.setServerController(ctrl2);
         
         ServerController expResult2 = ai.getServerController();
@@ -71,13 +71,13 @@ public class AITest {
         System.out.println("Testing aiRespond");
         
         ArrayList<HintCard> hintCards = new ArrayList();
-        hintCards.add(new SuspectCard(SuspectID.PEACOCK, CardColor.RED));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
-        hintCards.add(new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE, CardColor.BLUE));
+        hintCards.add(new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE));
         
         ServerController ctrl = new ServerController(new ServerNetwork(5555));
-        AI ai = new AI(new Difficulty(2,1), ctrl);
+        AI ai = new AI(new Difficulty(2,1), ctrl, new Game());
         ai.setHintCardsHand(hintCards);
         
         //Test a Private Tip Card of type all
@@ -129,18 +129,18 @@ public class AITest {
         System.out.println("aiRefuteSuggestion");
         
         ServerController ctrl = new ServerController(new ServerNetwork(5555));
-        AI ai = new AI(new Difficulty(2,1), ctrl);
+        AI ai = new AI(new Difficulty(2,1), ctrl, new Game());
        
         SuspectID suspect = SuspectID.PEACOCK;
         VehicleID vehicle = VehicleID.LIMOUSINE;
         DestinationID destination = DestinationID.CONEY_ISLAND;
        
         ArrayList<HintCard> hintCards = new ArrayList();
-        hintCards.add(new SuspectCard(SuspectID.PEACOCK, CardColor.RED));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
         ai.setHintCardsHand(hintCards);   
         
-        HintCard expResult = new SuspectCard(SuspectID.PEACOCK, CardColor.RED);
+        HintCard expResult = new SuspectCard(SuspectID.PEACOCK);
         Card result = ai.aiRefuteSuggestion(suspect, vehicle, destination);
         
         assertEquals(expResult, result);

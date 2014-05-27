@@ -23,9 +23,9 @@ public class DestinationCard extends HintCard
      *
      * @param destination A unique destination ID.
      */
-    public DestinationCard(DestinationID destination, CardColor cardColor)
+    public DestinationCard(DestinationID destination)
     {
-        super(HintCardType.DESTINATION, cardColor);
+        super(HintCardType.DESTINATION);
         this.destination = destination;
         
         if (this.destination == DestinationID.NIAGRA_FALLS || 

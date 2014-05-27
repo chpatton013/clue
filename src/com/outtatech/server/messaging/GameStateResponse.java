@@ -5,6 +5,7 @@
  */
 package com.outtatech.server.messaging;
 
+import com.outtatech.common.Player;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class GameStateResponse extends ServerResponse
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
+    private List<Player> players;
 
     /**
      * Constructs a new GameStateResponse object
@@ -28,9 +30,11 @@ public class GameStateResponse extends ServerResponse
      * @param currentActivePlayer id of the currently active player
      */
     public GameStateResponse(Integer deckCardCount,
-            List<Integer> playerTurnOrder, Integer currentActivePlayer)
+            List<Integer> playerTurnOrder, Integer currentActivePlayer, 
+            List<Player> players)
     {
         this.deckCardCount = deckCardCount;
+        this.players = players;
         this.playerTurnOrder = playerTurnOrder;
         this.currentActivePlayer = currentActivePlayer;
     }
@@ -43,6 +47,11 @@ public class GameStateResponse extends ServerResponse
     public Integer getDeckCardCount()
     {
         return deckCardCount;
+    }
+    
+    public List<Player> getPlayers()
+    {
+        return players;
     }
 
     /**
