@@ -79,6 +79,7 @@ public class ClientController
      */
     public void startSinglePlayerGame()
     {
+        this.creator = true;
         this.forwardMessage(new SinglePlayerGameRequest());
     }
 
