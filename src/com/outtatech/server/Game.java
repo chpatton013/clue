@@ -81,7 +81,7 @@ public class Game
     public void initPlayerTurnOrder()
     {
         this.playerTurnOrder
-                = new ArrayList<ServerPlayer>(this.players.values());
+            = new ArrayList<ServerPlayer>(this.players.values());
         Collections.shuffle(this.playerTurnOrder);
     }
 

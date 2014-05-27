@@ -60,9 +60,6 @@ public class ServerPlayer implements Player, Serializable
      * Construct a sever player to keep track of client and server player
      * actions.
      *
-     * @param name String representation of player
-     * @param actionCardsHand List of Card Objects representing a players hand
-     * of Action Cards
      */
     public ServerPlayer()
     {
@@ -80,6 +77,10 @@ public class ServerPlayer implements Player, Serializable
         return playerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public DestinationID getLocation()
     {
         return location;
@@ -95,6 +96,10 @@ public class ServerPlayer implements Player, Serializable
         this.location = location;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name)
     {
         this.name = name;

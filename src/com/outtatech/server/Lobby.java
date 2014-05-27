@@ -16,7 +16,7 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      *
      */
-        protected static Integer lobbyIdCounter = 0;
+    protected static Integer lobbyIdCounter = 0;
     String lobbyName;
     Integer gameId;
     Integer lobbyId;

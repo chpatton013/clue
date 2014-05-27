@@ -82,7 +82,7 @@
 <checkstyle config="nbproject/308style.xml" failOnViolation="true">
             <!-- Specify includes and excludes -->
             <fileset dir="src/com" includes="**/*.java"
-            excludes="**/AboutBox.java"/>
+            excludes="**/*Screen.java, **/lloseng/**/*.java"/>
 </checkstyle>
 </target>
 

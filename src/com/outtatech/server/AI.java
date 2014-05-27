@@ -109,9 +109,10 @@ public class AI extends ServerPlayer
                     cardInHand++)
             {
                 HintCard curHintCard = hintCardsHand.get(cardInHand);
-                HintCardType curHintType = hintCardsHand.get(cardInHand).
-                        getHintType();
+                HintCardType curHintType = 
+                        hintCardsHand.get(cardInHand).getHintType();
 
+                //Checks sleuthType
                 switch (sleuthType)
                 {
                     case AIR_VEHICLE:
@@ -148,6 +149,7 @@ public class AI extends ServerPlayer
                                 playableCards.add(curHintCard);
                             }
                         }
+                        break;
                     case MALE_SUSPECT:
                         // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
@@ -171,6 +173,7 @@ public class AI extends ServerPlayer
                             }
 
                         }
+                        break;
                     case WESTERN_DESTINATION:
                         // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
@@ -198,9 +201,10 @@ public class AI extends ServerPlayer
                     cardInHand++)
             {
                 HintCard curHintCard = hintCardsHand.get(cardInHand);
-                HintCardType curHintType = hintCardsHand.get(cardInHand).
-                        getHintType();
+                HintCardType curHintType = 
+                        hintCardsHand.get(cardInHand).getHintType();
 
+                //Checks Destinations
                 switch (privateTipType)
                 {
                     case ALL_DESTINATIONS:
@@ -412,7 +416,8 @@ public class AI extends ServerPlayer
      */
     private boolean aiMakeAccusation()
     { // void for sake of complitation w/pseudocde. should return a boolean
-        // knowledge = (add number of known cards in each category / number of cards in each category) / 3
+        // knowledge = (add number of known cards in each category 
+        // number of cards in each category) / 3
         float knowledge = (suspectCardsSeen.size() / 6 + vehicleCardsSeen.size()
                 / 6 + locationsSeen.size() / 9) / 3;
         // if knowledge < riskiness of AI
@@ -471,8 +476,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (SuspectID) cards.toArray()[(int) choice - cards.
-                            size()];
+                    return (SuspectID) cards.toArray()[(int) choice - 
+                            cards.size()];
                 }
             }
         }
@@ -503,8 +508,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (VehicleID) cards.toArray()[(int) choice - cards.
-                            size()];
+                    return (VehicleID) cards.toArray()[(int) choice - 
+                            cards.size()];
                 }
             }
         }
@@ -535,8 +540,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (DestinationID) cards.toArray()[(int) choice - cards.
-                            size()];
+                    return (DestinationID) cards.toArray()[(int) choice -
+                            cards.size()];
                 }
             }
         }
