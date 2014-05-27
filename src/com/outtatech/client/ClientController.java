@@ -212,10 +212,10 @@ public class ClientController
         {
             this.reactToCardDealResponse((CardDealResponse) obj);
         }
-        else if (obj instanceof ActionResponse)
-        {
-            this.reactToActionResponse((ActionResponse) obj);
-        }
+//        else if (obj instanceof ActionResponse)
+//        {
+//            this.reactToActionResponse((ActionResponse) obj);
+//        }
         else if (obj instanceof RevealCardResponse)
         {
             this.reactToRevealCardRequest((RevealCardResponse) obj);
@@ -333,19 +333,19 @@ public class ClientController
         }
     }
 
-    private void reactToActionResponse(ActionResponse rsp)
-    {
-        if (!(this.state instanceof ClientGameState))
-        {
-            System.err.println("Received ActionResponse while not in "
-                    + "ClientGameState.");
-            return;
-        }
-
-        ((ClientGameState) this.state).pushGameLog(
-                "Player " + rsp.getPlayerId() + " played card " + rsp.
-                getActionCard());
-    }
+//    private void reactToActionResponse(ActionResponse rsp)
+//    {
+//        if (!(this.state instanceof ClientGameState))
+//        {
+//            System.err.println("Received ActionResponse while not in "
+//                    + "ClientGameState.");
+//            return;
+//        }
+//
+//        ((ClientGameState) this.state).pushGameLog(
+//                "Player " + rsp.getPlayerId() + " played card " + rsp.
+//                getActionCard());
+//    }
 
     private void reactToRevealCardRequest(RevealCardResponse rsp)
     {
