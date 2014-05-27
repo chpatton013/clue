@@ -1,5 +1,6 @@
 package com.outtatech.client;
 
+import com.outtatech.common.ActionCard;
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
@@ -285,7 +286,7 @@ public class GUIController implements Observer{
      *Notifies client controller that player has played a card
      * @param cardType
      */
-    public void playCard(int cardType) {
+    public void playCard(ActionCard card) {
         if(isTurn) {
             //check type of card
 
