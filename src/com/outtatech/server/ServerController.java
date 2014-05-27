@@ -118,7 +118,7 @@ public class ServerController
         {
             System.out.println("Recieved AI Request");
             AddAIRequest addAIReq = (AddAIRequest) obj;
-            int num = (humans.keySet()).size();
+            int num = games.get(connection).getPlayers().size();
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                     games.get(connection));
             System.out.println("Creating new Clue Bot");
@@ -281,7 +281,7 @@ public class ServerController
 
         // Send all human players in the lobby a LobbyUpdateResponse
         forwardMessage(msg, gamePlayers);
-        informAI(msg, aiPlayers);
+        //informAI(msg, aiPlayers);
     }
 
     private HintCard findRefutingCard(List<ServerPlayer> gameServerPlayers,
@@ -538,11 +538,13 @@ public class ServerController
             if (!humans.containsKey(serverPlayer))
             {
                 //Send to AI
-                informAI(msg, robots.get(serverPlayer));
+                System.out.println("Sent to bot");
+                //informAI(msg, robots.get(serverPlayer));
             }
             else
             {
                 //Send to human
+                System.out.println("Sent to human");
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
