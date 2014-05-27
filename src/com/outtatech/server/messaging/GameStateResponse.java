@@ -20,6 +20,7 @@ public class GameStateResponse extends ServerResponse
      * Constructs a new GameStateResponse object
      *
      * @param currentActivePlayer id of the currently active player
+     * @param players
      */
     public GameStateResponse(Integer currentActivePlayer,
             Map<Integer, String> players)
@@ -28,6 +29,10 @@ public class GameStateResponse extends ServerResponse
         this.currentActivePlayer = currentActivePlayer;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<Integer, String> getPlayers()
     {
         return players;

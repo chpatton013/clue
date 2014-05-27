@@ -16,21 +16,36 @@ import com.outtatech.server.*;
  */
 public class LobbyJoinResponseTest {
     
+    /**
+     *
+     */
     public LobbyJoinResponseTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -50,6 +65,9 @@ public class LobbyJoinResponseTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGetLobby() {
         System.out.println("getLobby");
         Lobby expResult = new Lobby("Lobby 1", 1, true);
@@ -61,6 +79,9 @@ public class LobbyJoinResponseTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGetPlayers() {
         System.out.println("getPlayers");
         String playerName = "Player 1";

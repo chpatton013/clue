@@ -21,7 +21,8 @@ public class LobbyJoinResponse extends ServerResponse
      * Used to respond to a human player request.
      *
      * @param lobby
-     * @param player
+     * @param playerId
+     * @param players
      */
     public LobbyJoinResponse(Lobby lobby, Integer playerId,
             Map<Integer, String> players)

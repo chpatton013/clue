@@ -19,5 +19,9 @@ public interface Player
      */
     int getPlayerId();
 
+    /**
+     *
+     * @return
+     */
     String getName();
 }

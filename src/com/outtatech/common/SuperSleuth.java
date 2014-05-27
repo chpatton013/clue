@@ -16,6 +16,7 @@ public class SuperSleuth extends ActionCard
 
     /**
      * Constructs a new SuperSleuth ActionCard.
+     * @param type
      */
     public SuperSleuth(SuperSleuthType type)
     {
@@ -23,6 +24,10 @@ public class SuperSleuth extends ActionCard
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public SuperSleuthType getType()
     {
         return type;

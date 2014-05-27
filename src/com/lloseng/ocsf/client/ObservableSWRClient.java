@@ -35,7 +35,13 @@ public class ObservableSWRClient extends ObservableClient
     private Object received;
 
   //Constructor *****************************************************
-    public ObservableSWRClient(String host, int port)
+
+    /**
+     *
+     * @param host
+     * @param port
+     */
+        public ObservableSWRClient(String host, int port)
     {
         super(host, port);
     }
@@ -169,6 +175,7 @@ public class ObservableSWRClient extends ObservableClient
     /**
      * Returns true if cancal has been called.
      *
+     * @return 
      */
     public boolean isCancelled()
     {

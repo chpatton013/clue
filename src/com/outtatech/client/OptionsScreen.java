@@ -19,6 +19,10 @@ public class OptionsScreen extends javax.swing.JFrame
         initComponents();
     }
 
+    /**
+     *
+     * @param ctrl
+     */
     public OptionsScreen(GUIController ctrl)
     {
         controller = ctrl;

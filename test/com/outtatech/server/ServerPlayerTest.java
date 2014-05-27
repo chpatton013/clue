@@ -19,6 +19,9 @@ public class ServerPlayerTest
     List<ActionCard> actionCardsHand;
     List<HintCard> hintCardsHand;
     
+    /**
+     *
+     */
     public ServerPlayerTest()
     {
         actionCardsHand = new ArrayList<ActionCard>();
@@ -28,21 +31,33 @@ public class ServerPlayerTest
         hintCardsHand.add(new SuspectCard(SuspectID.WHITE));
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {

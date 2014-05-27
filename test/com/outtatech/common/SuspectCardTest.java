@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class SuspectCardTest
 {
     
+    /**
+     *
+     */
     public SuspectCardTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -65,6 +80,9 @@ public class SuspectCardTest
         testScarlet();
     }
     
+    /**
+     *
+     */
     @Test
     public void testGetGender()
     {
@@ -101,6 +119,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testWhite()
     {
         SuspectCard instance = new SuspectCard(SuspectID.WHITE);
@@ -109,6 +130,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testPeacock()
     {
         SuspectCard instance = new SuspectCard(SuspectID.PEACOCK);
@@ -117,6 +141,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGreen()
     {
         SuspectCard instance = new SuspectCard(SuspectID.GREEN);
@@ -125,6 +152,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMustard()
     {
         SuspectCard instance = new SuspectCard(SuspectID.MUSTARD);
@@ -133,6 +163,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testPlum()
     {
         SuspectCard instance = new SuspectCard(SuspectID.PLUM);
@@ -141,6 +174,9 @@ public class SuspectCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testScarlet()
     {
         SuspectCard instance = new SuspectCard(SuspectID.SCARLET);

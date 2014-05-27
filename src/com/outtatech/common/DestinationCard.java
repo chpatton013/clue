@@ -61,11 +61,19 @@ public class DestinationCard extends HintCard
         return destination;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsNorth()
     {
         return north;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsWest()
     {
         return west;

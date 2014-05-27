@@ -20,9 +20,20 @@ import java.util.*;
  */
 public class SystemDriver implements Observer
 {
+
+    /**
+     *
+     */
     public static final int port = 4444;
+
+    /**
+     *
+     */
     public static final String host = "localhost";
  
+    /**
+     *
+     */
     public SystemDriver()
     {
     }
@@ -75,6 +86,10 @@ public class SystemDriver implements Observer
         // </editor-fold>
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args)
     {
         SystemDriver driver = new SystemDriver();

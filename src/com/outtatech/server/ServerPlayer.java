@@ -23,22 +23,37 @@ public class ServerPlayer implements Player, Serializable
     private String name;
     private Color color;
     private DestinationID location;
+
+    /**
+     *
+     */
     public List<HintCard> hintCardsHand;
+
+    /**
+     *
+     */
     public List<ActionCard> actionCardsHand;
+
+    /**
+     *
+     */
     public EnumSet suspectCardsSeen = EnumSet.noneOf(SuspectID.class);
+
+    /**
+     *
+     */
     public EnumSet locationsSeen = EnumSet.noneOf(DestinationID.class);
+
+    /**
+     *
+     */
     public EnumSet vehicleCardsSeen = EnumSet.noneOf(VehicleID.class);
 
     /**
      * Construct a sever player to keep track of client and server player
      * actions.
      *
-     * @param playerId int representing the player
-     * @param notes Object representing notes for the player
      * @param name String representation of player
-     * @param color Color object to help differentiate players
-     * @param hintCardsHand List of Card Objects representing a players hand of
-     * Hint Cards
      * @param actionCardsHand List of Card Objects representing a players hand
      * of Action Cards
      */
@@ -63,6 +78,10 @@ public class ServerPlayer implements Player, Serializable
         return location;
     }
 
+    /**
+     *
+     * @param location
+     */
     public void setLocation(DestinationID location)
     {
         this.location = location;
@@ -73,6 +92,10 @@ public class ServerPlayer implements Player, Serializable
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName()
     {
         return this.name;

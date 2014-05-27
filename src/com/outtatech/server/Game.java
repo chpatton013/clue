@@ -33,6 +33,9 @@ public class Game
     private List<ServerPlayer> playerTurnOrder;
     private int curPlayerTurn;
 
+    /**
+     *
+     */
     public Game()
     {
         this.players = new ConcurrentHashMap<Integer, ServerPlayer>();
@@ -67,6 +70,9 @@ public class Game
         return playerTurnOrder.get(curPlayerTurn);
     }
 
+    /**
+     *
+     */
     public void initPlayerTurnOrder()
     {
         this.playerTurnOrder
@@ -94,11 +100,19 @@ public class Game
         return players;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ServerPlayer> getServerPlayersList()
     {
         return new ArrayList(players.values());
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Player> getPlayers()
     {
         List<Player> players = new ArrayList<Player>();
@@ -210,6 +224,10 @@ public class Game
         return destToPlayerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getGameId()
     {
         return gameId;
@@ -268,6 +286,10 @@ public class Game
         return drawPileT;
     }
 
+    /**
+     *
+     * @return
+     */
     public ActionCard popActionCard()
     {
         ActionCard ac = null;

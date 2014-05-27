@@ -18,6 +18,13 @@ public class ClientLobbyState extends State
     private boolean gameOwner;
     private int id;
 
+    /**
+     *
+     * @param playerId
+     * @param players
+     * @param gameOwner
+     * @param lobbyId
+     */
     public ClientLobbyState(Integer playerId, Map<Integer, String> players,
             boolean gameOwner, int lobbyId)
     {
@@ -37,6 +44,10 @@ public class ClientLobbyState extends State
         return this.playerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId()
     {
         return this.id;
@@ -53,12 +64,21 @@ public class ClientLobbyState extends State
         return this.players;
     }
 
+    /**
+     *
+     * @param playerId
+     * @param name
+     */
     public void addPlayer(Integer playerId, String name)
     {
         this.players.put(playerId, name);
         this.triggerChange();
     }
 
+    /**
+     *
+     * @param players
+     */
     public void setPlayers(Map<Integer, String> players)
     {
         this.players = players;

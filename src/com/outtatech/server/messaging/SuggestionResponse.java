@@ -24,11 +24,19 @@ public class SuggestionResponse extends ServerResponse
         this.correctAccusation = correctAccusation;
     }
 
+    /**
+     *
+     * @return
+     */
     public HintCard getRefutingCard()
     {
         return this.refutingCard;
     }
 
+    /**
+     *
+     * @param refutingCard
+     */
     public void setRefutingCard(HintCard refutingCard)
     {
         this.refutingCard = refutingCard;

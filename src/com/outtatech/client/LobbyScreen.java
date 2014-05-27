@@ -41,6 +41,10 @@ public class LobbyScreen extends javax.swing.JFrame
         gameStartButton.setEnabled(false);
     }
 
+    /**
+     *
+     * @param lobbyId
+     */
     public void setId(int lobbyId)
     {
         id = lobbyId;
@@ -51,6 +55,7 @@ public class LobbyScreen extends javax.swing.JFrame
      *
      * @param playerName
      * @param playerId
+     * @param isPlayer
      */
     public void addPlayer(String playerName, int playerId, boolean isPlayer)
     {
@@ -69,6 +74,10 @@ public class LobbyScreen extends javax.swing.JFrame
         numPlayers++;
     }
 
+    /**
+     *
+     * @param isLeader
+     */
     public void setLeader(boolean isLeader)
     {
         createAIButton.setEnabled(isLeader);

@@ -8,6 +8,49 @@ package com.outtatech.common;
  */
 public enum DestinationID
 {
-    NIAGRA_FALLS, GOLDEN_GATE_BRIDGE, OLD_FAITHFUL, CONEY_ISLAND, THE_ALAMO,
-    HOOVER_DAM, LINCOLN_MEMORIAL, MIAMI_BEACH, MT_RUSHMORE;
+
+    /**
+     *
+     */
+    NIAGRA_FALLS,
+
+    /**
+     *
+     */
+    GOLDEN_GATE_BRIDGE,
+
+    /**
+     *
+     */
+    OLD_FAITHFUL,
+
+    /**
+     *
+     */
+    CONEY_ISLAND,
+
+    /**
+     *
+     */
+    THE_ALAMO,
+
+    /**
+     *
+     */
+    HOOVER_DAM,
+
+    /**
+     *
+     */
+    LINCOLN_MEMORIAL,
+
+    /**
+     *
+     */
+    MIAMI_BEACH,
+
+    /**
+     *
+     */
+    MT_RUSHMORE;
 }

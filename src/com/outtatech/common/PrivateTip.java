@@ -16,6 +16,7 @@ public class PrivateTip extends ActionCard
 
     /**
      * Constructs a new PrivatTip ActionCard.
+     * @param type
      */
     public PrivateTip(PrivateTipType type)
     {
@@ -23,6 +24,10 @@ public class PrivateTip extends ActionCard
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public PrivateTipType getType()
     {
         return type;

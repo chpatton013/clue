@@ -7,5 +7,34 @@ package com.outtatech.common;
  */
 public enum VehicleID
 {
-    SEAPLANE, AUTOMOBILE, AIRLINER, HOT_AIR_BALLOON, LIMOUSINE, TRAIN;
+
+    /**
+     *
+     */
+    SEAPLANE,
+
+    /**
+     *
+     */
+    AUTOMOBILE,
+
+    /**
+     *
+     */
+    AIRLINER,
+
+    /**
+     *
+     */
+    HOT_AIR_BALLOON,
+
+    /**
+     *
+     */
+    LIMOUSINE,
+
+    /**
+     *
+     */
+    TRAIN;
 }

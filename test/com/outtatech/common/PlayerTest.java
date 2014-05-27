@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class PlayerTest
 {
     
+    /**
+     *
+     */
     public PlayerTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -51,6 +66,9 @@ public class PlayerTest
         assertEquals(expResult, result);
     }
 
+    /**
+     *
+     */
     public class PlayerImpl implements Player
     {   
         @Override
@@ -59,6 +77,10 @@ public class PlayerTest
             return 0;
         }
 
+        /**
+         *
+         * @return
+         */
         @Override
         public String getName()
         {

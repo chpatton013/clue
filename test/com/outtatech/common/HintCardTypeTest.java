@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class HintCardTypeTest 
 {
     
+    /**
+     *
+     */
     public HintCardTypeTest() 
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() 
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() 
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() 
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() 
     {
@@ -69,6 +84,9 @@ public class HintCardTypeTest
         testDestination();
     }
     
+    /**
+     *
+     */
     public void testVehicle()
     {
         String name = "VEHICLE";
@@ -77,6 +95,9 @@ public class HintCardTypeTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSuspect()
     {
         String name = "SUSPECT";
@@ -85,6 +106,9 @@ public class HintCardTypeTest
         assertEquals(expResult, result); 
     }
     
+    /**
+     *
+     */
     public void testDestination()
     {
         String name = "DESTINATION";

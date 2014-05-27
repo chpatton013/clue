@@ -16,6 +16,7 @@ public class VehicleCard extends HintCard
      * Constructs a new VehicleCard
      *
      * @param vehicle A unique vehicle ID
+     * @param cardColor
      */
     public VehicleCard(VehicleID vehicle, CardColor cardColor)
     {
@@ -45,11 +46,19 @@ public class VehicleCard extends HintCard
         return vehicle;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsAir()
     {
         return isAir;
     }
 
+    /**
+     *
+     * @return
+     */
     public CardColor getCardColor()
     {
         return color;

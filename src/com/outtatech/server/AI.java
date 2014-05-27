@@ -26,6 +26,7 @@ public class AI extends ServerPlayer
      *
      * @param difficulty the Difficulty instance to drive the AI
      * @param ctrl the Server Controller instance needing an AI
+     * @param game
      */
     public AI(Difficulty difficulty, ServerController ctrl, Game game)
     {
@@ -475,6 +476,10 @@ public class AI extends ServerPlayer
         return (DestinationID) cards.toArray()[0];
     }
 
+    /**
+     *
+     * @param obj
+     */
     public void reactToServer(Object obj)
     {
         if (obj instanceof AccusationResponse)

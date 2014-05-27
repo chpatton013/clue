@@ -11,6 +11,7 @@ public class LobbyJoinRequest extends ClientRequest
 
     /**
      * Creates a new ClientRequest object
+     * @param lobbyId
      */
     public LobbyJoinRequest(Integer lobbyId)
     {

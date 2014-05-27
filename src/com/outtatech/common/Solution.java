@@ -15,6 +15,9 @@ public class Solution implements Serializable
 
     /**
      * Creates a new Solution object.
+     * @param dest
+     * @param vehicle
+     * @param suspect
      */
     public Solution(DestinationID dest, VehicleID vehicle, SuspectID suspect)
     {

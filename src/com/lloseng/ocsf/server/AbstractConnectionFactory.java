@@ -46,6 +46,7 @@ public abstract class AbstractConnectionFactory
    * @param group the thread group that contains the connections.
    * @param clientSocket contains the client's socket.
    * @param server a reference to the server that created this instance.
+     * @return 
    * @exception IOException if an I/O error occur when creating the connection.
    */
   protected abstract ConnectionToClient createConnection(ThreadGroup group, 

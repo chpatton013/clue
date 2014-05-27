@@ -19,6 +19,7 @@ public class ClientNetwork extends AbstractClient
      *
      * @param host String value server name or ip
      * @param port the port number to connect to the server on
+     * @throws java.io.IOException
      */
     public ClientNetwork(String host, int port) throws IOException
     {

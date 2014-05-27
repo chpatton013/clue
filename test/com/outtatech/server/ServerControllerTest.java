@@ -24,6 +24,9 @@ public class ServerControllerTest
     private ServerNetwork servernw;
     private ServerController serverctrl;
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
@@ -45,6 +48,9 @@ public class ServerControllerTest
         servernw.setServerController(serverctrl);
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {

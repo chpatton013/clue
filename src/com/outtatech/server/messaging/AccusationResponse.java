@@ -15,6 +15,7 @@ public class AccusationResponse extends ServerResponse
     /**
      * Creates a new AccusationResponse object
      *
+     * @param solution
      * @param correctAccusation
      */
     public AccusationResponse(Solution solution, boolean correctAccusation)
@@ -23,6 +24,10 @@ public class AccusationResponse extends ServerResponse
         this.correctAccusation = correctAccusation;
     }
 
+    /**
+     *
+     * @return
+     */
     public Solution getSolution()
     {
         return this.solution;

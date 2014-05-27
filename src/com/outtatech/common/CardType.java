@@ -7,5 +7,14 @@ package com.outtatech.common;
  */
 public enum CardType
 {
-    HINT, ACTION;
+
+    /**
+     *
+     */
+    HINT,
+
+    /**
+     *
+     */
+    ACTION;
 }

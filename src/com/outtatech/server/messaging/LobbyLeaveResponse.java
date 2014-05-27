@@ -10,11 +10,19 @@ public class LobbyLeaveResponse extends ServerResponse
 {
     private Integer playerId;
 
+    /**
+     *
+     * @param playerId
+     */
     public LobbyLeaveResponse(Integer playerId)
     {
         this.playerId = playerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getPlayerId()
     {
         return this.playerId;

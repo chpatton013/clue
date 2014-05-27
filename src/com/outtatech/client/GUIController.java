@@ -48,6 +48,10 @@ public class GUIController implements Observer
 
     private CurrentWindow state = CurrentWindow.INTRO;
 
+    /**
+     *
+     * @param cCtrl
+     */
     public GUIController(ClientController cCtrl)
     {
         clientController = cCtrl;
@@ -60,6 +64,10 @@ public class GUIController implements Observer
     {
     }
 
+    /**
+     *
+     * @param ctrl
+     */
     public void initWindows(GUIController ctrl)
     {
         introScreen = new IntroScreen(ctrl);
@@ -273,6 +281,9 @@ public class GUIController implements Observer
         clientController.joinGame(lobbyId);
     }
 
+    /**
+     *
+     */
     public void startGame()
     {
         clientController.startGame();
@@ -280,6 +291,7 @@ public class GUIController implements Observer
 
     /**
      * Notifies client controller that player wants to create an AI player
+     * @param lobbyId
      */
     public void createAI(int lobbyId)
     {
@@ -330,7 +342,7 @@ public class GUIController implements Observer
     /**
      * Notifies client controller that player has played a card
      *
-     * @param cardType
+     * @param card
      */
     public void playCard(ActionCard card)
     {
@@ -356,22 +368,39 @@ public class GUIController implements Observer
         clientController.endTurn();
     }
 
+    /**
+     *
+     * @param indx
+     */
     public void setImageIndex(int indx)
     {
         imageIndex = indx;
         clientController.triggerChange();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getImageIndex()
     {
         return imageIndex;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getImagePath()
     {
         return imagePaths[imageIndex];
     }
 
+    /**
+     *
+     * @param indx
+     * @return
+     */
     public String getImagePath(int indx)
     {
         if (indx < 3)

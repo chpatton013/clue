@@ -44,6 +44,10 @@ public class SuspectCard extends HintCard
         return suspect;
     }
 
+    /**
+     *
+     * @return
+     */
     public Gender getGender()
     {
         return gender;

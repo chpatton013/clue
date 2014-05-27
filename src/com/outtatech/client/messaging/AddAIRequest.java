@@ -17,6 +17,7 @@ public class AddAIRequest extends ClientRequest
      * Creates a new AddAIRequest object.
      *
      * @param difficulty the difficulty of the new AI player
+     * @param lobbyId
      */
     public AddAIRequest(Difficulty difficulty, Integer lobbyId)
     {
@@ -37,6 +38,7 @@ public class AddAIRequest extends ClientRequest
     /**
      * Sets the difficulty of the AI player.
      *
+     * @param difficulty
      */
     public void setDifficulty(Difficulty difficulty)
     {
@@ -45,6 +47,7 @@ public class AddAIRequest extends ClientRequest
 
     /**
      * Sets the difficulty of the AI player.
+     * @return 
      */
 
     public Integer getLobbyId()
@@ -54,6 +57,7 @@ public class AddAIRequest extends ClientRequest
 
     /**
      * Sets the difficulty of the AI player.
+     * @param lobbyId
      */
 
     public void setLobbyId(Integer lobbyId)

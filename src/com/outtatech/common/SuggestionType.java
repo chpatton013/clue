@@ -6,5 +6,14 @@ package com.outtatech.common;
  */
 public enum SuggestionType
 {
-    ANY, CURRENT;
+
+    /**
+     *
+     */
+    ANY,
+
+    /**
+     *
+     */
+    CURRENT;
 }

@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class DestinationIDTest 
 {
     
+    /**
+     *
+     */
     public DestinationIDTest() 
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() 
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() 
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() 
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() 
     {
@@ -90,6 +105,9 @@ public class DestinationIDTest
         testMtRushmore();
     }
     
+    /**
+     *
+     */
     public void testNiagraFalls()
     {
         String name = "NIAGRA_FALLS";
@@ -98,6 +116,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGoldenGateBridge()
     {
         String name = "GOLDEN_GATE_BRIDGE";
@@ -106,6 +127,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testOldFaithful()
     {
         String name = "OLD_FAITHFUL";
@@ -114,6 +138,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testConeyIsland()
     {
         String name = "CONEY_ISLAND";
@@ -122,6 +149,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testTheAlamo()
     {
         String name = "THE_ALAMO";
@@ -130,6 +160,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testHooverDam()
     {
         String name = "HOOVER_DAM";
@@ -138,6 +171,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testLincolnMemorial()
     {
         String name = "LINCOLN_MEMORIAL";
@@ -146,6 +182,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMiamiBeach()
     {
         String name = "MIAMI_BEACH";
@@ -154,6 +193,9 @@ public class DestinationIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMtRushmore()
     {
         String name = "MT_RUSHMORE";

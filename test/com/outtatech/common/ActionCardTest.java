@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class ActionCardTest 
 {
     
+    /**
+     *
+     */
     public ActionCardTest() 
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() 
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() 
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() 
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() 
     {
@@ -63,6 +78,9 @@ public class ActionCardTest
         testSuggestion();
     }
     
+    /**
+     *
+     */
     @Test
     public void testGeneralActionCard()
     {
@@ -72,6 +90,9 @@ public class ActionCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSnoop()
     {
         ActionCard instance = new Snoop();
@@ -80,6 +101,9 @@ public class ActionCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAllSnoop()
     {
         ActionCard instance = new AllSnoop(true);
@@ -92,6 +116,9 @@ public class ActionCardTest
         assertEquals(expDirResult, dirResult);
     }
     
+    /**
+     *
+     */
     public void testPrivateTip()
     {
         ActionCard instance = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
@@ -100,6 +127,9 @@ public class ActionCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSuperSleuth()
     {
         ActionCard instance = new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT);
@@ -108,6 +138,9 @@ public class ActionCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSuggestion()
     {
         ActionCard instance = new Suggestion(SuggestionType.ANY);

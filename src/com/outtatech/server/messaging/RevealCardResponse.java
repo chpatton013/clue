@@ -19,7 +19,6 @@ public class RevealCardResponse extends ServerResponse
     /**
      * Creates a new RevealCardRequest object.
      *
-     * @param playerId the id of the player the cards are being revealed to.
      * @param actionCard the card that has triggered this reveal action.
      * @param cards the list of cards that this reveal action may want.
      */

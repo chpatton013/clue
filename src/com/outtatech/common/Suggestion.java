@@ -14,6 +14,7 @@ public class Suggestion extends ActionCard
 
     /**
      * Constructs a new Suggestion ActionCard.
+     * @param type
      */
     public Suggestion(SuggestionType type)
     {
@@ -21,6 +22,10 @@ public class Suggestion extends ActionCard
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public SuggestionType getType()
     {
         return type;

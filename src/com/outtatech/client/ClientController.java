@@ -74,6 +74,9 @@ public class ClientController
         }
     }
 
+    /**
+     *
+     */
     public void triggerChange()
     {
         this.state.triggerChange();
@@ -98,6 +101,7 @@ public class ClientController
 
     /**
      * Start the multi player game mode.
+     * @param lobbyName
      */
     public void startMultiPlayerGame(String lobbyName)
     {
@@ -118,6 +122,7 @@ public class ClientController
      * Sends a request to the game server to add an AI player.
      *
      * @param difficulty Difficulty the difficulty for this AI player
+     * @param lobbyId
      */
     public void addAIPlayer(Difficulty difficulty, Integer lobbyId)
     {
@@ -135,7 +140,7 @@ public class ClientController
     /**
      * Sends a request to the game server to remove a player from the lobby.
      *
-     * @param Integer playerId the id of the player to kick
+     * @param playerId
      */
     public void kickPlayer(Integer playerId)
     {
@@ -159,6 +164,12 @@ public class ClientController
         this.forwardMessage(new EndTurnRequest());
     }
 
+    /**
+     *
+     * @param actionCard
+     * @param cards
+     * @param playerId
+     */
     public void playActionCard(ActionCard actionCard, List<Card> cards,
             Integer playerId)
     {
@@ -173,8 +184,7 @@ public class ClientController
      * Called when the client would like to make an accusation during their
      * turn.
      *
-     * @param accusationCards list containing the Destination, Vehicle and
-     * Suspect card required to make an accusation.
+     * @param accusation
      */
     public void makeAccusation(Solution accusation)
     {

@@ -19,7 +19,7 @@ public class ClientLobbyDiscoveryState extends State
      * Constructor requires a List of Integer Objects that represents a list of
      * available games that the client, player, is able to join.
      *
-     * @param gameList List of games in the lobby
+     * @param lobbyList
      */
     public ClientLobbyDiscoveryState(List<Lobby> lobbyList)
     {

@@ -12,11 +12,19 @@ public class SuggestionRequest extends ClientRequest
 {
     private Solution suggestion;
 
+    /**
+     *
+     * @param suggestion
+     */
     public SuggestionRequest(Solution suggestion)
     {
         this.suggestion = suggestion;
     }
 
+    /**
+     *
+     * @return
+     */
     public Solution getSuggestion()
     {
         return this.suggestion;

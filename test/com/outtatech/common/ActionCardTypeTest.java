@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class ActionCardTypeTest 
 {
     
+    /**
+     *
+     */
     public ActionCardTypeTest() 
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() 
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() 
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() 
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() 
     {
@@ -76,6 +91,9 @@ public class ActionCardTypeTest
         testSuperSleuth();
     }
     
+    /**
+     *
+     */
     public void testSnoop()
     {
         String name = "SNOOP";
@@ -84,6 +102,9 @@ public class ActionCardTypeTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAllSnoop()
     {
         String name = "ALL_SNOOP";
@@ -92,6 +113,9 @@ public class ActionCardTypeTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testPrivateTip()
     {
         String name = "PRIVATE_TIP";
@@ -100,6 +124,9 @@ public class ActionCardTypeTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSuggestion()
     {
         String name = "SUGGESTION";

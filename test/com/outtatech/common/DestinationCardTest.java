@@ -14,24 +14,39 @@ import static org.junit.Assert.*;
 public class DestinationCardTest 
 {
     
+    /**
+     *
+     */
     public DestinationCardTest() 
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() 
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() 
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() {
     }
@@ -71,6 +86,9 @@ public class DestinationCardTest
         testMtRushmore();
     }
     
+    /**
+     *
+     */
     public void testNiagraFalls()
     {
         DestinationCard instance = new DestinationCard(DestinationID.NIAGRA_FALLS);
@@ -79,6 +97,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGoldenGateBridge()
     {
         DestinationCard instance = new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE);
@@ -87,6 +108,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testOldFaithful()
     {
         DestinationCard instance = new DestinationCard(DestinationID.OLD_FAITHFUL);
@@ -95,6 +119,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testConeyIsland()
     {
         DestinationCard instance = new DestinationCard(DestinationID.CONEY_ISLAND);
@@ -103,6 +130,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testTheAlamo()
     {
         DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
@@ -111,6 +141,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testHooverDam()
     {
         DestinationCard instance = new DestinationCard(DestinationID.HOOVER_DAM);
@@ -119,6 +152,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testLincolnMemorial()
     {
         DestinationCard instance = new DestinationCard(DestinationID.LINCOLN_MEMORIAL);
@@ -127,6 +163,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMiamiBeach()
     {
         DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
@@ -135,6 +174,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMtRushmore()
     {
         DestinationCard instance = new DestinationCard(DestinationID.MT_RUSHMORE);
@@ -143,6 +185,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     @Test
     public void testGetIsNorth()
     {
@@ -176,6 +221,9 @@ public class DestinationCardTest
         testIsNorthMiamiBeach();
     }
     
+    /**
+     *
+     */
     public void testisNorthNiagraFalls()
     {
         DestinationCard instance = 
@@ -185,6 +233,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthConeyIsland()
     {
         DestinationCard instance = 
@@ -194,6 +245,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthMtRushmore()
     {
         DestinationCard instance = 
@@ -203,6 +257,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthOldFaithful()
     {
         DestinationCard instance = 
@@ -212,6 +269,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthGoldenGateBridge()
     {
         DestinationCard instance = 
@@ -221,6 +281,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthHooverDam()
     {
         DestinationCard instance = 
@@ -230,6 +293,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthTheAlamo()
     {
         DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
@@ -238,6 +304,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthLincolnMemorial()
     {
         DestinationCard instance = 
@@ -247,6 +316,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsNorthMiamiBeach()
     {
         DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);
@@ -255,6 +327,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetIsWest()
     {
@@ -288,6 +363,9 @@ public class DestinationCardTest
         testIsWestMiamiBeach();
     }
     
+    /**
+     *
+     */
     public void testisWestNiagraFalls()
     {
         DestinationCard instance = 
@@ -297,6 +375,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestConeyIsland()
     {
         DestinationCard instance = 
@@ -306,6 +387,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestMtRushmore()
     {
         DestinationCard instance = 
@@ -315,6 +399,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestOldFaithful()
     {
         DestinationCard instance = 
@@ -324,6 +411,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestGoldenGateBridge()
     {
         DestinationCard instance = 
@@ -333,6 +423,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestHooverDam()
     {
         DestinationCard instance = 
@@ -342,6 +435,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestTheAlamo()
     {
         DestinationCard instance = new DestinationCard(DestinationID.THE_ALAMO);
@@ -350,6 +446,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestLincolnMemorial()
     {
         DestinationCard instance = 
@@ -359,6 +458,9 @@ public class DestinationCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testIsWestMiamiBeach()
     {
         DestinationCard instance = new DestinationCard(DestinationID.MIAMI_BEACH);

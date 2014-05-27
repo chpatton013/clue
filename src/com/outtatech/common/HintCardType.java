@@ -7,5 +7,19 @@ package com.outtatech.common;
  */
 public enum HintCardType
 {
-    VEHICLE, SUSPECT, DESTINATION;
+
+    /**
+     *
+     */
+    VEHICLE,
+
+    /**
+     *
+     */
+    SUSPECT,
+
+    /**
+     *
+     */
+    DESTINATION;
 }

@@ -85,6 +85,9 @@ public class MainGameScreen extends javax.swing.JFrame
         endTurn();
     }
 
+    /**
+     *
+     */
     public void updateLocation()
     {
         String path = controller.getImagePath();
@@ -99,6 +102,10 @@ public class MainGameScreen extends javax.swing.JFrame
         locationImage9.setIcon(new ImageIcon(path + "Location-9.jpg"));
     }
 
+    /**
+     *
+     * @param cards
+     */
     public void updateHand(List<Card> cards)
     {
         String path = controller.getImagePath();
@@ -1114,6 +1121,7 @@ public class MainGameScreen extends javax.swing.JFrame
      *
      * @param playerName
      * @param playerId
+     * @param isPlayer
      */
     public void addPlayer(String playerName, int playerId, boolean isPlayer)
     {
@@ -1132,7 +1140,6 @@ public class MainGameScreen extends javax.swing.JFrame
     /**
      * Removes a player from the player list
      *
-     * @param playerId
      */
     public void clearPlayers()
     {

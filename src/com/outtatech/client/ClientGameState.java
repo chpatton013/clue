@@ -34,6 +34,12 @@ public class ClientGameState extends State
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
+    /**
+     *
+     * @param playerID
+     * @param hand
+     * @param players
+     */
     public ClientGameState(int playerID, List<Card> hand,
             Map<Integer, String> players)
     {
@@ -148,6 +154,7 @@ public class ClientGameState extends State
     /**
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check, set to false after access.
+     * @return 
      */
     public boolean getRevealStatus()
     {
@@ -233,22 +240,38 @@ public class ClientGameState extends State
         return destToPlayerId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCurrentActivePlayer()
     {
         return this.currentActivePlayer;
     }
 
+    /**
+     *
+     * @param currentActivePlayer
+     */
     public void setCurrentActivePlayer(Integer currentActivePlayer)
     {
         this.currentActivePlayer = currentActivePlayer;
         triggerChange();
     }
 
+    /**
+     *
+     * @param message
+     */
     public void pushGameLog(String message)
     {
         this.gameLog.addLast(message);
     }
 
+    /**
+     *
+     * @return
+     */
     public String pollGameLog()
     {
         return this.gameLog.poll();

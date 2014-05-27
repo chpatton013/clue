@@ -13,22 +13,37 @@ import static org.junit.Assert.*;
  */
 public class KickPlayerRequestTest {
    
-   public KickPlayerRequestTest() {
+    /**
+     *
+     */
+    public KickPlayerRequestTest() {
    }
    
-   @BeforeClass
+    /**
+     *
+     */
+    @BeforeClass
    public static void setUpClass() {
    }
    
-   @AfterClass
+    /**
+     *
+     */
+    @AfterClass
    public static void tearDownClass() {
    }
    
-   @Before
+    /**
+     *
+     */
+    @Before
    public void setUp() {
    }
    
-   @After
+    /**
+     *
+     */
+    @After
    public void tearDown() {
    }
 

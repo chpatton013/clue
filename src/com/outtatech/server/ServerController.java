@@ -39,8 +39,7 @@ public class ServerController
      * used to facilitate changes to multiple Game instances with many different
      * Client connections and any AI players.
      *
-     * @param games a Map of Client connections and Games
-     * @param humans a Map of ServerPlayers and Client Connections
+     * @param network
      * @param robots a Map of ServerPlayers and AI instances
      */
     public ServerController(ServerNetwork network)
@@ -262,6 +261,11 @@ public class ServerController
         }
     }
 
+    /**
+     *
+     * @param game
+     * @param initiator
+     */
     public void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
         ServerPlayer newCurrent = game.advanceTurn();
@@ -480,6 +484,11 @@ public class ServerController
          */
     }
 
+    /**
+     *
+     * @param obj
+     * @param ai
+     */
     public void informAI(Object obj, List<AI> ai)
     {
         for (AI bot : ai)
@@ -488,6 +497,11 @@ public class ServerController
         }
     }
 
+    /**
+     *
+     * @param obj
+     * @param ai
+     */
     public void informAI(Object obj, AI ai)
     {
         ai.reactToServer(obj);
@@ -534,6 +548,11 @@ public class ServerController
         return this.players.get(game);
     }
 
+    /**
+     *
+     * @param client
+     * @return
+     */
     public Integer getLobbyId(ConnectionToClient client)
     {
         return games.get(client).getGameId();

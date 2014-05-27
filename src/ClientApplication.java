@@ -8,6 +8,9 @@ import com.outtatech.common.*;
  */
 public class ClientApplication {
     
+    /**
+     *
+     */
     public ClientApplication () {
         ClientController client = new ClientController();
         GUIController gui = new GUIController(client);
@@ -16,6 +19,10 @@ public class ClientApplication {
         gui.exitWindow();
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         ClientApplication app = new ClientApplication();
     }

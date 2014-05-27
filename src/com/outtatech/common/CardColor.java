@@ -6,5 +6,14 @@ package com.outtatech.common;
  */
 public enum CardColor
 {
-    RED, BLUE;
+
+    /**
+     *
+     */
+    RED,
+
+    /**
+     *
+     */
+    BLUE;
 }

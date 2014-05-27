@@ -7,5 +7,34 @@ package com.outtatech.common;
  */
 public enum SuspectID
 {
-    WHITE, PEACOCK, GREEN, MUSTARD, PLUM, SCARLET;
+
+    /**
+     *
+     */
+    WHITE,
+
+    /**
+     *
+     */
+    PEACOCK,
+
+    /**
+     *
+     */
+    GREEN,
+
+    /**
+     *
+     */
+    MUSTARD,
+
+    /**
+     *
+     */
+    PLUM,
+
+    /**
+     *
+     */
+    SCARLET;
 }
