@@ -139,7 +139,8 @@ public class ServerController
         {
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
-            serverPlayer.setName("xXDragonDildos69Xx");
+            int num = humans.keySet().size();
+            serverPlayer.setName("xXDragonDildos69Xx" + num);
             
             this.humans.put(serverPlayer, connection);
             List<ConnectionToClient> cxns = this.getGameClients(lobby.
