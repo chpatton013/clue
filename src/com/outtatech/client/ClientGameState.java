@@ -251,7 +251,7 @@ public class ClientGameState extends State
         this.playerTurnOrder = playerTurnOrder;
     }
 
-    public void setCurrentActivePlayer(Integer currectActivePlayer)
+    public void setCurrentActivePlayer(Integer currentActivePlayer)
     {
         this.currentActivePlayer = currentActivePlayer;
     }
