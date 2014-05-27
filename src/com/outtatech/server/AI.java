@@ -445,6 +445,8 @@ public class AI extends ServerPlayer
                     hintCardsHand.add((HintCard)temp);
                 }
             }
+            //playActionCard();
+            ctrl.handleEndTurnRequest(game, this);
         }
         if(obj instanceof GameStateResponse) 
         {
@@ -452,7 +454,7 @@ public class AI extends ServerPlayer
         }
         if(obj instanceof KickPlayerResponse) 
         {
-            System.out.println("lol dont give a fuck");
+            
         }
         if(obj instanceof RevealCardResponse) 
         {

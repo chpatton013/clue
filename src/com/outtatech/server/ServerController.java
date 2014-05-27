@@ -75,6 +75,12 @@ public class ServerController
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection)
     {
+        if (obj instanceof EndTurnRequest)
+        {
+            EndTurnRequest rqst = (EndTurnRequest)obj;
+            Game game = games.get(connection);
+            handleEndTurnRequest(game, connectionToPlayer.get(connection));
+        }
         /**
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
@@ -118,12 +124,10 @@ public class ServerController
          */
         else if (obj instanceof AddAIRequest)
         {
-            System.out.println("Recieved AI Request");
             AddAIRequest addAIReq = (AddAIRequest) obj;
             int num = games.get(connection).getPlayers().size();
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                     games.get(connection));
-            System.out.println("Creating new Clue Bot");
             newPlayer.setName("CLUEBot" + num);
 
             // Get the requestor's lobby
@@ -138,7 +142,6 @@ public class ServerController
             Map<Integer, String> names = new HashMap<Integer, String>();
             for (Player temp : players)
             {
-                System.out.println(temp.getName());
                 names.put(temp.getPlayerId(), temp.getName());
             }
 
@@ -259,7 +262,7 @@ public class ServerController
         }
     }
 
-    private void handleEndTurnRequest(Game game, ServerPlayer initiator)
+    public void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
         ServerPlayer newCurrent = game.advanceTurn();
         List<Card> drawCards = new ArrayList<Card>();
@@ -487,7 +490,7 @@ public class ServerController
 
     public void informAI(Object obj, AI ai)
     {
-
+        ai.reactToServer(obj);
     }
 
     /**
@@ -576,13 +579,11 @@ public class ServerController
             if (!humans.containsKey(serverPlayer))
             {
                 //Send to AI
-                System.out.println("Sent to bot");
                 //informAI(msg, robots.get(serverPlayer));
             }
             else
             {
                 //Send to human
-                System.out.println("Sent to human");
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
@@ -599,7 +600,6 @@ public class ServerController
         Integer currentActivePlayer = game.getCurrentPlayer().getPlayerId();
         Map<Integer, String> names = new HashMap<Integer, String>();
         for(Player player : game.getServerPlayers().values()) {
-            System.out.println(player.getName());
             names.put(player.getPlayerId(), player.getName());
         }
 
