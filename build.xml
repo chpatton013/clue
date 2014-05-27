@@ -70,4 +70,20 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+        <!--
+                =================
+                CHECKSTYLE SECTION
+                =================
+     -->
+<target description="Run checkstyle on src directory." name="checkstyle">
+<taskdef resource="checkstyletask.properties"
+         classpath="libs/308checks.jar;libs/checkstyle-all-4.4.jar"/>
+<checkstyle config="nbproject/308style.xml" failOnViolation="true">
+            <!-- Specify includes and excludes -->
+            <fileset dir="src/com" includes="**/*.java"
+            excludes="**/*Screen.java, **/lloseng/**/*.java"/>
+</checkstyle>
+</target>
+
 </project>

@@ -3,23 +3,34 @@ package com.outtatech.client.messaging;
 import com.outtatech.common.Solution;
 
 /**
- * Message sent from the client to the server when they would like to make
- * a suggestion.
- * 
+ * Version-latenightpizzaparty
+ * Message sent from the client to the server when they would like to make a
+ * suggestion.
+ *
  * @author jbilous
  */
 public class SuggestionRequest extends ClientRequest
 {
     private Solution suggestion;
-    
-    public SuggestionRequest(Solution suggestion) 
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @param suggestion method parameter
+     */
+    public SuggestionRequest(Solution suggestion)
     {
         this.suggestion = suggestion;
     }
-    
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
     public Solution getSuggestion()
     {
         return this.suggestion;
     }
-    
+
 }

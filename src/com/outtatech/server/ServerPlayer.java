@@ -29,6 +29,7 @@ public class ServerPlayer implements Player, Serializable
     public EnumSet locationsSeen = EnumSet.noneOf(DestinationID.class);
     public EnumSet vehicleCardsSeen = EnumSet.noneOf(VehicleID.class);
 
+    
     /**
      * Construct a sever player to keep track of client and server player
      * actions.

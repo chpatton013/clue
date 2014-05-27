@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class VehicleIDTest
 {
     
+    /**
+     *
+     */
     public VehicleIDTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -79,6 +94,9 @@ public class VehicleIDTest
         testTrain();
     }
     
+    /**
+     *
+     */
     public void testSeaPlane()
     {
         String name = "SEAPLANE";
@@ -87,6 +105,9 @@ public class VehicleIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAutomobile()
     {
         String name = "AUTOMOBILE";
@@ -95,6 +116,9 @@ public class VehicleIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAirliner()
     {
         String name = "AIRLINER";
@@ -103,6 +127,9 @@ public class VehicleIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testHotAirBalloon()
     {
         String name = "HOT_AIR_BALLOON";
@@ -111,6 +138,9 @@ public class VehicleIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testLimousine()
     {
         String name = "LIMOUSINE";
@@ -119,6 +149,9 @@ public class VehicleIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testTrain()
     {
         String name = "TRAIN";

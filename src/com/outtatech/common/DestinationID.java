@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * The DestinationID enumeration models types of destinations destination cards
  * can have
  *
@@ -8,6 +9,58 @@ package com.outtatech.common;
  */
 public enum DestinationID
 {
-    NIAGRA_FALLS, GOLDEN_GATE_BRIDGE, OLD_FAITHFUL, CONEY_ISLAND, THE_ALAMO,
-    HOOVER_DAM, LINCOLN_MEMORIAL, MIAMI_BEACH, MT_RUSHMORE;
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    NIAGRA_FALLS,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    GOLDEN_GATE_BRIDGE,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    OLD_FAITHFUL,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    CONEY_ISLAND,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    THE_ALAMO,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    HOOVER_DAM,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    LINCOLN_MEMORIAL,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    MIAMI_BEACH,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    MT_RUSHMORE;
 }

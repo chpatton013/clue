@@ -13,13 +13,22 @@ import static org.junit.Assert.*;
  */
 public class AITest {
     
+    /**
+     *
+     */
     public AITest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }

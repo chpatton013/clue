@@ -7,6 +7,7 @@ package com.outtatech.common;
  * date: 5/1/14
  */
 /**
+ * Version-latenightpizzaparty
  * An ActionCard is a playable card that describes an action that can take place
  * that can effect one or more players.
  *
@@ -17,9 +18,10 @@ public class ActionCard extends Card
     ActionCardType type;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new ActionCard.
      *
-     * @param type The type of action the card will perform once played.
+     * @param type The type of action the card will perform once played. method parameter
      */
     public ActionCard(ActionCardType type)
     {
@@ -28,9 +30,10 @@ public class ActionCard extends Card
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the type of action this ActionCard corresponds to.
      *
-     * @return The type of action this ActionCard corresponds to.
+     * @return The type of action this ActionCard corresponds to. return value
      */
     public ActionCardType getActionType()
     {

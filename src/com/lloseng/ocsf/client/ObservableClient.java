@@ -39,7 +39,13 @@ public class ObservableClient extends Observable
     private AdaptableClient service;
 
   //Constructor *****************************************************
-    public ObservableClient(String host, int port)
+
+    /**
+     *
+     * @param host
+     * @param port
+     */
+        public ObservableClient(String host, int port)
     {
         service = new AdaptableClient(host, port, this);
     }
@@ -47,6 +53,7 @@ public class ObservableClient extends Observable
   //Instance methods ************************************************
     /**
      * Opens the connections with the server.
+     * @throws java.io.IOException
      */
     final public void openConnection() throws IOException
     {
@@ -55,6 +62,7 @@ public class ObservableClient extends Observable
 
     /**
      * Closes the connection to the server.
+     * @throws java.io.IOException
      */
     final public void closeConnection() throws IOException
     {
@@ -66,6 +74,7 @@ public class ObservableClient extends Observable
      * communicate with the server.
      *
      * @param msg The message to be sent.
+     * @throws java.io.IOException
      */
     final public void sendToServer(Object msg) throws IOException
     {
@@ -75,6 +84,7 @@ public class ObservableClient extends Observable
 // ACCESSING METHODS ------------------------------------------------
     /**
      * Used to find out if the client is connnected.
+     * @return
      */
     final public boolean isConnected()
     {

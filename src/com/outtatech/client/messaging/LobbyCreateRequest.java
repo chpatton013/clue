@@ -1,6 +1,7 @@
 package com.outtatech.client.messaging;
 
 /**
+ * Version-latenightpizzaparty
  * An encapsulated message used by the client to request that the game server
  * creates a new game.
  *
@@ -11,9 +12,10 @@ public class LobbyCreateRequest extends ClientRequest
     String lobbyName;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new LobbyCreateRequest object.
      *
-     * @param lobbyName the name of the lobby to create
+     * @param lobbyName the name of the lobby to create method parameter
      */
     public LobbyCreateRequest(String lobbyName)
     {
@@ -21,9 +23,10 @@ public class LobbyCreateRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the name of the lobby.
      *
-     * @return the name of the lobby.
+     * @return the name of the lobby. return value
      */
     public String getLobbyName()
     {

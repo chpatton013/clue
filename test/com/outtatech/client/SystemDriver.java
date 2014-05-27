@@ -20,9 +20,20 @@ import java.util.*;
  */
 public class SystemDriver implements Observer
 {
+
+    /**
+     *
+     */
     public static final int port = 4444;
+
+    /**
+     *
+     */
     public static final String host = "localhost";
  
+    /**
+     *
+     */
     public SystemDriver()
     {
     }
@@ -31,7 +42,7 @@ public class SystemDriver implements Observer
     {
         // <editor-fold defaultstate="collapsed" desc=" Initialize Network and Controllers ">
         ServerNetwork server = new ServerNetwork(port);
-        try   
+        /**try   
         {
             server.listen();
         }
@@ -39,11 +50,11 @@ public class SystemDriver implements Observer
         {
             System.out.println("ouch");
             System.out.println(e.getMessage());
-        }
+        }**/
         System.out.println("Driver started, server listening.");
         ServerController gameController = new ServerController(server);
         server.setServerController(gameController);
-        ClientNetwork client = null;
+        /**ClientNetwork client = null;
         try
         {
             client = new ClientNetwork(host, port);
@@ -52,29 +63,33 @@ public class SystemDriver implements Observer
         catch(Exception ex)
         {
             System.out.println(ex.getMessage());
-        }
-        State state = new State();
+        }**/
+        State state;
+        ClientController clientOne = new ClientController();
+        state = clientOne.getState();
         state.addObserver(this);
-        ClientController ctrl = new ClientController();
-        client.setClientController(ctrl);
         
         
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc=" Lobby Testing ">
-        ctrl.searchForGames();
+        clientOne.searchForGames(); //should be zero
         System.out.println("sent search for games request.");
         
-        ctrl.startMultiPlayerGame("StarTREK");
+        clientOne.startMultiPlayerGame("StarTREK");
         System.out.println("sent add game request.");
         
-        ctrl.searchForGames();
+        clientOne.searchForGames();
         
         //while(true);
 
         // </editor-fold>
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args)
     {
         SystemDriver driver = new SystemDriver();

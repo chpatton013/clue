@@ -11,13 +11,22 @@ import static org.junit.Assert.*;
  */
 public class LobbyCreateResponseTest {
     
+    /**
+     *
+     */
     public LobbyCreateResponseTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }

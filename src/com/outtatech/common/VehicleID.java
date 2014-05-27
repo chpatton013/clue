@@ -1,11 +1,47 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * The VehicleID enumeration models types of vehicles vehicle cards can have.
  *
  * @author bennettschalich
  */
 public enum VehicleID
 {
-    SEAPLANE, AUTOMOBILE, AIRLINER, HOT_AIR_BALLOON, LIMOUSINE, TRAIN;
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    SEAPLANE,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    AUTOMOBILE,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    AIRLINER,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    HOT_AIR_BALLOON,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    LIMOUSINE,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+    TRAIN;
 }

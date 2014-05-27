@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * The PrivateTip class represents a type of ActionCard that represents an
  * Private Tip action. A PrivateTip ActionCard results in one of the following:
  * A player of your choice: Shows you all their Suspect Cards." (1) Shows you
@@ -13,16 +14,23 @@ package com.outtatech.common;
 public class PrivateTip extends ActionCard
 {
     PrivateTipType type;
-    
+
     /**
+     * Version-latenightpizzaparty
      * Constructs a new PrivatTip ActionCard.
+     * @param type method parameter
      */
     public PrivateTip(PrivateTipType type)
     {
         super(ActionCardType.PRIVATE_TIP);
         this.type = type;
     }
-    
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
     public PrivateTipType getType()
     {
         return type;

@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class SuggestionTypeTest
 {
     
+    /**
+     *
+     */
     public SuggestionTypeTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {

@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class HintCardTest
 {
     
+    /**
+     *
+     */
     public HintCardTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -56,6 +71,9 @@ public class HintCardTest
         testGetDestination();
     }
     
+    /**
+     *
+     */
     @Test
     public void testSpecificHintCards()
     {
@@ -69,6 +87,9 @@ public class HintCardTest
         testDestinationCard();
     }
     
+    /**
+     *
+     */
     public void testVehicleCard()
     {
         HintCard instance = new VehicleCard(VehicleID.SEAPLANE, CardColor.RED);
@@ -77,6 +98,9 @@ public class HintCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testSuspectCard()
     {
         HintCard instance = new SuspectCard(SuspectID.WHITE);
@@ -85,6 +109,9 @@ public class HintCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testDestinationCard()
     {
         HintCard instance = new DestinationCard(DestinationID.CONEY_ISLAND);
@@ -93,6 +120,9 @@ public class HintCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGetVehicle()
     {
         HintCard instance = new HintCard(HintCardType.VEHICLE);
@@ -101,6 +131,9 @@ public class HintCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGetSuspect()
     {
         HintCard instance = new HintCard(HintCardType.SUSPECT);
@@ -109,6 +142,9 @@ public class HintCardTest
         assertEquals(expResult, result); 
     }
     
+    /**
+     *
+     */
     public void testGetDestination()
     {
         HintCard instance = new HintCard(HintCardType.DESTINATION);

@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class SuspectIDTest
 {
     
+    /**
+     *
+     */
     public SuspectIDTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -79,6 +94,9 @@ public class SuspectIDTest
         testScarlet();
     }
     
+    /**
+     *
+     */
     public void testWhite()
     {
         String name = "WHITE";
@@ -87,6 +105,9 @@ public class SuspectIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testPeacock()
     {
         String name = "PEACOCK";
@@ -95,6 +116,9 @@ public class SuspectIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testGreen()
     {
         String name = "GREEN";
@@ -103,6 +127,9 @@ public class SuspectIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testMustard()
     {
         String name = "MUSTARD";
@@ -111,6 +138,9 @@ public class SuspectIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testPlum()
     {
         String name = "PLUM";
@@ -119,6 +149,9 @@ public class SuspectIDTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testScarlet()
     {
         String name = "SCARLET";

@@ -5,6 +5,7 @@ import com.outtatech.server.messaging.ServerResponse;
 import java.io.IOException;
 
 /**
+ * Version-latenightpizzaparty
  * The networking layer for the client application. Handles all incoming and
  * outgoing network traffic by communicating directly with the ClientController.
  *
@@ -15,30 +16,35 @@ public class ClientNetwork extends AbstractClient
     private ClientController ctrl;
 
     /**
+     * Version-latenightpizzaparty
      * Construct a new ClientNetwork on the give port.
      *
-     * @param host String value server name or ip
-     * @param port the port number to connect to the server on
+     * @param host String value server name or ip method parameter
+     * @param port the port number to connect to the server on method parameter
+     * @throws java.io.IOException
      */
     public ClientNetwork(String host, int port) throws IOException
     {
         super(host, port);
         this.openConnection();
     }
-    
+
     /**
+     * Version-latenightpizzaparty
      * Sets this instance's reference to the ClientController
-     * @param ctrl the client controller reference
+     *
+     * @param ctrl the client controller reference method parameter
      */
-    public void setClientController(ClientController ctrl) 
+    public void setClientController(ClientController ctrl)
     {
         this.ctrl = ctrl;
     }
 
     /**
+     * Version-latenightpizzaparty
      * Return this instance's reference to the ClientController.
      *
-     * @return the internal reference to the ClientController.
+     * @return the internal reference to the ClientController. return value
      * @see ClientController
      */
     public ClientController getClientController()
@@ -47,13 +53,15 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Send an object to the server.
      *
-     * @param obj the object to send as a message.
+     * @param obj the object to send as a message. method parameter
      */
     public void sendMessageToServer(Object obj)
     {
         // Call OCSF's sendToServer method
+        // Just in case...
         try
         {
             sendToServer(obj);
@@ -65,29 +73,32 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Handles a message sent from the server to this client.
      *
-     * @param msg the message sent.
+     * @param msg the message sent. method parameter
      */
     @Override
     protected void handleMessageFromServer(Object msg)
     {
-        ctrl.reactToMessage((ServerResponse)msg);
+        ctrl.reactToMessage((ServerResponse) msg);
     }
 
     /**
+     * Version-latenightpizzaparty
      * Respond to normal server connection closure.
      */
     @Override
     protected void connectionClosed()
     {
-        // Call OCSF close 
+        // Call OCSF close
     }
 
     /**
+     * Version-latenightpizzaparty
      * Respond to irregular server connection closure.
      *
-     * @param exception Exception that caused irregular closure.
+     * @param exception Exception that caused irregular closure. method parameter
      */
     @Override
     protected void connectionException(Exception exception)

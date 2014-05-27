@@ -1,21 +1,52 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  *
  * @author bennettschalich
  */
 public enum PrivateTipType
 {
     //Reveal all destination cards
-    ALL_DESTINATIONS, 
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ALL_DESTINATIONS,
     //Reveal all vehicle cards
-    ALL_VEHICLES,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ALL_VEHICLES,
     //Reveal one northern destination card
-    ONE_NORTHERN_DESTINATION,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ONE_NORTHERN_DESTINATION,
     //Reveals all suspect cards
-    ALL_SUSPECTS,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ALL_SUSPECTS,
     //Reveal a female suspect card
-    ONE_FEMALE_SUSPECT,
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ONE_FEMALE_SUSPECT,
     //Reveal a red vehicle card
-    ONE_RED_VEHICLE;  
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     */
+        ONE_RED_VEHICLE;
 }

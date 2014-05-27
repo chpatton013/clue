@@ -14,25 +14,40 @@ import static org.junit.Assert.*;
 public class VehicleCardTest
 {
     
+    /**
+     *
+     */
     public VehicleCardTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -65,6 +80,9 @@ public class VehicleCardTest
         testTrain();
     }
     
+    /**
+     *
+     */
     public void testSeaPlane()
     {
         VehicleCard instance = new VehicleCard(VehicleID.SEAPLANE, CardColor.RED);
@@ -73,6 +91,9 @@ public class VehicleCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAutomobile()
     {
         VehicleCard instance = new VehicleCard(VehicleID.AUTOMOBILE, CardColor.RED);
@@ -81,6 +102,9 @@ public class VehicleCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testAirliner()
     {
         VehicleCard instance = new VehicleCard(VehicleID.AIRLINER, CardColor.RED);
@@ -89,6 +113,9 @@ public class VehicleCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testHotAirBalloon()
     {
         VehicleCard instance = new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.RED);
@@ -97,6 +124,9 @@ public class VehicleCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testLimousine()
     {
         VehicleCard instance = new VehicleCard(VehicleID.LIMOUSINE, CardColor.RED);
@@ -105,6 +135,9 @@ public class VehicleCardTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     public void testTrain()
     {
         VehicleCard instance = new VehicleCard(VehicleID.TRAIN, CardColor.RED);

@@ -18,15 +18,24 @@ import org.junit.Test;
 public class ClientGameStateTest
 {
     
+    /**
+     *
+     */
     public ClientGameStateTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {

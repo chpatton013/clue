@@ -6,6 +6,7 @@ package com.outtatech.common;
  * and open the template in the editor.
  */
 /**
+ * Version-latenightpizzaparty
  * The Player interface represents a player in the game
  *
  * @author bennettschalich
@@ -13,10 +14,17 @@ package com.outtatech.common;
 public interface Player
 {
     /**
+     * Version-latenightpizzaparty
      * Returns the id of the player
      *
-     * @return The unique id of the player
+     * @return The unique id of the player return value
      */
     int getPlayerId();
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
     String getName();
 }

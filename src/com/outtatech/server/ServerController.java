@@ -259,7 +259,7 @@ public class ServerController
         }
     }
 
-    private void handleEndTurnRequest(Game game, ServerPlayer initiator)
+    void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
         ServerPlayer newCurrent = game.advanceTurn();
         List<ActionCard> drawCards = new ArrayList<ActionCard>();

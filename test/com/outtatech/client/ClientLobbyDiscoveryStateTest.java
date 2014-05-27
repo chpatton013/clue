@@ -16,22 +16,37 @@ import java.util.*;
  */
 public class ClientLobbyDiscoveryStateTest {
    
-   public ClientLobbyDiscoveryStateTest() {
+    /**
+     *
+     */
+    public ClientLobbyDiscoveryStateTest() {
    }
    
-   @BeforeClass
+    /**
+     *
+     */
+    @BeforeClass
    public static void setUpClass() {
    }
    
-   @AfterClass
+    /**
+     *
+     */
+    @AfterClass
    public static void tearDownClass() {
    }
    
-   @Before
+    /**
+     *
+     */
+    @Before
    public void setUp() {
    }
    
-   @After
+    /**
+     *
+     */
+    @After
    public void tearDown() {
    }
 

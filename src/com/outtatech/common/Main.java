@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  *
  * @author bennettschalich
  */
@@ -8,11 +9,11 @@ public class Main
 {
 
     /**
-     * @param args the command line arguments
+     * Version-latenightpizzaparty
+     * @param args the command line arguments method parameter
      */
     public static void main(String[] args)
     {
-        // TODO code application logic here
     }
 
 }

@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * A DestinationCard represents a HintCard that specifies a certain Destination
  * ID.
  *
@@ -12,56 +13,76 @@ public class DestinationCard extends HintCard
     DestinationID destination;
     boolean north;
     boolean west;
-    
+
     /**
+     * Version-latenightpizzaparty
      * Constructs a unique Destination Card.
      *
-     * @param destination A unique destination ID.
+     * @param destination A unique destination ID. method parameter
      */
     public DestinationCard(DestinationID destination)
     {
         super(HintCardType.DESTINATION);
         this.destination = destination;
-        
-        if (this.destination == DestinationID.NIAGRA_FALLS || 
-                this.destination == DestinationID.CONEY_ISLAND || 
-                this.destination == DestinationID.MT_RUSHMORE || 
-                this.destination == DestinationID.OLD_FAITHFUL)
+
+        // Guard against this
+        if (this.destination == DestinationID.NIAGRA_FALLS || this.destination
+                == DestinationID.CONEY_ISLAND || this.destination
+                == DestinationID.MT_RUSHMORE || this.destination
+                == DestinationID.OLD_FAITHFUL)
         {
             north = true;
         }
-        
+
+        // Otherwise...
         else
+        {
             north = false;
-        
-        if (this.destination == DestinationID.MT_RUSHMORE || 
-                this.destination == DestinationID.OLD_FAITHFUL || 
-                this.destination == DestinationID.GOLDEN_GATE_BRIDGE ||
-                this.destination == DestinationID.HOOVER_DAM || 
-                this.destination == DestinationID.THE_ALAMO)
+        }
+
+        // Guard against this
+        if (this.destination == DestinationID.MT_RUSHMORE || this.destination
+                == DestinationID.OLD_FAITHFUL || this.destination
+                == DestinationID.GOLDEN_GATE_BRIDGE || this.destination
+                == DestinationID.HOOVER_DAM || this.destination
+                == DestinationID.THE_ALAMO)
         {
             west = true;
         }
-        
-        else 
+
+        // Otherwise...
+        else
+        {
             west = false;
+        }
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the unique destination of this DestinationCard.
      *
-     * @return A unique destination.
+     * @return A unique destination. return value
      */
     public DestinationID getDestination()
     {
         return destination;
     }
-    
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
     public boolean getIsNorth()
     {
         return north;
     }
-    
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
     public boolean getIsWest()
     {
         return west;

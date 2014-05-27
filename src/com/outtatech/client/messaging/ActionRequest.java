@@ -5,6 +5,7 @@ import com.outtatech.common.Card;
 import java.util.List;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the client to the server when an action card is played or
  * an accusation is made.
  *
@@ -17,11 +18,12 @@ public class ActionRequest extends ClientRequest
     private Integer playerId;
 
     /**
+     * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
-     * @param actionCard the action card that the client is playing
-     * @param cards the cards involved in the action
-     * @param playerID the id of the player the action is targeting
+     * @param actionCard the action card that the client is playing method parameter
+     * @param cards the cards involved in the action method parameter
+     * @param playerID the id of the player the action is targeting method parameter
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
     {
@@ -29,12 +31,13 @@ public class ActionRequest extends ClientRequest
         this.cards = cards;
         this.playerId = playerId;
     }
-    
+
     /**
+     * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
-     * @param actionCard the action card that the client is playing
-     * @param cards the cards involved in the action
+     * @param actionCard the action card that the client is playing method parameter
+     * @param cards the cards involved in the action method parameter
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards)
     {
@@ -43,11 +46,11 @@ public class ActionRequest extends ClientRequest
         this.playerId = playerId;
     }
 
-
     /**
+     * Version-latenightpizzaparty
      * Returns the action card involved in the user action.
      *
-     * @return the action card involved in the user action.
+     * @return the action card involved in the user action. return value
      */
     public ActionCard getActionCard()
     {
@@ -55,21 +58,24 @@ public class ActionRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the cards involved in the clients action.
      *
-     * @return the cards involved in the clients action.
+     * @return the cards involved in the clients action. return value
      */
     public List<Card> getCards()
     {
         return cards;
     }
-    
+
     /**
+     * Version-latenightpizzaparty
      * Returns the Id of the player requested
-     * 
-     * @return the integer ID of the player
+     *
+     * @return the integer ID of the player return value
      */
-    public Integer getPlayerId() {
+    public Integer getPlayerId()
+    {
         return playerId;
     }
 }

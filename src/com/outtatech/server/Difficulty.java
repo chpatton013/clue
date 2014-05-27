@@ -3,6 +3,7 @@ package com.outtatech.server;
 import java.io.Serializable;
 
 /**
+ * Version-latenightpizzaparty
  * The Difficulty class models the intelligence of an AI and the likeliness an
  * AI is to take risks.
  *
@@ -15,11 +16,12 @@ public class Difficulty implements Serializable
     private int riskiness;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a Difficulty instance with the specified intelligence and
      * riskiness.
      *
-     * @param intelligence The intelligence of an AI.
-     * @param riskiness The likeliness an AI is to take risks.
+     * @param intelligence The intelligence of an AI. method parameter
+     * @param riskiness The likeliness an AI is to take risks. method parameter
      */
     public Difficulty(int intelligence, int riskiness)
     {
@@ -28,9 +30,10 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the intelligence of this difficulty instance.
      *
-     * @return The intelligence of this difficulty.
+     * @return The intelligence of this difficulty. return value
      */
     public int getIntelligence()
     {
@@ -38,9 +41,10 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the intelligence of this difficulty.
      *
-     * @param intelligence The likeliness an AI is to take risks.
+     * @param intelligence The likeliness an AI is to take risks. method parameter
      */
     public void setIntelligence(int intelligence)
     {
@@ -48,9 +52,10 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the riskiness of this difficulty.
      *
-     * @return the riskiness of this difficulty.
+     * @return the riskiness of this difficulty. return value
      */
     public int getRiskiness()
     {
@@ -58,9 +63,10 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the riskiness of this difficulty.
      *
-     * @param riskiness The likeliness an AI is to take risks.
+     * @param riskiness The likeliness an AI is to take risks. method parameter
      */
     public void setRiskiness(int riskiness)
     {

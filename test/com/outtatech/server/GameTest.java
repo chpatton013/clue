@@ -31,6 +31,9 @@ public class GameTest
     Solution solution;
     Map<DestinationID, Integer> destToPlayerId;
     
+    /**
+     *
+     */
     public GameTest()
     {
         List<HintCard> hintCardsHand = new ArrayList<HintCard>();
@@ -62,7 +65,8 @@ public class GameTest
         Map<DestinationID, Integer> destToPlayerId = 
                 new HashMap<DestinationID, Integer>();
         
-        Game instance = new Game(players, sp, drawPile, discardPile, solution, destToPlayerId);
+        //Game instance = new Game(players, sp, drawPile, discardPile, solution, destToPlayerId);
+        Game instance = new Game();
         
         this.instance = instance;
         this.sp = sp;
@@ -73,26 +77,41 @@ public class GameTest
         this.destToPlayerId = destToPlayerId;
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
     }
 
+    /**
+     *
+     */
     @Test
     public void testGetServerPlayers()
     {
@@ -154,6 +173,9 @@ public class GameTest
         assertEquals(expResult, result);
     }
     
+    /**
+     *
+     */
     @Test
     public void testGetDestToPlayerId()
     {

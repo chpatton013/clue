@@ -22,25 +22,40 @@ import org.junit.Test;
 public class ClientGameStateTest
 {
     
+    /**
+     *
+     */
     public ClientGameStateTest()
     {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass()
     {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass()
     {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp()
     {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown()
     {
@@ -62,7 +77,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         int expResult = 4;
         int result = instance.getPlayerId();
         assertEquals(expResult, result);
@@ -90,7 +106,8 @@ public class ClientGameStateTest
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
         Object obj = new Object();
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         
         Object expResult = obj;
         Object result = instance.getNotes();
@@ -113,7 +130,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         List<Card> expResult = list;
         List<Card> result = instance.getHand();
         assertEquals(expResult, result);
@@ -135,7 +153,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         Map<DestinationID, Integer> expResult = map;
         Map<DestinationID, Integer> result = instance.getDestToPlayerId();
         assertEquals(expResult, result);
@@ -250,47 +269,6 @@ public class ClientGameStateTest
     }
 
     /**
-     * Test of setPlayerId method, of class ClientGameState.
-     */
-    @Test
-    public void testSetPlayerId() {
-        System.out.println("setPlayerId");
-        int playerID = 0;
-        ClientGameState instance = null;
-        instance.setPlayerId(playerID);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getDeckCardCount method, of class ClientGameState.
-     */
-    @Test
-    public void testGetDeckCardCount() {
-        System.out.println("getDeckCardCount");
-        ClientGameState instance = null;
-        Integer expResult = null;
-        Integer result = instance.getDeckCardCount();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPlayerTurnOrder method, of class ClientGameState.
-     */
-    @Test
-    public void testGetPlayerTurnOrder() {
-        System.out.println("getPlayerTurnOrder");
-        ClientGameState instance = null;
-        List expResult = null;
-        List result = instance.getPlayerTurnOrder();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getCurrentActivePlayer method, of class ClientGameState.
      */
     @Test
@@ -300,32 +278,6 @@ public class ClientGameStateTest
         Integer expResult = null;
         Integer result = instance.getCurrentActivePlayer();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDeckCardCount method, of class ClientGameState.
-     */
-    @Test
-    public void testSetDeckCardCount() {
-        System.out.println("setDeckCardCount");
-        Integer deckCardCount = null;
-        ClientGameState instance = null;
-        instance.setDeckCardCount(deckCardCount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setPlayerTurnOrder method, of class ClientGameState.
-     */
-    @Test
-    public void testSetPlayerTurnOrder() {
-        System.out.println("setPlayerTurnOrder");
-        List<Integer> playerTurnOrder = null;
-        ClientGameState instance = null;
-        instance.setPlayerTurnOrder(playerTurnOrder);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -369,5 +321,21 @@ public class ClientGameStateTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
+    /**
+     * Test of pollGameLog method, of class ClientGameState.
+     */
+    @Test
+    public void testGetPlayers() 
+    {
+        System.out.println("pollGameLog");
+        HashMap<Integer, String> players = new HashMap<Integer, String>();
+        players.put(1, "Player 1");
+        ClientGameState instance = new ClientGameState(4, null, players);;
+        Map<Integer, String> expResult = players;
+        Map<Integer, String> result = instance.getPlayers();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

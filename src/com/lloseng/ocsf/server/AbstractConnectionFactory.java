@@ -9,8 +9,8 @@ import java.io.*;
 
 /**
 * The <code> AbstractConnectionFactory </code> is an abstract class
-* that must be subclassed when one want to use a  
-* subclass of <code> ConnectionToClient </code> class. 
+* that must be subclassed when one want to use a
+* subclass of <code> ConnectionToClient </code> class.
 * The role of this class is to create these connections
 * when required. The creation of such factory is however
 * optional.<p>
@@ -19,7 +19,7 @@ import java.io.*;
 * should be defined when one to handle the received
 * messages inside each <code>ConnectionToClient</code>
 * instances instead of having a centralized handling
-* through the 
+* through the
 * <code>AbstractServer.handleMessageFromClient()</code>
 * method.
 *
@@ -46,8 +46,9 @@ public abstract class AbstractConnectionFactory
    * @param group the thread group that contains the connections.
    * @param clientSocket contains the client's socket.
    * @param server a reference to the server that created this instance.
+     * @return
    * @exception IOException if an I/O error occur when creating the connection.
    */
-  protected abstract ConnectionToClient createConnection(ThreadGroup group, 
+  protected abstract ConnectionToClient createConnection(ThreadGroup group,
      Socket clientSocket, AbstractServer server) throws IOException;
 }
