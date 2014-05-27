@@ -125,7 +125,8 @@ public class GUIController implements Observer{
             
             //  if it is the client's turn, call startTurn and clearGameLog methods
             isTurn = false;
-            if(((ClientGameState)obs).getCurrentActivePlayer() == curPlayerId) {
+            Integer currentActive = ((ClientGameState)obs).getCurrentActivePlayer();
+            if(currentActive != null && currentActive == curPlayerId) {
                 mainGameScreen.startTurn();
                 isTurn = true;
             }
