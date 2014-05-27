@@ -112,7 +112,7 @@ public class GUIController implements Observer{
             Map<Integer, String> playMap = ((ClientGameState)obs).getPlayers();
             ArrayList playList = new ArrayList(playMap.keySet());
             for(int indx = 0; indx < playList.size(); indx++) {
-                mainGameScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
+                mainGameScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)), ((Integer)playList.get(indx)) == curPlayerId);
             }
             
             mainGameScreen.updateHand(((ClientGameState)obs).getHand());

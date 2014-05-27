@@ -145,6 +145,25 @@ public class ServerController
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
                     newPlayer.getPlayerId(), names));
         }
+        
+        else if(obj instanceof KickPlayerRequest) 
+        {
+            KickPlayerRequest rqst = ((KickPlayerRequest)obj);
+            Player player = null;
+            Game game = games.get(connection);
+            List<Player> players = game.getPlayers();
+            Map<Integer, ServerPlayer> map = game.getServerPlayers();
+            for(Player temp : players)
+            {
+                if(rqst.getPlayerId() == temp.getPlayerId()) 
+                {
+                    map.remove(temp.getPlayerId());
+                    player = temp;
+                }
+            }
+            forwardMessage(new KickPlayerResponse(player.getPlayerId()),
+                    connection);
+        }
 
         /* 
          * LobbyJoinRequest respond with LobbyJoinResponse
