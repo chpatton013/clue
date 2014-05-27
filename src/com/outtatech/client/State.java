@@ -48,17 +48,29 @@ public class State extends Observable
         super.addObserver(o);
     }
     
+    /**
+     * Returns the list of Observer classes.
+     * @return observers
+     */
     public CopyOnWriteArrayList<Observer> getObservers()
     {
         return observers;
     }
     
+    /**
+     * Adds the observers from another State instance to this 
+     * instance.
+     * @param observers 
+     */
     public void addOldStatesObservers(CopyOnWriteArrayList<Observer> observers)
     {
         for(Observer o : observers)
            this.addObserver(o);
     }
     
+    /**
+     * Set the instance as changed, and notify observers.
+     */
     public void triggerChange()
     {
         this.setChanged();

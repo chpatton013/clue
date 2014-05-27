@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import java.util.Map;
 
 /**
  *
@@ -49,8 +50,8 @@ public class ClientLobbyStateTest
     public void testGetPlayer() {
         System.out.println("getPlayer");
         ClientLobbyState instance = null;
-        Player expResult = null;
-        Player result = instance.getPlayer();
+        Map<Integer, String> expResult = null;
+        Map<Integer, String> result = instance.getPlayers();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -77,8 +78,8 @@ public class ClientLobbyStateTest
     public void testGetPlayers() {
         System.out.println("getPlayers");
         ClientLobbyState instance = null;
-        List expResult = null;
-        List result = instance.getPlayers();
+        Map<Integer, String> expResult = null;
+        Map<Integer, String> result = instance.getPlayers();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -92,7 +93,7 @@ public class ClientLobbyStateTest
         System.out.println("addPlayer");
         Player player = null;
         ClientLobbyState instance = null;
-        instance.addPlayer(player);
+        instance.addPlayer(1,"Bob");
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -103,7 +104,7 @@ public class ClientLobbyStateTest
     @Test
     public void testSetPlayers() {
         System.out.println("setPlayers");
-        List<Player> players = null;
+        Map<Integer, String> players = null;
         ClientLobbyState instance = null;
         instance.setPlayers(players);
         // TODO review the generated test code and remove the default call to fail.
