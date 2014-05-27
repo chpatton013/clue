@@ -100,13 +100,23 @@ public class GUIController implements Observer{
         
         //if state is MAINGAME
         if(obs instanceof ClientGameState) {
-            state = CurrentWindow.MAINGAME;
-        
-            lobbyScreen.setVisible(false);
-            mainGameScreen.setVisible(true);
-            
             //  call mainGameScreen's clearFields method
+            mainGameScreen.clearPlayers();
             //  add each hand card and location back
+            List<Player> playList = ((ClientGameState)obs).getPlayers();
+            for(int indx = 0; indx < playList.size(); indx++) {
+                mainGameScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
+            }
+            
+            mainGameScreen.updateHand(((ClientGameState)obs).getHand());
+            
+            String logUpdate = ((ClientGameState)obs).pollGameLog();
+            
+            while(logUpdate != null) {
+                mainGameScreen.updateGameLog(logUpdate);
+                logUpdate = ((ClientGameState)obs).pollGameLog();
+            }
+            
             //  if it is the client's turn, call startTurn and clearGameLog methods
             //  add any applicable messages to game log through updateGameLog method
             //  check client controller's reveal flag
@@ -124,6 +134,10 @@ public class GUIController implements Observer{
             //    
             //  if set
             //    add applicable message to mainGameScreen's game log
+            state = CurrentWindow.MAINGAME;
+        
+            lobbyScreen.setVisible(false);
+            mainGameScreen.setVisible(true);
         }
         
     }

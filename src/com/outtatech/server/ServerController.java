@@ -479,7 +479,7 @@ public class ServerController
         //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
-            playerHands.get(index % (playerCount - 1)).add(game.popHintCard());
+            playerHands.get(index % (playerCount)).add(game.popHintCard());
         }
 
         //Add one action card to each hand.
