@@ -227,6 +227,27 @@ public class ServerController
             forwardMessage(new LobbyJoinResponse(lobby,
                     serverPlayer.getPlayerId(), names), connection);
         }
+        else if (obj instanceof KickPlayerRequest)
+        {
+            KickPlayerRequest rqst = ((KickPlayerRequest) obj);
+            Player player = null;
+            Game game = games.get(connection);
+            List<Player> players = game.getPlayers();
+            Map<Integer, ServerPlayer> map = game.getServerPlayers();
+            // Iterate over this set
+            for (Player temp : players)
+            {
+                // Guard against this
+                if (rqst.getPlayerId() == temp.getPlayerId())
+                {
+                    map.remove(temp.getPlayerId());
+                    player = temp;
+                }
+            }
+            // Iterate over this set
+            forwardMessage(new KickPlayerResponse(player.getPlayerId()),
+                    connection);
+        }
 
         /**
          *
