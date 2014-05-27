@@ -127,8 +127,15 @@ public class ServerController
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
+            
+            List<Player> players = lobbyGame.getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player temp : players) {
+                names.put(temp.getPlayerId(), temp.getName());
+            }
+            
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
-                    newPlayer.getPlayerId(), lobbyGame.getPlayers()));
+                    newPlayer.getPlayerId(), names));
         }
 
         /* 
@@ -150,8 +157,14 @@ public class ServerController
             Game game = gameIdToGame.get(lobby.getGameId());
             game.addServerPlayer(serverPlayer);
             
+            List<Player> players = game.getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player temp : players) {
+                names.put(temp.getPlayerId(), temp.getName());
+            }
+            
             forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.
-                    getPlayerId(), game.getPlayers()),
+                    getPlayerId(), names),
                     cxns);
         }
 
@@ -201,9 +214,16 @@ public class ServerController
             bot.setName("CLUEBot" + num);
             games.get(connection).getServerPlayers()
                     .put(bot.getPlayerId(), bot);
+            
+            List<Player> players = games.get(connection).getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>(); 
+            for(Player play : players) {
+                names.put(play.getPlayerId(), play.getName());
+            }
+            
             //update the mapping
             forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()),
-                    bot.getPlayerId(), games.get(connection).getPlayers()),
+                    bot.getPlayerId(), names),
                     connection);
         }
         /**
