@@ -25,16 +25,16 @@ public class GameTest
 {
     Game instance;
     ServerPlayer sp;
-    List<ServerPlayer> players;
+    Map<Integer, ServerPlayer> players;
     List<ActionCard> drawPile;
     List<ActionCard> discardPile;
-    List<HintCard> solution;
+    Solution solution;
     Map<DestinationID, Integer> destToPlayerId;
     
     public GameTest()
     {
         List<HintCard> hintCardsHand = new ArrayList<HintCard>();
-        hintCardsHand.add(new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED));
+        hintCardsHand.add(new DestinationCard(DestinationID.CONEY_ISLAND));
         
         List<ActionCard> actionCardsHand = new ArrayList<ActionCard>();
         actionCardsHand.add(new Snoop());
@@ -47,16 +47,17 @@ public class GameTest
         discardPile.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
         discardPile.add(new Suggestion(SuggestionType.ANY));
         
-        ServerPlayer sp = new ServerPlayer(5, new Object(), "Bob", new Color(1, 1, 1), 
-                hintCardsHand, actionCardsHand);
+        ServerPlayer sp = new ServerPlayer();
+        sp.setNotes(new String());
+        sp.setName("Bob");
+        sp.setColor(new Color(1, 1, 1)); 
+        sp.setHintCardsHand(hintCardsHand); 
+        sp.setActionCardsHand(actionCardsHand);
         
-        List<ServerPlayer> players = new ArrayList<ServerPlayer>();
-        players.add(sp);
+        Map<Integer, ServerPlayer> players = new HashMap<Integer, ServerPlayer>();
+        players.put(sp.getPlayerId(),sp);
         
-        List<HintCard> solution = new ArrayList<HintCard>();
-        solution.add(new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED));
-        solution.add(new SuspectCard(SuspectID.WHITE, CardColor.RED));
-        solution.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
+        Solution solution = new Solution(DestinationID.CONEY_ISLAND,  VehicleID.AIRLINER, SuspectID.WHITE);
         
         Map<DestinationID, Integer> destToPlayerId = 
                 new HashMap<DestinationID, Integer>();
@@ -97,8 +98,8 @@ public class GameTest
     {
         System.out.println("getServerPlayers");
         
-        List<ServerPlayer> expResult = players;
-        List<ServerPlayer> result = instance.getServerPlayers();
+        Map<Integer, ServerPlayer> expResult = players;
+        Map<Integer, ServerPlayer> result = instance.getServerPlayers();
         assertEquals(expResult, result);
     }
     /**
@@ -148,8 +149,8 @@ public class GameTest
     {
         System.out.println("getSolution");
         
-        List<HintCard> expResult = solution;
-        List<HintCard> result = instance.getSolution();
+        Solution expResult = solution;
+        Solution result = instance.getSolution();
         assertEquals(expResult, result);
     }
     
