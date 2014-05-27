@@ -146,6 +146,7 @@ public class ServerController
         else if(obj instanceof KickPlayerRequest) 
         {
             KickPlayerRequest rqst = ((KickPlayerRequest)obj);
+            Player player = null;
             Game game = games.get(connection);
             List<Player> players = game.getPlayers();
             Map<Integer, ServerPlayer> map = game.getServerPlayers();
@@ -154,14 +155,11 @@ public class ServerController
                 if(rqst.getPlayerId() == temp.getPlayerId()) 
                 {
                     map.remove(temp.getPlayerId());
+                    player = temp;
                 }
             }
-        }
-        
-        else if(obj instanceof LobbyLeaveRequest)
-        {
-            LobbyLeaveRequest rqst = (LobbyLeaveRequest)obj;
-            
+            forwardMessage(new KickPlayerResponse(player.getPlayerId()),
+                    connection);
         }
 
         /* 
