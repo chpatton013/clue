@@ -116,9 +116,13 @@ public class ServerController
          */
         else if (obj instanceof AddAIRequest)
         {
+            System.out.println("Recieved AI Request");
             AddAIRequest addAIReq = (AddAIRequest) obj;
+            int num = (humans.keySet()).size();
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                     games.get(connection));
+            System.out.println("Creating new Clue Bot");
+            newPlayer.setName("CLUEBot" + num);
 
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
@@ -131,6 +135,7 @@ public class ServerController
             List<Player> players = lobbyGame.getPlayers();
             Map<Integer, String> names = new HashMap<Integer, String>(); 
             for(Player temp : players) {
+                System.out.println(temp.getName());
                 names.put(temp.getPlayerId(), temp.getName());
             }
             
@@ -147,7 +152,7 @@ public class ServerController
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             int num = humans.keySet().size();
-            serverPlayer.setName("xXDragonDildos69Xx" + num);
+            serverPlayer.setName("CluePlayer" + num);
             this.humans.put(serverPlayer, connection);
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
@@ -221,30 +226,6 @@ public class ServerController
         else if (obj instanceof GameStartRequest)
         {
             handleGameStartRequest(games.get(connection));
-        }
-        /*
-         * AddAIRequest?
-         */
-        else if (obj instanceof AddAIRequest)
-        {
-            AddAIRequest temp = ((AddAIRequest) obj);
-            int num = (robots.keySet()).size();
-            AI bot = new AI(new Difficulty(100, 100), this, games.
-                    get(connection));
-            bot.setName("CLUEBot" + num);
-            games.get(connection).getServerPlayers()
-                    .put(bot.getPlayerId(), bot);
-            
-            List<Player> players = games.get(connection).getPlayers();
-            Map<Integer, String> names = new HashMap<Integer, String>(); 
-            for(Player play : players) {
-                names.put(play.getPlayerId(), play.getName());
-            }
-            
-            //update the mapping
-            forwardMessage(new LobbyJoinResponse(lobbies.get(temp.getLobbyId()),
-                    bot.getPlayerId(), names),
-                    connection);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
