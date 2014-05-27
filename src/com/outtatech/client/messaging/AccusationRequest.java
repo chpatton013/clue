@@ -19,7 +19,8 @@ public class AccusationRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Creates an AccusationRequest object.
      *
-     * @param accusationCards list that contains the three cards that are method parameter
+     * @param accusation list that contains the three cards that are 
+     * method parameter
      * required for an accusation.
      */
     public AccusationRequest(Solution accusation)

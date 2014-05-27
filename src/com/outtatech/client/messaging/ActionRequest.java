@@ -21,9 +21,11 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
-     * @param actionCard the action card that the client is playing method parameter
+     * @param actionCard the action card that the client is playing method 
+     * parameter
      * @param cards the cards involved in the action method parameter
-     * @param playerID the id of the player the action is targeting method parameter
+     * @param playerId the id of the player the action is targeting method 
+     * parameter
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
     {

@@ -143,7 +143,8 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Getter method for the cards that have been revealed to the client.
      *
-     * @return a list that contains cards that have been revealed to the client. return value
+     * @return a list that contains cards that have been revealed to the client.
+     * return value
      */
     public List<Card> getRevealed()
     {
@@ -155,7 +156,8 @@ public class ClientGameState extends State
      * Setter method for the list of cards that have been revealed to the
      * client.
      *
-     * @param revealed the list of cards that have been revealed to the client. method parameter
+     * @param revealed the list of cards that have been revealed to the client. 
+     * method parameter
      */
     public void setRevealed(List<Card> revealed)
     {

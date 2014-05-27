@@ -19,7 +19,8 @@ public class AllSnoop extends ActionCard
      * Version-latenightpizzaparty
      * Constructs a new AllSnoop ActionCard.
      *
-     * @param right The direction the All Snoop action will take. If true- method parameter
+     * @param right The direction the All Snoop action will take. 
+     * If true- method parameter
      * right; otherwise left.
      */
     public AllSnoop(boolean right)

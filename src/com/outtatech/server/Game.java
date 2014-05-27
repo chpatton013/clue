@@ -137,7 +137,8 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the current ServerPlayer in this game.
      *
-     * @param current The ServerPlayer to make current in the Game method parameter
+     * @param current The ServerPlayer to make current in the Game method
+     * parameter
      */
     public void setCurrentServerPlayer(ServerPlayer current)
     {
@@ -225,7 +226,8 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the Map between destination Ids and playerIds for this game.
      *
-     * @param destToPlayerId The new Map of destination Ids and PlayerIds for method parameter
+     * @param destToPlayerId The new Map of destination Ids and 
+     * PlayerIds for method parameter
      * this game
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> destToPlayerId)

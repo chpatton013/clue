@@ -30,7 +30,8 @@ public class CardDealResponse extends ServerResponse
      *
      * @return cards dealt to the player. return value
      */
-    public List<Card> getCards() {
+    public List<Card> getCards() 
+    {
         return cards;
     }
 }

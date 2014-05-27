@@ -72,13 +72,18 @@ public class ServerPlayer implements Player, Serializable
         this.actionCardsHand = new ArrayList<ActionCard>();
     }
 
+    /**
+     * 
+     * Version-latenightpizzaparty
+     * @return value
+     */
     public int getPlayerId()
     {
         return playerId;
     }
 
     /**
-     *
+     *Version-latenightpizzaparty
      * @return return value
      */
     public DestinationID getLocation()
@@ -97,7 +102,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
-     *
+     *Version-latenightpizzaparty
      * @param name method parameter
      */
     public void setName(String name)
@@ -227,10 +232,10 @@ public class ServerPlayer implements Player, Serializable
     private void changeNextColor()
     {
         Random rand = new Random();
-        int r = rand.nextInt(255);
-        int g = rand.nextInt(255);
-        int b = rand.nextInt(255);
+        int red = rand.nextInt(255);
+        int green = rand.nextInt(255);
+        int blue = rand.nextInt(255);
 
-        nextColor = new Color(r, g, b);
+        nextColor = new Color(red, green, blue);
     }
 }

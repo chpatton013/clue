@@ -509,7 +509,8 @@ public class ClientController
      * Version-latenightpizzaparty
      * Send a message via the ClientNetwork instance.
      *
-     * @param obj ClientRequest the message object to send via the ClientNetwork method parameter
+     * @param obj ClientRequest the message object to send via the ClientNetwork
+     * method parameter
      * instance.
      */
     private void forwardMessage(Object obj)

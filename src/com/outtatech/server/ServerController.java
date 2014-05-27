@@ -42,17 +42,16 @@ public class ServerController
      * Client connections and any AI players.
      *
      * @param network method parameter
-     * @param robots a Map of ServerPlayers and AI instances method parameter
      */
     public ServerController(ServerNetwork network)
     {
         this.network = network;
         this.network.setServerController(this);
         this.connectionToPlayer
-                = new HashMap<ConnectionToClient, ServerPlayer>();
+            = new HashMap<ConnectionToClient, ServerPlayer>();
         this.games = new HashMap<ConnectionToClient, Game>();
         this.players
-                = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
+            = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
         this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
         this.robots = new HashMap<ServerPlayer, AI>();
         this.lobbies = new HashMap<Integer, Lobby>();
@@ -65,7 +64,7 @@ public class ServerController
         }
         catch (IOException ex)
         {
-
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -74,7 +73,8 @@ public class ServerController
      * Handle a network request from a client.
      *
      * @param obj Object signaling an action. method parameter
-     * @param connection ConnectionToClient used to respond back to client. method parameter
+     * @param connection ConnectionToClient used to respond back to client.
+     * method parameter
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection)
     {
@@ -335,13 +335,15 @@ public class ServerController
      * Version-latenightpizzaparty
      * Given a game and a message, distributes the message to AI and Players
      *
-     * @param game the game that contains the players the msg should be sent to method parameter
-     * @param msg the message that should be sent to the players in the game method parameter
+     * @param game the game that contains the players the msg should be 
+     * sent to method parameter
+     * @param msg the message that should be sent to the players in the 
+     * game method parameter
      */
     private void informPlayers(Game game, ServerResponse msg)
     {
         ArrayList<ConnectionToClient> gamePlayers
-                = new ArrayList<ConnectionToClient>();
+            = new ArrayList<ConnectionToClient>();
 
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
 
@@ -421,7 +423,7 @@ public class ServerController
             ConnectionToClient connection)
     {
         ArrayList<ConnectionToClient> gamePlayers
-                = new ArrayList<ConnectionToClient>();
+            = new ArrayList<ConnectionToClient>();
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
 
         Solution suggestion = suggestionReq.getSuggestion();
@@ -431,7 +433,7 @@ public class ServerController
 
         //Get all players in game
         List<ServerPlayer> gameServerPlayers
-                = clientGame.getServerPlayersList();
+            = clientGame.getServerPlayersList();
 
         //Build a list of human client connections to send accusation
         //response to
@@ -487,7 +489,7 @@ public class ServerController
 
         //Get all players in game
         List<ServerPlayer> gameServerPlayers
-                = clientGame.getServerPlayersList();
+            = clientGame.getServerPlayersList();
 
         //Build a list of human client connections to send accusation
         //response to
@@ -639,7 +641,8 @@ public class ServerController
      */
     private void handleGameStartRequest(Game game)
     {
-        ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
+        ArrayList<ArrayList<Card>> playerHands = 
+                new ArrayList<ArrayList<Card>>();
 
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
@@ -762,9 +765,10 @@ public class ServerController
         for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++)
         {
             HintCard curHintCard = hintCardsHand.get(cardInHand);
-            HintCardType curHintType = hintCardsHand.get(cardInHand).
-                    getHintType();
+            HintCardType curHintType = 
+                    hintCardsHand.get(cardInHand).getHintType();
 
+            //Choose the right option
             switch (privateTipType)
             {
                 case ALL_DESTINATIONS:
@@ -830,6 +834,7 @@ public class ServerController
         List<Card> revealed = new ArrayList<Card>();
         Integer randomCard;
 
+        //Choose the right option
         switch (privateTipType)
         {
             case ALL_DESTINATIONS:
@@ -903,8 +908,8 @@ public class ServerController
                     cardInHand++)
             {
                 HintCard curHintCard = hintCardsHand.get(cardInHand);
-                HintCardType curHintType = hintCardsHand.get(cardInHand).
-                        getHintType();
+                HintCardType curHintType = 
+                        hintCardsHand.get(cardInHand).getHintType();
 
                 switch (sleuthType)
                 {
@@ -942,6 +947,7 @@ public class ServerController
                                 playableCards.add(curHintCard);
                             }
                         }
+                        break;
                     case MALE_SUSPECT:
                         // Guard against this
                         if (curHintType == HintCardType.SUSPECT)
@@ -965,6 +971,7 @@ public class ServerController
                             }
 
                         }
+                        break;
                     case WESTERN_DESTINATION:
                         // Guard against this
                         if (curHintType == HintCardType.DESTINATION)
