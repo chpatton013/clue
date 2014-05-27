@@ -9,6 +9,7 @@ package com.outtatech.client;
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
+import com.outtatech.server.ServerPlayer;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -90,7 +91,7 @@ public class GUIController implements Observer{
             lobbyScreen.setId(((ClientLobbyState)obs).getId());
             lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
             for(int indx = 0; indx < playList.size(); indx++) {
-                lobbyScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
+                lobbyScreen.addPlayer(((ServerPlayer)playList.get(indx)).getName(), playList.get(indx).getPlayerId());
             }
             //Set state to LOBBY
             state = CurrentWindow.LOBBY;
@@ -108,7 +109,7 @@ public class GUIController implements Observer{
             //  add each hand card and location back
             List<Player> playList = ((ClientGameState)obs).getPlayers();
             for(int indx = 0; indx < playList.size(); indx++) {
-                mainGameScreen.addPlayer("THISISAPLAYER", playList.get(indx).getPlayerId());
+                mainGameScreen.addPlayer(((ServerPlayer)playList.get(indx)).getName(), playList.get(indx).getPlayerId());
             }
             
             mainGameScreen.updateHand(((ClientGameState)obs).getHand());
@@ -242,7 +243,7 @@ public class GUIController implements Observer{
      */
     public void createAI(int lobbyId) {
         //call Client Controller's addAIPlayer method
-        clientController.addAIPlayer(new Difficulty(100, 100), lobbyId);
+        clientController.addAIPlayer(new Difficulty(5, 5), lobbyId);
     }
     
     /**
