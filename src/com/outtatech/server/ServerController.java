@@ -149,8 +149,8 @@ public class ServerController
             int num = humans.keySet().size();
             serverPlayer.setName("xXDragonDildos69Xx" + num);
             this.humans.put(serverPlayer, connection);
-            List<ConnectionToClient> cxns = this.getGameClients(lobby.
-                    getLobbyId());
+            List<ConnectionToClient> cxns = this.getGameClients(
+                    lobby.getLobbyId());
             cxns.add(this.humans.get(serverPlayer));
 
             Game game = gameIdToGame.get(lobby.getGameId());
@@ -158,13 +158,12 @@ public class ServerController
             
             List<Player> players = game.getPlayers();
             Map<Integer, String> names = new HashMap<Integer, String>(); 
-            for(Player temp : players) {
+            for (Player temp : players) {
                 names.put(temp.getPlayerId(), temp.getName());
             }
             
-            forwardMessage(new LobbyJoinResponse(lobby, serverPlayer.
-                    getPlayerId(), names),
-                    cxns);
+            forwardMessage(new LobbyJoinResponse(lobby,
+                    serverPlayer.getPlayerId(), names), cxns);
         }
 
         /**
@@ -183,6 +182,37 @@ public class ServerController
             //@TODO Only the requesting client will be updated.  Other clients
             //will need to send a lobby discovery response to refresh.
             forwardMessage(new LobbyCreateResponse(lobby), connection);
+        }
+
+        /**
+         * SinglePlayerGameRequest respond with LobbyJoinResponse else if
+         */
+        else if (obj instanceof SinglePlayerGameRequest)
+        {
+            String lobbyName = "single_player_lobby";
+            Game game = new Game();
+            Lobby lobby = new Lobby(lobbyName, game.getGameId(), false);
+
+            games.put(connection, game);
+            gameIdToGame.put(game.getGameId(), game);
+            lobbies.put(game.getGameId(), lobby);
+            players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
+
+            ServerPlayer serverPlayer = new ServerPlayer();
+            serverPlayer.setName("single_player_host");
+            this.humans.put(serverPlayer, connection);
+            List<ConnectionToClient> cxns = this.getGameClients(
+                    lobby.getLobbyId());
+            cxns.add(this.humans.get(serverPlayer));
+
+            List<Player> players = game.getPlayers();
+            Map<Integer, String> names = new HashMap<Integer, String>();
+            for (Player temp : players) {
+                names.put(temp.getPlayerId(), temp.getName());
+            }
+
+            forwardMessage(new LobbyJoinResponse(lobby,
+                     serverPlayer.getPlayerId(), names), connection);
         }
 
         /**
