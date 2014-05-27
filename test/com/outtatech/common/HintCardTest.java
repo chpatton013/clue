@@ -79,7 +79,7 @@ public class HintCardTest
     
     public void testSuspectCard()
     {
-        HintCard instance = new SuspectCard(SuspectID.WHITE, CardColor.RED);
+        HintCard instance = new SuspectCard(SuspectID.WHITE);
         SuspectID expResult = SuspectID.WHITE;
         SuspectID result = ((SuspectCard)instance).getSuspect();
         assertEquals(expResult, result);
@@ -87,7 +87,7 @@ public class HintCardTest
     
     public void testDestinationCard()
     {
-        HintCard instance = new DestinationCard(DestinationID.CONEY_ISLAND, CardColor.RED);
+        HintCard instance = new DestinationCard(DestinationID.CONEY_ISLAND);
         DestinationID expResult = DestinationID.CONEY_ISLAND;
         DestinationID result = ((DestinationCard)instance).getDestination();
         assertEquals(expResult, result);
@@ -95,7 +95,7 @@ public class HintCardTest
     
     public void testGetVehicle()
     {
-        HintCard instance = new HintCard(HintCardType.VEHICLE, CardColor.RED);
+        HintCard instance = new HintCard(HintCardType.VEHICLE);
         HintCardType expResult = HintCardType.VEHICLE;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result);
@@ -103,7 +103,7 @@ public class HintCardTest
     
     public void testGetSuspect()
     {
-        HintCard instance = new HintCard(HintCardType.SUSPECT, CardColor.RED);
+        HintCard instance = new HintCard(HintCardType.SUSPECT);
         HintCardType expResult = HintCardType.SUSPECT;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result); 
@@ -111,7 +111,7 @@ public class HintCardTest
     
     public void testGetDestination()
     {
-        HintCard instance = new HintCard(HintCardType.DESTINATION, CardColor.RED);
+        HintCard instance = new HintCard(HintCardType.DESTINATION);
         HintCardType expResult = HintCardType.DESTINATION;
         HintCardType result = instance.getHintType();
         assertEquals(expResult, result);
