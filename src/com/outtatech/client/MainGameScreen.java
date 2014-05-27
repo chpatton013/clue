@@ -16,6 +16,7 @@ import com.outtatech.common.HintCard;
 import com.outtatech.common.HintCardType;
 import com.outtatech.common.PrivateTip;
 import com.outtatech.common.PrivateTipType;
+import com.outtatech.common.Snoop;
 import com.outtatech.common.Suggestion;
 import com.outtatech.common.SuggestionType;
 import com.outtatech.common.SuperSleuth;
@@ -191,9 +192,9 @@ public class MainGameScreen extends javax.swing.JFrame {
                         }
                     }
                 }
-                else if(((ActionCard)card).getActionType() == ActionCardType.SUPER_SLEUTH) {
-                    if(((SuperSleuth)card).getType() == SuperSleuthType.AIR_VEHICLE) {
-                        image = "Action-SuperSleuthAir.jpg";
+                else if(((ActionCard)card).getActionType() == ActionCardType.SUGGESTION) {
+                    if(((Suggestion)card).getType() == SuggestionType.ANY) {
+                        image = "Action-SuggestionAny.jpg";
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
@@ -203,8 +204,8 @@ public class MainGameScreen extends javax.swing.JFrame {
                             actionImage2.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuperSleuth)card).getType() == SuperSleuthType.BLUE_CARD) {
-                        image = "Action-SuperSleuthBlue.jpg";
+                    else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
+                        image = "Action-SuggestionCurrent.jpg";
                         if(!filled[0]) {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
@@ -214,49 +215,27 @@ public class MainGameScreen extends javax.swing.JFrame {
                             actionImage2.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuperSleuth)card).getType() == SuperSleuthType.FEMALE_SUSPECT) {
-                        image = "Action-SuperSleuthFemale.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
-                        }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.SNOOP) {
+                    image = "Action-Snoop.jpg";
+                    if(!filled[0]) {
+                        filled[0] = true;
+                        actionImage1.setIcon(new ImageIcon(path + image));
                     }
-                    else if(((SuperSleuth)card).getType() == SuperSleuthType.MALE_SUSPECT) {
-                        image = "Action-SuperSleuthMale.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
-                        }
+                    else if(!filled[1]) {
+                        filled[1] = true;
+                        actionImage2.setIcon(new ImageIcon(path + image));
                     }
-                    else if(((SuperSleuth)card).getType() == SuperSleuthType.SOUTHERN_DESTINATION) {
-                        image = "Action-SuperSleuthSouth.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
-                        }
+                }
+                else if(((ActionCard)card).getActionType() == ActionCardType.ALL_SNOOP) {
+                    image = "Action-AllSnoop.jpg";
+                    if(!filled[0]) {
+                        filled[0] = true;
+                        actionImage1.setIcon(new ImageIcon(path + image));
                     }
-                    else if(((SuperSleuth)card).getType() == SuperSleuthType.WESTERN_DESTINATION) {
-                        image = "Action-SuperSleuthWest.jpg";
-                        if(!filled[0]) {
-                            filled[0] = true;
-                            actionImage1.setIcon(new ImageIcon(path + image));
-                        }
-                        else if(!filled[1]) {
-                            filled[1] = true;
-                            actionImage2.setIcon(new ImageIcon(path + image));
-                        }
+                    else if(!filled[1]) {
+                        filled[1] = true;
+                        actionImage2.setIcon(new ImageIcon(path + image));
                     }
                 }
             }
