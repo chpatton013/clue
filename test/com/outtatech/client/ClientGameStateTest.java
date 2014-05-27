@@ -269,47 +269,6 @@ public class ClientGameStateTest
     }
 
     /**
-     * Test of setPlayerId method, of class ClientGameState.
-     */
-    @Test
-    public void testSetPlayerId() {
-        System.out.println("setPlayerId");
-        int playerID = 0;
-        ClientGameState instance = null;
-        instance.setPlayerId(playerID);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getDeckCardCount method, of class ClientGameState.
-     */
-    @Test
-    public void testGetDeckCardCount() {
-        System.out.println("getDeckCardCount");
-        ClientGameState instance = null;
-        Integer expResult = null;
-        Integer result = instance.getDeckCardCount();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPlayerTurnOrder method, of class ClientGameState.
-     */
-    @Test
-    public void testGetPlayerTurnOrder() {
-        System.out.println("getPlayerTurnOrder");
-        ClientGameState instance = null;
-        List expResult = null;
-        List result = instance.getPlayerTurnOrder();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getCurrentActivePlayer method, of class ClientGameState.
      */
     @Test
@@ -319,32 +278,6 @@ public class ClientGameStateTest
         Integer expResult = null;
         Integer result = instance.getCurrentActivePlayer();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDeckCardCount method, of class ClientGameState.
-     */
-    @Test
-    public void testSetDeckCardCount() {
-        System.out.println("setDeckCardCount");
-        Integer deckCardCount = null;
-        ClientGameState instance = null;
-        instance.setDeckCardCount(deckCardCount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setPlayerTurnOrder method, of class ClientGameState.
-     */
-    @Test
-    public void testSetPlayerTurnOrder() {
-        System.out.println("setPlayerTurnOrder");
-        List<Integer> playerTurnOrder = null;
-        ClientGameState instance = null;
-        instance.setPlayerTurnOrder(playerTurnOrder);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
