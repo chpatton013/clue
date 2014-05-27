@@ -427,11 +427,11 @@ public class AI extends ServerPlayer
         {
             //?
         }
-        if(obj instanceof ActionResponse) 
-        {
-            ActionResponse card = (ActionResponse)obj;
-            aiRespond(card.getActionCard());
-        }
+//        if(obj instanceof ActionResponse) 
+//        {
+//            ActionResponse card = (ActionResponse)obj;
+//            aiRespond(card.getActionCard());
+//        }
         if(obj instanceof CardDealResponse) 
         {
             CardDealResponse rsp = (CardDealResponse)obj;
