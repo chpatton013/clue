@@ -98,6 +98,7 @@ public class GUIController implements Observer{
             state = CurrentWindow.LOBBY;
 
             //hide the game select screen and display the lobby screen
+            introScreen.setVisible(false);
             gameSelectScreen.setVisible(false);
             lobbyScreen.setVisible(true);
         }
