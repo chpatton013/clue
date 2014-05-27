@@ -92,7 +92,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         for(int indx = 0; indx < cards.size(); indx++) {
             card = cards.get(indx);
             if(card.getCardType() == CardType.ACTION) {
-                path = "images\\actionCards\\";
+                path = "images/actionCards/";
                 if(((ActionCard)card).getActionType() == ActionCardType.PRIVATE_TIP) {
                     if(((PrivateTip)card).getType() == PrivateTipType.ALL_DESTINATIONS) {
                         image = "Action-PrivateTipAllDestination.jpg";

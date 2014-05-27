@@ -43,25 +43,25 @@ public class LobbyScreen extends javax.swing.JFrame {
      * @param playerName
      * @param playerId
      */
-    public void addPlayer(String playerName, int playerId) {
+    public void addPlayer(String playerName, int playerId, boolean isPlayer) {
         //set player list text to current text + playerName + "waiting..."
-        playerList.setValueAt(playerName, numPlayers, 0);
+        String name = playerName;
+        if(isPlayer)
+            name = name + "(You)";
+        playerList.setValueAt(name, numPlayers, 0);
         
         //set playerIds[numPlayers] to the player's id
         playerIds[numPlayers] = playerId;
         
         //increment numPlayers
         numPlayers++;
-        
-        //if numPlayers is >= 4 make the start game button active
-        if(numPlayers >= 4)
-            gameStartButton.setEnabled(true);
     }
     
     public void setLeader(boolean isLeader){
         createAIButton.setEnabled(isLeader);
         kickPlayerButton.setEnabled(isLeader);
-        gameStartButton.setEnabled(isLeader);
+        if(numPlayers >= 3)
+            gameStartButton.setEnabled(isLeader);
     }
     
     /**

@@ -33,9 +33,9 @@ public class GUIController implements Observer{
     boolean isTurn = false;
     
     String[] imagePaths = {
-        "images\\greece\\",
-        "images\\whiteHouse\\",
-        "images\\pirate\\"};
+        "images/greece/",
+        "images/whiteHouse/",
+        "images/pirate/"};
     
     private enum CurrentWindow {
         INTRO, GAMESELECT, LOBBY, MAINGAME
@@ -80,16 +80,19 @@ public class GUIController implements Observer{
         
         //if state is LOBBY
         if(obs instanceof ClientLobbyState) {
+            curPlayerId = ((ClientLobbyState)obs).getPlayerId();
             //  clear all players
             lobbyScreen.clearPlayers();
             //  add each player back
             Map<Integer, String> playMap = ((ClientLobbyState)obs).getPlayers();
             ArrayList playList = new ArrayList(playMap.keySet());
             lobbyScreen.setId(((ClientLobbyState)obs).getId());
-            lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
+            
             for(int indx = 0; indx < playList.size(); indx++) {
-                lobbyScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
+                lobbyScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)), ((Integer)playList.get(indx)) == curPlayerId);
             }
+            
+            lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
             //Set state to LOBBY
             state = CurrentWindow.LOBBY;
 

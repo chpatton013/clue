@@ -34,8 +34,8 @@ public class OptionsScreen extends javax.swing.JFrame {
     private void updateCards(int indx){
         String path = controller.getImagePath(indx);
         cardImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
-        cardImage2.setIcon(new ImageIcon(path + "Suspect-1.jpg"));
-        cardImage3.setIcon(new ImageIcon(path + "Transportation-1.jpg"));
+        cardImage2.setIcon(new ImageIcon(path + "MUSTARD.jpg"));
+        cardImage3.setIcon(new ImageIcon(path + "AIRLINER.jpg"));
     }
 
     /**
