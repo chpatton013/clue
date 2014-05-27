@@ -62,7 +62,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         int expResult = 4;
         int result = instance.getPlayerId();
         assertEquals(expResult, result);
@@ -90,7 +91,8 @@ public class ClientGameStateTest
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
         Object obj = new Object();
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         
         Object expResult = obj;
         Object result = instance.getNotes();
@@ -113,7 +115,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         List<Card> expResult = list;
         List<Card> result = instance.getHand();
         assertEquals(expResult, result);
@@ -135,7 +138,8 @@ public class ClientGameStateTest
         map.put(DestinationID.CONEY_ISLAND, new Integer(5));
         map.put(DestinationID.THE_ALAMO, new Integer(3));
         
-        ClientGameState instance = new ClientGameState(4, list);
+        Map<Integer, String> players = null;
+        ClientGameState instance = new ClientGameState(4, list, players);
         Map<DestinationID, Integer> expResult = map;
         Map<DestinationID, Integer> result = instance.getDestToPlayerId();
         assertEquals(expResult, result);
@@ -369,5 +373,21 @@ public class ClientGameStateTest
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
+    /**
+     * Test of pollGameLog method, of class ClientGameState.
+     */
+    @Test
+    public void testGetPlayers() 
+    {
+        System.out.println("pollGameLog");
+        HashMap<Integer, String> players = new HashMap<Integer, String>();
+        players.put(1, "Player 1");
+        ClientGameState instance = new ClientGameState(4, null, players);;
+        Map<Integer, String> expResult = players;
+        Map<Integer, String> result = instance.getPlayers();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

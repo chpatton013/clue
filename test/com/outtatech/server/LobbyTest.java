@@ -22,7 +22,7 @@ public class LobbyTest
     {
         System.out.println("getLobbyName");
         
-        Lobby instance = new Lobby("lobby", new Integer(5));
+        Lobby instance = new Lobby("lobby", new Integer(5), true);
         String expResult = "lobby";
         String result = instance.getLobbyName();
         assertEquals(expResult, result);
@@ -35,7 +35,7 @@ public class LobbyTest
     public void testGetGameId()
     {
         System.out.println("getGameId");
-        Lobby instance = new Lobby("lobby", new Integer(5));
+        Lobby instance = new Lobby("lobby", new Integer(5), true);
         Integer expResult = new Integer(5);
         Integer result = instance.getGameId();
         assertEquals(expResult, result);
@@ -49,9 +49,23 @@ public class LobbyTest
     {
         System.out.println("getLobbyId");
         
-        Lobby instance = new Lobby("lobby", new Integer(5));
-        Integer expResult = new Integer(2);
+        Lobby instance = new Lobby("lobby", new Integer(5), true);
+        Integer expResult = new Integer(5);
         Integer result = instance.getLobbyId();
+        assertEquals(expResult, result);
+    }
+    
+        /**
+     * Test of isVisible method, of class Lobby.
+     */
+    @Test
+    public void testIsVisible()
+    {
+        System.out.println("getLobbyId");
+        
+        Lobby instance = new Lobby("lobby", new Integer(5), true);
+        boolean expResult = true;
+        boolean result = instance.isVisible();
         assertEquals(expResult, result);
     }
 }

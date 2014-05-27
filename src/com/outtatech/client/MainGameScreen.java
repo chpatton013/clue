@@ -63,6 +63,22 @@ public class MainGameScreen extends javax.swing.JFrame {
         locationImage8.setText("");
         locationImage9.setText("");
         
+        updateLocation();
+        
+        actionImage1.setText("");
+        actionImage2.setText("");
+        
+        hintImage1.setText("");
+        hintImage2.setText("");
+        hintImage3.setText("");
+        hintImage4.setText("");
+        hintImage5.setText("");
+        hintImage6.setText("");
+        
+        endTurn();
+    }
+    
+    public void updateLocation() {
         String path = controller.getImagePath();
         locationImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
         locationImage2.setIcon(new ImageIcon(path + "Location-2.jpg"));
@@ -73,30 +89,19 @@ public class MainGameScreen extends javax.swing.JFrame {
         locationImage7.setIcon(new ImageIcon(path + "Location-7.jpg"));
         locationImage8.setIcon(new ImageIcon(path + "Location-8.jpg"));
         locationImage9.setIcon(new ImageIcon(path + "Location-9.jpg"));
-        
-        actionImage1.setText("");
-        actionImage2.setText("");
-        
-        hintImage1.setText("");
-        hintImage2.setText("");
-        hintImage3.setText("");
-        hintImage4.setText("");
-        hintImage5.setText("");
-        
-        endTurn();
     }
     
     public void updateHand(List<Card> cards) {
         String path = controller.getImagePath();
         String image;
-        boolean[] filled = {false, false, false, false, false, false, false};
+        boolean[] filled = {false, false, false, false, false, false, false, false};
         Card card;
         actionCards[0] = null;
         actionCards[1] = null;
         for(int indx = 0; indx < cards.size(); indx++) {
             card = cards.get(indx);
             if(card.getCardType() == CardType.ACTION) {
-                path = "images/actionCards/";
+                path = "./images/actionCards/";
                 if(((ActionCard)card).getActionType() == ActionCardType.PRIVATE_TIP) {
                     if(((PrivateTip)card).getType() == PrivateTipType.ALL_DESTINATIONS) {
                         image = "Action-PrivateTipAllDestination.jpg";
@@ -256,6 +261,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.GOLDEN_GATE_BRIDGE) {
                         image = "Location-2.jpg";
@@ -278,6 +287,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.HOOVER_DAM) {
@@ -302,6 +315,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.LINCOLN_MEMORIAL) {
                         image = "Location-4.jpg";
@@ -324,6 +341,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.MIAMI_BEACH) {
@@ -348,6 +369,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.MT_RUSHMORE) {
                         image = "Location-6.jpg";
@@ -370,6 +395,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.NIAGRA_FALLS) {
@@ -394,6 +423,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.OLD_FAITHFUL) {
                         image = "Location-8.jpg";
@@ -417,6 +450,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((DestinationCard)card).getDestination() == DestinationID.THE_ALAMO) {
                         image = "Location-9.jpg";
@@ -439,6 +476,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                 }
@@ -465,6 +506,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((SuspectCard)card).getSuspect() == SuspectID.MUSTARD) {
                         image = "MUSTARD.jpg";
@@ -487,6 +532,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((SuspectCard)card).getSuspect() == SuspectID.PEACOCK) {
@@ -511,6 +560,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((SuspectCard)card).getSuspect() == SuspectID.PLUM) {
                         image = "PLUM.jpg";
@@ -533,6 +586,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((SuspectCard)card).getSuspect() == SuspectID.SCARLET) {
@@ -557,6 +614,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((SuspectCard)card).getSuspect() == SuspectID.WHITE) {
                         image = "WHITE.jpg";
@@ -579,6 +640,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                 }
@@ -605,6 +670,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((VehicleCard)card).getVehicle() == VehicleID.AUTOMOBILE) {
                         image = "AUTOMOBILE.jpg";
@@ -627,6 +696,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((VehicleCard)card).getVehicle() == VehicleID.HOT_AIR_BALLOON) {
@@ -651,6 +724,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((VehicleCard)card).getVehicle() == VehicleID.LIMOUSINE) {
                         image = "LIMOSINE.jpg";
@@ -673,6 +750,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                     else if(((VehicleCard)card).getVehicle() == VehicleID.SEAPLANE) {
@@ -697,6 +778,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
+                        }
                     }
                     else if(((VehicleCard)card).getVehicle() == VehicleID.TRAIN) {
                         image = "TRAIN.jpg";
@@ -719,6 +804,10 @@ public class MainGameScreen extends javax.swing.JFrame {
                         else if(!filled[6]) {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
+                        }
+                        else if(!filled[7]) {
+                            filled[7] = true;
+                            hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                 }
@@ -744,6 +833,9 @@ public class MainGameScreen extends javax.swing.JFrame {
         }
         if(!filled[6]) {
             hintImage5.setIcon(new ImageIcon());
+        }
+        if(!filled[7]) {
+            hintImage6.setIcon(new ImageIcon());
         }
     }
     
@@ -881,6 +973,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         hintImage3 = new javax.swing.JLabel();
         hintImage4 = new javax.swing.JLabel();
         hintImage5 = new javax.swing.JLabel();
+        hintImage6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1045,6 +1138,8 @@ public class MainGameScreen extends javax.swing.JFrame {
 
         hintImage5.setText("HC5");
 
+        hintImage6.setText("HC6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1124,7 +1219,9 @@ public class MainGameScreen extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(hintImage4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage5))))
+                                        .addComponent(hintImage5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hintImage6))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(locationImage1)
@@ -1186,7 +1283,8 @@ public class MainGameScreen extends javax.swing.JFrame {
                     .addComponent(hintImage2)
                     .addComponent(hintImage3)
                     .addComponent(hintImage4)
-                    .addComponent(hintImage5))
+                    .addComponent(hintImage5)
+                    .addComponent(hintImage6))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -1340,6 +1438,7 @@ public class MainGameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel hintImage3;
     private javax.swing.JLabel hintImage4;
     private javax.swing.JLabel hintImage5;
+    private javax.swing.JLabel hintImage6;
     private javax.swing.JButton instructionsButton;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;

@@ -98,6 +98,7 @@ public class GUIController implements Observer{
             state = CurrentWindow.LOBBY;
 
             //hide the game select screen and display the lobby screen
+            introScreen.setVisible(false);
             gameSelectScreen.setVisible(false);
             lobbyScreen.setVisible(true);
         }
@@ -115,6 +116,7 @@ public class GUIController implements Observer{
             }
             
             mainGameScreen.updateHand(((ClientGameState)obs).getHand());
+            mainGameScreen.updateLocation();
             
             //  add any applicable messages to game log through updateGameLog method
             String logUpdate = ((ClientGameState)obs).pollGameLog();
@@ -304,6 +306,7 @@ public class GUIController implements Observer{
         accusationScreen.setVisible(false);
         
         //call client controller's end turn method
+        clientController.endTurn();
     }
     
     public void setImageIndex(int indx){
