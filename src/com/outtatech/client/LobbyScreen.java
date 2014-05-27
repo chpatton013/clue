@@ -197,20 +197,24 @@ public class LobbyScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameStartButtonMouseClicked
-        //call controller's startGame method
-        controller.startGame();
+        if(gameStartButton.isEnabled()) {
+            //call controller's startGame method
+            controller.startGame();
+        }
     }//GEN-LAST:event_gameStartButtonMouseClicked
 
     private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
-        //call controller's createAI method
-        controller.createAI(id);
+        if(createAIButton.isEnabled()) {
+            //call controller's createAI method
+            controller.createAI(id);
+        }
     }//GEN-LAST:event_createAIButtonMouseClicked
 
     private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kickPlayerButtonMouseClicked
         //call controller's kickPlayer method with the selected player's id
         int indx = playerList.getSelectedRow();
         
-        if(indx >= 0) {
+        if(indx >= 0 && kickPlayerButton.isEnabled()) {
             controller.kickPlayer(playerIds[indx]);
         }
     }//GEN-LAST:event_kickPlayerButtonMouseClicked

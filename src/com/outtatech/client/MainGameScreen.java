@@ -1350,15 +1350,19 @@ public class MainGameScreen extends javax.swing.JFrame {
 
     private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's accuse method
-        controller.accuse();
+        if(accuseButton.isEnabled()) {
+            controller.accuse();
+        }
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMouseClicked
-        //call controller's endTurn method
-        endTurn();
-        
-        //call this's endTurn method
-        controller.endTurn();
+        if(endTurnButton.isEnabled()) {
+            //call controller's endTurn method
+            endTurn();
+
+            //call this's endTurn method
+            controller.endTurn();
+        }
     }//GEN-LAST:event_endTurnButtonMouseClicked
 
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
