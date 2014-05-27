@@ -120,7 +120,7 @@ public class ServerController
         {
             System.out.println("Recieved AI Request");
             AddAIRequest addAIReq = (AddAIRequest) obj;
-            int num = (humans.keySet()).size();
+            int num = games.get(connection).getPlayers().size();
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                     games.get(connection));
             System.out.println("Creating new Clue Bot");
@@ -155,7 +155,7 @@ public class ServerController
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             int num = humans.keySet().size();
-            serverPlayer.setName("CluePlayer" + num);
+            serverPlayer.setName("CluePlayer" + (num + 1));
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
             List<ConnectionToClient> cxns = this.getGameClients(
@@ -240,6 +240,10 @@ public class ServerController
          * LobbyDiscoveryResponse?
          */
 
+        else if (obj instanceof GameStateRequest)
+        {
+            this.handleGameStateRequest(games.get(connection), connection);
+        }
         /**
          * else if EndTurnRequest respond with GameStateResponse
          */
@@ -312,7 +316,7 @@ public class ServerController
 
         // Send all human players in the lobby a LobbyUpdateResponse
         forwardMessage(msg, gamePlayers);
-        informAI(msg, aiPlayers);
+        //informAI(msg, aiPlayers);
     }
 
     private HintCard findRefutingCard(List<ServerPlayer> gameServerPlayers,
@@ -569,11 +573,13 @@ public class ServerController
             if (!humans.containsKey(serverPlayer))
             {
                 //Send to AI
-                informAI(msg, robots.get(serverPlayer));
+                System.out.println("Sent to bot");
+                //informAI(msg, robots.get(serverPlayer));
             }
             else
             {
                 //Send to human
+                System.out.println("Sent to human");
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
@@ -581,6 +587,25 @@ public class ServerController
         // Remove lobby when game starts
         waiting.remove(game);
 
+    }
+
+    private void handleGameStateRequest(Game game, ConnectionToClient cxn)
+    {
+        Integer deckSize = game.getDrawPile().size();
+
+        List<Integer> playerTurnOrder = new ArrayList<Integer>(
+              game.getServerPlayers().keySet());
+
+        Integer currentActivePlayer = playerTurnOrder.get(0);
+
+        Map<Integer, String> names = new HashMap<Integer, String>();
+        for(Player player : game.getServerPlayers().values()) {
+            System.out.println(player.getName());
+            names.put(player.getPlayerId(), player.getName());
+        }
+
+        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
+                 currentActivePlayer, names), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)

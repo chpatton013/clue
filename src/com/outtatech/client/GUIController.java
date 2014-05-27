@@ -34,9 +34,9 @@ public class GUIController implements Observer{
     boolean isTurn = false;
     
     String[] imagePaths = {
-        "images/greece/",
-        "images/whiteHouse/",
-        "images/pirate/"};
+        "./images/greece/",
+        "./images/whiteHouse/",
+        "./images/pirate/"};
     
     private enum CurrentWindow {
         INTRO, GAMESELECT, LOBBY, MAINGAME
@@ -126,7 +126,8 @@ public class GUIController implements Observer{
             
             //  if it is the client's turn, call startTurn and clearGameLog methods
             isTurn = false;
-            if(((ClientGameState)obs).getCurrentActivePlayer() == curPlayerId) {
+            Integer currentActive = ((ClientGameState)obs).getCurrentActivePlayer();
+            if(currentActive != null && currentActive == curPlayerId) {
                 mainGameScreen.startTurn();
                 isTurn = true;
             }

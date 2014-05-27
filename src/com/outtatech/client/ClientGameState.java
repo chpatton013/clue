@@ -55,6 +55,7 @@ public class ClientGameState extends State
     public void setNewAccusation()
     {
         newAccusation = true;
+        triggerChange();
     }
 
     /**
@@ -98,6 +99,7 @@ public class ClientGameState extends State
     public void setDestToPlayerId(Map<DestinationID, Integer> map)
     {
         this.destToPlayerId = map;
+        triggerChange();
     }
     
     
@@ -109,6 +111,7 @@ public class ClientGameState extends State
     public void setPlayers(Map<Integer, String> players)
     {
         this.players = players;
+        triggerChange();
     }
     
     /**
@@ -140,6 +143,7 @@ public class ClientGameState extends State
     public void setRevealed(List<Card> revealed)
     {
         this.revealed = revealed;
+        triggerChange();
     }
 
     /**
@@ -162,6 +166,7 @@ public class ClientGameState extends State
     public void setRevealStatus(boolean revealStatus)
     {
         this.revealStatus = revealStatus;
+        triggerChange();
     }
 
     /**
@@ -172,6 +177,7 @@ public class ClientGameState extends State
     public void setPlayerId(int playerID)
     {
         this.playerID = playerID;
+        triggerChange();
     }
     
     /**
@@ -182,6 +188,7 @@ public class ClientGameState extends State
     public void setPlayerHand(List<Card> hand)
     {
         this.hand = hand;
+        triggerChange();
     }
 
     /**
@@ -202,6 +209,7 @@ public class ClientGameState extends State
     public void setNotes(Object notes)
     {
         this.notes = notes;
+        triggerChange();
     }
 
     /**
@@ -244,16 +252,19 @@ public class ClientGameState extends State
     public void setDeckCardCount(Integer deckCardCount)
     {
         this.deckCardCount = deckCardCount;
+        triggerChange();
     }
 
     public void setPlayerTurnOrder(List<Integer> playerTurnOrder)
     {
         this.playerTurnOrder = playerTurnOrder;
+        triggerChange();
     }
 
-    public void setCurrentActivePlayer(Integer currectActivePlayer)
+    public void setCurrentActivePlayer(Integer currentActivePlayer)
     {
         this.currentActivePlayer = currentActivePlayer;
+        triggerChange();
     }
 
     public void pushGameLog(String message)
