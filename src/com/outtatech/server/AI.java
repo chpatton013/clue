@@ -217,12 +217,7 @@ public class AI extends ServerPlayer
      */
 
     public void aiTurn()
-    {
-        // If not time to make an accusation, play an action card randomly determined.
-        
-        int index = (int)Math.random() * game.getServerPlayersList().size();
-        Integer playerID = game.getServerPlayersList().get(index).getPlayerId();
-         
+    {         
         if (!aiMakeAccusation())
         {
             ActionCard cardToPlay = actionCardsHand.get((int)Math.random());
@@ -231,13 +226,33 @@ public class AI extends ServerPlayer
                 aiMakeSuggestion(cardToPlay);
             else if (cardToPlay.getActionType() == ActionCardType.SNOOP || 
                    cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP )
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null, playerID), this);
+            {
+                ctrl.reactToRobot(new ActionRequest(cardToPlay, null, getRandomPlayerID()), this);
+            }
+               
             else
                 ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);     
         }
 
         ctrl.reactToRobot(new EndTurnRequest(), this);
         
+    }
+    
+    /**
+     * Returns ID of random player in game.
+     * @return playerID ID of random player in game. 
+     */
+    private Integer getRandomPlayerID()
+    {
+        Integer playerID = -1;
+      
+        while (playerID == this.getPlayerId())
+        {
+           int index = (int)Math.random() * game.getServerPlayersList().size();
+           playerID = game.getServerPlayersList().get(index).getPlayerId();
+        }
+        
+      return playerID;
     }
     
     private void aiMakeSuggestion(ActionCard card)

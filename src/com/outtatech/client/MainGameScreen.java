@@ -86,6 +86,8 @@ public class MainGameScreen extends javax.swing.JFrame {
         hintImage3.setText("");
         hintImage4.setText("");
         hintImage5.setText("");
+        
+        endTurn();
     }
     
     public void updateHand(List<Card> cards) {

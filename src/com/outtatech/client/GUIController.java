@@ -31,7 +31,9 @@ public class GUIController implements Observer{
     ClientController clientController;
     State gameState;
     
-    int imageIndex = 0;
+    int imageIndex = 0, curPlayerId = -1;
+    
+    boolean isTurn = false;
     
     String[] imagePaths = {
         "images\\greece\\",
@@ -100,6 +102,7 @@ public class GUIController implements Observer{
         
         //if state is MAINGAME
         if(obs instanceof ClientGameState) {
+            curPlayerId = ((ClientGameState)obs).getPlayerId();
             //  call mainGameScreen's clearFields method
             mainGameScreen.clearPlayers();
             //  add each hand card and location back
@@ -110,6 +113,7 @@ public class GUIController implements Observer{
             
             mainGameScreen.updateHand(((ClientGameState)obs).getHand());
             
+            //  add any applicable messages to game log through updateGameLog method
             String logUpdate = ((ClientGameState)obs).pollGameLog();
             
             while(logUpdate != null) {
@@ -118,7 +122,12 @@ public class GUIController implements Observer{
             }
             
             //  if it is the client's turn, call startTurn and clearGameLog methods
-            //  add any applicable messages to game log through updateGameLog method
+            isTurn = false;
+            if(((ClientGameState)obs).getCurrentActivePlayer() == curPlayerId) {
+                mainGameScreen.startTurn();
+                isTurn = true;
+            }
+            
             //  check client controller's reveal flag
             //
             //  if set
@@ -274,11 +283,13 @@ public class GUIController implements Observer{
      * @param cardType
      */
     public void playCard(int cardType) {
-        //check type of card
-        
-        //call client controller's requestUse method with an action card of 
-        //type cardType and selected playerId from game window if 
-        //it is a snoop card
+        if(isTurn) {
+            //check type of card
+
+            //call client controller's requestUse method with an action card of 
+            //type cardType and selected playerId from game window if 
+            //it is a snoop card
+        }
     }
     
     /**
