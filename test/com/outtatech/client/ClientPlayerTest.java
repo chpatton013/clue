@@ -1,4 +1,5 @@
-package com.outtatech.client;
+del
+        package com.outtatech.client;
 
 import com.outtatech.server.ClientPlayer;
 import java.awt.Color;

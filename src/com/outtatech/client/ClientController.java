@@ -79,6 +79,7 @@ public class ClientController
      */
     public void startSinglePlayerGame()
     {
+        this.creator = true;
         this.forwardMessage(new SinglePlayerGameRequest());
     }
 
@@ -316,6 +317,8 @@ public class ClientController
                     state.getPlayers()));
 
             ((ClientGameState) this.state).pushGameLog("Game Started");
+
+            this.forwardMessage(new GameStateRequest());
         }
         else if (!(this.state instanceof ClientGameState))
         {

@@ -34,9 +34,9 @@ public class GUIController implements Observer{
     boolean isTurn = false;
     
     String[] imagePaths = {
-        "images/greece/",
-        "images/whiteHouse/",
-        "images/pirate/"};
+        "./images/greece/",
+        "./images/whiteHouse/",
+        "./images/pirate/"};
     
     private enum CurrentWindow {
         INTRO, GAMESELECT, LOBBY, MAINGAME

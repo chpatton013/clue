@@ -27,6 +27,7 @@ public class ServerController
     private Map<Integer, Game> gameIdToGame;
     private Map<Game, CopyOnWriteArrayList<ConnectionToClient>> players;
     private Map<ServerPlayer, ConnectionToClient> humans;
+    private Map<ConnectionToClient, ServerPlayer> connectionToPlayer;
     //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
     private Map<Integer, Lobby> lobbies;
@@ -46,7 +47,8 @@ public class ServerController
     {
         this.network = network;
         this.network.setServerController(this);
-
+        this.connectionToPlayer
+                = new HashMap<ConnectionToClient, ServerPlayer>();
         this.games = new HashMap<ConnectionToClient, Game>();
         this.players
                 = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
@@ -131,14 +133,15 @@ public class ServerController
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
-            
+
             List<Player> players = lobbyGame.getPlayers();
-            Map<Integer, String> names = new HashMap<Integer, String>(); 
-            for(Player temp : players) {
+            Map<Integer, String> names = new HashMap<Integer, String>();
+            for (Player temp : players)
+            {
                 System.out.println(temp.getName());
                 names.put(temp.getPlayerId(), temp.getName());
             }
-            
+
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
                     newPlayer.getPlayerId(), names));
         }
@@ -171,21 +174,23 @@ public class ServerController
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             int num = humans.keySet().size();
-            serverPlayer.setName("CluePlayer" + num);
+            serverPlayer.setName("CluePlayer" + (num + 1));
             this.humans.put(serverPlayer, connection);
+            this.connectionToPlayer.put(connection, serverPlayer);
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
             cxns.add(this.humans.get(serverPlayer));
 
             Game game = gameIdToGame.get(lobby.getGameId());
             game.addServerPlayer(serverPlayer);
-            
+
             List<Player> players = game.getPlayers();
-            Map<Integer, String> names = new HashMap<Integer, String>(); 
-            for (Player temp : players) {
+            Map<Integer, String> names = new HashMap<Integer, String>();
+            for (Player temp : players)
+            {
                 names.put(temp.getPlayerId(), temp.getName());
             }
-            
+
             forwardMessage(new LobbyJoinResponse(lobby,
                     serverPlayer.getPlayerId(), names), cxns);
         }
@@ -225,18 +230,20 @@ public class ServerController
             ServerPlayer serverPlayer = new ServerPlayer();
             serverPlayer.setName("single_player_host");
             this.humans.put(serverPlayer, connection);
+            this.connectionToPlayer.put(connection, serverPlayer);
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
             cxns.add(this.humans.get(serverPlayer));
 
             List<Player> players = game.getPlayers();
             Map<Integer, String> names = new HashMap<Integer, String>();
-            for (Player temp : players) {
+            for (Player temp : players)
+            {
                 names.put(temp.getPlayerId(), temp.getName());
             }
 
             forwardMessage(new LobbyJoinResponse(lobby,
-                     serverPlayer.getPlayerId(), names), connection);
+                    serverPlayer.getPlayerId(), names), connection);
         }
 
         /**
@@ -252,20 +259,48 @@ public class ServerController
          * LobbyDiscoveryResponse?
          */
 
+        else if (obj instanceof GameStateRequest)
+        {
+            this.handleGameStateRequest(games.get(connection), connection);
+        }
         /**
          * else if EndTurnRequest respond with GameStateResponse
          */
         else if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest endTurnReq = (EndTurnRequest) obj;
-            handleEndTurnRequest(games.get(connection));
+            handleEndTurnRequest(games.get(connection), connectionToPlayer.get(
+                    connection));
 //            forwardMessage(new GameStateResponse()), connection, false);
         }
     }
 
-    private void handleEndTurnRequest(Game game)
+    private void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
-       
+        ServerPlayer newCurrent = game.advanceTurn();
+        List<Card> drawCards = new ArrayList<Card>();
+        drawCards.add(game.getDrawPile().remove(0));
+        ServerResponse response = new CardDealResponse(drawCards);
+        informPlayer(initiator, response);
+    }
+
+    /**
+     * Given a player and a message, distribute the message to AI or Human
+     *
+     * @param player
+     * @param msg
+     */
+    private void informPlayer(ServerPlayer player, ServerResponse msg)
+    {
+        if (player instanceof AI)
+        {
+            AI aiPlayer = (AI) player;
+            informAI(msg, aiPlayer);
+        }
+        else
+        {
+            forwardMessage(msg, humans.get(player));
+        }
     }
 
     /**
@@ -567,7 +602,29 @@ public class ServerController
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
+        
+        // Remove lobby when game starts
+        waiting.remove(game);
 
+    }
+
+    private void handleGameStateRequest(Game game, ConnectionToClient cxn)
+    {
+        Integer deckSize = game.getDrawPile().size();
+
+        List<Integer> playerTurnOrder = new ArrayList<Integer>(
+              game.getServerPlayers().keySet());
+
+        Integer currentActivePlayer = playerTurnOrder.get(0);
+
+        Map<Integer, String> names = new HashMap<Integer, String>();
+        for(Player player : game.getServerPlayers().values()) {
+            System.out.println(player.getName());
+            names.put(player.getPlayerId(), player.getName());
+        }
+
+        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
+                 currentActivePlayer, names), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)

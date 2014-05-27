@@ -1,3 +1,4 @@
+
 import com.outtatech.client.ClientGameState;
 import com.outtatech.common.Card;
 import com.outtatech.common.DestinationID;
@@ -14,31 +15,38 @@ import org.junit.Test;
  *
  * @author Thomas
  */
-public class ClientGameStateTest {
+public class ClientGameStateTest
+{
     
-    public ClientGameStateTest() {
+    public ClientGameStateTest()
+    {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass()
+    {
     }
     
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass()
+    {
     }
 
     /**
      * Test of setNewAccusation method, of class ClientGameState.
      */
     @Test
-    public void testSetNewAccusation() {
+    public void testSetNewAccusation()
+    {
         System.out.println("setNewAccusation");
         
-        try {
+        try
+        {
             ClientGameState instance = new ClientGameState(0, null, null);
             instance.setNewAccusation();
         }
-        catch(Exception ex) {
+        catch (Exception ex)
+        {
             fail();
         }
     }
@@ -47,7 +55,8 @@ public class ClientGameStateTest {
      * Test of getAccusationStatus method, of class ClientGameState.
      */
     @Test
-    public void testGetAccusationStatus() {
+    public void testGetAccusationStatus()
+    {
         System.out.println("getAccusationStatus");
         
         ClientGameState instance = new ClientGameState(0, null, null);
@@ -55,10 +64,12 @@ public class ClientGameStateTest {
         boolean result = instance.getAccusationStatus();
         assertEquals(expResult, result);
         
-        try {
+        try
+        {
             instance.setNewAccusation();
         }
-        catch(Exception ex) {
+        catch (Exception ex)
+        {
             fail("---Failed To Set New Accusation. Aborting.");
         }
         
@@ -71,7 +82,8 @@ public class ClientGameStateTest {
      * Test of getAccusation method, of class ClientGameState.
      */
     @Test
-    public void testGetAccusation() {
+    public void testGetAccusation()
+    {
         System.out.println("getAccusation");
         
         ClientGameState instance = new ClientGameState(0, null, null);
@@ -84,7 +96,8 @@ public class ClientGameStateTest {
      * Test of getPlayerId method, of class ClientGameState.
      */
     @Test
-    public void testGetPlayerId() {
+    public void testGetPlayerId()
+    {
         System.out.println("getPlayerId");
         
         ClientGameState instance = new ClientGameState(0, null, null);
@@ -97,7 +110,8 @@ public class ClientGameStateTest {
      * Test of getRevealed method, of class ClientGameState.
      */
     @Test
-    public void testGetRevealed() {
+    public void testGetRevealed()
+    {
         System.out.println("getRevealed");
         
         ClientGameState instance = new ClientGameState(0, null, null);
@@ -110,15 +124,18 @@ public class ClientGameStateTest {
      * Test of setRevealed method, of class ClientGameState.
      */
     @Test
-    public void testSetRevealed() {
+    public void testSetRevealed()
+    {
         System.out.println("setRevealed");
         
         List<Card> revealed = null;
         ClientGameState instance = new ClientGameState(0, null, null);
-        try{
+        try
+        {
             instance.setRevealed(revealed);
         }
-        catch(Exception ex){
+        catch (Exception ex)
+        {
             fail();
         }
     }
@@ -127,7 +144,8 @@ public class ClientGameStateTest {
      * Test of getRevealStatus method, of class ClientGameState.
      */
     @Test
-    public void testGetRevealStatus() {
+    public void testGetRevealStatus()
+    {
         System.out.println("getRevealStatus");
         
         ClientGameState instance = new ClientGameState(0, null, null);
@@ -136,10 +154,12 @@ public class ClientGameStateTest {
         assertEquals(expResult, result);
         
         expResult = true;
-        try {
+        try
+        {
             instance.setRevealStatus(expResult);
         }
-        catch(Exception ex) {
+        catch (Exception ex)
+        {
             fail("---Failed To Set New Reveal. Aborting.");
         }
         result = instance.getRevealStatus();
@@ -150,16 +170,19 @@ public class ClientGameStateTest {
      * Test of setRevealStatus method, of class ClientGameState.
      */
     @Test
-    public void testSetRevealStatus() {
+    public void testSetRevealStatus()
+    {
         System.out.println("setRevealStatus");
         
         boolean revealStatus = false;
         ClientGameState instance = new ClientGameState(0, null, null);
         
-        try {
+        try
+        {
             instance.setRevealStatus(revealStatus);
         }
-        catch(Exception ex){
+        catch (Exception ex)
+        {
             fail();
         }
     }
@@ -168,16 +191,19 @@ public class ClientGameStateTest {
      * Test of setPlayerId method, of class ClientGameState.
      */
     @Test
-    public void testSetPlayerId() {
+    public void testSetPlayerId()
+    {
         System.out.println("setPlayerId");
         
         int playerID = 0;
         ClientGameState instance = new ClientGameState(0, null, null);
         
-        try {
+        try
+        {
             instance.setPlayerId(playerID);
         }
-        catch(Exception ex) {
+        catch (Exception ex)
+        {
             fail();
         }
     }
@@ -186,7 +212,8 @@ public class ClientGameStateTest {
      * Test of getNotes method, of class ClientGameState.
      */
     @Test
-    public void testGetNotes() {
+    public void testGetNotes()
+    {
         System.out.println("getNotes");
         
         String expResult = "Test";
@@ -200,7 +227,8 @@ public class ClientGameStateTest {
      * Test of getHand method, of class ClientGameState.
      */
     @Test
-    public void testGetHand() {
+    public void testGetHand()
+    {
         System.out.println("getHand");
         
         List<Card> expResult = new ArrayList<Card>();
@@ -214,10 +242,12 @@ public class ClientGameStateTest {
      * Test of getDestToPlayerId method, of class ClientGameState.
      */
     @Test
-    public void testGetDestToPlayerId() {
+    public void testGetDestToPlayerId()
+    {
         System.out.println("getDestToPlayerId");
         
-        Map<DestinationID, Integer> expResult = new HashMap<DestinationID, Integer>();
+        Map<DestinationID, Integer> expResult
+                = new HashMap<DestinationID, Integer>();
         expResult.put(DestinationID.THE_ALAMO, 5);
         ClientGameState instance = new ClientGameState(0, null, null);
         instance.setDestToPlayerId(expResult);

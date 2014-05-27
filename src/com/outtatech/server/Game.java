@@ -30,6 +30,8 @@ public class Game
     private List<HintCard> listHintCards;
     private Solution solution;
     private Map<DestinationID, Integer> destToPlayerId;
+    private List<ServerPlayer> playerTurnOrder;
+    private int curPlayerTurn;
 
     /**
      * Constructor for a Game instance.
@@ -48,7 +50,8 @@ public class Game
             List<ActionCard> drawPile,
             List<ActionCard> discardPile,
             Solution solution,
-            Map<DestinationID, Integer> destToPlayerId)
+            Map<DestinationID, Integer> destToPlayerId,
+            List<ServerPlayer> playerTurnOrder)
     {
         this.players = players;
         this.current = current;
@@ -57,6 +60,8 @@ public class Game
         this.solution = solution;
         this.destToPlayerId = destToPlayerId;
         this.gameId = ++gameIdCounter;
+        curPlayerTurn = 0;
+        this.playerTurnOrder = playerTurnOrder;
     }
     
     
@@ -70,8 +75,32 @@ public class Game
         this.solution = pickSolution();
         this.destToPlayerId = null;
         this.gameId = ++gameIdCounter;
+        playerTurnOrder = new ArrayList(players.values());
+        curPlayerTurn = 0;
+        Collections.shuffle(playerTurnOrder);
+    }
+    
+    /**
+     * Advances the games turn to the next player.
+     * 
+     * @return the next player whose turn it is
+     */
+    public ServerPlayer advanceTurn()
+    {
+        curPlayerTurn = (curPlayerTurn + 1) % playerTurnOrder.size();
+        return playerTurnOrder.get(curPlayerTurn);
     }
 
+    /**
+     * Get the current player whose turn it is.
+     * 
+     * @return the current player whose turn it is.
+     */
+    public ServerPlayer getCurrentPlayer()
+    {
+        return playerTurnOrder.get(curPlayerTurn);
+    }
+    
     /**
      * Add a ServerPlayer to the List of ServerPlayers in this game.
      *
