@@ -6,32 +6,36 @@ import javax.swing.ImageIcon;
  *
  * @author Thomas
  */
-public class OptionsScreen extends javax.swing.JFrame {
+public class OptionsScreen extends javax.swing.JFrame
+{
 
     GUIController controller;
-    
+
     /**
      * Creates new form OptionsScreen
      */
-    public OptionsScreen() {
+    public OptionsScreen()
+    {
         initComponents();
     }
-    
-    public OptionsScreen(GUIController ctrl) {
+
+    public OptionsScreen(GUIController ctrl)
+    {
         controller = ctrl;
-        
+
         int indx = controller.getImageIndex();
-        
+
         initComponents();
-        
+
         cardImage1.setText("");
         cardImage2.setText("");
         cardImage3.setText("");
-        
+
         updateCards(indx);
     }
-    
-    private void updateCards(int indx){
+
+    private void updateCards(int indx)
+    {
         String path = controller.getImagePath(indx);
         cardImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
         cardImage2.setIcon(new ImageIcon(path + "MUSTARD.jpg"));
@@ -165,8 +169,10 @@ public class OptionsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void greeceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greeceButtonActionPerformed
-        if(greeceButton.isSelected())
+        if (greeceButton.isSelected())
+        {
             updateCards(0);
+        }
     }//GEN-LAST:event_greeceButtonActionPerformed
 
     private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
@@ -174,60 +180,89 @@ public class OptionsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_closeButtonMouseClicked
 
     private void applyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applyButtonMouseClicked
-        if(greeceButton.isSelected())
+        if (greeceButton.isSelected())
+        {
             controller.setImageIndex(0);
-        else if(whiteHouseButton.isSelected())
+        }
+        else if (whiteHouseButton.isSelected())
+        {
             controller.setImageIndex(1);
+        }
         else
+        {
             controller.setImageIndex(2);
-        
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_applyButtonMouseClicked
 
     private void whiteHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteHouseButtonActionPerformed
-        if(whiteHouseButton.isSelected())
+        if (whiteHouseButton.isSelected())
+        {
             updateCards(1);
+        }
     }//GEN-LAST:event_whiteHouseButtonActionPerformed
 
     private void pirateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pirateButtonActionPerformed
-        if(pirateButton.isSelected())
+        if (pirateButton.isSelected())
+        {
             updateCards(2);
+        }
     }//GEN-LAST:event_pirateButtonActionPerformed
 
     private void greeceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_greeceButtonMouseClicked
-        
+
     }//GEN-LAST:event_greeceButtonMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(OptionsScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new OptionsScreen().setVisible(true);
             }
         });

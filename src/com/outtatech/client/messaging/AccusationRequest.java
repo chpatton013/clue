@@ -26,11 +26,11 @@ public class AccusationRequest extends ClientRequest
     }
 
     /**
-     * Getter method for the solution that was given by the client in
-     * order to make an accusation.
+     * Getter method for the solution that was given by the client in order to
+     * make an accusation.
      *
-     * @return the solution that was given by the client in order to make
-     * an accusation.
+     * @return the solution that was given by the client in order to make an
+     * accusation.
      */
     public Solution getSolution()
     {

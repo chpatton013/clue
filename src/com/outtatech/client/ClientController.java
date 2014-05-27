@@ -169,7 +169,6 @@ public class ClientController
 //    {
 //        this.forwardMessage(new RevealCardsRequest(cards));
 //    }
-
     /**
      * Called when the client would like to make an accusation during their
      * turn.
@@ -245,8 +244,8 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
-        if (this.state instanceof ClientMenuState ||
-                this.state instanceof ClientLobbyDiscoveryState)
+        if (this.state instanceof ClientMenuState
+                || this.state instanceof ClientLobbyDiscoveryState)
         {
             Integer myId = rsp.getPlayerId();
             Map<Integer, String> players = rsp.getPlayers();
@@ -261,9 +260,9 @@ public class ClientController
         }
         else
         {
-            System.err.println("Received LobbyJoinResponse while not in " +
-                    "ClientMenuState, ClientLobbyDiscoveryState, or " +
-                    "ClientLobbyState.");
+            System.err.println("Received LobbyJoinResponse while not in "
+                    + "ClientMenuState, ClientLobbyDiscoveryState, or "
+                    + "ClientLobbyState.");
         }
     }
 
@@ -295,8 +294,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received GameStateResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received GameStateResponse while not in "
+                    + "ClientGameState.");
             return;
         }
 
@@ -304,8 +303,8 @@ public class ClientController
         state.setPlayers(rsp.getPlayers());
         state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
 
-        state.pushGameLog("Game state updated:" +
-                "\n   Current Active Player: " + rsp.getCurrentActivePlayer());
+        state.pushGameLog("Game state updated:" + "\n   Current Active Player: "
+                + rsp.getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
@@ -348,7 +347,6 @@ public class ClientController
 //                "Player " + rsp.getPlayerId() + " played card " + rsp.
 //                getActionCard());
 //    }
-
     private void reactToRevealCardRequest(RevealCardResponse rsp)
     {
         if (!(this.state instanceof ClientGameState))

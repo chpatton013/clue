@@ -7,59 +7,66 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Thomas
  */
-public class GameSelectScreen extends javax.swing.JFrame {
-    
+public class GameSelectScreen extends javax.swing.JFrame
+{
+
     private int selectedRow = -1;
-    
+
     private ArrayList lobbyIds = new ArrayList();
-    
+
     GUIController controller;
 
     /**
      * Creates new form GameSelectScreen
      */
-    public GameSelectScreen() {
+    public GameSelectScreen()
+    {
         initComponents();
     }
-    
+
     /**
-     *Alternate constructor to take a GUIController in
+     * Alternate constructor to take a GUIController in
+     *
      * @param ctrl
      */
-    public GameSelectScreen(GUIController ctrl) {
+    public GameSelectScreen(GUIController ctrl)
+    {
         //set controller to ctrl
         controller = ctrl;
-        
+
         initComponents();
     }
-    
+
     /**
-     *Adds a game to the screen
+     * Adds a game to the screen
+     *
      * @param gameName
      * @param lobbyId
      */
-    public void addGame(String gameName, int lobbyId) {
+    public void addGame(String gameName, int lobbyId)
+    {
         //set game list to current text + gameName
         gameList.setValueAt(gameName, lobbyIds.size(), 0);
-        
+
         //add lobbyId to lobbyIds
         lobbyIds.add(lobbyId);
     }
-    
+
     /**
-     *Removes all games from the screen
+     * Removes all games from the screen
      */
-    public void clearGames() {
+    public void clearGames()
+    {
         //set game list's text to ""
-        for(int curRow = 0; curRow < lobbyIds.size(); curRow++){
+        for (int curRow = 0; curRow < lobbyIds.size(); curRow++)
+        {
             gameList.setValueAt("", curRow, 0);
         }
-        
+
         //clear lobbyIds
         lobbyIds = new ArrayList();
     }
@@ -194,9 +201,10 @@ public class GameSelectScreen extends javax.swing.JFrame {
     private void joinGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinGameButtonMouseClicked
         //call controller's joinGame method with the selected lobby's lobby id
         int row = gameList.getSelectedRow();
-        
-        if(row >= 0 && row < lobbyIds.size()) {
-            controller.joinGame((int)lobbyIds.get(row));
+
+        if (row >= 0 && row < lobbyIds.size())
+        {
+            controller.joinGame((int) lobbyIds.get(row));
         }
     }//GEN-LAST:event_joinGameButtonMouseClicked
 
@@ -208,33 +216,52 @@ public class GameSelectScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(GameSelectScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new GameSelectScreen().setVisible(true);
             }
         });

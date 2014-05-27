@@ -13,7 +13,7 @@ package com.outtatech.common;
 public class PrivateTip extends ActionCard
 {
     PrivateTipType type;
-    
+
     /**
      * Constructs a new PrivatTip ActionCard.
      */
@@ -22,7 +22,7 @@ public class PrivateTip extends ActionCard
         super(ActionCardType.PRIVATE_TIP);
         this.type = type;
     }
-    
+
     public PrivateTipType getType()
     {
         return type;

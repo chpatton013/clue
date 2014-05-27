@@ -24,7 +24,7 @@ public class RevealCardResponse extends ServerResponse
      * @param cards the list of cards that this reveal action may want.
      */
     public RevealCardResponse(ActionCard actionCard,
-          List<Card> cards)
+            List<Card> cards)
     {
         this.actionCard = actionCard;
         this.cards = cards;

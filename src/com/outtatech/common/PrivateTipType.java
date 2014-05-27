@@ -7,7 +7,7 @@ package com.outtatech.common;
 public enum PrivateTipType
 {
     //Reveal all destination cards
-    ALL_DESTINATIONS, 
+    ALL_DESTINATIONS,
     //Reveal all vehicle cards
     ALL_VEHICLES,
     //Reveal one northern destination card
@@ -17,5 +17,5 @@ public enum PrivateTipType
     //Reveal a female suspect card
     ONE_FEMALE_SUSPECT,
     //Reveal a red vehicle card
-    ONE_RED_VEHICLE;  
+    ONE_RED_VEHICLE;
 }

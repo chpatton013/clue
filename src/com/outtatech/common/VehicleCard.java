@@ -22,13 +22,17 @@ public class VehicleCard extends HintCard
         super(HintCardType.VEHICLE);
         this.vehicle = vehicle;
         this.color = cardColor;
-        
-        if (this.vehicle == VehicleID.SEAPLANE || 
-                this.vehicle == VehicleID.AIRLINER || 
-                this.vehicle == VehicleID.HOT_AIR_BALLOON)
+
+        if (this.vehicle == VehicleID.SEAPLANE || this.vehicle
+                == VehicleID.AIRLINER || this.vehicle
+                == VehicleID.HOT_AIR_BALLOON)
+        {
             isAir = true;
+        }
         else
+        {
             isAir = false;
+        }
     }
 
     /**
@@ -40,12 +44,12 @@ public class VehicleCard extends HintCard
     {
         return vehicle;
     }
-    
+
     public boolean getIsAir()
     {
         return isAir;
     }
-    
+
     public CardColor getCardColor()
     {
         return color;

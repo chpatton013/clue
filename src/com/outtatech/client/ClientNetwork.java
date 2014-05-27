@@ -25,12 +25,13 @@ public class ClientNetwork extends AbstractClient
         super(host, port);
         this.openConnection();
     }
-    
+
     /**
      * Sets this instance's reference to the ClientController
+     *
      * @param ctrl the client controller reference
      */
-    public void setClientController(ClientController ctrl) 
+    public void setClientController(ClientController ctrl)
     {
         this.ctrl = ctrl;
     }
@@ -72,7 +73,7 @@ public class ClientNetwork extends AbstractClient
     @Override
     protected void handleMessageFromServer(Object msg)
     {
-        ctrl.reactToMessage((ServerResponse)msg);
+        ctrl.reactToMessage((ServerResponse) msg);
     }
 
     /**

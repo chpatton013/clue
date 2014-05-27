@@ -33,28 +33,31 @@ public class AddAIRequest extends ClientRequest
     {
         return difficulty;
     }
-     /**
-     * Sets the difficulty of the AI player.
 
+    /**
+     * Sets the difficulty of the AI player.
+     *
      */
     public void setDifficulty(Difficulty difficulty)
     {
         this.difficulty = difficulty;
     }
+
     /**
      * Sets the difficulty of the AI player.
      */
-    
-    public Integer getLobbyId() 
+
+    public Integer getLobbyId()
     {
-       return lobbyId;
+        return lobbyId;
     }
+
     /**
      * Sets the difficulty of the AI player.
      */
-    
-    public void setLobbyId(Integer lobbyId) 
+
+    public void setLobbyId(Integer lobbyId)
     {
-       this.lobbyId = lobbyId;
+        this.lobbyId = lobbyId;
     }
 }

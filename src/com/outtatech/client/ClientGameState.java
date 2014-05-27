@@ -34,7 +34,8 @@ public class ClientGameState extends State
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
-    public ClientGameState(int playerID, List<Card> hand, Map<Integer, String> players)
+    public ClientGameState(int playerID, List<Card> hand,
+            Map<Integer, String> players)
     {
         this.players = players;
         this.playerID = playerID;
@@ -89,21 +90,21 @@ public class ClientGameState extends State
     {
         return playerID;
     }
-    
+
     /**
      * Setter method that sets the mapping from destination IDs to player IDs
-     * @param map 
+     *
+     * @param map
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> map)
     {
         this.destToPlayerId = map;
         triggerChange();
     }
-    
-    
+
     /**
      * Sets the players in this game
-     * 
+     *
      * @param players the players in this game.
      */
     public void setPlayers(Map<Integer, String> players)
@@ -111,10 +112,10 @@ public class ClientGameState extends State
         this.players = players;
         triggerChange();
     }
-    
+
     /**
      * Returns the list of players in this game
-     * 
+     *
      * @return the list of players in this game
      */
     public Map<Integer, String> getPlayers()
@@ -177,11 +178,11 @@ public class ClientGameState extends State
         this.playerID = playerID;
         triggerChange();
     }
-    
+
     /**
      * Sets this players hand.
-     * 
-     * @param hand 
+     *
+     * @param hand
      */
     public void setPlayerHand(List<Card> hand)
     {
@@ -198,11 +199,11 @@ public class ClientGameState extends State
     {
         return notes;
     }
-    
+
     /**
      * Sets this players notes.
-     * 
-     * @param notes 
+     *
+     * @param notes
      */
     public void setNotes(Object notes)
     {

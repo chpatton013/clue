@@ -4,87 +4,103 @@ package com.outtatech.client;
  *
  * @author Thomas
  */
-public class LobbyScreen extends javax.swing.JFrame {
-    
+public class LobbyScreen extends javax.swing.JFrame
+{
+
     private int numPlayers = 0, selectedRow = -1;
-    
-    private int[] playerIds = {-1, -1, -1, -1, -1};
-    
+
+    private int[] playerIds =
+    {
+        -1, -1, -1, -1, -1
+    };
+
     private int id = -1;
-    
+
     GUIController controller;
 
     /**
      * Creates new form LobbyScreen
      */
-    public LobbyScreen() {
+    public LobbyScreen()
+    {
         initComponents();
     }
-    
+
     /**
-     *Alternate constructor to take a GUIController in
+     * Alternate constructor to take a GUIController in
+     *
      * @param ctrl
      */
-    public LobbyScreen(GUIController ctrl) {
+    public LobbyScreen(GUIController ctrl)
+    {
         //set controller to ctrl
         controller = ctrl;
-        
+
         initComponents();
-        
+
         gameStartButton.setEnabled(false);
     }
-    
-    public void setId(int lobbyId) {
+
+    public void setId(int lobbyId)
+    {
         id = lobbyId;
     }
-    
+
     /**
-     *Adds a player to the lobby
+     * Adds a player to the lobby
+     *
      * @param playerName
      * @param playerId
      */
-    public void addPlayer(String playerName, int playerId, boolean isPlayer) {
+    public void addPlayer(String playerName, int playerId, boolean isPlayer)
+    {
         //set player list text to current text + playerName + "waiting..."
         String name = playerName;
-        if(isPlayer)
+        if (isPlayer)
+        {
             name = name + "(You)";
+        }
         playerList.setValueAt(name, numPlayers, 0);
-        
+
         //set playerIds[numPlayers] to the player's id
         playerIds[numPlayers] = playerId;
-        
+
         //increment numPlayers
         numPlayers++;
     }
-    
-    public void setLeader(boolean isLeader){
+
+    public void setLeader(boolean isLeader)
+    {
         createAIButton.setEnabled(isLeader);
         kickPlayerButton.setEnabled(isLeader);
-        if(numPlayers >= 3)
+        if (numPlayers >= 3)
+        {
             gameStartButton.setEnabled(isLeader);
+        }
     }
-    
+
     /**
-     *Clears all players from the lobby
+     * Clears all players from the lobby
      */
-    public void clearPlayers() {
+    public void clearPlayers()
+    {
         //set the player list text to ""
         playerList.setValueAt("", 0, 0);
         playerList.setValueAt("", 1, 0);
         playerList.setValueAt("", 2, 0);
         playerList.setValueAt("", 3, 0);
         playerList.setValueAt("", 4, 0);
-        
+
         //set numPlayers to 0
         numPlayers = 0;
-        
+
         //set playerIds to -1 at all indicies
         playerIds[0] = -1;
         playerIds[1] = -1;
         playerIds[2] = -1;
         playerIds[3] = -1;
         playerIds[4] = -1;
-        
+
         gameStartButton.setEnabled(false);
     }
 
@@ -197,14 +213,16 @@ public class LobbyScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameStartButtonMouseClicked
-        if(gameStartButton.isEnabled()) {
+        if (gameStartButton.isEnabled())
+        {
             //call controller's startGame method
             controller.startGame();
         }
     }//GEN-LAST:event_gameStartButtonMouseClicked
 
     private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
-        if(createAIButton.isEnabled()) {
+        if (createAIButton.isEnabled())
+        {
             //call controller's createAI method
             controller.createAI(id);
         }
@@ -213,8 +231,9 @@ public class LobbyScreen extends javax.swing.JFrame {
     private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kickPlayerButtonMouseClicked
         //call controller's kickPlayer method with the selected player's id
         int indx = playerList.getSelectedRow();
-        
-        if(indx >= 0 && kickPlayerButton.isEnabled()) {
+
+        if (indx >= 0 && kickPlayerButton.isEnabled())
+        {
             controller.kickPlayer(playerIds[indx]);
         }
     }//GEN-LAST:event_kickPlayerButtonMouseClicked
@@ -227,33 +246,52 @@ public class LobbyScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(
+                    java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(
+                    java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(
+                    java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(LobbyScreen.class.getName()).log(
+                    java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new LobbyScreen().setVisible(true);
             }
         });

@@ -10,7 +10,7 @@ public class HintCard extends Card
 {
     /*The type of HintCard this card is.*/
     private HintCardType type;
-    
+
     /**
      * Constructs a new HintCard with a type.
      *

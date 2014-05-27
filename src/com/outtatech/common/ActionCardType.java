@@ -5,7 +5,6 @@ package com.outtatech.common;
  *
  * @author bennettschalich
  */
-
 public enum ActionCardType
 {
     SUGGESTION, SNOOP, ALL_SNOOP, SUPER_SLEUTH, PRIVATE_TIP;

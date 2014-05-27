@@ -62,7 +62,7 @@ public class ServerPlayer implements Player, Serializable
     {
         return location;
     }
-    
+
     public void setLocation(DestinationID location)
     {
         this.location = location;
@@ -72,7 +72,7 @@ public class ServerPlayer implements Player, Serializable
     {
         this.name = name;
     }
-    
+
     public String getName()
     {
         return this.name;

@@ -1,6 +1,7 @@
 package com.outtatech.server;
 
 import java.io.Serializable;
+
 /**
  * Represents a game that is waiting for players to join in order to be started.
  *

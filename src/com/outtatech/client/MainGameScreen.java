@@ -26,33 +26,40 @@ import javax.swing.ImageIcon;
  *
  * @author Thomas
  */
-public class MainGameScreen extends javax.swing.JFrame {
-    
+public class MainGameScreen extends javax.swing.JFrame
+{
+
     private ArrayList playerIds = new ArrayList();
-    
+
     int selectedPlayer = -1;
-    
+
     GUIController controller;
-    
-    ActionCard[] actionCards = {null, null};
+
+    ActionCard[] actionCards =
+    {
+        null, null
+    };
 
     /**
      * Creates new form MainGameScreen
      */
-    public MainGameScreen() {
+    public MainGameScreen()
+    {
         initComponents();
     }
-    
+
     /**
-     *Alternate constructor to take a GUIController in
+     * Alternate constructor to take a GUIController in
+     *
      * @param ctrl
      */
-    public MainGameScreen(GUIController ctrl) {
+    public MainGameScreen(GUIController ctrl)
+    {
         //set controller to ctrl
         controller = ctrl;
-        
+
         initComponents();
-        
+
         locationImage1.setText("");
         locationImage2.setText("");
         locationImage3.setText("");
@@ -62,23 +69,24 @@ public class MainGameScreen extends javax.swing.JFrame {
         locationImage7.setText("");
         locationImage8.setText("");
         locationImage9.setText("");
-        
+
         updateLocation();
-        
+
         actionImage1.setText("");
         actionImage2.setText("");
-        
+
         hintImage1.setText("");
         hintImage2.setText("");
         hintImage3.setText("");
         hintImage4.setText("");
         hintImage5.setText("");
         hintImage6.setText("");
-        
+
         endTurn();
     }
-    
-    public void updateLocation() {
+
+    public void updateLocation()
+    {
         String path = controller.getImagePath();
         locationImage1.setIcon(new ImageIcon(path + "Location-1.jpg"));
         locationImage2.setIcon(new ImageIcon(path + "Location-2.jpg"));
@@ -90,722 +98,956 @@ public class MainGameScreen extends javax.swing.JFrame {
         locationImage8.setIcon(new ImageIcon(path + "Location-8.jpg"));
         locationImage9.setIcon(new ImageIcon(path + "Location-9.jpg"));
     }
-    
-    public void updateHand(List<Card> cards) {
+
+    public void updateHand(List<Card> cards)
+    {
         String path = controller.getImagePath();
         String image;
-        boolean[] filled = {false, false, false, false, false, false, false, false};
+        boolean[] filled =
+        {
+            false, false, false, false, false, false, false, false
+        };
         Card card;
         actionCards[0] = null;
         actionCards[1] = null;
-        for(int indx = 0; indx < cards.size(); indx++) {
+        for (int indx = 0; indx < cards.size(); indx++)
+        {
             card = cards.get(indx);
-            if(card.getCardType() == CardType.ACTION) {
+            if (card.getCardType() == CardType.ACTION)
+            {
                 path = "./images/actionCards/";
-                if(((ActionCard)card).getActionType() == ActionCardType.PRIVATE_TIP) {
-                    if(((PrivateTip)card).getType() == PrivateTipType.ALL_DESTINATIONS) {
+                if (((ActionCard) card).getActionType()
+                        == ActionCardType.PRIVATE_TIP)
+                {
+                    if (((PrivateTip) card).getType()
+                            == PrivateTipType.ALL_DESTINATIONS)
+                    {
                         image = "Action-PrivateTipAllDestination.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ALL_DESTINATIONS);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_DESTINATIONS);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ALL_DESTINATIONS);
                         }
                     }
-                    else if(((PrivateTip)card).getType() == PrivateTipType.ALL_SUSPECTS) {
+                    else if (((PrivateTip) card).getType()
+                            == PrivateTipType.ALL_SUSPECTS)
+                    {
                         image = "Action-PrivateTipAllSuspect.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_SUSPECTS);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ALL_SUSPECTS);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_SUSPECTS);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ALL_SUSPECTS);
                         }
                     }
-                    else if(((PrivateTip)card).getType() == PrivateTipType.ALL_VEHICLES) {
+                    else if (((PrivateTip) card).getType()
+                            == PrivateTipType.ALL_VEHICLES)
+                    {
                         image = "Action-PrivateTipAllVehicle.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ALL_VEHICLES);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ALL_VEHICLES);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ALL_VEHICLES);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ALL_VEHICLES);
                         }
                     }
-                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_FEMALE_SUSPECT) {
+                    else if (((PrivateTip) card).getType()
+                            == PrivateTipType.ONE_FEMALE_SUSPECT)
+                    {
                         image = "Action-PrivateTipFemale.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ONE_FEMALE_SUSPECT);
                         }
                     }
-                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_NORTHERN_DESTINATION) {
+                    else if (((PrivateTip) card).getType()
+                            == PrivateTipType.ONE_NORTHERN_DESTINATION)
+                    {
                         image = "Action-PrivateTipNorthern.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ONE_NORTHERN_DESTINATION);
                         }
                     }
-                    else if(((PrivateTip)card).getType() == PrivateTipType.ONE_RED_VEHICLE) {
+                    else if (((PrivateTip) card).getType()
+                            == PrivateTipType.ONE_RED_VEHICLE)
+                    {
                         image = "Action-PrivateTipRed.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new PrivateTip(PrivateTipType.ONE_RED_VEHICLE);
+                            actionCards[0] = new PrivateTip(
+                                    PrivateTipType.ONE_RED_VEHICLE);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new PrivateTip(PrivateTipType.ONE_RED_VEHICLE);
+                            actionCards[1] = new PrivateTip(
+                                    PrivateTipType.ONE_RED_VEHICLE);
                         }
                     }
                 }
-                else if(((ActionCard)card).getActionType() == ActionCardType.SUGGESTION) {
-                    if(((Suggestion)card).getType() == SuggestionType.ANY) {
+                else if (((ActionCard) card).getActionType()
+                        == ActionCardType.SUGGESTION)
+                {
+                    if (((Suggestion) card).getType() == SuggestionType.ANY)
+                    {
                         image = "Action-SuggestionAny.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
                             actionCards[0] = new Suggestion(SuggestionType.ANY);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
                             actionCards[1] = new Suggestion(SuggestionType.ANY);
                         }
                     }
-                    else if(((Suggestion)card).getType() == SuggestionType.CURRENT) {
+                    else if (((Suggestion) card).getType()
+                            == SuggestionType.CURRENT)
+                    {
                         image = "Action-SuggestionCurrent.jpg";
-                        if(!filled[0]) {
+                        if (!filled[0])
+                        {
                             filled[0] = true;
                             actionImage1.setIcon(new ImageIcon(path + image));
-                            actionCards[0] = new Suggestion(SuggestionType.CURRENT);
+                            actionCards[0] = new Suggestion(
+                                    SuggestionType.CURRENT);
                         }
-                        else if(!filled[1]) {
+                        else if (!filled[1])
+                        {
                             filled[1] = true;
                             actionImage2.setIcon(new ImageIcon(path + image));
-                            actionCards[1] = new Suggestion(SuggestionType.CURRENT);
+                            actionCards[1] = new Suggestion(
+                                    SuggestionType.CURRENT);
                         }
                     }
                 }
-                else if(((ActionCard)card).getActionType() == ActionCardType.SNOOP) {
+                else if (((ActionCard) card).getActionType()
+                        == ActionCardType.SNOOP)
+                {
                     image = "Action-Snoop.jpg";
-                    if(!filled[0]) {
+                    if (!filled[0])
+                    {
                         filled[0] = true;
                         actionImage1.setIcon(new ImageIcon(path + image));
                         actionCards[0] = new ActionCard(ActionCardType.SNOOP);
                     }
-                    else if(!filled[1]) {
+                    else if (!filled[1])
+                    {
                         filled[1] = true;
                         actionImage2.setIcon(new ImageIcon(path + image));
                         actionCards[1] = new ActionCard(ActionCardType.SNOOP);
                     }
                 }
-                else if(((ActionCard)card).getActionType() == ActionCardType.ALL_SNOOP) {
+                else if (((ActionCard) card).getActionType()
+                        == ActionCardType.ALL_SNOOP)
+                {
                     image = "Action-AllSnoop.jpg";
-                    if(!filled[0]) {
+                    if (!filled[0])
+                    {
                         filled[0] = true;
                         actionImage1.setIcon(new ImageIcon(path + image));
-                        actionCards[0] = new ActionCard(ActionCardType.ALL_SNOOP);
+                        actionCards[0]
+                                = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
-                    else if(!filled[1]) {
+                    else if (!filled[1])
+                    {
                         filled[1] = true;
                         actionImage2.setIcon(new ImageIcon(path + image));
-                        actionCards[1] = new ActionCard(ActionCardType.ALL_SNOOP);
+                        actionCards[1]
+                                = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
                 }
             }
-            else if (card.getCardType() == CardType.HINT){
-                if(((HintCard)card).getHintType() == HintCardType.DESTINATION) {
-                    if(((DestinationCard)card).getDestination() == DestinationID.CONEY_ISLAND) {
+            else if (card.getCardType() == CardType.HINT)
+            {
+                if (((HintCard) card).getHintType() == HintCardType.DESTINATION)
+                {
+                    if (((DestinationCard) card).getDestination()
+                            == DestinationID.CONEY_ISLAND)
+                    {
                         image = "Location-1.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.GOLDEN_GATE_BRIDGE) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.GOLDEN_GATE_BRIDGE)
+                    {
                         image = "Location-2.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.HOOVER_DAM) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.HOOVER_DAM)
+                    {
                         image = "Location-3.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.LINCOLN_MEMORIAL) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.LINCOLN_MEMORIAL)
+                    {
                         image = "Location-4.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.MIAMI_BEACH) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.MIAMI_BEACH)
+                    {
                         image = "Location-5.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.MT_RUSHMORE) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.MT_RUSHMORE)
+                    {
                         image = "Location-6.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.NIAGRA_FALLS) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.NIAGRA_FALLS)
+                    {
                         image = "Location-7.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.OLD_FAITHFUL) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.OLD_FAITHFUL)
+                    {
                         image = "Location-8.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((DestinationCard)card).getDestination() == DestinationID.THE_ALAMO) {
+                    else if (((DestinationCard) card).getDestination()
+                            == DestinationID.THE_ALAMO)
+                    {
                         image = "Location-9.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                 }
-                else if(((HintCard)card).getHintType() == HintCardType.SUSPECT) {
-                    if(((SuspectCard)card).getSuspect() == SuspectID.GREEN) {
+                else if (((HintCard) card).getHintType() == HintCardType.SUSPECT)
+                {
+                    if (((SuspectCard) card).getSuspect() == SuspectID.GREEN)
+                    {
                         image = "GREEN.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuspectCard)card).getSuspect() == SuspectID.MUSTARD) {
+                    else if (((SuspectCard) card).getSuspect()
+                            == SuspectID.MUSTARD)
+                    {
                         image = "MUSTARD.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuspectCard)card).getSuspect() == SuspectID.PEACOCK) {
+                    else if (((SuspectCard) card).getSuspect()
+                            == SuspectID.PEACOCK)
+                    {
                         image = "PEACOCK.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuspectCard)card).getSuspect() == SuspectID.PLUM) {
+                    else if (((SuspectCard) card).getSuspect() == SuspectID.PLUM)
+                    {
                         image = "PLUM.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuspectCard)card).getSuspect() == SuspectID.SCARLET) {
+                    else if (((SuspectCard) card).getSuspect()
+                            == SuspectID.SCARLET)
+                    {
                         image = "SCARLET.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((SuspectCard)card).getSuspect() == SuspectID.WHITE) {
+                    else if (((SuspectCard) card).getSuspect()
+                            == SuspectID.WHITE)
+                    {
                         image = "WHITE.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
                 }
-                else if(((HintCard)card).getHintType() == HintCardType.VEHICLE) {
-                    if(((VehicleCard)card).getVehicle() == VehicleID.AIRLINER) {
+                else if (((HintCard) card).getHintType() == HintCardType.VEHICLE)
+                {
+                    if (((VehicleCard) card).getVehicle() == VehicleID.AIRLINER)
+                    {
                         image = "AIRLINER.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((VehicleCard)card).getVehicle() == VehicleID.AUTOMOBILE) {
+                    else if (((VehicleCard) card).getVehicle()
+                            == VehicleID.AUTOMOBILE)
+                    {
                         image = "AUTOMOBILE.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((VehicleCard)card).getVehicle() == VehicleID.HOT_AIR_BALLOON) {
+                    else if (((VehicleCard) card).getVehicle()
+                            == VehicleID.HOT_AIR_BALLOON)
+                    {
                         image = "HOTAIRBALLOON.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((VehicleCard)card).getVehicle() == VehicleID.LIMOUSINE) {
+                    else if (((VehicleCard) card).getVehicle()
+                            == VehicleID.LIMOUSINE)
+                    {
                         image = "LIMOSINE.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((VehicleCard)card).getVehicle() == VehicleID.SEAPLANE) {
+                    else if (((VehicleCard) card).getVehicle()
+                            == VehicleID.SEAPLANE)
+                    {
                         image = "SEAPLANE.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
                     }
-                    else if(((VehicleCard)card).getVehicle() == VehicleID.TRAIN) {
+                    else if (((VehicleCard) card).getVehicle()
+                            == VehicleID.TRAIN)
+                    {
                         image = "TRAIN.jpg";
-                        if(!filled[2]) {
+                        if (!filled[2])
+                        {
                             filled[2] = true;
                             hintImage1.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[3]) {
+                        else if (!filled[3])
+                        {
                             filled[3] = true;
                             hintImage2.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[4]) {
+                        else if (!filled[4])
+                        {
                             filled[4] = true;
                             hintImage3.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[5]) {
+                        else if (!filled[5])
+                        {
                             filled[5] = true;
                             hintImage4.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[6]) {
+                        else if (!filled[6])
+                        {
                             filled[6] = true;
                             hintImage5.setIcon(new ImageIcon(path + image));
                         }
-                        else if(!filled[7]) {
+                        else if (!filled[7])
+                        {
                             filled[7] = true;
                             hintImage6.setIcon(new ImageIcon(path + image));
                         }
@@ -813,108 +1055,129 @@ public class MainGameScreen extends javax.swing.JFrame {
                 }
             }
         }
-        if(!filled[0]) {
+        if (!filled[0])
+        {
             actionImage1.setIcon(new ImageIcon());
         }
-        if(!filled[1]) {
+        if (!filled[1])
+        {
             actionImage2.setIcon(new ImageIcon());
         }
-        if(!filled[2]) {
+        if (!filled[2])
+        {
             hintImage1.setIcon(new ImageIcon());
         }
-        if(!filled[3]) {
+        if (!filled[3])
+        {
             hintImage2.setIcon(new ImageIcon());
         }
-        if(!filled[4]) {
+        if (!filled[4])
+        {
             hintImage3.setIcon(new ImageIcon());
         }
-        if(!filled[5]) {
+        if (!filled[5])
+        {
             hintImage4.setIcon(new ImageIcon());
         }
-        if(!filled[6]) {
+        if (!filled[6])
+        {
             hintImage5.setIcon(new ImageIcon());
         }
-        if(!filled[7]) {
+        if (!filled[7])
+        {
             hintImage6.setIcon(new ImageIcon());
         }
     }
-    
+
     /**
-     *Adds a string to the game log
+     * Adds a string to the game log
+     *
      * @param updateString
      */
-    public void updateGameLog(String updateString) {
+    public void updateGameLog(String updateString)
+    {
         //set game log's text to the current text + updateString
         gameLog.setText(gameLog.getText() + "\n" + updateString);
     }
-    
+
     /**
-     *Clears the game log
+     * Clears the game log
      */
-    public void clearGameLog() {
+    public void clearGameLog()
+    {
         //set game log's test to ""
         gameLog.setText("");
     }
-    
+
     /**
-     *Adds a player to the player list
+     * Adds a player to the player list
+     *
      * @param playerName
      * @param playerId
      */
-    public void addPlayer(String playerName, int playerId, boolean isPlayer) {
+    public void addPlayer(String playerName, int playerId, boolean isPlayer)
+    {
         //set player list to current text + playerName
         String name = playerName;
-        if(isPlayer)
+        if (isPlayer)
+        {
             name = name + "(You)";
+        }
         playerList.setValueAt(name, playerIds.size(), 0);
-        
+
         //add player id to playerIds
         playerIds.add(playerId);
     }
-    
+
     /**
-     *Removes a player from the player list
+     * Removes a player from the player list
+     *
      * @param playerId
      */
-    public void clearPlayers() {
+    public void clearPlayers()
+    {
         //set player list to current text - playerName
         playerList.setValueAt("", 0, 0);
         playerList.setValueAt("", 1, 0);
         playerList.setValueAt("", 2, 0);
         playerList.setValueAt("", 3, 0);
         playerList.setValueAt("", 4, 0);
-        
+
         //remove player id from playerIds
         playerIds.clear();
     }
-    
+
     /**
-     *Changes a player's location
+     * Changes a player's location
+     *
      * @param locationId
      * @param playerId
      */
-    public void setPlayerLocation(int locationId, int playerId) {
+    public void setPlayerLocation(int locationId, int playerId)
+    {
         //sets the background of the specified location panel to the color
         //of the corresponding player
     }
-    
+
     /**
-     *Makes the window in play mode
+     * Makes the window in play mode
      */
-    public void startTurn() {
+    public void startTurn()
+    {
         //sets the endTurnButton and accuseButton to active
         endTurnButton.setEnabled(true);
         accuseButton.setEnabled(true);
     }
-    
+
     /**
-     *Makes the window in watch mode
+     * Makes the window in watch mode
      */
-    public void endTurn() {
+    public void endTurn()
+    {
         //sets the endTurnButton and accuseButton to inactive
         endTurnButton.setEnabled(false);
         accuseButton.setEnabled(false);
-        
+
     }
 
     /**
@@ -1353,13 +1616,15 @@ public class MainGameScreen extends javax.swing.JFrame {
 
     private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's accuse method
-        if(accuseButton.isEnabled()) {
+        if (accuseButton.isEnabled())
+        {
             controller.accuse();
         }
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMouseClicked
-        if(endTurnButton.isEnabled()) {
+        if (endTurnButton.isEnabled())
+        {
             //call controller's endTurn method
             endTurn();
 
@@ -1378,22 +1643,28 @@ public class MainGameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_leaveGameButtonMouseClicked
 
     private void actionImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage1MouseClicked
-        if(actionCards[0] != null) {
-            if(actionCards[0].getActionType() == ActionCardType.SUGGESTION) {
-                
+        if (actionCards[0] != null)
+        {
+            if (actionCards[0].getActionType() == ActionCardType.SUGGESTION)
+            {
+
             }
-            else {
+            else
+            {
                 controller.playCard(actionCards[0]);
             }
         }
     }//GEN-LAST:event_actionImage1MouseClicked
 
     private void actionImage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage2MouseClicked
-        if(actionCards[1] != null) {
-            if(actionCards[1].getActionType() == ActionCardType.SUGGESTION) {
-                
+        if (actionCards[1] != null)
+        {
+            if (actionCards[1].getActionType() == ActionCardType.SUGGESTION)
+            {
+
             }
-            else {
+            else
+            {
                 controller.playCard(actionCards[1]);
             }
         }
@@ -1402,33 +1673,52 @@ public class MainGameScreen extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(MainGameScreen.class.getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new MainGameScreen().setVisible(true);
             }
         });

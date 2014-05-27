@@ -29,7 +29,7 @@ public class ActionRequest extends ClientRequest
         this.cards = cards;
         this.playerId = playerId;
     }
-    
+
     /**
      * Returns a new ActionRequest object.
      *
@@ -42,7 +42,6 @@ public class ActionRequest extends ClientRequest
         this.cards = cards;
         this.playerId = playerId;
     }
-
 
     /**
      * Returns the action card involved in the user action.
@@ -63,13 +62,14 @@ public class ActionRequest extends ClientRequest
     {
         return cards;
     }
-    
+
     /**
      * Returns the Id of the player requested
-     * 
+     *
      * @return the integer ID of the player
      */
-    public Integer getPlayerId() {
+    public Integer getPlayerId()
+    {
         return playerId;
     }
 }

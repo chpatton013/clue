@@ -32,6 +32,7 @@ public class ServerNetwork extends AbstractServer
 
     /**
      * Sets this instance's server controller
+     *
      * @param ctrl the ServerController object.
      */
     public void setServerController(ServerController ctrl)
@@ -101,17 +102,17 @@ public class ServerNetwork extends AbstractServer
         // Update server state based on message as appropriate.
         ctrl.reactToNetwork(message, client);
     }
-    
+
     /**
-     * Method called each time a client disconnects.
-     * The client is guaranteed to be disconnected but the thread
-     * is still active until it is asynchronously removed from the thread group. 
+     * Method called each time a client disconnects. The client is guaranteed to
+     * be disconnected but the thread is still active until it is asynchronously
+     * removed from the thread group.
      *
      * @param client the connection with the client.
      */
     @Override
     synchronized protected void clientDisconnected(
-      ConnectionToClient client) 
+            ConnectionToClient client)
     {
         Integer lobbyId = ctrl.getLobbyId(client);
         Difficulty difficulty = new Difficulty(3, 3);

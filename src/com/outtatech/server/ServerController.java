@@ -77,7 +77,7 @@ public class ServerController
     {
         if (obj instanceof EndTurnRequest)
         {
-            EndTurnRequest rqst = (EndTurnRequest)obj;
+            EndTurnRequest rqst = (EndTurnRequest) obj;
             Game game = games.get(connection);
             handleEndTurnRequest(game, connectionToPlayer.get(connection));
         }
@@ -148,17 +148,17 @@ public class ServerController
             informPlayers(lobbyGame, new LobbyJoinResponse(lobby,
                     newPlayer.getPlayerId(), names));
         }
-        
-        else if(obj instanceof KickPlayerRequest) 
+
+        else if (obj instanceof KickPlayerRequest)
         {
-            KickPlayerRequest rqst = ((KickPlayerRequest)obj);
+            KickPlayerRequest rqst = ((KickPlayerRequest) obj);
             Player player = null;
             Game game = games.get(connection);
             List<Player> players = game.getPlayers();
             Map<Integer, ServerPlayer> map = game.getServerPlayers();
-            for(Player temp : players)
+            for (Player temp : players)
             {
-                if(rqst.getPlayerId() == temp.getPlayerId()) 
+                if (rqst.getPlayerId() == temp.getPlayerId())
                 {
                     map.remove(temp.getPlayerId());
                     player = temp;
@@ -587,7 +587,7 @@ public class ServerController
                 forwardMessage(msg, humans.get(serverPlayer));
             }
         }
-        
+
         // Remove lobby when game starts
         waiting.remove(game);
 
@@ -599,12 +599,13 @@ public class ServerController
 
         Integer currentActivePlayer = game.getCurrentPlayer().getPlayerId();
         Map<Integer, String> names = new HashMap<Integer, String>();
-        for(Player player : game.getServerPlayers().values()) {
+        for (Player player : game.getServerPlayers().values())
+        {
             names.put(player.getPlayerId(), player.getName());
         }
 
         this.forwardMessage(new GameStateResponse(currentActivePlayer, names),
-              cxn);
+                cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)

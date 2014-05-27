@@ -27,7 +27,7 @@ public class GameStateResponse extends ServerResponse
         this.players = players;
         this.currentActivePlayer = currentActivePlayer;
     }
-    
+
     public Map<Integer, String> getPlayers()
     {
         return players;

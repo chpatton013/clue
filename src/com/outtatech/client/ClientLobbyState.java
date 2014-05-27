@@ -9,7 +9,7 @@ import com.outtatech.common.*;
  * ClientPreGameState instances will hold information about other players
  * waiting to join the same game of Indication.
  *
- * @author dmangin
+ * @author dmangins
  */
 public class ClientLobbyState extends State
 {
@@ -36,8 +36,9 @@ public class ClientLobbyState extends State
     {
         return this.playerId;
     }
-    
-    public int getId() {
+
+    public int getId()
+    {
         return this.id;
     }
 
@@ -58,7 +59,8 @@ public class ClientLobbyState extends State
         this.triggerChange();
     }
 
-    public void setPlayers(Map<Integer, String> players) {
+    public void setPlayers(Map<Integer, String> players)
+    {
         this.players = players;
         this.triggerChange();
     }

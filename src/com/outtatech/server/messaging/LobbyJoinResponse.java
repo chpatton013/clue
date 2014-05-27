@@ -19,10 +19,12 @@ public class LobbyJoinResponse extends ServerResponse
 
     /**
      * Used to respond to a human player request.
+     *
      * @param lobby
      * @param player
      */
-    public LobbyJoinResponse(Lobby lobby, Integer playerId, Map<Integer, String> players)
+    public LobbyJoinResponse(Lobby lobby, Integer playerId,
+            Map<Integer, String> players)
     {
         this.lobby = lobby;
         this.playerId = playerId;
@@ -42,6 +44,7 @@ public class LobbyJoinResponse extends ServerResponse
 
     /**
      * Get the player object created by the game server.
+     *
      * @return
      */
     public Integer getPlayerId()
@@ -51,6 +54,7 @@ public class LobbyJoinResponse extends ServerResponse
 
     /**
      * Get the list of player objects in this lobby.
+     *
      * @return
      */
     public Map<Integer, String> getPlayers()
