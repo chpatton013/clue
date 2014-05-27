@@ -1,5 +1,6 @@
 package com.outtatech.server.messaging;
 
+import com.outtatech.common.ActionCard;
 import com.outtatech.common.Card;
 import java.util.List;
 
@@ -10,14 +11,14 @@ import java.util.List;
  */
 public class CardDealResponse extends ServerResponse
 {
-    private final List<Card> cards;
+    private final List<ActionCard> cards;
 
     /**
      * Creates a new CardDealResponse object.
      *
      * @param cards list of cards that have been dealt.
      */
-    public CardDealResponse(List<Card> cards)
+    public CardDealResponse(List<ActionCard> cards)
     {
         this.cards = cards;
     }
@@ -27,7 +28,7 @@ public class CardDealResponse extends ServerResponse
      * 
      * @return cards dealt to the player.
      */
-    public List<Card> getCards() {
+    public List<ActionCard> getCards() {
         return cards;
     }
 }

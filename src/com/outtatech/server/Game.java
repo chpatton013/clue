@@ -6,6 +6,7 @@ import com.outtatech.common.DestinationID;
 import com.outtatech.common.HintCard;
 import com.outtatech.common.Solution;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -16,20 +17,22 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * The Game class contains functions that provide information on the state of an
  * Indication Game and provide functions that can change the state of the Game.
  *
- * @author Steven Chiu, Brian Schacherer
+ * @author Steven Chiu, Brian Schacherer, James Bilous
  * @version 1.0 - May 11, 2014
  */
 public class Game
 {
     private static Integer gameIdCounter = 0;
     private Integer gameId;
-    private Map <Integer, ServerPlayer> players;
+    private Map<Integer, ServerPlayer> players;
     private ServerPlayer current;
     private List<ActionCard> drawPile;
+    private List<DestinationID> destinationPile;
     private List<ActionCard> discardPile;
     private List<HintCard> listHintCards;
     private Solution solution;
     private Map<DestinationID, Integer> destToPlayerId;
+    private Map<Integer, DestinationID> playerIdToDest;
     private List<ServerPlayer> playerTurnOrder;
     private int curPlayerTurn;
 
@@ -63,26 +66,65 @@ public class Game
         curPlayerTurn = 0;
         this.playerTurnOrder = playerTurnOrder;
     }
-    
-    
+
     public Game()
     {
         this.players = new ConcurrentHashMap<Integer, ServerPlayer>();
         this.current = null;
-        this.drawPile = initializeDrawPile();
         this.discardPile = new CopyOnWriteArrayList<ActionCard>();
-        this.listHintCards = initializeHintCards();
-        this.solution = pickSolution();
         this.destToPlayerId = null;
         this.gameId = ++gameIdCounter;
-        playerTurnOrder = new ArrayList(players.values());
-        curPlayerTurn = 0;
-        Collections.shuffle(playerTurnOrder);
     }
     
     /**
+     * Sets the players for this game
+     * @param players the players for this game
+     */
+    public void setPlayers(ConcurrentHashMap<Integer, ServerPlayer> players)
+    {
+        this.players = players;
+    }
+
+    public void initialize()
+    {
+        playerTurnOrder = new ArrayList(players.values());
+        curPlayerTurn = 0;
+        Collections.shuffle(playerTurnOrder);
+        drawPile = this.initializeDrawPile();
+        listHintCards = this.initializeHintCards();
+        this.solution = pickSolution();
+        initDestinations();
+    }
+
+    /**
+     * Method that shuffles the destinations and assigns one to each player
+     */
+    private void initDestinations()
+    {
+        destToPlayerId = new ConcurrentHashMap<DestinationID, Integer>();
+        playerIdToDest = new ConcurrentHashMap<Integer, DestinationID>();
+        destinationPile = new ArrayList<DestinationID>(Arrays.asList(
+                DestinationID.CONEY_ISLAND, DestinationID.GOLDEN_GATE_BRIDGE,
+                DestinationID.HOOVER_DAM, DestinationID.LINCOLN_MEMORIAL,
+                DestinationID.MIAMI_BEACH, DestinationID.MT_RUSHMORE,
+                DestinationID.NIAGRA_FALLS,
+                DestinationID.OLD_FAITHFUL, DestinationID.THE_ALAMO));
+
+        Collections.shuffle(destinationPile);
+
+        for (int playerIndex = 0; playerIndex < players.values().size();
+                playerIndex++)
+        {
+            destToPlayerId.put(destinationPile.get(0), players.get(playerIndex).
+                    getPlayerId());
+            playerIdToDest.put(players.get(playerIndex).getPlayerId(),
+                    destinationPile.remove(0));
+        }
+    }
+
+    /**
      * Advances the games turn to the next player.
-     * 
+     *
      * @return the next player whose turn it is
      */
     public ServerPlayer advanceTurn()
@@ -93,14 +135,34 @@ public class Game
 
     /**
      * Get the current player whose turn it is.
-     * 
+     *
      * @return the current player whose turn it is.
      */
     public ServerPlayer getCurrentPlayer()
     {
         return playerTurnOrder.get(curPlayerTurn);
     }
-    
+
+    /**
+     * Returns the index for the player array for the currently active player.
+     *
+     * @return the index of the currently active player;
+     */
+    public Integer getCurrentPlayerIndex()
+    {
+        return curPlayerTurn;
+    }
+
+    /**
+     * Returns the player turn order for this game
+     *
+     * @return the player turn order.
+     */
+    public List<ServerPlayer> getPlayerTurnOrder()
+    {
+        return playerTurnOrder;
+    }
+
     /**
      * Add a ServerPlayer to the List of ServerPlayers in this game.
      *
@@ -110,7 +172,7 @@ public class Game
     {
         players.put(newPlayer.getPlayerId(), newPlayer);
     }
-    
+
     /**
      * Gets the Map of ServerPlayers in this game.
      *
@@ -120,16 +182,18 @@ public class Game
     {
         return players;
     }
-    
+
     public List<ServerPlayer> getServerPlayersList()
     {
         return new ArrayList(players.values());
     }
-    
-    public List<Player> getPlayers() {
+
+    public List<Player> getPlayers()
+    {
         List<Player> players = new ArrayList<Player>();
-        for (Player player : this.getServerPlayers().values()) {
-           players.add(player);
+        for (Player player : this.getServerPlayers().values())
+        {
+            players.add(player);
         }
         return players;
     }
@@ -143,7 +207,7 @@ public class Game
     {
         this.current = current;
     }
-    
+
     /**
      * Gets the current ServerPlayer associated with this game.
      *
@@ -153,7 +217,7 @@ public class Game
     {
         return current;
     }
-    
+
     /**
      * Sets the drawPile of this game.
      *
@@ -173,7 +237,7 @@ public class Game
     {
         return drawPile;
     }
-    
+
     /**
      * Sets the discardPile of this game.
      *
@@ -183,7 +247,7 @@ public class Game
     {
         this.discardPile = discardPile;
     }
-    
+
     /**
      * Gets the solution of this game.
      *
@@ -217,14 +281,14 @@ public class Game
     /**
      * Sets the Map between destination Ids and playerIds for this game.
      *
-     * @param destToPlayerId The new Map of destination Ids and PlayerIds for 
+     * @param destToPlayerId The new Map of destination Ids and PlayerIds for
      * this game
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> destToPlayerId)
     {
         this.destToPlayerId = destToPlayerId;
     }
-    
+
     /**
      * Gets the Map between destination Ids and playerIds for this game.
      *
@@ -234,13 +298,13 @@ public class Game
     {
         return destToPlayerId;
     }
-    
-    public Integer getGameId() 
+
+    public Integer getGameId()
     {
         return gameId;
     }
-    
-    private List<ActionCard> initializeDrawPile() 
+
+    private List<ActionCard> initializeDrawPile()
     {
         List<ActionCard> drawPileT = new CopyOnWriteArrayList<ActionCard>();
         int countSuggestionANY = 10;
@@ -249,32 +313,32 @@ public class Game
         int countAllSnoopLEFT = 2;
         int countAllSnoopRIGHT = 2;
         boolean right = true;
-        
-        for(int index = 0; index < countSuggestionANY; index++)
+
+        for (int index = 0; index < countSuggestionANY; index++)
         {
             drawPileT.add(new Suggestion(SuggestionType.ANY));
         }
-        
-        for(int index = 0; index < countSuggestionCURRENT; index++)
+
+        for (int index = 0; index < countSuggestionCURRENT; index++)
         {
-            drawPileT.add(new Suggestion(SuggestionType.CURRENT));   
+            drawPileT.add(new Suggestion(SuggestionType.CURRENT));
         }
-        
-        for(int index = 0; index < countSnoop; index++)
+
+        for (int index = 0; index < countSnoop; index++)
         {
             drawPileT.add(new Snoop());
         }
-        
-        for(int index = 0; index < countAllSnoopLEFT; index++)
+
+        for (int index = 0; index < countAllSnoopLEFT; index++)
         {
             drawPileT.add(new AllSnoop(!right));
         }
-        
-        for(int index = 0; index < countAllSnoopRIGHT; index++)
+
+        for (int index = 0; index < countAllSnoopRIGHT; index++)
         {
             drawPileT.add(new AllSnoop(right));
         }
-                
+
         drawPileT.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
         drawPileT.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
         drawPileT.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
@@ -288,33 +352,34 @@ public class Game
         drawPileT.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
         drawPileT.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
         drawPileT.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
-        
+
         Collections.shuffle(drawPileT);
         return drawPileT;
     }
-    
+
     public ActionCard popActionCard()
     {
         ActionCard ac = null;
-        
-        if(drawPile.size() > 0)
+
+        if (drawPile.size() > 0)
         {
             ac = drawPile.remove(0);
         }
-            
+
         return ac;
     }
-    
+
     /**
-     * Creates a list of HintCards for the game to 
-     * first pick a solution then for the game to deal.
-     * @param hintCards 
+     * Creates a list of HintCards for the game to first pick a solution then
+     * for the game to deal.
+     *
+     * @param hintCards
      */
     private List<HintCard> initializeHintCards()
     {
         List<HintCard> hintCards = new CopyOnWriteArrayList<HintCard>();
         CardColor dc = CardColor.BLUE;
-        
+
         //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.
         hintCards.add(new SuspectCard(SuspectID.GREEN));
         hintCards.add(new SuspectCard(SuspectID.MUSTARD));
@@ -322,14 +387,14 @@ public class Game
         hintCards.add(new SuspectCard(SuspectID.PLUM));
         hintCards.add(new SuspectCard(SuspectID.SCARLET));
         hintCards.add(new SuspectCard(SuspectID.WHITE));
-        
+
         hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
         hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, dc));
         hintCards.add(new VehicleCard(VehicleID.LIMOUSINE, dc));
         hintCards.add(new VehicleCard(VehicleID.SEAPLANE, dc));
         hintCards.add(new VehicleCard(VehicleID.TRAIN, dc));
-        
+
         hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND));
         hintCards.add(
                 new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE));
@@ -340,40 +405,43 @@ public class Game
         hintCards.add(new DestinationCard(DestinationID.NIAGRA_FALLS));
         hintCards.add(new DestinationCard(DestinationID.OLD_FAITHFUL));
         hintCards.add(new DestinationCard(DestinationID.THE_ALAMO));
-        
+
         Collections.shuffle(hintCards);
         return hintCards;
     }
-    
+
     /**
      * Get the number of hint cards to be dealt
+     *
      * @return List of HintCards
      */
     public Integer getHintCardsSize()
     {
         return this.listHintCards.size();
     }
-    
+
     /**
      * Return the first Hint Card in the List
+     *
      * @return HintCard
      */
     public HintCard popHintCard()
     {
         HintCard hintCard = null;
-                
+
         if (listHintCards.size() > 0)
         {
             hintCard = listHintCards.remove(0);
         }
-        
+
         return hintCard;
     }
-    
+
     /**
      * Pre condition listHintCards has been shuffled.
+     *
      * @param hintCards
-     * @return 
+     * @return
      */
     private Solution pickSolution()
     {
@@ -384,36 +452,36 @@ public class Game
         boolean hasDid = false;
         boolean hasVid = false;
         boolean hasSid = false;
-                
+
         if (listHintCards != null)
         {
-            for(HintCard hc : listHintCards)
+            for (HintCard hc : listHintCards)
             {
-                if(hc.getHintType() == HintCardType.DESTINATION && !hasDid)
+                if (hc.getHintType() == HintCardType.DESTINATION && !hasDid)
                 {
-                    did = ((DestinationCard)hc).getDestination();
+                    did = ((DestinationCard) hc).getDestination();
                     listHintCards.remove(hc);
                     hasDid = true;
                 }
-                
-                if(hc.getHintType() == HintCardType.VEHICLE && !hasVid)
+
+                if (hc.getHintType() == HintCardType.VEHICLE && !hasVid)
                 {
-                    vid = ((VehicleCard)hc).getVehicle();
+                    vid = ((VehicleCard) hc).getVehicle();
                     listHintCards.remove(hc);
                     hasVid = true;
                 }
-                
-                if(hc.getHintType() == HintCardType.SUSPECT && !hasSid)
+
+                if (hc.getHintType() == HintCardType.SUSPECT && !hasSid)
                 {
-                    sid = ((SuspectCard)hc).getSuspect();
+                    sid = ((SuspectCard) hc).getSuspect();
                     listHintCards.remove(hc);
                     hasSid = true;
                 }
             }
-            
+
             solution = new Solution(did, vid, sid);
         }
-        
+
         return solution;
     }
 }

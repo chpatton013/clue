@@ -313,7 +313,8 @@ public class ClientController
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
             Integer me = state.getPlayerId();
-            this.setState(new ClientGameState(me, rsp.getCards(),
+            List<Card> newStateCards = new ArrayList(rsp.getCards());
+            this.setState(new ClientGameState(me, newStateCards,
                     state.getPlayers()));
 
             ((ClientGameState) this.state).pushGameLog("Game Started");

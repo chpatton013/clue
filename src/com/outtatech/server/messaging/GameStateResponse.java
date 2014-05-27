@@ -1,5 +1,7 @@
 package com.outtatech.server.messaging;
 
+import com.outtatech.common.Card;
+import com.outtatech.common.HintCard;
 import com.outtatech.common.Player;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ public class GameStateResponse extends ServerResponse
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
     private Map<Integer, String> players;
+    private List<HintCard> hintCards;
 
     /**
      * Constructs a new GameStateResponse object
@@ -27,10 +30,11 @@ public class GameStateResponse extends ServerResponse
      */
     public GameStateResponse(Integer deckCardCount,
             List<Integer> playerTurnOrder, Integer currentActivePlayer, 
-            Map<Integer, String> players)
+            Map<Integer, String> players, List<HintCard> hintCards)
     {
         this.deckCardCount = deckCardCount;
         this.players = players;
+        this.hintCards = hintCards;
         this.playerTurnOrder = playerTurnOrder;
         this.currentActivePlayer = currentActivePlayer;
     }

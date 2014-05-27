@@ -183,6 +183,7 @@ public class ServerController
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
+            game.addServerPlayer(connectionToPlayer.get(connection));
             Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
@@ -232,7 +233,9 @@ public class ServerController
          */
         else if (obj instanceof GameStartRequest)
         {
-            handleGameStartRequest(games.get(connection));
+            Game game = games.get(connection);
+            handleGameStartRequest(games.get(connection), lobbies.get(game.
+                    getGameId()));
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -259,7 +262,7 @@ public class ServerController
     private void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
         ServerPlayer newCurrent = game.advanceTurn();
-        List<Card> drawCards = new ArrayList<Card>();
+        List<ActionCard> drawCards = new ArrayList<ActionCard>();
         drawCards.add(game.getDrawPile().remove(0));
         ServerResponse response = new CardDealResponse(drawCards);
         informPlayer(initiator, response);
@@ -541,49 +544,51 @@ public class ServerController
      * @TODO also send out a GameStateResponse??
      * @param game
      */
-    private void handleGameStartRequest(Game game)
+    private void handleGameStartRequest(Game game, Lobby lobby)
     {
-        ArrayList<ArrayList<Card>> playerHands = new ArrayList<>();
+        game.initialize();
 
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
         Integer playerCount = gameServerPlayers.size();
-
-        for (ServerPlayer serverPlayer : gameServerPlayers)
-        {
-            playerHands.add(new ArrayList<Card>());
-        }
+        int playerIndex = 0;
 
         //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
-            playerHands.get(index % (playerCount)).add(game.popHintCard());
+            gameServerPlayers.get(index % playerCount).addHintCard(game.
+                    popHintCard());
         }
 
+        List<Integer> idList = new ArrayList<Integer>();
+        List<Integer> playerTurnOrder = new ArrayList<Integer>();
+        Map<Integer, String> nameMap = new HashMap<Integer, String>();
+
         //Add one action card to each hand.
-        for (ArrayList<Card> alc : playerHands)
+        for (ServerPlayer pl : gameServerPlayers)
         {
-            alc.add(game.popActionCard());
+            pl.addActionCard(game.popActionCard());
+            idList.add(pl.getPlayerId());
+            nameMap.put(pl.getPlayerId(), pl.getName());
+        }
+
+        for (ServerPlayer pl : game.getPlayerTurnOrder())
+        {
+            playerTurnOrder.add(playerTurnOrder.size(), pl.getPlayerId());
+            GameStateResponse gameResponse = new GameStateResponse(game.
+                    getDrawPile().size(), playerTurnOrder, game.
+                    getCurrentPlayerIndex(), nameMap, pl.hintCardsHand);
+            informPlayer(pl, gameResponse);
         }
 
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
-            CardDealResponse msg = new CardDealResponse(playerHands.remove(0));
-            if (!humans.containsKey(serverPlayer))
-            {
-                //Send to AI
-                System.out.println("Sent to bot");
-                //informAI(msg, robots.get(serverPlayer));
-            }
-            else
-            {
-                //Send to human
-                System.out.println("Sent to human");
-                forwardMessage(msg, humans.get(serverPlayer));
-            }
+            CardDealResponse msg = new CardDealResponse(
+                    serverPlayer.actionCardsHand);
+            informPlayer(serverPlayer, msg);
         }
-        
+
         // Remove lobby when game starts
         waiting.remove(game);
 
@@ -592,20 +597,23 @@ public class ServerController
     private void handleGameStateRequest(Game game, ConnectionToClient cxn)
     {
         Integer deckSize = game.getDrawPile().size();
+        ServerPlayer serverPlayer = connectionToPlayer.get(cxn);
 
         List<Integer> playerTurnOrder = new ArrayList<Integer>(
-              game.getServerPlayers().keySet());
+                game.getServerPlayers().keySet());
 
         Integer currentActivePlayer = playerTurnOrder.get(0);
 
         Map<Integer, String> names = new HashMap<Integer, String>();
-        for(Player player : game.getServerPlayers().values()) {
+        for (Player player : game.getServerPlayers().values())
+        {
             System.out.println(player.getName());
             names.put(player.getPlayerId(), player.getName());
         }
 
         this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
-                 currentActivePlayer, names), cxn);
+                currentActivePlayer, names, serverPlayer.getHintCardsHand()),
+                cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)

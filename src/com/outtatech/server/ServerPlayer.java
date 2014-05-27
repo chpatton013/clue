@@ -53,6 +53,11 @@ public class ServerPlayer implements Player, Serializable
         this.actionCardsHand = new ArrayList<ActionCard>();
     }
 
+    public void addActionCard(ActionCard card)
+    {
+        actionCardsHand.add(card);
+    }
+    
     public int getPlayerId()
     {
         return playerId;
@@ -62,7 +67,7 @@ public class ServerPlayer implements Player, Serializable
     {
         return location;
     }
-    
+
     public void setLocation(DestinationID location)
     {
         this.location = location;
@@ -72,7 +77,7 @@ public class ServerPlayer implements Player, Serializable
     {
         this.name = name;
     }
-    
+
     public String getName()
     {
         return this.name;
@@ -86,6 +91,25 @@ public class ServerPlayer implements Player, Serializable
     public Object getNotes()
     {
         return notes;
+    }
+
+    /**
+     * Method to add a hint card to this players hand.
+     *
+     * @param card the hintcard to add to the players hand
+     */
+    public void addHintCard(HintCard card)
+    {
+        this.hintCardsHand.add(card);
+    }
+    
+    /**
+     * Removes a card from this players hand
+     * @param card the card to remove from this player's hand.
+     */
+    public void playHintCard(HintCard card)
+    {
+        hintCardsHand.remove(card);
     }
 
     /**
