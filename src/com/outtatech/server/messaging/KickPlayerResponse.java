@@ -15,7 +15,7 @@ public class KickPlayerResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Creates a new KickPlayerResponse object.
      *
-     * @param playerId The Id of the player kicked from the game
+     * @param playerId The Id of the player kicked from the game method parameter
      */
     public KickPlayerResponse(int playerId)
     {
@@ -26,7 +26,7 @@ public class KickPlayerResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Getter method for the Id of the player kicked
      *
-     * @return Id of the player kicked
+     * @return Id of the player kicked return value
      */
     public int getPlayerId()
     {

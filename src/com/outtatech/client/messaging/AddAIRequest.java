@@ -18,8 +18,8 @@ public class AddAIRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Creates a new AddAIRequest object.
      *
-     * @param difficulty the difficulty of the new AI player
-     * @param lobbyId
+     * @param difficulty the difficulty of the new AI player method parameter
+     * @param lobbyId method parameter
      */
     public AddAIRequest(Difficulty difficulty, Integer lobbyId)
     {
@@ -31,7 +31,7 @@ public class AddAIRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns the difficulty of the AI player.
      *
-     * @return the difficulty of the AI player
+     * @return the difficulty of the AI player return value
      */
     public Difficulty getDifficulty()
     {
@@ -42,7 +42,7 @@ public class AddAIRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
      *
-     * @param difficulty
+     * @param difficulty method parameter
      */
     public void setDifficulty(Difficulty difficulty)
     {
@@ -52,7 +52,7 @@ public class AddAIRequest extends ClientRequest
     /**
      * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
-     * @return
+     * @return return value
      */
 
     public Integer getLobbyId()
@@ -63,7 +63,7 @@ public class AddAIRequest extends ClientRequest
     /**
      * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
-     * @param lobbyId
+     * @param lobbyId method parameter
      */
 
     public void setLobbyId(Integer lobbyId)

@@ -17,7 +17,7 @@ public class CardDealResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Creates a new CardDealResponse object.
      *
-     * @param cards list of cards that have been dealt.
+     * @param cards list of cards that have been dealt. method parameter
      */
     public CardDealResponse(List<Card> cards)
     {
@@ -28,7 +28,7 @@ public class CardDealResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Getter methods for the cards dealt to the player.
      *
-     * @return cards dealt to the player.
+     * @return cards dealt to the player. return value
      */
     public List<Card> getCards() {
         return cards;

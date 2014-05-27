@@ -34,7 +34,7 @@ public class GameSelectScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Alternate constructor to take a GUIController in
      *
-     * @param ctrl
+     * @param ctrl method parameter
      */
     public GameSelectScreen(GUIController ctrl)
     {
@@ -48,8 +48,8 @@ public class GameSelectScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Adds a game to the screen
      *
-     * @param gameName
-     * @param lobbyId
+     * @param gameName method parameter
+     * @param lobbyId method parameter
      */
     public void addGame(String gameName, int lobbyId)
     {
@@ -223,7 +223,7 @@ public class GameSelectScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

@@ -52,7 +52,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @param cCtrl
+     * @param cCtrl method parameter
      */
     public GUIController(ClientController cCtrl)
     {
@@ -61,7 +61,7 @@ public class GUIController implements Observer
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String[] args)
     {
@@ -70,7 +70,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @param ctrl
+     * @param ctrl method parameter
      */
     public void initWindows(GUIController ctrl)
     {
@@ -291,7 +291,7 @@ public class GUIController implements Observer
      * Version-latenightpizzaparty
      * Notifies client controller that player wants to join a game
      *
-     * @param lobbyId
+     * @param lobbyId method parameter
      */
     public void joinGame(int lobbyId)
     {
@@ -312,7 +312,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      * Notifies client controller that player wants to create an AI player
-     * @param lobbyId
+     * @param lobbyId method parameter
      */
     public void createAI(int lobbyId)
     {
@@ -325,7 +325,7 @@ public class GUIController implements Observer
      * Notifies client controller that player wants to remove a player from the
      * lobby
      *
-     * @param playerId
+     * @param playerId method parameter
      */
     public void kickPlayer(int playerId)
     {
@@ -353,9 +353,9 @@ public class GUIController implements Observer
      * Version-latenightpizzaparty
      * Notifies client controller that player has made an accusation
      *
-     * @param cardType1
-     * @param cardType2
-     * @param cardType3
+     * @param cardType1 method parameter
+     * @param cardType2 method parameter
+     * @param cardType3 method parameter
      */
     public void makeAccusation(int cardType1, int cardType2, int cardType3)
     {
@@ -368,7 +368,7 @@ public class GUIController implements Observer
      * Version-latenightpizzaparty
      * Notifies client controller that player has played a card
      *
-     * @param card
+     * @param card method parameter
      */
     public void playCard(ActionCard card)
     {
@@ -399,7 +399,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @param indx
+     * @param indx method parameter
      */
     public void setImageIndex(int indx)
     {
@@ -410,7 +410,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public int getImageIndex()
     {
@@ -420,7 +420,7 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public String getImagePath()
     {
@@ -430,8 +430,8 @@ public class GUIController implements Observer
     /**
      * Version-latenightpizzaparty
      *
-     * @param indx
-     * @return
+     * @param indx method parameter
+     * @return return value
      */
     public String getImagePath(int indx)
     {

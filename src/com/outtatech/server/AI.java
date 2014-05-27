@@ -26,9 +26,9 @@ public class AI extends ServerPlayer
      * Construct an AI instance, requires instantiated instances of Difficulty
      * and ServerController.
      *
-     * @param difficulty the Difficulty instance to drive the AI
-     * @param ctrl the Server Controller instance needing an AI
-     * @param game
+     * @param difficulty the Difficulty instance to drive the AI method parameter
+     * @param ctrl the Server Controller instance needing an AI method parameter
+     * @param game method parameter
      */
     public AI(Difficulty difficulty, ServerController ctrl, Game game)
     {
@@ -42,7 +42,7 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Gets the difficulty associated with this AI.
      *
-     * @return The difficulty associated with this AI.
+     * @return The difficulty associated with this AI. return value
      */
     public Difficulty getDifficulty()
     {
@@ -53,7 +53,7 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Sets the difficulty associated with this AI.
      *
-     * @param difficulty The difficulty level of the AI.
+     * @param difficulty The difficulty level of the AI. method parameter
      */
     public void setDifficulty(Difficulty difficulty)
     {
@@ -64,7 +64,7 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Gets the ServerController associated with this AI.
      *
-     * @return ctrl The ServerController of this AI.
+     * @return ctrl The ServerController of this AI. return value
      */
     public ServerController getServerController()
     {
@@ -75,7 +75,7 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Sets the ServerController associated with this AI.
      *
-     * @param ctrl The ServerController of this AI.
+     * @param ctrl The ServerController of this AI. method parameter
      */
     public void setServerController(ServerController ctrl)
     {
@@ -87,8 +87,8 @@ public class AI extends ServerPlayer
      * Method invoked when AI needs to respond to Action cards requiring it's
      * participation.
      *
-     * @param card The card to respond to.
-     * @return playableCards The list of cards to show or null if there are no
+     * @param card The card to respond to. method parameter
+     * @return playableCards The list of cards to show or null if there are no return value
      * compatible cards found.
      */
     public ArrayList<HintCard> aiRespond(ActionCard card)
@@ -312,7 +312,7 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Returns ID of random player in game.
      *
-     * @return playerID ID of random player in game.
+     * @return playerID ID of random player in game. return value
      */
     private Integer getRandomPlayerID()
     {
@@ -361,10 +361,10 @@ public class AI extends ServerPlayer
      * Version-latenightpizzaparty
      * Method invoked when another player or bot makes a suggestion.
      *
-     * @param suspect The ID of suspect in the suggestion.
-     * @param vehicle The ID of vehicle in the suggestion.
-     * @param destination The ID of location in the suggestion.
-     * @return HintCard The card that refutes the suggestion.
+     * @param suspect The ID of suspect in the suggestion. method parameter
+     * @param vehicle The ID of vehicle in the suggestion. method parameter
+     * @param destination The ID of location in the suggestion. method parameter
+     * @return HintCard The card that refutes the suggestion. return value
      */
     public HintCard aiRefuteSuggestion(SuspectID suspect, VehicleID vehicle,
             DestinationID destination)
@@ -411,7 +411,7 @@ public class AI extends ServerPlayer
      * Method invoked each time AI plays a turn in order to determine whether or
      * not to make an accusation based on the AI difficulty level.
      *
-     * @return boolean Returns true if accusation has been made, false if it
+     * @return boolean Returns true if accusation has been made, false if it return value
      * hasn't.
      */
     private boolean aiMakeAccusation()
@@ -551,7 +551,7 @@ public class AI extends ServerPlayer
     /**
      * Version-latenightpizzaparty
      *
-     * @param obj
+     * @param obj method parameter
      */
     public void reactToServer(Object obj)
     {

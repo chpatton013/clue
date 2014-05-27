@@ -43,7 +43,7 @@ public class InstructionsScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

@@ -51,7 +51,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * Get the Player's current State
      *
-     * @return the Player's state
+     * @return the Player's state return value
      */
     public State getState()
     {
@@ -62,7 +62,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * Set the player's current state
      *
-     * @param newState an initialized instance of State
+     * @param newState an initialized instance of State method parameter
      */
     public void setState(State newState)
     {
@@ -111,7 +111,7 @@ public class ClientController
     /**
      * Version-latenightpizzaparty
      * Start the multi player game mode.
-     * @param lobbyName
+     * @param lobbyName method parameter
      */
     public void startMultiPlayerGame(String lobbyName)
     {
@@ -122,7 +122,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * Sends a Lobby Join request to the game server.
      *
-     * @param lobbyId Integer the id of the lobby to join
+     * @param lobbyId Integer the id of the lobby to join method parameter
      */
     public void joinGame(Integer lobbyId)
     {
@@ -133,8 +133,8 @@ public class ClientController
      * Version-latenightpizzaparty
      * Sends a request to the game server to add an AI player.
      *
-     * @param difficulty Difficulty the difficulty for this AI player
-     * @param lobbyId
+     * @param difficulty Difficulty the difficulty for this AI player method parameter
+     * @param lobbyId method parameter
      */
     public void addAIPlayer(Difficulty difficulty, Integer lobbyId)
     {
@@ -154,7 +154,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * Sends a request to the game server to remove a player from the lobby.
      *
-     * @param playerId
+     * @param playerId method parameter
      */
     public void kickPlayer(Integer playerId)
     {
@@ -183,9 +183,9 @@ public class ClientController
     /**
      * Version-latenightpizzaparty
      *
-     * @param actionCard
-     * @param cards
-     * @param playerId
+     * @param actionCard method parameter
+     * @param cards method parameter
+     * @param playerId method parameter
      */
     public void playActionCard(ActionCard actionCard, List<Card> cards,
             Integer playerId)
@@ -202,7 +202,7 @@ public class ClientController
      * Called when the client would like to make an accusation during their
      * turn.
      *
-     * @param accusation
+     * @param accusation method parameter
      */
     public void makeAccusation(Solution accusation)
     {
@@ -214,7 +214,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * React to a message from the ClientNetwork.
      *
-     * @param obj Object message from the ClientNetwork
+     * @param obj Object message from the ClientNetwork method parameter
      */
     public void reactToMessage(ServerResponse obj)
     {
@@ -509,7 +509,7 @@ public class ClientController
      * Version-latenightpizzaparty
      * Send a message via the ClientNetwork instance.
      *
-     * @param obj ClientRequest the message object to send via the ClientNetwork
+     * @param obj ClientRequest the message object to send via the ClientNetwork method parameter
      * instance.
      */
     private void forwardMessage(Object obj)

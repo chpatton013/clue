@@ -13,7 +13,7 @@ public class LobbyJoinRequest extends ClientRequest
     /**
      * Version-latenightpizzaparty
      * Creates a new ClientRequest object
-     * @param lobbyId
+     * @param lobbyId method parameter
      */
     public LobbyJoinRequest(Integer lobbyId)
     {
@@ -24,7 +24,7 @@ public class LobbyJoinRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns the lobby id.
      *
-     * @return the lobby id
+     * @return the lobby id return value
      */
     public Integer getLobbyId()
     {

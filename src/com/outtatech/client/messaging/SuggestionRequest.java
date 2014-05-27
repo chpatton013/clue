@@ -16,7 +16,7 @@ public class SuggestionRequest extends ClientRequest
     /**
      * Version-latenightpizzaparty
      *
-     * @param suggestion
+     * @param suggestion method parameter
      */
     public SuggestionRequest(Solution suggestion)
     {
@@ -26,7 +26,7 @@ public class SuggestionRequest extends ClientRequest
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Solution getSuggestion()
     {

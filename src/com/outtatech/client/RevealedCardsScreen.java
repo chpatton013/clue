@@ -25,7 +25,7 @@ public class RevealedCardsScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Adds a card to the window
      *
-     * @param cardType
+     * @param cardType method parameter
      */
     public void addCard(int cardType)
     {
@@ -174,7 +174,7 @@ public class RevealedCardsScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

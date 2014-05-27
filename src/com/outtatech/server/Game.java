@@ -55,7 +55,7 @@ public class Game
      * Version-latenightpizzaparty
      * Advances the games turn to the next player.
      *
-     * @return the next player whose turn it is
+     * @return the next player whose turn it is return value
      */
     public ServerPlayer advanceTurn()
     {
@@ -67,7 +67,7 @@ public class Game
      * Version-latenightpizzaparty
      * Get the current player whose turn it is.
      *
-     * @return the current player whose turn it is.
+     * @return the current player whose turn it is. return value
      */
     public ServerPlayer getCurrentPlayer()
     {
@@ -89,7 +89,7 @@ public class Game
      * Version-latenightpizzaparty
      * Add a ServerPlayer to the List of ServerPlayers in this game.
      *
-     * @param newPlayer The ServerPlayer to add to the Game
+     * @param newPlayer The ServerPlayer to add to the Game method parameter
      */
     public void addServerPlayer(ServerPlayer newPlayer)
     {
@@ -100,7 +100,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the Map of ServerPlayers in this game.
      *
-     * @return The Map of ServerPlayers in this game.
+     * @return The Map of ServerPlayers in this game. return value
      */
     public Map<Integer, ServerPlayer> getServerPlayers()
     {
@@ -110,7 +110,7 @@ public class Game
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public List<ServerPlayer> getServerPlayersList()
     {
@@ -120,7 +120,7 @@ public class Game
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public List<Player> getPlayers()
     {
@@ -137,7 +137,7 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the current ServerPlayer in this game.
      *
-     * @param current The ServerPlayer to make current in the Game
+     * @param current The ServerPlayer to make current in the Game method parameter
      */
     public void setCurrentServerPlayer(ServerPlayer current)
     {
@@ -148,7 +148,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the current ServerPlayer associated with this game.
      *
-     * @return The current ServerPlayer associated with this game.
+     * @return The current ServerPlayer associated with this game. return value
      */
     public ServerPlayer getCurrentServerPlayer()
     {
@@ -159,7 +159,7 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the drawPile of this game.
      *
-     * @param drawPile The new drawPile for this Game
+     * @param drawPile The new drawPile for this Game method parameter
      */
     public void setDrawPile(List<ActionCard> drawPile)
     {
@@ -170,7 +170,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the drawPile of this game.
      *
-     * @return The drawPile of this game.
+     * @return The drawPile of this game. return value
      */
     public List<ActionCard> getDrawPile()
     {
@@ -181,7 +181,7 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the discardPile of this game.
      *
-     * @param discardPile The new discardPile for this Game
+     * @param discardPile The new discardPile for this Game method parameter
      */
     public void setDiscardPile(List<ActionCard> discardPile)
     {
@@ -192,7 +192,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the solution of this game.
      *
-     * @return The discardPile of this game.
+     * @return The discardPile of this game. return value
      */
     public List<ActionCard> getDiscardPile()
     {
@@ -203,7 +203,7 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the solution of this game.
      *
-     * @param solution The new solution for this game
+     * @param solution The new solution for this game method parameter
      */
     public void setSolution(Solution solution)
     {
@@ -214,7 +214,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the solution of this game.
      *
-     * @return The solution of this game.
+     * @return The solution of this game. return value
      */
     public Solution getSolution()
     {
@@ -225,7 +225,7 @@ public class Game
      * Version-latenightpizzaparty
      * Sets the Map between destination Ids and playerIds for this game.
      *
-     * @param destToPlayerId The new Map of destination Ids and PlayerIds for
+     * @param destToPlayerId The new Map of destination Ids and PlayerIds for method parameter
      * this game
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> destToPlayerId)
@@ -237,7 +237,7 @@ public class Game
      * Version-latenightpizzaparty
      * Gets the Map between destination Ids and playerIds for this game.
      *
-     * @return The Map of destination Ids and PlayerIds for this game
+     * @return The Map of destination Ids and PlayerIds for this game return value
      */
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
@@ -247,7 +247,7 @@ public class Game
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Integer getGameId()
     {
@@ -315,7 +315,7 @@ public class Game
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public ActionCard popActionCard()
     {
@@ -335,7 +335,7 @@ public class Game
      * Creates a list of HintCards for the game to first pick a solution then
      * for the game to deal.
      *
-     * @param hintCards
+     * @param hintCards method parameter
      */
     private List<HintCard> initializeHintCards()
     {
@@ -376,7 +376,7 @@ public class Game
      * Version-latenightpizzaparty
      * Get the number of hint cards to be dealt
      *
-     * @return List of HintCards
+     * @return List of HintCards return value
      */
     public Integer getHintCardsSize()
     {
@@ -387,7 +387,7 @@ public class Game
      * Version-latenightpizzaparty
      * Return the first Hint Card in the List
      *
-     * @return HintCard
+     * @return HintCard return value
      */
     public HintCard popHintCard()
     {
@@ -406,8 +406,8 @@ public class Game
      * Version-latenightpizzaparty
      * Pre condition listHintCards has been shuffled.
      *
-     * @param hintCards
-     * @return
+     * @param hintCards method parameter
+     * @return return value
      */
     private Solution pickSolution()
     {

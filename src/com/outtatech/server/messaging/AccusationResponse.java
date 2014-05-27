@@ -17,8 +17,8 @@ public class AccusationResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Creates a new AccusationResponse object
      *
-     * @param solution
-     * @param correctAccusation
+     * @param solution method parameter
+     * @param correctAccusation method parameter
      */
     public AccusationResponse(Solution solution, boolean correctAccusation)
     {
@@ -29,7 +29,7 @@ public class AccusationResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Solution getSolution()
     {
@@ -40,7 +40,7 @@ public class AccusationResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns whether or not the accusation was correct.
      *
-     * @return whether or not the accusation was correct
+     * @return whether or not the accusation was correct return value
      */
     public boolean getCorrectAccusation()
     {

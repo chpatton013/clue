@@ -17,14 +17,14 @@ public interface Player
      * Version-latenightpizzaparty
      * Returns the id of the player
      *
-     * @return The unique id of the player
+     * @return The unique id of the player return value
      */
     int getPlayerId();
 
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     String getName();
 }

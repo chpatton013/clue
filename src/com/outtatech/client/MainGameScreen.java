@@ -54,7 +54,7 @@ public class MainGameScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Alternate constructor to take a GUIController in
      *
-     * @param ctrl
+     * @param ctrl method parameter
      */
     public MainGameScreen(GUIController ctrl)
     {
@@ -109,7 +109,7 @@ public class MainGameScreen extends javax.swing.JFrame
     /**
      * Version-latenightpizzaparty
      *
-     * @param cards
+     * @param cards method parameter
      */
     public void updateHand(List<Card> cards)
     {
@@ -1298,7 +1298,7 @@ public class MainGameScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Adds a string to the game log
      *
-     * @param updateString
+     * @param updateString method parameter
      */
     public void updateGameLog(String updateString)
     {
@@ -1320,9 +1320,9 @@ public class MainGameScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Adds a player to the player list
      *
-     * @param playerName
-     * @param playerId
-     * @param isPlayer
+     * @param playerName method parameter
+     * @param playerId method parameter
+     * @param isPlayer method parameter
      */
     public void addPlayer(String playerName, int playerId, boolean isPlayer)
     {
@@ -1361,8 +1361,8 @@ public class MainGameScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Changes a player's location
      *
-     * @param locationId
-     * @param playerId
+     * @param locationId method parameter
+     * @param playerId method parameter
      */
     public void setPlayerLocation(int locationId, int playerId)
     {
@@ -1894,7 +1894,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

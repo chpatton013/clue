@@ -18,7 +18,7 @@ public class LobbyDiscoveryResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Constructs a new lobby discovery response message.
      *
-     * @param lobbies list of currently active lobbies.
+     * @param lobbies list of currently active lobbies. method parameter
      */
     public LobbyDiscoveryResponse(List<Lobby> lobbies)
     {
@@ -29,7 +29,7 @@ public class LobbyDiscoveryResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns a list of currently active lobbies.
      *
-     * @return list of currently active lobbies.
+     * @return list of currently active lobbies. return value
      */
     public List<Lobby> getLobbies()
     {

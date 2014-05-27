@@ -16,7 +16,7 @@ public class KickPlayerRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Construct a new KickPlayerRequest object
      *
-     * @param playerId the id of the player to be kicked.
+     * @param playerId the id of the player to be kicked. method parameter
      */
     public KickPlayerRequest(Integer playerId)
     {
@@ -27,7 +27,7 @@ public class KickPlayerRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Getter method for the ID of the player to kick.
      *
-     * @return the ID of the player to kick.
+     * @return the ID of the player to kick. return value
      */
     public Integer getPlayerId()
     {

@@ -19,7 +19,7 @@ public class ServerApplication {
     /**
      * Version-latenightpizzaparty
      *
-     * @param args
+     * @param args method parameter
      */
     public static void main(String[] args) {
         ServerApplication app = new ServerApplication();

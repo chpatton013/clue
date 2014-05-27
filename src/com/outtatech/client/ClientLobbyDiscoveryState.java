@@ -21,7 +21,7 @@ public class ClientLobbyDiscoveryState extends State
      * Constructor requires a List of Integer Objects that represents a list of
      * available games that the client, player, is able to join.
      *
-     * @param lobbyList
+     * @param lobbyList method parameter
      */
     public ClientLobbyDiscoveryState(List<Lobby> lobbyList)
     {
@@ -33,7 +33,7 @@ public class ClientLobbyDiscoveryState extends State
      * Get the current list of lobbies associated with the instance of
      * ClientLobbyState.
      *
-     * @return List of Lobby Objects representing unstarted games
+     * @return List of Lobby Objects representing unstarted games return value
      */
     public List<Lobby> getLobbyList()
     {
@@ -44,7 +44,7 @@ public class ClientLobbyDiscoveryState extends State
      * Version-latenightpizzaparty
      * Sets the lobby list of the state
      *
-     * @param newLobbyList the lobby list of the state
+     * @param newLobbyList the lobby list of the state method parameter
      */
     public void setLobbyList(List<Lobby> newLobbyList)
     {

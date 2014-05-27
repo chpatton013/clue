@@ -17,8 +17,8 @@ public class VehicleCard extends HintCard
      * Version-latenightpizzaparty
      * Constructs a new VehicleCard
      *
-     * @param vehicle A unique vehicle ID
-     * @param cardColor
+     * @param vehicle A unique vehicle ID method parameter
+     * @param cardColor method parameter
      */
     public VehicleCard(VehicleID vehicle, CardColor cardColor)
     {
@@ -44,7 +44,7 @@ public class VehicleCard extends HintCard
      * Version-latenightpizzaparty
      * Returns the Vehicle ID this VehicleCard has.
      *
-     * @return A vehicle ID.
+     * @return A vehicle ID. return value
      */
     public VehicleID getVehicle()
     {
@@ -54,7 +54,7 @@ public class VehicleCard extends HintCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public boolean getIsAir()
     {
@@ -64,7 +64,7 @@ public class VehicleCard extends HintCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public CardColor getCardColor()
     {

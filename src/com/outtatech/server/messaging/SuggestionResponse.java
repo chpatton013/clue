@@ -19,7 +19,7 @@ public class SuggestionResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Constructs a new SuggestionResponse object
      *
-     * @param correctAccusation whether or not the accusation was correct.
+     * @param correctAccusation whether or not the accusation was correct. method parameter
      */
     public SuggestionResponse(boolean correctAccusation)
     {
@@ -29,7 +29,7 @@ public class SuggestionResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public HintCard getRefutingCard()
     {
@@ -39,7 +39,7 @@ public class SuggestionResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @param refutingCard
+     * @param refutingCard method parameter
      */
     public void setRefutingCard(HintCard refutingCard)
     {

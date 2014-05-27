@@ -39,9 +39,9 @@ public class ClientGameState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param playerID
-     * @param hand
-     * @param players
+     * @param playerID method parameter
+     * @param hand method parameter
+     * @param players method parameter
      */
     public ClientGameState(int playerID, List<Card> hand,
             Map<Integer, String> players)
@@ -72,7 +72,7 @@ public class ClientGameState extends State
      * Getter for a field that indicates whether or not a new accusation has
      * been made since last check.
      *
-     * @return whether or not a new accusation has been made
+     * @return whether or not a new accusation has been made return value
      */
     public boolean getAccusationStatus()
     {
@@ -85,7 +85,7 @@ public class ClientGameState extends State
      * sets the field that indicates whether or not there was a new accusation
      * to false after access.
      *
-     * @return whether or not the accusation was correct.
+     * @return whether or not the accusation was correct. return value
      */
     public boolean getAccusation()
     {
@@ -97,7 +97,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Returns the player id associated with the ClientGameState instance.
      *
-     * @return playerID
+     * @return playerID return value
      */
     public int getPlayerId()
     {
@@ -108,7 +108,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Setter method that sets the mapping from destination IDs to player IDs
      *
-     * @param map
+     * @param map method parameter
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> map)
     {
@@ -120,7 +120,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Sets the players in this game
      *
-     * @param players the players in this game.
+     * @param players the players in this game. method parameter
      */
     public void setPlayers(Map<Integer, String> players)
     {
@@ -132,7 +132,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Returns the list of players in this game
      *
-     * @return the list of players in this game
+     * @return the list of players in this game return value
      */
     public Map<Integer, String> getPlayers()
     {
@@ -143,7 +143,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Getter method for the cards that have been revealed to the client.
      *
-     * @return a list that contains cards that have been revealed to the client.
+     * @return a list that contains cards that have been revealed to the client. return value
      */
     public List<Card> getRevealed()
     {
@@ -155,7 +155,7 @@ public class ClientGameState extends State
      * Setter method for the list of cards that have been revealed to the
      * client.
      *
-     * @param revealed the list of cards that have been revealed to the client.
+     * @param revealed the list of cards that have been revealed to the client. method parameter
      */
     public void setRevealed(List<Card> revealed)
     {
@@ -167,7 +167,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check, set to false after access.
-     * @return
+     * @return return value
      */
     public boolean getRevealStatus()
     {
@@ -181,7 +181,7 @@ public class ClientGameState extends State
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check.
      *
-     * @param revealStatus
+     * @param revealStatus method parameter
      */
     public void setRevealStatus(boolean revealStatus)
     {
@@ -193,7 +193,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Change the player id associated to the instance of ClientGameState
      *
-     * @param playerID integer id of the player
+     * @param playerID integer id of the player method parameter
      */
     public void setPlayerId(int playerID)
     {
@@ -205,7 +205,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Sets this players hand.
      *
-     * @param hand
+     * @param hand method parameter
      */
     public void setPlayerHand(List<Card> hand)
     {
@@ -217,7 +217,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Returns an Object representing the players notes.
      *
-     * @return Object
+     * @return Object return value
      */
     public Object getNotes()
     {
@@ -228,7 +228,7 @@ public class ClientGameState extends State
      * Version-latenightpizzaparty
      * Sets this players notes.
      *
-     * @param notes
+     * @param notes method parameter
      */
     public void setNotes(Object notes)
     {
@@ -241,7 +241,7 @@ public class ClientGameState extends State
      * Returns a list of the current Indication cards held by the calling
      * instance.
      *
-     * @return List of Card Objects
+     * @return List of Card Objects return value
      */
     public List<Card> getHand()
     {
@@ -253,7 +253,7 @@ public class ClientGameState extends State
      * Returns a map representing a set of Destinations and its corresponding
      * playerID.
      *
-     * @return Map of DestinationID Objects to Integer Playerids
+     * @return Map of DestinationID Objects to Integer Playerids return value
      */
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
@@ -263,7 +263,7 @@ public class ClientGameState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Integer getCurrentActivePlayer()
     {
@@ -273,7 +273,7 @@ public class ClientGameState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param currentActivePlayer
+     * @param currentActivePlayer method parameter
      */
     public void setCurrentActivePlayer(Integer currentActivePlayer)
     {
@@ -284,7 +284,7 @@ public class ClientGameState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param message
+     * @param message method parameter
      */
     public void pushGameLog(String message)
     {
@@ -294,7 +294,7 @@ public class ClientGameState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public String pollGameLog()
     {

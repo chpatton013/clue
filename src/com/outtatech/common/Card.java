@@ -17,7 +17,7 @@ public class Card implements Serializable
      * Version-latenightpizzaparty
      * Constructs a new Card.
      *
-     * @param cardType Describes whether the card is of the type Hint or Action.
+     * @param cardType Describes whether the card is of the type Hint or Action. method parameter
      */
     public Card(CardType cardType)
     {
@@ -29,7 +29,7 @@ public class Card implements Serializable
      * Version-latenightpizzaparty
      * Returns the card type (Hint or Action).
      *
-     * @return The card type (Hint or Action).
+     * @return The card type (Hint or Action). return value
      */
     public CardType getCardType()
     {
@@ -40,7 +40,7 @@ public class Card implements Serializable
      * Version-latenightpizzaparty
      * Returns a unique id
      *
-     * @return a unique id
+     * @return a unique id return value
      */
     public int getID()
     {

@@ -16,7 +16,7 @@ public class Suggestion extends ActionCard
     /**
      * Version-latenightpizzaparty
      * Constructs a new Suggestion ActionCard.
-     * @param type
+     * @param type method parameter
      */
     public Suggestion(SuggestionType type)
     {
@@ -27,7 +27,7 @@ public class Suggestion extends ActionCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public SuggestionType getType()
     {

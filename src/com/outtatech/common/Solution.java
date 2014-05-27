@@ -17,9 +17,9 @@ public class Solution implements Serializable
     /**
      * Version-latenightpizzaparty
      * Creates a new Solution object.
-     * @param dest
-     * @param vehicle
-     * @param suspect
+     * @param dest method parameter
+     * @param vehicle method parameter
+     * @param suspect method parameter
      */
     public Solution(DestinationID dest, VehicleID vehicle, SuspectID suspect)
     {
@@ -32,7 +32,7 @@ public class Solution implements Serializable
      * Version-latenightpizzaparty
      * Getter method for the solutions destination ID.
      *
-     * @return the destination ID of this solution.
+     * @return the destination ID of this solution. return value
      */
     public DestinationID getDestination()
     {
@@ -43,7 +43,7 @@ public class Solution implements Serializable
      * Version-latenightpizzaparty
      * Getter method for the solutions vehicle ID.
      *
-     * @return the vehicle ID of this solution.
+     * @return the vehicle ID of this solution. return value
      */
     public VehicleID getVehicle()
     {
@@ -54,7 +54,7 @@ public class Solution implements Serializable
      * Version-latenightpizzaparty
      * Getter method for the solutions suspect ID.
      *
-     * @return the suspect ID of this solution.
+     * @return the suspect ID of this solution. return value
      */
     public SuspectID getSuspect()
     {
@@ -66,8 +66,8 @@ public class Solution implements Serializable
      * Equals method that determines whether another solution is equal to this
      * one.
      *
-     * @param obj the object to be compared.
-     * @return whether or not the solutions are equal.
+     * @param obj the object to be compared. method parameter
+     * @return whether or not the solutions are equal. return value
      */
     public boolean equals(Object obj)
     {

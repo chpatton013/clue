@@ -21,8 +21,8 @@ public class GameStateResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Constructs a new GameStateResponse object
      *
-     * @param currentActivePlayer id of the currently active player
-     * @param players
+     * @param currentActivePlayer id of the currently active player method parameter
+     * @param players method parameter
      */
     public GameStateResponse(Integer currentActivePlayer,
             Map<Integer, String> players)
@@ -34,7 +34,7 @@ public class GameStateResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Map<Integer, String> getPlayers()
     {
@@ -45,7 +45,7 @@ public class GameStateResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns the id of the player whose turn is currently active.
      *
-     * @return the id of the player whose turn is currently active.
+     * @return the id of the player whose turn is currently active. return value
      */
     public Integer getCurrentActivePlayer()
     {

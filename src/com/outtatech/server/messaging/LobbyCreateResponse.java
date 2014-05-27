@@ -18,7 +18,7 @@ public class LobbyCreateResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Creates a LobbyCreateResponse
      *
-     * @param lobby the lobby that was newly created.
+     * @param lobby the lobby that was newly created. method parameter
      */
     public LobbyCreateResponse(Lobby lobby)
     {
@@ -29,7 +29,7 @@ public class LobbyCreateResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns a newly created lobby object.
      *
-     * @return the newly created lobby
+     * @return the newly created lobby return value
      */
     public Lobby getLobby()
     {

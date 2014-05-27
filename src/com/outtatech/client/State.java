@@ -22,7 +22,7 @@ public class State extends Observable
      * Version-latenightpizzaparty
      * Get the host name associated with this instance.
      *
-     * @return String host name.
+     * @return String host name. return value
      */
     public String getHostName()
     {
@@ -33,7 +33,7 @@ public class State extends Observable
      * Version-latenightpizzaparty
      * Set the host name that the State instance will use.
      *
-     * @param hostname String
+     * @param hostname String method parameter
      */
     public void setHostName(String hostname)
     {
@@ -44,7 +44,7 @@ public class State extends Observable
      * Version-latenightpizzaparty
      * Override parent method to enable storing observers.
      *
-     * @param o
+     * @param o method parameter
      */
     @Override
     public void addObserver(Observer o)
@@ -57,7 +57,7 @@ public class State extends Observable
      * Version-latenightpizzaparty
      * Returns the list of Observer classes.
      *
-     * @return observers
+     * @return observers return value
      */
     public CopyOnWriteArrayList<Observer> getObservers()
     {
@@ -68,7 +68,7 @@ public class State extends Observable
      * Version-latenightpizzaparty
      * Adds the observers from another State instance to this instance.
      *
-     * @param observers
+     * @param observers method parameter
      */
     public void addOldStatesObservers(CopyOnWriteArrayList<Observer> observers)
     {

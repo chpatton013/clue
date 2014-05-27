@@ -26,9 +26,9 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      * Constructs a new Lobby
      *
-     * @param lobbyName String designating the lobby name.
-     * @param gameId Integer that differentiates one game from the next.
-     * @param visible
+     * @param lobbyName String designating the lobby name. method parameter
+     * @param gameId Integer that differentiates one game from the next. method parameter
+     * @param visible method parameter
      */
     public Lobby(String lobbyName, Integer gameId, boolean visible)
     {
@@ -42,7 +42,7 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      * Returns the name of the lobby.
      *
-     * @return the name of the lobby
+     * @return the name of the lobby return value
      */
     public String getLobbyName()
     {
@@ -53,7 +53,7 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      * Returns the ID of the game that this lobby represents
      *
-     * @return the ID of the game this lobby represents
+     * @return the ID of the game this lobby represents return value
      */
     public Integer getGameId()
     {
@@ -64,7 +64,7 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      * Returns the id of this lobby.
      *
-     * @return the id of this lobby.
+     * @return the id of this lobby. return value
      */
     public Integer getLobbyId()
     {
@@ -75,7 +75,7 @@ public class Lobby implements Serializable
      * Version-latenightpizzaparty
      * Returns whether or not this lobby should be made visible.
      *
-     * @return whether or not this lobby should be made visible.
+     * @return whether or not this lobby should be made visible. return value
      */
     public boolean isVisible()
     {

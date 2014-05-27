@@ -25,7 +25,7 @@ public class ServerNetwork extends AbstractServer
      * Construct a ServerNetwork, requires an integer to designate which port
      * should be used. Calls its super class, AbstractServer, constructor.
      *
-     * @param port the networking port the server will listen on
+     * @param port the networking port the server will listen on method parameter
      */
     public ServerNetwork(int port)
     {
@@ -36,7 +36,7 @@ public class ServerNetwork extends AbstractServer
      * Version-latenightpizzaparty
      * Sets this instance's server controller
      *
-     * @param ctrl the ServerController object.
+     * @param ctrl the ServerController object. method parameter
      */
     public void setServerController(ServerController ctrl)
     {
@@ -48,8 +48,8 @@ public class ServerNetwork extends AbstractServer
      * Sends a Message object to all client connections provide in the client
      * list.
      *
-     * @param msg ServerResponse to send to client connections
-     * @param clientList list of client connections
+     * @param msg ServerResponse to send to client connections method parameter
+     * @param clientList list of client connections method parameter
      */
     public void sendMessageToClients(ServerResponse msg,
             List<ConnectionToClient> clientList)
@@ -76,8 +76,8 @@ public class ServerNetwork extends AbstractServer
      * Version-latenightpizzaparty
      * Sends an Object to the provided client connection.
      *
-     * @param msg ServerResponse to send to client connections
-     * @param client the client connection
+     * @param msg ServerResponse to send to client connections method parameter
+     * @param client the client connection method parameter
      */
     public void sendMessageToClient(Object msg,
             ConnectionToClient client)
@@ -100,8 +100,8 @@ public class ServerNetwork extends AbstractServer
      * Version-latenightpizzaparty
      * Receives an Object from a client connection
      *
-     * @param message Object received from the client connection
-     * @param client ConnectionToClient client to responded too.
+     * @param message Object received from the client connection method parameter
+     * @param client ConnectionToClient client to responded too. method parameter
      */
     @Override
     public void handleMessageFromClient(Object message,
@@ -118,7 +118,7 @@ public class ServerNetwork extends AbstractServer
      * be disconnected but the thread is still active until it is asynchronously
      * removed from the thread group.
      *
-     * @param client the connection with the client.
+     * @param client the connection with the client. method parameter
      */
     @Override
     synchronized protected void clientDisconnected(

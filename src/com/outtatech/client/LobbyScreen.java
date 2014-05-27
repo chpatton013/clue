@@ -32,7 +32,7 @@ public class LobbyScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Alternate constructor to take a GUIController in
      *
-     * @param ctrl
+     * @param ctrl method parameter
      */
     public LobbyScreen(GUIController ctrl)
     {
@@ -47,7 +47,7 @@ public class LobbyScreen extends javax.swing.JFrame
     /**
      * Version-latenightpizzaparty
      *
-     * @param lobbyId
+     * @param lobbyId method parameter
      */
     public void setId(int lobbyId)
     {
@@ -58,9 +58,9 @@ public class LobbyScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Adds a player to the lobby
      *
-     * @param playerName
-     * @param playerId
-     * @param isPlayer
+     * @param playerName method parameter
+     * @param playerId method parameter
+     * @param isPlayer method parameter
      */
     public void addPlayer(String playerName, int playerId, boolean isPlayer)
     {
@@ -83,7 +83,7 @@ public class LobbyScreen extends javax.swing.JFrame
     /**
      * Version-latenightpizzaparty
      *
-     * @param isLeader
+     * @param isLeader method parameter
      */
     public void setLeader(boolean isLeader)
     {
@@ -267,7 +267,7 @@ public class LobbyScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

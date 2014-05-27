@@ -16,7 +16,7 @@ public class SuspectCard extends HintCard
      * Version-latenightpizzaparty
      * Constructs a new SuspectCard
      *
-     * @param suspect A unique suspect ID
+     * @param suspect A unique suspect ID method parameter
      */
     public SuspectCard(SuspectID suspect)
     {
@@ -42,7 +42,7 @@ public class SuspectCard extends HintCard
      * Version-latenightpizzaparty
      * Returns the suspect this HintCard has.
      *
-     * @return A suspect ID.
+     * @return A suspect ID. return value
      */
     public SuspectID getSuspect()
     {
@@ -52,7 +52,7 @@ public class SuspectCard extends HintCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Gender getGender()
     {

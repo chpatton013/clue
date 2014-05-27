@@ -23,7 +23,7 @@ public class AccusationScreen extends javax.swing.JFrame
      * Version-latenightpizzaparty
      * Alternate constructor to take a GUIController in
      *
-     * @param ctrl
+     * @param ctrl method parameter
      */
     public AccusationScreen(GUIController ctrl)
     {
@@ -212,7 +212,7 @@ public class AccusationScreen extends javax.swing.JFrame
 
     /**
      * Version-latenightpizzaparty
-     * @param args the command line arguments
+     * @param args the command line arguments method parameter
      */
     public static void main(String args[])
     {

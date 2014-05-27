@@ -21,9 +21,9 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
-     * @param actionCard the action card that the client is playing
-     * @param cards the cards involved in the action
-     * @param playerID the id of the player the action is targeting
+     * @param actionCard the action card that the client is playing method parameter
+     * @param cards the cards involved in the action method parameter
+     * @param playerID the id of the player the action is targeting method parameter
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
     {
@@ -36,8 +36,8 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
-     * @param actionCard the action card that the client is playing
-     * @param cards the cards involved in the action
+     * @param actionCard the action card that the client is playing method parameter
+     * @param cards the cards involved in the action method parameter
      */
     public ActionRequest(ActionCard actionCard, List<Card> cards)
     {
@@ -50,7 +50,7 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns the action card involved in the user action.
      *
-     * @return the action card involved in the user action.
+     * @return the action card involved in the user action. return value
      */
     public ActionCard getActionCard()
     {
@@ -61,7 +61,7 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns the cards involved in the clients action.
      *
-     * @return the cards involved in the clients action.
+     * @return the cards involved in the clients action. return value
      */
     public List<Card> getCards()
     {
@@ -72,7 +72,7 @@ public class ActionRequest extends ClientRequest
      * Version-latenightpizzaparty
      * Returns the Id of the player requested
      *
-     * @return the integer ID of the player
+     * @return the integer ID of the player return value
      */
     public Integer getPlayerId()
     {

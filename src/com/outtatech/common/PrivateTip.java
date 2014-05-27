@@ -18,7 +18,7 @@ public class PrivateTip extends ActionCard
     /**
      * Version-latenightpizzaparty
      * Constructs a new PrivatTip ActionCard.
-     * @param type
+     * @param type method parameter
      */
     public PrivateTip(PrivateTipType type)
     {
@@ -29,7 +29,7 @@ public class PrivateTip extends ActionCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public PrivateTipType getType()
     {

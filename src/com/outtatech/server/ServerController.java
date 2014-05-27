@@ -41,8 +41,8 @@ public class ServerController
      * used to facilitate changes to multiple Game instances with many different
      * Client connections and any AI players.
      *
-     * @param network
-     * @param robots a Map of ServerPlayers and AI instances
+     * @param network method parameter
+     * @param robots a Map of ServerPlayers and AI instances method parameter
      */
     public ServerController(ServerNetwork network)
     {
@@ -73,8 +73,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Handle a network request from a client.
      *
-     * @param obj Object signaling an action.
-     * @param connection ConnectionToClient used to respond back to client.
+     * @param obj Object signaling an action. method parameter
+     * @param connection ConnectionToClient used to respond back to client. method parameter
      */
     public void reactToNetwork(Object obj, ConnectionToClient connection)
     {
@@ -296,8 +296,8 @@ public class ServerController
     /**
      * Version-latenightpizzaparty
      *
-     * @param game
-     * @param initiator
+     * @param game method parameter
+     * @param initiator method parameter
      */
     public void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
@@ -312,8 +312,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Given a player and a message, distribute the message to AI or Human
      *
-     * @param player
-     * @param msg
+     * @param player method parameter
+     * @param msg method parameter
      */
     private void informPlayer(ServerPlayer player, ServerResponse msg)
     {
@@ -335,8 +335,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Given a game and a message, distributes the message to AI and Players
      *
-     * @param game the game that contains the players the msg should be sent to
-     * @param msg the message that should be sent to the players in the game
+     * @param game the game that contains the players the msg should be sent to method parameter
+     * @param msg the message that should be sent to the players in the game method parameter
      */
     private void informPlayers(Game game, ServerResponse msg)
     {
@@ -522,8 +522,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Handles a request made by an AI player.
      *
-     * @param obj Object signaling an action.
-     * @param robot AI instance that triggered the action.
+     * @param obj Object signaling an action. method parameter
+     * @param robot AI instance that triggered the action. method parameter
      */
     public void reactToRobot(ClientRequest obj, AI robot)
     {
@@ -550,8 +550,8 @@ public class ServerController
     /**
      * Version-latenightpizzaparty
      *
-     * @param obj
-     * @param ai
+     * @param obj method parameter
+     * @param ai method parameter
      */
     public void informAI(Object obj, List<AI> ai)
     {
@@ -565,8 +565,8 @@ public class ServerController
     /**
      * Version-latenightpizzaparty
      *
-     * @param obj
-     * @param ai
+     * @param obj method parameter
+     * @param ai method parameter
      */
     public void informAI(Object obj, AI ai)
     {
@@ -577,8 +577,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Provides a hook to send a single message to a networked client.
      *
-     * @param obj Object to send to network hooks
-     * @param client The connection to send the object to
+     * @param obj Object to send to network hooks method parameter
+     * @param client The connection to send the object to method parameter
      */
     public void forwardMessage(Object obj, ConnectionToClient client)
     {
@@ -589,8 +589,8 @@ public class ServerController
      * Version-latenightpizzaparty
      * Provides a hook to send Objects to a networked client.
      *
-     * @param obj Object to send to network hooks
-     * @param clients The connections to send the object to
+     * @param obj Object to send to network hooks method parameter
+     * @param clients The connections to send the object to method parameter
      */
     public void forwardMessage(Object obj, List<ConnectionToClient> clients)
     {
@@ -620,8 +620,8 @@ public class ServerController
     /**
      * Version-latenightpizzaparty
      *
-     * @param client
-     * @return
+     * @param client method parameter
+     * @return return value
      */
     public Integer getLobbyId(ConnectionToClient client)
     {
@@ -635,7 +635,7 @@ public class ServerController
      * each player
      *
      * @TODO also send out a GameStateResponse??
-     * @param game
+     * @param game method parameter
      */
     private void handleGameStartRequest(Game game)
     {

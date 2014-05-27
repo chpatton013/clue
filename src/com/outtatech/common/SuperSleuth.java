@@ -18,7 +18,7 @@ public class SuperSleuth extends ActionCard
     /**
      * Version-latenightpizzaparty
      * Constructs a new SuperSleuth ActionCard.
-     * @param type
+     * @param type method parameter
      */
     public SuperSleuth(SuperSleuthType type)
     {
@@ -29,7 +29,7 @@ public class SuperSleuth extends ActionCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public SuperSleuthType getType()
     {

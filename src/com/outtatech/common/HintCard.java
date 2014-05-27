@@ -16,7 +16,7 @@ public class HintCard extends Card
      * Version-latenightpizzaparty
      * Constructs a new HintCard with a type.
      *
-     * @param type The type of HintCard this Card is.
+     * @param type The type of HintCard this Card is. method parameter
      */
     public HintCard(HintCardType type)
     {
@@ -28,7 +28,7 @@ public class HintCard extends Card
      * Version-latenightpizzaparty
      * Returns the type of HintCard this Card is.
      *
-     * @return The type of HintCard.
+     * @return The type of HintCard. return value
      */
     public HintCardType getHintType()
     {

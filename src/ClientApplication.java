@@ -24,7 +24,7 @@ public class ClientApplication {
     /**
      * Version-latenightpizzaparty
      *
-     * @param args
+     * @param args method parameter
      */
     public static void main(String[] args) {
         ClientApplication app = new ClientApplication();

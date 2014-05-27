@@ -20,9 +20,9 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Construct a client player to keep track of players in the game
      *
-     * @param playerId int representing the player
-     * @param name String representation of player
-     * @param color Color object to help differentiate players
+     * @param playerId int representing the player method parameter
+     * @param name String representation of player method parameter
+     * @param color Color object to help differentiate players method parameter
      */
     public ClientPlayer(int playerId,
             String name,
@@ -37,7 +37,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Gets the Id of this player.
      *
-     * @return The Id of this player.
+     * @return The Id of this player. return value
      */
     public int getPlayerId()
     {
@@ -48,7 +48,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Sets the Id of this player.
      *
-     * @param playerId The Id of the player.
+     * @param playerId The Id of the player. method parameter
      */
     public void setPlayerId(int playerId)
     {
@@ -59,7 +59,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Gets the name of this player.
      *
-     * @return The name of this player.
+     * @return The name of this player. return value
      */
     public String getName()
     {
@@ -70,7 +70,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Sets the name of this player.
      *
-     * @param name The name of the player.
+     * @param name The name of the player. method parameter
      */
     public void setName(String name)
     {
@@ -81,7 +81,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Gets the color associated with this player.
      *
-     * @return The color associated with this player.
+     * @return The color associated with this player. return value
      */
     public Color getColor()
     {
@@ -92,7 +92,7 @@ public class ClientPlayer implements Player
      * Version-latenightpizzaparty
      * Sets the color associated with this player.
      *
-     * @param color The color of the player.
+     * @param color The color of the player. method parameter
      */
     public void setColor(Color color)
     {

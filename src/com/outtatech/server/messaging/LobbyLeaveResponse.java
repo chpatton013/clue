@@ -14,7 +14,7 @@ public class LobbyLeaveResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @param playerId
+     * @param playerId method parameter
      */
     public LobbyLeaveResponse(Integer playerId)
     {
@@ -24,7 +24,7 @@ public class LobbyLeaveResponse extends ServerResponse
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public Integer getPlayerId()
     {

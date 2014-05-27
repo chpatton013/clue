@@ -79,7 +79,7 @@ public class ServerPlayer implements Player, Serializable
 
     /**
      *
-     * @return
+     * @return return value
      */
     public DestinationID getLocation()
     {
@@ -89,7 +89,7 @@ public class ServerPlayer implements Player, Serializable
     /**
      * Version-latenightpizzaparty
      *
-     * @param location
+     * @param location method parameter
      */
     public void setLocation(DestinationID location)
     {
@@ -98,7 +98,7 @@ public class ServerPlayer implements Player, Serializable
 
     /**
      *
-     * @param name
+     * @param name method parameter
      */
     public void setName(String name)
     {
@@ -108,7 +108,7 @@ public class ServerPlayer implements Player, Serializable
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public String getName()
     {
@@ -119,7 +119,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Gets the notes of this player.
      *
-     * @return The notes of this player.
+     * @return The notes of this player. return value
      */
     public Object getNotes()
     {
@@ -130,7 +130,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Sets the notes of this player.
      *
-     * @param notes The notes of this player.
+     * @param notes The notes of this player. method parameter
      */
     public void setNotes(Object notes)
     {
@@ -160,7 +160,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Gets the color associated with this player.
      *
-     * @return The color associated with this player.
+     * @return The color associated with this player. return value
      */
     public Color getColor()
     {
@@ -171,7 +171,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Sets the color associated with this player.
      *
-     * @param color The color of the player.
+     * @param color The color of the player. method parameter
      */
     public void setColor(Color color)
     {
@@ -182,7 +182,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Gets the action cards hand of this player.
      *
-     * @return The action cards hand of this player.
+     * @return The action cards hand of this player. return value
      */
     public List<ActionCard> getActionCardsHand()
     {
@@ -193,7 +193,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Gets the hint cards hand of this player.
      *
-     * @return The hint cards hand of this player.
+     * @return The hint cards hand of this player. return value
      */
     public List<HintCard> getHintCardsHand()
     {
@@ -204,7 +204,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Sets the action cards hand of this player.
      *
-     * @param actionCardsHand of the player.
+     * @param actionCardsHand of the player. method parameter
      */
     public void setActionCardsHand(List<ActionCard> actionCardsHand)
     {
@@ -216,7 +216,7 @@ public class ServerPlayer implements Player, Serializable
      * Version-latenightpizzaparty
      * Sets the hint cards hand of this player.
      *
-     * @param hintCardsHand of the player.
+     * @param hintCardsHand of the player. method parameter
      */
     public void setHintCardsHand(List<HintCard> hintCardsHand)
     {

@@ -18,7 +18,7 @@ public class DestinationCard extends HintCard
      * Version-latenightpizzaparty
      * Constructs a unique Destination Card.
      *
-     * @param destination A unique destination ID.
+     * @param destination A unique destination ID. method parameter
      */
     public DestinationCard(DestinationID destination)
     {
@@ -61,7 +61,7 @@ public class DestinationCard extends HintCard
      * Version-latenightpizzaparty
      * Returns the unique destination of this DestinationCard.
      *
-     * @return A unique destination.
+     * @return A unique destination. return value
      */
     public DestinationID getDestination()
     {
@@ -71,7 +71,7 @@ public class DestinationCard extends HintCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public boolean getIsNorth()
     {
@@ -81,7 +81,7 @@ public class DestinationCard extends HintCard
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public boolean getIsWest()
     {

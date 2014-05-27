@@ -21,8 +21,8 @@ public class RevealCardResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Creates a new RevealCardRequest object.
      *
-     * @param actionCard the card that has triggered this reveal action.
-     * @param cards the list of cards that this reveal action may want.
+     * @param actionCard the card that has triggered this reveal action. method parameter
+     * @param cards the list of cards that this reveal action may want. method parameter
      */
     public RevealCardResponse(ActionCard actionCard,
             List<Card> cards)
@@ -35,7 +35,7 @@ public class RevealCardResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns the cards that has triggered this reveal action.
      *
-     * @return the card that has triggered this reveal action.
+     * @return the card that has triggered this reveal action. return value
      */
     public ActionCard getActionCard()
     {
@@ -46,7 +46,7 @@ public class RevealCardResponse extends ServerResponse
      * Version-latenightpizzaparty
      * Returns the list of cards this reveal action may want.
      *
-     * @return the list of cards this reveal action may want.
+     * @return the list of cards this reveal action may want. return value
      */
     public List<Card> getCards()
     {

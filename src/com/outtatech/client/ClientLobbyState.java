@@ -22,10 +22,10 @@ public class ClientLobbyState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param playerId
-     * @param players
-     * @param gameOwner
-     * @param lobbyId
+     * @param playerId method parameter
+     * @param players method parameter
+     * @param gameOwner method parameter
+     * @param lobbyId method parameter
      */
     public ClientLobbyState(Integer playerId, Map<Integer, String> players,
             boolean gameOwner, int lobbyId)
@@ -40,7 +40,7 @@ public class ClientLobbyState extends State
      * Version-latenightpizzaparty
      * Returns the player associated with this instance.
      *
-     * @return Player
+     * @return Player return value
      */
     public Integer getPlayerId()
     {
@@ -50,7 +50,7 @@ public class ClientLobbyState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @return
+     * @return return value
      */
     public int getId()
     {
@@ -62,7 +62,7 @@ public class ClientLobbyState extends State
      * Returns a list of players that are waiting for the same game of
      * indication to start.
      *
-     * @return List of Integer Objects representing player ids.
+     * @return List of Integer Objects representing player ids. return value
      */
     public Map<Integer, String> getPlayers()
     {
@@ -72,8 +72,8 @@ public class ClientLobbyState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param playerId
-     * @param name
+     * @param playerId method parameter
+     * @param name method parameter
      */
     public void addPlayer(Integer playerId, String name)
     {
@@ -84,7 +84,7 @@ public class ClientLobbyState extends State
     /**
      * Version-latenightpizzaparty
      *
-     * @param players
+     * @param players method parameter
      */
     public void setPlayers(Map<Integer, String> players)
     {
@@ -97,7 +97,7 @@ public class ClientLobbyState extends State
      * Checks if the playerId associated with this instance is the game owner.
      * ie. created the game.
      *
-     * @return boolean true if player is the game owner.
+     * @return boolean true if player is the game owner. return value
      */
     public boolean getGameOwner()
     {
