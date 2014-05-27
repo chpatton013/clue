@@ -74,7 +74,7 @@ public class ClientController
         }
     }
     
-    private void triggerChange()
+    public void triggerChange()
     {
         this.state.triggerChange();
     }
