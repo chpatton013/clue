@@ -38,21 +38,10 @@ public class KickPlayerRequestTest {
    @Test
    public void testGetPlayerId() {
       System.out.println("getPlayerId");
-      KickPlayerRequest instance = new KickPlayerRequest(59, 4873);
+      KickPlayerRequest instance = new KickPlayerRequest(59);
       Integer expResult = 59;
       Integer result = instance.getPlayerId();
       assertEquals(expResult, result);
    }
 
-   /**
-    * Test of getLobbyId method, of class KickPlayerRequest.
-    */
-   @Test
-   public void testGetLobbyId() {
-      System.out.println("getLobbyId");
-      KickPlayerRequest instance = new KickPlayerRequest(59, 4873);
-      Integer expResult = 4873;
-      Integer result = instance.getLobbyId();
-      assertEquals(expResult, result);
-   }
 }
