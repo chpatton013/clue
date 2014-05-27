@@ -13,10 +13,6 @@ public class Difficulty implements Serializable
 {
     private int intelligence;
     private int riskiness;
-    public static final int CAREFUL = 1;
-    public static final int RISKY = 2;
-    public static final int DUMBDUMB = 1;
-    public static final int SMART = 2;
 
     /**
      * Constructs a Difficulty instance with the specified intelligence and
