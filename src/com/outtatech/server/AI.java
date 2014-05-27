@@ -110,7 +110,8 @@ public class AI extends ServerPlayer
                    case BLUE_CARD:
                        if (curHintType == HintCardType.VEHICLE) 
                        {
-                            if(curHintCard.getCardColor() == CardColor.BLUE) 
+                           VehicleCard vehicleHint = (VehicleCard)curHintCard;
+                            if(vehicleHint.getCardColor() == CardColor.BLUE) 
                             {
                                  playableCards.add(curHintCard);
                             }

@@ -15,6 +15,7 @@ public class VehicleCard extends HintCard
     /*A unique Vehicle*/
     VehicleID vehicle;
     boolean isAir;
+    CardColor color;
 
     /**
      * Constructs a new VehicleCard
@@ -23,8 +24,9 @@ public class VehicleCard extends HintCard
      */
     public VehicleCard(VehicleID vehicle, CardColor cardColor)
     {
-        super(HintCardType.VEHICLE, cardColor);
+        super(HintCardType.VEHICLE);
         this.vehicle = vehicle;
+        this.color = cardColor;
         
         if (this.vehicle == VehicleID.SEAPLANE || 
                 this.vehicle == VehicleID.AIRLINER || 
@@ -47,5 +49,10 @@ public class VehicleCard extends HintCard
     public boolean getIsAir()
     {
         return isAir;
+    }
+    
+    public CardColor getCardColor()
+    {
+        return color;
     }
 }
