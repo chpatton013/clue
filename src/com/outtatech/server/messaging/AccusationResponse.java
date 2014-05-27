@@ -3,6 +3,7 @@ package com.outtatech.server.messaging;
 import com.outtatech.common.*;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the server to the client when an accusation is made.
  *
  * @author jbilous
@@ -13,6 +14,7 @@ public class AccusationResponse extends ServerResponse
     private boolean correctAccusation;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new AccusationResponse object
      *
      * @param solution
@@ -25,6 +27,7 @@ public class AccusationResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -34,6 +37,7 @@ public class AccusationResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns whether or not the accusation was correct.
      *
      * @return whether or not the accusation was correct

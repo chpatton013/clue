@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * Version-latenightpizzaparty
  * The Game class contains functions that provide information on the state of an
  * Indication Game and provide functions that can change the state of the Game.
  *
@@ -34,6 +35,7 @@ public class Game
     private int curPlayerTurn;
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public Game()
@@ -50,6 +52,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Advances the games turn to the next player.
      *
      * @return the next player whose turn it is
@@ -61,6 +64,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Get the current player whose turn it is.
      *
      * @return the current player whose turn it is.
@@ -71,6 +75,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public void initPlayerTurnOrder()
@@ -81,6 +86,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Add a ServerPlayer to the List of ServerPlayers in this game.
      *
      * @param newPlayer The ServerPlayer to add to the Game
@@ -91,6 +97,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the Map of ServerPlayers in this game.
      *
      * @return The Map of ServerPlayers in this game.
@@ -101,6 +108,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -110,6 +118,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -125,6 +134,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the current ServerPlayer in this game.
      *
      * @param current The ServerPlayer to make current in the Game
@@ -135,6 +145,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the current ServerPlayer associated with this game.
      *
      * @return The current ServerPlayer associated with this game.
@@ -145,6 +156,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the drawPile of this game.
      *
      * @param drawPile The new drawPile for this Game
@@ -155,6 +167,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the drawPile of this game.
      *
      * @return The drawPile of this game.
@@ -165,6 +178,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the discardPile of this game.
      *
      * @param discardPile The new discardPile for this Game
@@ -175,6 +189,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the solution of this game.
      *
      * @return The discardPile of this game.
@@ -185,6 +200,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the solution of this game.
      *
      * @param solution The new solution for this game
@@ -195,6 +211,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the solution of this game.
      *
      * @return The solution of this game.
@@ -205,6 +222,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the Map between destination Ids and playerIds for this game.
      *
      * @param destToPlayerId The new Map of destination Ids and PlayerIds for
@@ -216,6 +234,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the Map between destination Ids and playerIds for this game.
      *
      * @return The Map of destination Ids and PlayerIds for this game
@@ -226,6 +245,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -293,6 +313,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -310,6 +331,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Creates a list of HintCards for the game to first pick a solution then
      * for the game to deal.
      *
@@ -351,6 +373,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Get the number of hint cards to be dealt
      *
      * @return List of HintCards
@@ -361,6 +384,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Return the first Hint Card in the List
      *
      * @return HintCard
@@ -379,6 +403,7 @@ public class Game
     }
 
     /**
+     * Version-latenightpizzaparty
      * Pre condition listHintCards has been shuffled.
      *
      * @param hintCards

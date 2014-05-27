@@ -9,6 +9,7 @@ import java.util.Random;
 import java.io.Serializable;
 
 /**
+ * Version-latenightpizzaparty
  * The ServerPlayer class represents a player in a game.
  *
  * @author Steven Chiu
@@ -25,31 +26,37 @@ public class ServerPlayer implements Player, Serializable
     private DestinationID location;
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public List<HintCard> hintCardsHand;
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public List<ActionCard> actionCardsHand;
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public EnumSet suspectCardsSeen = EnumSet.noneOf(SuspectID.class);
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public EnumSet locationsSeen = EnumSet.noneOf(DestinationID.class);
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public EnumSet vehicleCardsSeen = EnumSet.noneOf(VehicleID.class);
 
     /**
+     * Version-latenightpizzaparty
      * Construct a sever player to keep track of client and server player
      * actions.
      *
@@ -79,6 +86,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param location
      */
@@ -93,6 +101,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -102,6 +111,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the notes of this player.
      *
      * @return The notes of this player.
@@ -112,6 +122,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the notes of this player.
      *
      * @param notes The notes of this player.
@@ -141,6 +152,7 @@ public class ServerPlayer implements Player, Serializable
 //        this.name = name;
 //    }
     /**
+     * Version-latenightpizzaparty
      * Gets the color associated with this player.
      *
      * @return The color associated with this player.
@@ -151,6 +163,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the color associated with this player.
      *
      * @param color The color of the player.
@@ -161,6 +174,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the action cards hand of this player.
      *
      * @return The action cards hand of this player.
@@ -171,6 +185,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the hint cards hand of this player.
      *
      * @return The hint cards hand of this player.
@@ -181,6 +196,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the action cards hand of this player.
      *
      * @param actionCardsHand of the player.
@@ -192,6 +208,7 @@ public class ServerPlayer implements Player, Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the hint cards hand of this player.
      *
      * @param hintCardsHand of the player.

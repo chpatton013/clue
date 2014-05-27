@@ -12,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * Version-latenightpizzaparty
  *
  * @author Thomas
  */
@@ -49,6 +50,7 @@ public class GUIController implements Observer
     private CurrentWindow state = CurrentWindow.INTRO;
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param cCtrl
      */
@@ -58,6 +60,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * @param args the command line arguments
      */
     public static void main(String[] args)
@@ -65,6 +68,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param ctrl
      */
@@ -198,6 +202,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns user to the starting screen
      */
     public void exitWindow()
@@ -217,6 +222,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Shows the instructions screen
      */
     public void showInstructions()
@@ -226,6 +232,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Shows the options screen
      */
     public void showOptions()
@@ -235,6 +242,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player selected to start a single player
      * game
      */
@@ -246,6 +254,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player selected to start a multiplayer
      * game
      */
@@ -268,6 +277,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player wants to create a game
      */
     public void createGame()
@@ -278,6 +288,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player wants to join a game
      *
      * @param lobbyId
@@ -290,6 +301,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public void startGame()
@@ -298,6 +310,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player wants to create an AI player
      * @param lobbyId
      */
@@ -308,6 +321,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player wants to remove a player from the
      * lobby
      *
@@ -325,6 +339,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Begins the accusation process
      */
     public void accuse()
@@ -335,6 +350,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player has made an accusation
      *
      * @param cardType1
@@ -349,6 +365,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player has played a card
      *
      * @param card
@@ -367,6 +384,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Notifies client controller that player has ended their turn
      */
     public void endTurn()
@@ -379,6 +397,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param indx
      */
@@ -389,6 +408,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -398,6 +418,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -407,6 +428,7 @@ public class GUIController implements Observer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param indx
      * @return

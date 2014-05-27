@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * A SuspectCard represents a HintCard that specifies a certain Suspect ID.
  *
  * @author bennettschalich
@@ -12,6 +13,7 @@ public class SuspectCard extends HintCard
     Gender gender;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new SuspectCard
      *
      * @param suspect A unique suspect ID
@@ -37,6 +39,7 @@ public class SuspectCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the suspect this HintCard has.
      *
      * @return A suspect ID.
@@ -47,6 +50,7 @@ public class SuspectCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */

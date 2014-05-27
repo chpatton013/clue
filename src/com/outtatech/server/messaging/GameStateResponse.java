@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the server to the client that encapsulates the server's
  * representation of a game.
  *
@@ -17,6 +18,7 @@ public class GameStateResponse extends ServerResponse
     private Map<Integer, String> players;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new GameStateResponse object
      *
      * @param currentActivePlayer id of the currently active player
@@ -30,6 +32,7 @@ public class GameStateResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -39,6 +42,7 @@ public class GameStateResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the id of the player whose turn is currently active.
      *
      * @return the id of the player whose turn is currently active.

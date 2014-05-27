@@ -1,12 +1,14 @@
 import com.outtatech.server.*;
 
 /**
+ * Version-latenightpizzaparty
  *
  * @author dmangin
  */
 public class ServerApplication {
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public ServerApplication() {
@@ -15,6 +17,7 @@ public class ServerApplication {
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param args
      */

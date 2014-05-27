@@ -5,6 +5,7 @@ import com.outtatech.server.messaging.ServerResponse;
 import java.io.IOException;
 
 /**
+ * Version-latenightpizzaparty
  * The networking layer for the client application. Handles all incoming and
  * outgoing network traffic by communicating directly with the ClientController.
  *
@@ -15,6 +16,7 @@ public class ClientNetwork extends AbstractClient
     private ClientController ctrl;
 
     /**
+     * Version-latenightpizzaparty
      * Construct a new ClientNetwork on the give port.
      *
      * @param host String value server name or ip
@@ -28,6 +30,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets this instance's reference to the ClientController
      *
      * @param ctrl the client controller reference
@@ -38,6 +41,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Return this instance's reference to the ClientController.
      *
      * @return the internal reference to the ClientController.
@@ -49,6 +53,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Send an object to the server.
      *
      * @param obj the object to send as a message.
@@ -68,6 +73,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Handles a message sent from the server to this client.
      *
      * @param msg the message sent.
@@ -79,6 +85,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Respond to normal server connection closure.
      */
     @Override
@@ -88,6 +95,7 @@ public class ClientNetwork extends AbstractClient
     }
 
     /**
+     * Version-latenightpizzaparty
      * Respond to irregular server connection closure.
      *
      * @param exception Exception that caused irregular closure.

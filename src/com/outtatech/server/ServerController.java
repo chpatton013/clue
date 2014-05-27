@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * Version-latenightpizzaparty
  * The ServerController controls every game being played. Each game has a set of
  * players connected to the ServerController, represented by the Connection
  * object. This association is tracked with a map of Connection to Game. This
@@ -35,6 +36,7 @@ public class ServerController
     private ServerNetwork network;
 
     /**
+     * Version-latenightpizzaparty
      * Construct a ServerController object. A ServerController instance can be
      * used to facilitate changes to multiple Game instances with many different
      * Client connections and any AI players.
@@ -68,6 +70,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Handle a network request from a client.
      *
      * @param obj Object signaling an action.
@@ -83,6 +86,7 @@ public class ServerController
             handleEndTurnRequest(game, connectionToPlayer.get(connection));
         }
         /**
+         * Version-latenightpizzaparty
          * Check the Object obj with the instanceOf (io) method if instanceOf
          * LobbyListRequest respond with LobbyDiscoveryResponse else if
          */
@@ -216,6 +220,7 @@ public class ServerController
         }
 
         /**
+         * Version-latenightpizzaparty
          * LobbyCreateRequest respond with LobbyCreateResponse else if
          */
         // Otherwise...
@@ -234,6 +239,7 @@ public class ServerController
         }
 
         /**
+         * Version-latenightpizzaparty
          * SinglePlayerGameRequest respond with LobbyJoinResponse else if
          */
         // Otherwise...
@@ -253,6 +259,7 @@ public class ServerController
         }
 
         /**
+         * Version-latenightpizzaparty
          *
          */
         // Otherwise...
@@ -261,6 +268,7 @@ public class ServerController
             handleGameStartRequest(games.get(connection));
         }
         /**
+         * Version-latenightpizzaparty
          * @TODO Add a response class? PlayersResponse? List of player names and
          * made up AI names? or Add a list of players to the
          * LobbyDiscoveryResponse?
@@ -272,6 +280,7 @@ public class ServerController
             this.handleGameStateRequest(games.get(connection), connection);
         }
         /**
+         * Version-latenightpizzaparty
          * else if EndTurnRequest respond with GameStateResponse
          */
         // Otherwise...
@@ -285,6 +294,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param game
      * @param initiator
@@ -299,6 +309,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Given a player and a message, distribute the message to AI or Human
      *
      * @param player
@@ -321,6 +332,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Given a game and a message, distributes the message to AI and Players
      *
      * @param game the game that contains the players the msg should be sent to
@@ -507,6 +519,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Handles a request made by an AI player.
      *
      * @param obj Object signaling an action.
@@ -515,10 +528,12 @@ public class ServerController
     public void reactToRobot(ClientRequest obj, AI robot)
     {
         /**
+         * Version-latenightpizzaparty
          * Using the robots Map find the Game instance of the AI robot.
          */
 
         /**
+         * Version-latenightpizzaparty
          * Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
          *
@@ -533,6 +548,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param obj
      * @param ai
@@ -547,6 +563,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param obj
      * @param ai
@@ -557,6 +574,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Provides a hook to send a single message to a networked client.
      *
      * @param obj Object to send to network hooks
@@ -568,6 +586,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Provides a hook to send Objects to a networked client.
      *
      * @param obj Object to send to network hooks
@@ -576,6 +595,7 @@ public class ServerController
     public void forwardMessage(Object obj, List<ConnectionToClient> clients)
     {
         /**
+         * Version-latenightpizzaparty
          * Determine the instance of this object if the object instance requires
          * notifying all clients then call ServerNetwork.sendMessageToClients().
          * If only one client needs to be notified by the response then call
@@ -598,6 +618,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param client
      * @return
@@ -608,6 +629,7 @@ public class ServerController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Using the provided Game instance deal hint cards to the Server Players.
      * Deal out all HintCards for the Game instance. Deal out one ActionCard to
      * each player

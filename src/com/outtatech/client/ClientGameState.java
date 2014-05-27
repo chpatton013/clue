@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Version-latenightpizzaparty
  * The ClientGameState class holds logic for the players State in the Indication
  * Game. The class mediates game logic between the server and the player.
  *
@@ -30,11 +31,13 @@ public class ClientGameState extends State
     private Integer currentActivePlayer;
 
     /**
+     * Version-latenightpizzaparty
      * Map holds the set of DestinationIds and a corresponding playerId.
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param playerID
      * @param hand
@@ -54,6 +57,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets a flag that indicates whether or not a new accusation has been made
      * since last update.
      */
@@ -64,6 +68,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter for a field that indicates whether or not a new accusation has
      * been made since last check.
      *
@@ -75,6 +80,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns a field that indicates whether the current accusation is correct,
      * sets the field that indicates whether or not there was a new accusation
      * to false after access.
@@ -88,6 +94,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the player id associated with the ClientGameState instance.
      *
      * @return playerID
@@ -98,6 +105,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Setter method that sets the mapping from destination IDs to player IDs
      *
      * @param map
@@ -109,6 +117,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the players in this game
      *
      * @param players the players in this game.
@@ -120,6 +129,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the list of players in this game
      *
      * @return the list of players in this game
@@ -130,6 +140,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method for the cards that have been revealed to the client.
      *
      * @return a list that contains cards that have been revealed to the client.
@@ -140,6 +151,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Setter method for the list of cards that have been revealed to the
      * client.
      *
@@ -152,6 +164,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check, set to false after access.
      * @return
@@ -164,6 +177,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the field that indicates whether or not new cards have been revealed
      * to the client since last state check.
      *
@@ -176,6 +190,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Change the player id associated to the instance of ClientGameState
      *
      * @param playerID integer id of the player
@@ -187,6 +202,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets this players hand.
      *
      * @param hand
@@ -198,6 +214,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns an Object representing the players notes.
      *
      * @return Object
@@ -208,6 +225,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets this players notes.
      *
      * @param notes
@@ -219,6 +237,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns a list of the current Indication cards held by the calling
      * instance.
      *
@@ -230,6 +249,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns a map representing a set of Destinations and its corresponding
      * playerID.
      *
@@ -241,6 +261,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -250,6 +271,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param currentActivePlayer
      */
@@ -260,6 +282,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param message
      */
@@ -269,6 +292,7 @@ public class ClientGameState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */

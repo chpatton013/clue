@@ -7,6 +7,7 @@ import com.outtatech.client.messaging.AddAIRequest;
 import java.util.List;
 
 /**
+ * Version-latenightpizzaparty
  * ServerNetwork class extends the AbstractServer class in the OCSF framework.
  * An instance of this class will hold a collection of connected clients and a
  * game controller. The class facilitates communication to and from the clients.
@@ -20,6 +21,7 @@ public class ServerNetwork extends AbstractServer
     private List<ConnectionToClient> clients;
 
     /**
+     * Version-latenightpizzaparty
      * Construct a ServerNetwork, requires an integer to designate which port
      * should be used. Calls its super class, AbstractServer, constructor.
      *
@@ -31,6 +33,7 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets this instance's server controller
      *
      * @param ctrl the ServerController object.
@@ -41,6 +44,7 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a Message object to all client connections provide in the client
      * list.
      *
@@ -69,6 +73,7 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends an Object to the provided client connection.
      *
      * @param msg ServerResponse to send to client connections
@@ -92,6 +97,7 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Receives an Object from a client connection
      *
      * @param message Object received from the client connection
@@ -107,6 +113,7 @@ public class ServerNetwork extends AbstractServer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Method called each time a client disconnects. The client is guaranteed to
      * be disconnected but the thread is still active until it is asynchronously
      * removed from the thread group.

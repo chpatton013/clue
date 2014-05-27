@@ -3,12 +3,14 @@ import com.outtatech.client.messaging.*;
 import com.outtatech.common.*;
 
 /**
+ * Version-latenightpizzaparty
  *
  * @author dmangin
  */
 public class ClientApplication {
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public ClientApplication () {
@@ -20,6 +22,7 @@ public class ClientApplication {
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param args
      */

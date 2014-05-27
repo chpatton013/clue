@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * The Suggestion class represents a type of ActionCard that represents an
  * Suggestion action. A Suggestion action allows you to make a guess of the
  * Suspect, Vehicle, and Destination and starting at the player to your left
@@ -13,6 +14,7 @@ public class Suggestion extends ActionCard
     SuggestionType type;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new Suggestion ActionCard.
      * @param type
      */
@@ -23,6 +25,7 @@ public class Suggestion extends ActionCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */

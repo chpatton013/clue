@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * A VehicleCard represents a HintCard that specifies a certain Vehicle ID.
  *
  * @author bennettschalich
@@ -13,6 +14,7 @@ public class VehicleCard extends HintCard
     CardColor color;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new VehicleCard
      *
      * @param vehicle A unique vehicle ID
@@ -39,6 +41,7 @@ public class VehicleCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the Vehicle ID this VehicleCard has.
      *
      * @return A vehicle ID.
@@ -49,6 +52,7 @@ public class VehicleCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -58,6 +62,7 @@ public class VehicleCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */

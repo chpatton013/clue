@@ -3,6 +3,7 @@ package com.outtatech.server;
 import java.io.Serializable;
 
 /**
+ * Version-latenightpizzaparty
  * The Difficulty class models the intelligence of an AI and the likeliness an
  * AI is to take risks.
  *
@@ -15,6 +16,7 @@ public class Difficulty implements Serializable
     private int riskiness;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a Difficulty instance with the specified intelligence and
      * riskiness.
      *
@@ -28,6 +30,7 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the intelligence of this difficulty instance.
      *
      * @return The intelligence of this difficulty.
@@ -38,6 +41,7 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the intelligence of this difficulty.
      *
      * @param intelligence The likeliness an AI is to take risks.
@@ -48,6 +52,7 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the riskiness of this difficulty.
      *
      * @return the riskiness of this difficulty.
@@ -58,6 +63,7 @@ public class Difficulty implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the riskiness of this difficulty.
      *
      * @param riskiness The likeliness an AI is to take risks.

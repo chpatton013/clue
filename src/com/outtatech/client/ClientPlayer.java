@@ -4,6 +4,7 @@ import java.awt.Color;
 import com.outtatech.common.*;
 
 /**
+ * Version-latenightpizzaparty
  * The ClientPlayer class represents a player in a game.
  *
  * @author Steven Chiu
@@ -16,6 +17,7 @@ public class ClientPlayer implements Player
     private Color color;
 
     /**
+     * Version-latenightpizzaparty
      * Construct a client player to keep track of players in the game
      *
      * @param playerId int representing the player
@@ -32,6 +34,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the Id of this player.
      *
      * @return The Id of this player.
@@ -42,6 +45,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the Id of this player.
      *
      * @param playerId The Id of the player.
@@ -52,6 +56,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the name of this player.
      *
      * @return The name of this player.
@@ -62,6 +67,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the name of this player.
      *
      * @param name The name of the player.
@@ -72,6 +78,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the color associated with this player.
      *
      * @return The color associated with this player.
@@ -82,6 +89,7 @@ public class ClientPlayer implements Player
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the color associated with this player.
      *
      * @param color The color of the player.

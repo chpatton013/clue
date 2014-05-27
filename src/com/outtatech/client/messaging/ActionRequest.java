@@ -5,6 +5,7 @@ import com.outtatech.common.Card;
 import java.util.List;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the client to the server when an action card is played or
  * an accusation is made.
  *
@@ -17,6 +18,7 @@ public class ActionRequest extends ClientRequest
     private Integer playerId;
 
     /**
+     * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
      * @param actionCard the action card that the client is playing
@@ -31,6 +33,7 @@ public class ActionRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns a new ActionRequest object.
      *
      * @param actionCard the action card that the client is playing
@@ -44,6 +47,7 @@ public class ActionRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the action card involved in the user action.
      *
      * @return the action card involved in the user action.
@@ -54,6 +58,7 @@ public class ActionRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the cards involved in the clients action.
      *
      * @return the cards involved in the clients action.
@@ -64,6 +69,7 @@ public class ActionRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the Id of the player requested
      *
      * @return the integer ID of the player

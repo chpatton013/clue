@@ -1,6 +1,7 @@
 package com.outtatech.server.messaging;
 
 /**
+ * Version-latenightpizzaparty
  * Message passed from the server to the client in response to a player joining
  * an existing lobby.
  *
@@ -11,6 +12,7 @@ public class LobbyLeaveResponse extends ServerResponse
     private Integer playerId;
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param playerId
      */
@@ -20,6 +22,7 @@ public class LobbyLeaveResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */

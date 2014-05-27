@@ -1,6 +1,7 @@
 package com.outtatech.server.messaging;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the server to the client in response to a request to have a
  * player kicked.
  *
@@ -11,6 +12,7 @@ public class KickPlayerResponse extends ServerResponse
     private int playerId;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new KickPlayerResponse object.
      *
      * @param playerId The Id of the player kicked from the game
@@ -21,6 +23,7 @@ public class KickPlayerResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method for the Id of the player kicked
      *
      * @return Id of the player kicked

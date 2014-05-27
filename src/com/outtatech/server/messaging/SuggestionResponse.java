@@ -4,6 +4,7 @@ import com.outtatech.common.HintCard;
 import com.outtatech.common.Solution;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the server to the client in response to a suggestion they
  * made.
  *
@@ -15,6 +16,7 @@ public class SuggestionResponse extends ServerResponse
     private HintCard refutingCard;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new SuggestionResponse object
      *
      * @param correctAccusation whether or not the accusation was correct.
@@ -25,6 +27,7 @@ public class SuggestionResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -34,6 +37,7 @@ public class SuggestionResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param refutingCard
      */

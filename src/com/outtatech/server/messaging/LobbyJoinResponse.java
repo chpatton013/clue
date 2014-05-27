@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the server to the client when a new user joins a lobby that
  * a client is part of.
  *
@@ -18,6 +19,7 @@ public class LobbyJoinResponse extends ServerResponse
     private final Map<Integer, String> players;
 
     /**
+     * Version-latenightpizzaparty
      * Used to respond to a human player request.
      *
      * @param lobby
@@ -33,6 +35,7 @@ public class LobbyJoinResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method that returns the id of the player who has just joined a
      * lobby.
      *
@@ -44,6 +47,7 @@ public class LobbyJoinResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Get the player object created by the game server.
      *
      * @return
@@ -54,6 +58,7 @@ public class LobbyJoinResponse extends ServerResponse
     }
 
     /**
+     * Version-latenightpizzaparty
      * Get the list of player objects in this lobby.
      *
      * @return

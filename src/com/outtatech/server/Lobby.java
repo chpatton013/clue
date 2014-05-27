@@ -3,6 +3,7 @@ package com.outtatech.server;
 import java.io.Serializable;
 
 /**
+ * Version-latenightpizzaparty
  * Represents a game that is waiting for players to join in order to be started.
  *
  * @author jbilous
@@ -12,6 +13,7 @@ public class Lobby implements Serializable
     //IMPORTANT: check if issue with lobbyID
 
     /**
+     * Version-latenightpizzaparty
      *
      */
         protected static Integer lobbyIdCounter = 0;
@@ -21,6 +23,7 @@ public class Lobby implements Serializable
     boolean visible;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new Lobby
      *
      * @param lobbyName String designating the lobby name.
@@ -36,6 +39,7 @@ public class Lobby implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the name of the lobby.
      *
      * @return the name of the lobby
@@ -46,6 +50,7 @@ public class Lobby implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the ID of the game that this lobby represents
      *
      * @return the ID of the game this lobby represents
@@ -56,6 +61,7 @@ public class Lobby implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the id of this lobby.
      *
      * @return the id of this lobby.
@@ -66,6 +72,7 @@ public class Lobby implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns whether or not this lobby should be made visible.
      *
      * @return whether or not this lobby should be made visible.

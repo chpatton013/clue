@@ -3,6 +3,7 @@ package com.outtatech.common;
 import java.io.Serializable;
 
 /**
+ * Version-latenightpizzaparty
  * Object that represents a solution set to a clue game.
  *
  * @author jbilous
@@ -14,6 +15,7 @@ public class Solution implements Serializable
     private SuspectID suspectSolution;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new Solution object.
      * @param dest
      * @param vehicle
@@ -27,6 +29,7 @@ public class Solution implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method for the solutions destination ID.
      *
      * @return the destination ID of this solution.
@@ -37,6 +40,7 @@ public class Solution implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method for the solutions vehicle ID.
      *
      * @return the vehicle ID of this solution.
@@ -47,6 +51,7 @@ public class Solution implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Getter method for the solutions suspect ID.
      *
      * @return the suspect ID of this solution.
@@ -57,6 +62,7 @@ public class Solution implements Serializable
     }
 
     /**
+     * Version-latenightpizzaparty
      * Equals method that determines whether another solution is equal to this
      * one.
      *

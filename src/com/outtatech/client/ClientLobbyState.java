@@ -6,6 +6,7 @@ import com.outtatech.client.*;
 import com.outtatech.common.*;
 
 /**
+ * Version-latenightpizzaparty
  * ClientPreGameState instances will hold information about other players
  * waiting to join the same game of Indication.
  *
@@ -19,6 +20,7 @@ public class ClientLobbyState extends State
     private int id;
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param playerId
      * @param players
@@ -35,6 +37,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the player associated with this instance.
      *
      * @return Player
@@ -45,6 +48,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -54,6 +58,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns a list of players that are waiting for the same game of
      * indication to start.
      *
@@ -65,6 +70,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param playerId
      * @param name
@@ -76,6 +82,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param players
      */
@@ -86,6 +93,7 @@ public class ClientLobbyState extends State
     }
 
     /**
+     * Version-latenightpizzaparty
      * Checks if the playerId associated with this instance is the game owner.
      * ie. created the game.
      *

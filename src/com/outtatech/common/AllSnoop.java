@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * The AllSnoop class represents a type of ActionCard that represents an All
  * Snoop action. The AllSnoop action has every player look at a HintCard of
  * another player to either the right or left (depending on the direction
@@ -15,6 +16,7 @@ public class AllSnoop extends ActionCard
     private boolean right;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a new AllSnoop ActionCard.
      *
      * @param right The direction the All Snoop action will take. If true-
@@ -27,6 +29,7 @@ public class AllSnoop extends ActionCard
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the direction the AllSnoop action
      *
      * @return the direction of the Allsnoop action. True is right, false is

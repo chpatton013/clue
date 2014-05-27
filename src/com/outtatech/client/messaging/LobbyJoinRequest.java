@@ -1,6 +1,7 @@
 package com.outtatech.client.messaging;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the client to the server when the client joins a lobby.
  *
  * @author jbilous
@@ -10,6 +11,7 @@ public class LobbyJoinRequest extends ClientRequest
     Integer lobbyId;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new ClientRequest object
      * @param lobbyId
      */
@@ -19,6 +21,7 @@ public class LobbyJoinRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the lobby id.
      *
      * @return the lobby id

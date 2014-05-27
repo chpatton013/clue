@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Version-latenightpizzaparty
  * The ClientController class facilitates changes to the clients State,
  * facilitates sending requests to the Networking classes, and reacts to
  * responses received from the Networking classes.
@@ -26,6 +27,7 @@ public class ClientController
     private boolean accused = false;
 
     /**
+     * Version-latenightpizzaparty
      * Constructor for the ClientController.
      */
     public ClientController()
@@ -46,6 +48,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Get the Player's current State
      *
      * @return the Player's state
@@ -56,6 +59,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Set the player's current state
      *
      * @param newState an initialized instance of State
@@ -77,6 +81,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      */
     public void triggerChange()
@@ -85,6 +90,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Start the single player game mode.
      */
     public void startSinglePlayerGame()
@@ -94,6 +100,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a LobbyListRequest to the game server.
      */
     public void searchForGames()
@@ -102,6 +109,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Start the multi player game mode.
      * @param lobbyName
      */
@@ -111,6 +119,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a Lobby Join request to the game server.
      *
      * @param lobbyId Integer the id of the lobby to join
@@ -121,6 +130,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a request to the game server to add an AI player.
      *
      * @param difficulty Difficulty the difficulty for this AI player
@@ -132,6 +142,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a request to the game server to remove yourself from the lobby.
      */
     public void leaveLobby()
@@ -140,6 +151,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a request to the game server to remove a player from the lobby.
      *
      * @param playerId
@@ -150,6 +162,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sends a request to the game server to start the game.
      */
     public void startGame()
@@ -158,6 +171,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Initiates a message to the server that indicates the client has ended
      * their current turn.
      */
@@ -167,6 +181,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param actionCard
      * @param cards
@@ -183,6 +198,7 @@ public class ClientController
 //        this.forwardMessage(new RevealCardsRequest(cards));
 //    }
     /**
+     * Version-latenightpizzaparty
      * Called when the client would like to make an accusation during their
      * turn.
      *
@@ -195,6 +211,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * React to a message from the ClientNetwork.
      *
      * @param obj Object message from the ClientNetwork
@@ -489,6 +506,7 @@ public class ClientController
     }
 
     /**
+     * Version-latenightpizzaparty
      * Send a message via the ClientNetwork instance.
      *
      * @param obj ClientRequest the message object to send via the ClientNetwork

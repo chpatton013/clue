@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.Random;
 
 /**
+ * Version-latenightpizzaparty
  * AI Class can be used to replace a human player. An AI instance will have its
  * own level of Difficulty
  *
@@ -21,6 +22,7 @@ public class AI extends ServerPlayer
     private Game game;
 
     /**
+     * Version-latenightpizzaparty
      * Construct an AI instance, requires instantiated instances of Difficulty
      * and ServerController.
      *
@@ -37,6 +39,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the difficulty associated with this AI.
      *
      * @return The difficulty associated with this AI.
@@ -47,6 +50,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the difficulty associated with this AI.
      *
      * @param difficulty The difficulty level of the AI.
@@ -57,6 +61,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Gets the ServerController associated with this AI.
      *
      * @return ctrl The ServerController of this AI.
@@ -67,6 +72,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the ServerController associated with this AI.
      *
      * @param ctrl The ServerController of this AI.
@@ -77,6 +83,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Method invoked when AI needs to respond to Action cards requiring it's
      * participation.
      *
@@ -263,6 +270,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Method invoked when it is AI's turn to play an action card.
      */
     public void aiTurn()
@@ -297,6 +305,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns ID of random player in game.
      *
      * @return playerID ID of random player in game.
@@ -345,6 +354,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Method invoked when another player or bot makes a suggestion.
      *
      * @param suspect The ID of suspect in the suggestion.
@@ -393,6 +403,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      * Method invoked each time AI plays a turn in order to determine whether or
      * not to make an accusation based on the AI difficulty level.
      *
@@ -533,6 +544,7 @@ public class AI extends ServerPlayer
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @param obj
      */

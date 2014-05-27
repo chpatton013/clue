@@ -3,6 +3,7 @@ package com.outtatech.client.messaging;
 import com.outtatech.server.Difficulty;
 
 /**
+ * Version-latenightpizzaparty
  * Message sent from the client to the server when an AI is added to a lobby.
  *
  * @author jbilous
@@ -14,6 +15,7 @@ public class AddAIRequest extends ClientRequest
     private Integer lobbyId;
 
     /**
+     * Version-latenightpizzaparty
      * Creates a new AddAIRequest object.
      *
      * @param difficulty the difficulty of the new AI player
@@ -26,6 +28,7 @@ public class AddAIRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the difficulty of the AI player.
      *
      * @return the difficulty of the AI player
@@ -36,6 +39,7 @@ public class AddAIRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
      *
      * @param difficulty
@@ -46,6 +50,7 @@ public class AddAIRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
      * @return
      */
@@ -56,6 +61,7 @@ public class AddAIRequest extends ClientRequest
     }
 
     /**
+     * Version-latenightpizzaparty
      * Sets the difficulty of the AI player.
      * @param lobbyId
      */

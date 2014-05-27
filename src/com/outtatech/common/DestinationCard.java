@@ -1,6 +1,7 @@
 package com.outtatech.common;
 
 /**
+ * Version-latenightpizzaparty
  * A DestinationCard represents a HintCard that specifies a certain Destination
  * ID.
  *
@@ -14,6 +15,7 @@ public class DestinationCard extends HintCard
     boolean west;
 
     /**
+     * Version-latenightpizzaparty
      * Constructs a unique Destination Card.
      *
      * @param destination A unique destination ID.
@@ -56,6 +58,7 @@ public class DestinationCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      * Returns the unique destination of this DestinationCard.
      *
      * @return A unique destination.
@@ -66,6 +69,7 @@ public class DestinationCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
@@ -75,6 +79,7 @@ public class DestinationCard extends HintCard
     }
 
     /**
+     * Version-latenightpizzaparty
      *
      * @return
      */
