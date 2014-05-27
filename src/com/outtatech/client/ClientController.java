@@ -316,6 +316,8 @@ public class ClientController
                     state.getPlayers()));
 
             ((ClientGameState) this.state).pushGameLog("Game Started");
+
+            this.forwardMessage(new GameStateRequest());
         }
         else if (!(this.state instanceof ClientGameState))
         {

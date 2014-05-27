@@ -152,7 +152,7 @@ public class ServerController
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             ServerPlayer serverPlayer = new ServerPlayer();
             int num = humans.keySet().size();
-            serverPlayer.setName("CluePlayer" + num);
+            serverPlayer.setName("CluePlayer" + (num + 1));
             this.humans.put(serverPlayer, connection);
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
@@ -233,6 +233,10 @@ public class ServerController
          * LobbyDiscoveryResponse?
          */
 
+        else if (obj instanceof GameStateRequest)
+        {
+            this.handleGameStateRequest(games.get(connection), connection);
+        }
         /**
          * else if EndTurnRequest respond with GameStateResponse
          */
@@ -549,6 +553,25 @@ public class ServerController
             }
         }
 
+    }
+
+    private void handleGameStateRequest(Game game, ConnectionToClient cxn)
+    {
+        Integer deckSize = game.getDrawPile().size();
+
+        List<Integer> playerTurnOrder = new ArrayList<Integer>(
+              game.getServerPlayers().keySet());
+
+        Integer currentActivePlayer = playerTurnOrder.get(0);
+
+        Map<Integer, String> names = new HashMap<Integer, String>();
+        for(Player player : game.getServerPlayers().values()) {
+            System.out.println(player.getName());
+            names.put(player.getPlayerId(), player.getName());
+        }
+
+        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
+                 currentActivePlayer, names), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
