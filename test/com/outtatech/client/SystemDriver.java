@@ -62,7 +62,7 @@ public class SystemDriver implements Observer
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc=" Lobby Testing ">
-        clientOne.searchForGames();
+        clientOne.searchForGames(); //should be zero
         System.out.println("sent search for games request.");
         
         clientOne.startMultiPlayerGame("StarTREK");
