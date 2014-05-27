@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.outtatech.client;
 
 import com.outtatech.client.messaging.*;
@@ -13,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The ClientController class facilitates changes to the clients State,
@@ -246,17 +242,9 @@ public class ClientController
         if (this.state instanceof ClientLobbyDiscoveryState)
         {
             Integer myId = rsp.getPlayerId();
-            List<Player> players = rsp.getPlayers();
-            Player me = null;
-            for (Player player : players)
-            {
-                if (player.getPlayerId() == myId)
-                {
-                    me = player;
-                }
-            }
+            Map<Integer, String> players = rsp.getPlayers();
 
-            this.setState(new ClientLobbyState(me, players, this.creator,
+            this.setState(new ClientLobbyState(myId, players, this.creator,
                     rsp.getLobby().getLobbyId()));
             this.creator = false;
         }
@@ -299,8 +287,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received GameStateResponse while not in "
-                    + "ClientGameState.");
+            System.err.println("Received GameStateResponse while not in " +
+                    "ClientGameState.");
             return;
         }
 
@@ -310,10 +298,10 @@ public class ClientController
         state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
         state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
 
-        state.pushGameLog("Game state updated:" + "\n   Deck Card Count: "
-                + rsp.getDeckCardCount() + "\n   Player Turn Order: " + rsp.
-                getDeckCardCount() + "\n   Current Active Player: " + rsp.
-                getCurrentActivePlayer());
+        state.pushGameLog("Game state updated:" + "\n   Deck Card Count: " +
+                rsp.getDeckCardCount() + "\n   Player Turn Order: " +
+                rsp.getDeckCardCount() + "\n   Current Active Player: " +
+                rsp.getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
@@ -321,8 +309,8 @@ public class ClientController
         if (this.state instanceof ClientLobbyState)
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
-            Player me = state.getPlayer();
-            this.setState(new ClientGameState(me.getPlayerId(), rsp.getCards(),
+            Integer me = state.getPlayerId();
+            this.setState(new ClientGameState(me, rsp.getCards(),
                     state.getPlayers()));
 
             ((ClientGameState) this.state).pushGameLog("Game Started");
@@ -452,19 +440,11 @@ public class ClientController
     {
         ClientLobbyState state = (ClientLobbyState) this.state;
 
-        if (playerId == state.getPlayer().getPlayerId())
+        state.getPlayers().remove(playerId);
+
+        if (playerId == state.getPlayerId())
         {
             this.searchForGames();
-        }
-
-        List<Player> players = state.getPlayers();
-        for (int index = 0; index < players.size(); ++index)
-        {
-            if (playerId == players.get(index).getPlayerId())
-            {
-                players.remove(index);
-                break;
-            }
         }
     }
 

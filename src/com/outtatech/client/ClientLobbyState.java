@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.outtatech.client;
 
-import java.util.List;
+import java.util.Map;
 
 import com.outtatech.client.*;
 import com.outtatech.common.*;
@@ -18,15 +13,15 @@ import com.outtatech.common.*;
  */
 public class ClientLobbyState extends State
 {
-    private Player player;
-    private List<Player> players;
+    private Integer playerId;
+    private Map<Integer, String> players;
     private boolean gameOwner;
     private int id;
 
-    public ClientLobbyState(Player player, List<Player> players,
+    public ClientLobbyState(Integer playerId, Map<Integer, String> players,
             boolean gameOwner, int lobbyId)
     {
-        this.player = player;
+        this.playerId = playerId;
         this.players = players;
         this.gameOwner = gameOwner;
         this.id = lobbyId;
@@ -37,9 +32,9 @@ public class ClientLobbyState extends State
      *
      * @return Player
      */
-    public Player getPlayer()
+    public Integer getPlayerId()
     {
-        return this.player;
+        return this.playerId;
     }
     
     public int getId() {
@@ -52,18 +47,18 @@ public class ClientLobbyState extends State
      *
      * @return List of Integer Objects representing player ids.
      */
-    public List<Player> getPlayers()
+    public Map<Integer, String> getPlayers()
     {
         return this.players;
     }
 
-    public void addPlayer(Player player)
+    public void addPlayer(Integer playerId, String name)
     {
-        this.players.add(player);
+        this.players.put(playerId, name);
         this.triggerChange();
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Map<Integer, String> players) {
         this.players = players;
         this.triggerChange();
     }

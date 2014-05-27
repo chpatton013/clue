@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.outtatech.client;
 
 import com.outtatech.common.Card;
@@ -30,7 +25,7 @@ public class ClientGameState extends State
     private boolean newAccusation;
     private boolean accusationStatus;
     private Deque<String> gameLog;
-    private List<Player> players;
+    private Map<Integer, String> players;
 
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
@@ -41,7 +36,7 @@ public class ClientGameState extends State
      */
     private Map<DestinationID, Integer> destToPlayerId;
 
-    public ClientGameState(int playerID, List<Card> hand, List<Player> players)
+    public ClientGameState(int playerID, List<Card> hand, Map<Integer, String> players)
     {
         this.players = players;
         this.playerID = playerID;
@@ -101,7 +96,7 @@ public class ClientGameState extends State
      * 
      * @param players the players in this game.
      */
-    public void setPlayers(List<Player> players)
+    public void setPlayers(Map<Integer, String> players)
     {
         this.players = players;
     }
@@ -111,7 +106,7 @@ public class ClientGameState extends State
      * 
      * @return the list of players in this game
      */
-    public List<Player> getPlayers()
+    public Map<Integer, String> getPlayers()
     {
         return players;
     }
