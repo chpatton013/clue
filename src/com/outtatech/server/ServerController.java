@@ -575,21 +575,17 @@ public class ServerController
 
     private void handleGameStateRequest(Game game, ConnectionToClient cxn)
     {
-        Integer deckSize = game.getDrawPile().size();
+        game.initPlayerTurnOrder();
 
-        List<Integer> playerTurnOrder = new ArrayList<Integer>(
-              game.getServerPlayers().keySet());
-
-        Integer currentActivePlayer = playerTurnOrder.get(0);
-
+        Integer currentActivePlayer = game.getCurrentPlayer().getPlayerId();
         Map<Integer, String> names = new HashMap<Integer, String>();
         for(Player player : game.getServerPlayers().values()) {
             System.out.println(player.getName());
             names.put(player.getPlayerId(), player.getName());
         }
 
-        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
-                 currentActivePlayer, names), cxn);
+        this.forwardMessage(new GameStateResponse(currentActivePlayer, names),
+              cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)

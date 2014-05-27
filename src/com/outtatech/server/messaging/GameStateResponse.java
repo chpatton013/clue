@@ -13,51 +13,24 @@ import java.util.Map;
 public class GameStateResponse extends ServerResponse
 {
 
-    private Integer deckCardCount;
-    private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
     private Map<Integer, String> players;
 
     /**
      * Constructs a new GameStateResponse object
      *
-     * @param deckCardCount the number of cards in the game's deck
-     * @param playerTurnOrder list of player ID's that represents turn order
      * @param currentActivePlayer id of the currently active player
      */
-    public GameStateResponse(Integer deckCardCount,
-            List<Integer> playerTurnOrder, Integer currentActivePlayer, 
+    public GameStateResponse(Integer currentActivePlayer,
             Map<Integer, String> players)
     {
-        this.deckCardCount = deckCardCount;
         this.players = players;
-        this.playerTurnOrder = playerTurnOrder;
         this.currentActivePlayer = currentActivePlayer;
-    }
-
-    /**
-     * Returns the number of cards in the Game's deck.
-     *
-     * @return the number of cards in the Game's deck
-     */
-    public Integer getDeckCardCount()
-    {
-        return deckCardCount;
     }
     
     public Map<Integer, String> getPlayers()
     {
         return players;
-    }
-
-    /**
-     * Returns a list representing the order in which players take their turns.
-     *
-     * @return a list representing the order in which players take their turns.
-     */
-    public List<Integer> getPlayerTurnOrder()
-    {
-        return playerTurnOrder;
     }
 
     /**

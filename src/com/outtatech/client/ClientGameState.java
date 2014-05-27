@@ -27,8 +27,6 @@ public class ClientGameState extends State
     private Deque<String> gameLog;
     private Map<Integer, String> players;
 
-    private Integer deckCardCount;
-    private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
 
     /**
@@ -234,31 +232,9 @@ public class ClientGameState extends State
         return destToPlayerId;
     }
 
-    public Integer getDeckCardCount()
-    {
-        return this.deckCardCount;
-    }
-
-    public List<Integer> getPlayerTurnOrder()
-    {
-        return this.playerTurnOrder;
-    }
-
     public Integer getCurrentActivePlayer()
     {
         return this.currentActivePlayer;
-    }
-
-    public void setDeckCardCount(Integer deckCardCount)
-    {
-        this.deckCardCount = deckCardCount;
-        triggerChange();
-    }
-
-    public void setPlayerTurnOrder(List<Integer> playerTurnOrder)
-    {
-        this.playerTurnOrder = playerTurnOrder;
-        triggerChange();
     }
 
     public void setCurrentActivePlayer(Integer currentActivePlayer)

@@ -33,38 +33,6 @@ public class Game
     private List<ServerPlayer> playerTurnOrder;
     private int curPlayerTurn;
 
-    /**
-     * Constructor for a Game instance.
-     *
-     * @param player List of Player Objects.
-     * @param current ServerPlayer representing the player currently taking a
-     * turn.
-     * @param drawPile List of ActionCard Objects
-     * @param discardPile List of ActionCard Objects
-     * @param solution List of HintCard Objects
-     * @param destToPlayerId Map of DestinationID to Integer represents which
-     * player is on which DestinationID
-     */
-    public Game(Map<Integer, ServerPlayer> players,
-            ServerPlayer current,
-            List<ActionCard> drawPile,
-            List<ActionCard> discardPile,
-            Solution solution,
-            Map<DestinationID, Integer> destToPlayerId,
-            List<ServerPlayer> playerTurnOrder)
-    {
-        this.players = players;
-        this.current = current;
-        this.drawPile = drawPile;
-        this.discardPile = discardPile;
-        this.solution = solution;
-        this.destToPlayerId = destToPlayerId;
-        this.gameId = ++gameIdCounter;
-        curPlayerTurn = 0;
-        this.playerTurnOrder = playerTurnOrder;
-    }
-    
-    
     public Game()
     {
         this.players = new ConcurrentHashMap<Integer, ServerPlayer>();
@@ -75,9 +43,7 @@ public class Game
         this.solution = pickSolution();
         this.destToPlayerId = null;
         this.gameId = ++gameIdCounter;
-        playerTurnOrder = new ArrayList(players.values());
-        curPlayerTurn = 0;
-        Collections.shuffle(playerTurnOrder);
+        this.curPlayerTurn = 0;
     }
     
     /**
@@ -88,7 +54,7 @@ public class Game
     public ServerPlayer advanceTurn()
     {
         curPlayerTurn = (curPlayerTurn + 1) % playerTurnOrder.size();
-        return playerTurnOrder.get(curPlayerTurn);
+        return this.getCurrentPlayer();
     }
 
     /**
@@ -99,6 +65,13 @@ public class Game
     public ServerPlayer getCurrentPlayer()
     {
         return playerTurnOrder.get(curPlayerTurn);
+    }
+
+    public void initPlayerTurnOrder()
+    {
+        this.playerTurnOrder
+           = new ArrayList<ServerPlayer>(this.players.values());
+        Collections.shuffle(this.playerTurnOrder);
     }
     
     /**

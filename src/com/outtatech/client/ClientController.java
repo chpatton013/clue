@@ -301,15 +301,11 @@ public class ClientController
         }
 
         ClientGameState state = (ClientGameState) this.state;
-        state.setDeckCardCount(rsp.getDeckCardCount());
         state.setPlayers(rsp.getPlayers());
-        state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
         state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
 
-        state.pushGameLog("Game state updated:" + "\n   Deck Card Count: " +
-                rsp.getDeckCardCount() + "\n   Player Turn Order: " +
-                rsp.getDeckCardCount() + "\n   Current Active Player: " +
-                rsp.getCurrentActivePlayer());
+        state.pushGameLog("Game state updated:" +
+                "\n   Current Active Player: " + rsp.getCurrentActivePlayer());
     }
 
     private void reactToCardDealResponse(CardDealResponse rsp)
