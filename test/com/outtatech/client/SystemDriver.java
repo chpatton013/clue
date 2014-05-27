@@ -55,7 +55,7 @@ public class SystemDriver implements Observer
         }
         State state = new State();
         state.addObserver(this);
-        ClientController ctrl = new ClientController(state, client);
+        ClientController ctrl = new ClientController();
         client.setClientController(ctrl);
         
         

@@ -24,8 +24,8 @@ public class ServerPlayerTest
         actionCardsHand = new ArrayList<ActionCard>();
         hintCardsHand = new ArrayList<HintCard>();
         actionCardsHand.add(new Snoop());
-        hintCardsHand.add(new SuspectCard(SuspectID.WHITE, CardColor.RED));
-
+        //hintCardsHand.add(new SuspectCard(SuspectID.WHITE, CardColor.RED));
+        hintCardsHand.add(new SuspectCard(SuspectID.WHITE));
     }
     
     @BeforeClass
@@ -56,9 +56,10 @@ public class ServerPlayerTest
     {
         System.out.println("getPlayerId");
         
-        ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
-                new Color(1, 1, 1), hintCardsHand, actionCardsHand);
-        Object expResult = 1;
+        //ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
+        //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        ServerPlayer instance = new ServerPlayer();
+        Object expResult = 0;
         Object result = instance.getPlayerId();
         assertEquals(expResult, result);
     }
@@ -73,8 +74,10 @@ public class ServerPlayerTest
         
         Object obj = new Object();
         
-        ServerPlayer instance = new ServerPlayer(1, obj, "Bob", 
-                new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        //ServerPlayer instance = new ServerPlayer(1, obj, "Bob", 
+        //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        ServerPlayer instance = new ServerPlayer();
+        instance.setNotes(obj);
         Object expResult = obj;
         Object result = instance.getNotes();
         assertEquals(expResult, result);
@@ -94,9 +97,10 @@ public class ServerPlayerTest
     {
         System.out.println("getName");
         
-        ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
-                new Color(1, 1, 1), hintCardsHand, actionCardsHand);
-        
+        //ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
+        //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        ServerPlayer instance = new ServerPlayer();
+        instance.setName("Bob");
         String expResult = "Bob";
         String result = instance.getName();
         assertEquals(expResult, result);
@@ -115,8 +119,11 @@ public class ServerPlayerTest
     {
         System.out.println("getColor");
         
-        ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
-                new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        //ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
+        //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        ServerPlayer instance = new ServerPlayer();
+        
+        instance.setColor(new Color(1,1,1));
         Color expResult = new Color(1, 1, 1);
         Color result = instance.getColor();
         assertEquals(expResult, result);
@@ -135,13 +142,14 @@ public class ServerPlayerTest
     {
         System.out.println("getHand");
         
-        ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
-                new Color(1, 1, 1), hintCardsHand, actionCardsHand);
-        
+        //ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
+        //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
+        ServerPlayer instance = new ServerPlayer();
+        instance.setHintCardsHand(hintCardsHand);
         List<HintCard> expResult1 = hintCardsHand;
         List<HintCard> result1 = instance.getHintCardsHand();
         assertEquals(expResult1, result1);
-        
+        instance.setActionCardsHand(actionCardsHand);
         List<ActionCard> expResult2 = actionCardsHand;
         List<ActionCard> result2 = instance.getActionCardsHand();
         assertEquals(expResult2, result2);

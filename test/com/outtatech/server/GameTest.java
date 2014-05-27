@@ -62,7 +62,8 @@ public class GameTest
         Map<DestinationID, Integer> destToPlayerId = 
                 new HashMap<DestinationID, Integer>();
         
-        Game instance = new Game(players, sp, drawPile, discardPile, solution, destToPlayerId);
+        //Game instance = new Game(players, sp, drawPile, discardPile, solution, destToPlayerId);
+        Game instance = new Game();
         
         this.instance = instance;
         this.sp = sp;
