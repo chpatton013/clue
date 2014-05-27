@@ -73,4 +73,13 @@ public class GameStateResponse extends ServerResponse
     {
         return currentActivePlayer;
     }
+    
+    /**
+     * Returns a list of the players Hint Cards.
+     * @return hintCards
+     */
+    public List<HintCard> getHintCards()
+    {
+        return hintCards;
+    }
 }

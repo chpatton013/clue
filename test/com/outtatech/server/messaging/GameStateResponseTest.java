@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import com.outtatech.common.*;
 
 /**
  *
@@ -66,7 +67,9 @@ public class GameStateResponseTest {
         Map<Integer, String> players = new HashMap<Integer, String>();
         //GameStateResponse instance = new GameStateResponse(32, 
         //        temp, 2);
-        GameStateResponse instance = new GameStateResponse(32, temp, 2, players);
+        List<HintCard> hc = null;
+        GameStateResponse instance = new GameStateResponse(32, temp, 2
+                , players, hc);
                 
         Integer expResult = 32;
         Integer result = instance.getDeckCardCount();
@@ -88,7 +91,9 @@ public class GameStateResponseTest {
         //GameStateResponse instance = new GameStateResponse(32, 
         //        temp, 2);
         Map<Integer, String> players = new HashMap<Integer, String>();
-        GameStateResponse instance = new GameStateResponse(32, temp, 2, players);
+        List<HintCard> hc = null;
+        GameStateResponse instance = new GameStateResponse(32, temp, 
+                2, players, hc);
         
         ArrayList<Integer> expResult = new ArrayList<Integer>();
         expResult.add(2);
@@ -116,7 +121,9 @@ public class GameStateResponseTest {
         //GameStateResponse instance = new GameStateResponse(32, 
         //        temp, 2);
         Map<Integer, String> players = new HashMap<Integer, String>();
-        GameStateResponse instance = new GameStateResponse(32, temp, 2, players);
+        List<HintCard> hc = null;
+        GameStateResponse instance = new GameStateResponse(32, temp, 2, 
+                players, hc);
         
         Integer expResult = 2;
         Integer result = instance.getCurrentActivePlayer();
@@ -140,10 +147,40 @@ public class GameStateResponseTest {
         //        temp, 2);
         Map<Integer, String> players = new HashMap<Integer, String>();
         players.put(playerId, playerName);
-        GameStateResponse instance = new GameStateResponse(32, temp, 2, players);
+        List<HintCard> hc = null;
+        GameStateResponse instance = new GameStateResponse(32, temp, 
+                2, players, hc);
         
         Map<Integer, String> expResult = players;
         Map<Integer, String> result = instance.getPlayers();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getCurrentActivePlayer method, of class GameStateResponse.
+     */
+    @Test
+    public void testGetHintCards() {
+        String playerName = "Player 1";
+        int playerId = 4444;
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        temp.add(2);
+        temp.add(3);
+        temp.add(4);
+        temp.add(5);
+        temp.add(6);
+        //GameStateResponse instance = new GameStateResponse(32, 
+        //        temp, 2);
+        Map<Integer, String> players = new HashMap<Integer, String>();
+        players.put(playerId, playerName);
+        List<HintCard> hc = new ArrayList<>();
+        hc.add(new HintCard(HintCardType.DESTINATION));
+        
+        GameStateResponse instance = new GameStateResponse(32, temp, 
+                2, players, hc);
+        
+        List<HintCard> expResult = hc;
+        List<HintCard> result = instance.getHintCards();
         assertEquals(expResult, result);
     }
 }

@@ -28,14 +28,12 @@ public class CardDealResponseTest
     {
         System.out.println("Testing getCards of CardDealResponse ");
         
-        List<Card> list = new ArrayList<Card>();
-        list.add(new DestinationCard(DestinationID.NIAGRA_FALLS));
-        list.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
-        list.add(new SuspectCard(SuspectID.MUSTARD));
+        List<ActionCard> list = new ArrayList<>();
+        list.add(new ActionCard(ActionCardType.ALL_SNOOP));
         
         CardDealResponse response = new CardDealResponse(list);
-        List<Card> expResult = list;
-        List<Card> result = response.getCards();
+        List<ActionCard> expResult = list;
+        List<ActionCard> result = response.getCards();
         assertEquals(expResult, result);
     }
 }
