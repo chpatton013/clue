@@ -4,7 +4,9 @@ import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import com.outtatech.server.ServerPlayer;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -81,11 +83,12 @@ public class GUIController implements Observer{
             //  clear all players
             lobbyScreen.clearPlayers();
             //  add each player back
-            List<Player> playList = ((ClientLobbyState)obs).getPlayers();
+            Map<Integer, String> playMap = ((ClientLobbyState)obs).getPlayers();
+            ArrayList playList = new ArrayList(playMap.keySet());
             lobbyScreen.setId(((ClientLobbyState)obs).getId());
             lobbyScreen.setLeader(((ClientLobbyState)obs).getGameOwner());
             for(int indx = 0; indx < playList.size(); indx++) {
-                lobbyScreen.addPlayer(((ServerPlayer)playList.get(indx)).getName(), playList.get(indx).getPlayerId());
+                lobbyScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
             }
             //Set state to LOBBY
             state = CurrentWindow.LOBBY;
@@ -101,9 +104,10 @@ public class GUIController implements Observer{
             //  call mainGameScreen's clearFields method
             mainGameScreen.clearPlayers();
             //  add each hand card and location back
-            List<Player> playList = ((ClientGameState)obs).getPlayers();
+            Map<Integer, String> playMap = ((ClientGameState)obs).getPlayers();
+            ArrayList playList = new ArrayList(playMap.keySet());
             for(int indx = 0; indx < playList.size(); indx++) {
-                mainGameScreen.addPlayer(((ServerPlayer)playList.get(indx)).getName(), playList.get(indx).getPlayerId());
+                mainGameScreen.addPlayer(playMap.get(((Integer)playList.get(indx))), ((Integer)playList.get(indx)));
             }
             
             mainGameScreen.updateHand(((ClientGameState)obs).getHand());
