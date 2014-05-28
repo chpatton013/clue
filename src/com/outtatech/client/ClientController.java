@@ -293,32 +293,12 @@ public class ClientController
 
     private void reactToGameStateResponse(GameStateResponse rsp)
     {
-        if (!(this.state instanceof ClientGameState))
-        {
-            System.err.println("Received GameStateResponse while not in " +
-                    "ClientGameState.");
-            return;
-        }
-
-        ClientGameState state = (ClientGameState) this.state;
-        state.setDeckCardCount(rsp.getDeckCardCount());
-        state.setPlayers(rsp.getPlayers());
-        state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
-        state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
-
-        state.pushGameLog("Game state updated:" + "\n   Deck Card Count: " +
-                rsp.getDeckCardCount() + "\n   Player Turn Order: " +
-                rsp.getDeckCardCount() + "\n   Current Active Player: " +
-                rsp.getCurrentActivePlayer());
-    }
-
-    private void reactToCardDealResponse(CardDealResponse rsp)
-    {
         if (this.state instanceof ClientLobbyState)
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
             Integer me = state.getPlayerId();
-            List<Card> newStateCards = new ArrayList(rsp.getCards());
+            List<Card> newStateCards = new ArrayList(rsp.getHintCards());
+            newStateCards.addAll(rsp.getActionCards());
             this.setState(new ClientGameState(me, newStateCards,
                     state.getPlayers()));
 
@@ -326,7 +306,31 @@ public class ClientController
 
             this.forwardMessage(new GameStateRequest());
         }
-        else if (!(this.state instanceof ClientGameState))
+        else if (this.state instanceof ClientGameState)
+        {
+            ClientGameState state = (ClientGameState) this.state;
+            state.setDeckCardCount(rsp.getDeckCardCount());
+            state.setPlayers(rsp.getPlayers());
+            state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
+            state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+
+            state.pushGameLog("Game state updated:" +
+                  "\n   Deck Card Count: " + rsp.getDeckCardCount() +
+                  "\n   Player Turn Order: " + rsp.getDeckCardCount() +
+                  "\n   Current Active Player: " +
+                  rsp.getCurrentActivePlayer());
+        }
+        else
+        {
+            System.err.println("Received GameStateResponse while not in " +
+                    "ClientGameState.");
+            return;
+        }
+    }
+
+    private void reactToCardDealResponse(CardDealResponse rsp)
+    {
+        if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received CardDealResponse while not in "
                     + "ClientGameState.");

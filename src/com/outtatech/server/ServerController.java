@@ -599,15 +599,9 @@ public class ServerController
             playerTurnOrder.add(playerTurnOrder.size(), pl.getPlayerId());
             GameStateResponse gameResponse = new GameStateResponse(game.
                     getDrawPile().size(), playerTurnOrder, game.
-                    getCurrentPlayerIndex(), nameMap, pl.hintCardsHand);
+                    getCurrentPlayerIndex(), nameMap, pl.hintCardsHand,
+                    pl.actionCardsHand);
             informPlayer(pl, gameResponse);
-        }
-
-        for (ServerPlayer serverPlayer : gameServerPlayers)
-        {
-            CardDealResponse msg = new CardDealResponse(
-                    serverPlayer.actionCardsHand);
-            informPlayer(serverPlayer, msg);
         }
 
         // Remove lobby when game starts
@@ -633,8 +627,8 @@ public class ServerController
         }
 
         this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
-                currentActivePlayer, names, serverPlayer.getHintCardsHand()),
-                cxn);
+                currentActivePlayer, names, serverPlayer.getHintCardsHand(),
+                serverPlayer.getActionCardsHand()), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
