@@ -32,9 +32,10 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private ArrayList playerIds = new ArrayList();
 
-    int selectedPlayer = -1;
+    int selectedPlayer = 0;
 
     GUIController controller;
+    
 
     ActionCard[] actionCards =
     {
@@ -1851,6 +1852,8 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
+        selectedPlayer = playerList.getSelectedRow();
+        
     }//GEN-LAST:event_playerListMouseClicked
 
     private void leaveGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGameButtonMouseClicked
@@ -1865,12 +1868,14 @@ public class MainGameScreen extends javax.swing.JFrame
             // Guard against this
             if (actionCards[0].getActionType() == ActionCardType.SUGGESTION)
             {
+               System.out.println("Tried to Play the first action card SUGGESTION");
 
             }
             // Otherwise...
             else
             {
-                controller.playCard(actionCards[0]);
+                controller.playCard(actionCards[0], selectedPlayer);
+                System.out.println("Tried to Play the first action card");
             }
         }
     }//GEN-LAST:event_actionImage1MouseClicked
@@ -1887,7 +1892,7 @@ public class MainGameScreen extends javax.swing.JFrame
             // Otherwise...
             else
             {
-                controller.playCard(actionCards[1]);
+                controller.playCard(actionCards[1], selectedPlayer);
             }
         }
     }//GEN-LAST:event_actionImage2MouseClicked
