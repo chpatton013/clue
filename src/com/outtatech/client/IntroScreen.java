@@ -40,7 +40,8 @@ public class IntroScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,32 +58,40 @@ public class IntroScreen extends javax.swing.JFrame
         jLabel2.setText("An OutaTech Game");
 
         SinglePlayerButton.setText("Single Player");
-        SinglePlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        SinglePlayerButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 SinglePlayerButtonMouseClicked(evt);
             }
         });
 
         MultiPlayerButton.setText("Multiplayer");
         MultiPlayerButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        MultiPlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        MultiPlayerButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 MultiPlayerButtonMouseClicked(evt);
             }
         });
 
         InformationButton.setText("Information");
         InformationButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        InformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        InformationButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 InformationButtonMouseClicked(evt);
             }
         });
 
         OptionsButton.setText("Options");
         OptionsButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        OptionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        OptionsButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 OptionsButtonMouseClicked(evt);
             }
         });
@@ -123,22 +132,26 @@ public class IntroScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SinglePlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SinglePlayerButtonMouseClicked
+    private void SinglePlayerButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_SinglePlayerButtonMouseClicked
         //call controller's singlePlayerSelected method
         controller.singlePlayerSelected();
     }//GEN-LAST:event_SinglePlayerButtonMouseClicked
 
-    private void MultiPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MultiPlayerButtonMouseClicked
+    private void MultiPlayerButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_MultiPlayerButtonMouseClicked
         //call controller's multiplayerSelected method
         controller.multiplayerSelected();
     }//GEN-LAST:event_MultiPlayerButtonMouseClicked
 
-    private void InformationButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InformationButtonMouseClicked
+    private void InformationButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_InformationButtonMouseClicked
         //call controller's showInstructions method
         controller.showInstructions();
     }//GEN-LAST:event_InformationButtonMouseClicked
 
-    private void OptionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsButtonMouseClicked
+    private void OptionsButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_OptionsButtonMouseClicked
         //call controller's showOptions method
         controller.showOptions();
     }//GEN-LAST:event_OptionsButtonMouseClicked

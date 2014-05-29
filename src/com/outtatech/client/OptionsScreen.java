@@ -57,7 +57,8 @@ public class OptionsScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         greeceButton = new javax.swing.JRadioButton();
@@ -74,43 +75,55 @@ public class OptionsScreen extends javax.swing.JFrame
 
         buttonGroup1.add(greeceButton);
         greeceButton.setLabel("Greece");
-        greeceButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        greeceButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 greeceButtonMouseClicked(evt);
             }
         });
-        greeceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        greeceButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 greeceButtonActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(whiteHouseButton);
         whiteHouseButton.setLabel("White House");
-        whiteHouseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        whiteHouseButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 whiteHouseButtonActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(pirateButton);
         pirateButton.setLabel("Pirate");
-        pirateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        pirateButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 pirateButtonActionPerformed(evt);
             }
         });
 
         applyButton.setLabel("Apply");
-        applyButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        applyButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 applyButtonMouseClicked(evt);
             }
         });
 
         closeButton.setLabel("Return");
-        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 closeButtonMouseClicked(evt);
             }
         });
@@ -176,7 +189,8 @@ public class OptionsScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void greeceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greeceButtonActionPerformed
+    private void greeceButtonActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_greeceButtonActionPerformed
         // Guard against this
         if (greeceButton.isSelected())
         {
@@ -184,11 +198,13 @@ public class OptionsScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_greeceButtonActionPerformed
 
-    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_closeButtonMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonMouseClicked
 
-    private void applyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applyButtonMouseClicked
+    private void applyButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_applyButtonMouseClicked
         // Guard against this
         if (greeceButton.isSelected())
         {
@@ -208,7 +224,8 @@ public class OptionsScreen extends javax.swing.JFrame
         this.setVisible(false);
     }//GEN-LAST:event_applyButtonMouseClicked
 
-    private void whiteHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteHouseButtonActionPerformed
+    private void whiteHouseButtonActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_whiteHouseButtonActionPerformed
         // Guard against this
         if (whiteHouseButton.isSelected())
         {
@@ -216,7 +233,8 @@ public class OptionsScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_whiteHouseButtonActionPerformed
 
-    private void pirateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pirateButtonActionPerformed
+    private void pirateButtonActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_pirateButtonActionPerformed
         // Guard against this
         if (pirateButton.isSelected())
         {
@@ -224,7 +242,8 @@ public class OptionsScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_pirateButtonActionPerformed
 
-    private void greeceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_greeceButtonMouseClicked
+    private void greeceButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_greeceButtonMouseClicked
 
     }//GEN-LAST:event_greeceButtonMouseClicked
 

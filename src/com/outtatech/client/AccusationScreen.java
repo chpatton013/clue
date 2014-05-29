@@ -53,7 +53,8 @@ public class AccusationScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         cardDropDown1 = new javax.swing.JComboBox();
         cardDropDown2 = new javax.swing.JComboBox();
@@ -68,38 +69,48 @@ public class AccusationScreen extends javax.swing.JFrame
         cardDropDown1.setMaximumRowCount(9);
         cardDropDown1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suspect1", "Suspect2", "Suspect3", "Suspect4", "Suspect5", "Suspect6" }));
         cardDropDown1.setPreferredSize(new java.awt.Dimension(70, 20));
-        cardDropDown1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cardDropDown1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cardDropDown1ActionPerformed(evt);
             }
         });
 
         cardDropDown2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vehicle1", "Vehicle2", "Vehicle3", "Vehicle4", "Vehicle5", "Vehicle6" }));
         cardDropDown2.setPreferredSize(new java.awt.Dimension(70, 20));
-        cardDropDown2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cardDropDown2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cardDropDown2ActionPerformed(evt);
             }
         });
 
         cardDropDown3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Location1", "Location2", "Location3", "Location4", "Location5", "Location6", "Location7", "Location8", "Location9" }));
         cardDropDown3.setPreferredSize(new java.awt.Dimension(70, 20));
-        cardDropDown3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cardDropDown3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cardDropDown3ActionPerformed(evt);
             }
         });
 
         accuseButton.setText("ACCUSE!");
-        accuseButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        accuseButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 accuseButtonMouseClicked(evt);
             }
         });
 
         closeButton.setText("Close");
-        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 closeButtonMouseClicked(evt);
             }
         });
@@ -168,17 +179,20 @@ public class AccusationScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_closeButtonMouseClicked
         //close the window
         this.setVisible(false);
     }//GEN-LAST:event_closeButtonMouseClicked
 
-    private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
+    private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's makeAccusation method with the card types of
         //the three selected cards
     }//GEN-LAST:event_accuseButtonMouseClicked
 
-    private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown1ActionPerformed
+    private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_cardDropDown1ActionPerformed
         //set cardImage1 to image of selected card
         int suspectNumber = cardDropDown1.getSelectedIndex();
         String path = controller.getImagePath();
@@ -204,7 +218,8 @@ public class AccusationScreen extends javax.swing.JFrame
         image1.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown1ActionPerformed
 
-    private void cardDropDown2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown2ActionPerformed
+    private void cardDropDown2ActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_cardDropDown2ActionPerformed
         //set cardImage2 to image of selected card
         int vehicleNumber = cardDropDown2.getSelectedIndex();
         String path = controller.getImagePath();
@@ -230,7 +245,8 @@ public class AccusationScreen extends javax.swing.JFrame
         image2.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown2ActionPerformed
 
-    private void cardDropDown3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown3ActionPerformed
+    private void cardDropDown3ActionPerformed(java.awt.event.ActionEvent evt)
+    {//GEN-FIRST:event_cardDropDown3ActionPerformed
         //set cardImage3 to image of selected card
         int locationNumber = cardDropDown3.getSelectedIndex() + 1;
         String path = controller.getImagePath();

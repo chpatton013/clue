@@ -32,7 +32,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private ArrayList playerIds = new ArrayList();
 
-    int selectedPlayer = 0;
+    private int selectedPlayer = 0;
 
     GUIController controller;
     
@@ -313,7 +313,8 @@ public class MainGameScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -377,29 +378,37 @@ public class MainGameScreen extends javax.swing.JFrame
         jScrollPane1.setViewportView(gameLog);
 
         optionsButton.setText("Options");
-        optionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        optionsButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 optionsButtonMouseClicked(evt);
             }
         });
 
         instructionsButton.setText("Instructions");
-        instructionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        instructionsButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 instructionsButtonMouseClicked(evt);
             }
         });
 
         accuseButton.setText("Accuse!");
-        accuseButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        accuseButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 accuseButtonMouseClicked(evt);
             }
         });
 
         endTurnButton.setText("End Turn");
-        endTurnButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        endTurnButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 endTurnButtonMouseClicked(evt);
             }
         });
@@ -417,19 +426,23 @@ public class MainGameScreen extends javax.swing.JFrame
             new String [] {
                 "Players:"
             }
-        ) {
+        )
+        {
             boolean[] canEdit = new boolean [] {
                 false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         playerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         playerList.setShowHorizontalLines(false);
-        playerList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        playerList.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 playerListMouseClicked(evt);
             }
         });
@@ -483,8 +496,10 @@ public class MainGameScreen extends javax.swing.JFrame
         jCheckBox21.setToolTipText("");
 
         leaveGameButton.setText("Leave Game");
-        leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 leaveGameButtonMouseClicked(evt);
             }
         });
@@ -508,15 +523,19 @@ public class MainGameScreen extends javax.swing.JFrame
         locationImage9.setText("L9");
 
         actionImage1.setText("AC1");
-        actionImage1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        actionImage1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 actionImage1MouseClicked(evt);
             }
         });
 
         actionImage2.setText("AC2");
-        actionImage2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        actionImage2.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 actionImage2MouseClicked(evt);
             }
         });
@@ -726,17 +745,20 @@ public class MainGameScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void instructionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instructionsButtonMouseClicked
+    private void instructionsButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_instructionsButtonMouseClicked
         //call controller's showInstructions method
         controller.showInstructions();
     }//GEN-LAST:event_instructionsButtonMouseClicked
 
-    private void optionsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_optionsButtonMouseClicked
+    private void optionsButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_optionsButtonMouseClicked
         //call controller's showOptions method
         controller.showOptions();
     }//GEN-LAST:event_optionsButtonMouseClicked
 
-    private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accuseButtonMouseClicked
+    private void accuseButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's accuse method
         // Guard against this
         if (accuseButton.isEnabled())
@@ -745,7 +767,8 @@ public class MainGameScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_accuseButtonMouseClicked
 
-    private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endTurnButtonMouseClicked
+    private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_endTurnButtonMouseClicked
         // Guard against this
         if (endTurnButton.isEnabled())
         {
@@ -757,18 +780,21 @@ public class MainGameScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_endTurnButtonMouseClicked
 
-    private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
+    private void playerListMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
         selectedPlayer = (int)playerIds.get(playerList.getSelectedRow());
         
     }//GEN-LAST:event_playerListMouseClicked
 
-    private void leaveGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveGameButtonMouseClicked
+    private void leaveGameButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_leaveGameButtonMouseClicked
         //call controller's exitWindow method
         controller.exitWindow();
     }//GEN-LAST:event_leaveGameButtonMouseClicked
 
-    private void actionImage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage1MouseClicked
+    private void actionImage1MouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_actionImage1MouseClicked
         // Guard against this
         if (actionCards[0] != null)
         {
@@ -787,7 +813,8 @@ public class MainGameScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_actionImage1MouseClicked
 
-    private void actionImage2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actionImage2MouseClicked
+    private void actionImage2MouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_actionImage2MouseClicked
         // Guard against this
         if (actionCards[1] != null)
         {

@@ -10,7 +10,7 @@ public class SuspectCard extends HintCard
 {
     /*A unique Suspect*/
     private SuspectID suspect;
-    Gender gender;
+    private Gender gender;
 
     /**
      * Version-latenightpizzaparty

@@ -10,9 +10,9 @@ package com.outtatech.common;
 public class DestinationCard extends HintCard
 {
     /*A unique destination*/
-    DestinationID destination;
-    boolean north;
-    boolean west;
+    private DestinationID destination;
+    private boolean north;
+    private boolean west;
 
     /**
      * Version-latenightpizzaparty

@@ -189,7 +189,8 @@ public class GUIController implements Observer
             }
 
             //  check client controller's reveal flag
-            if(((ClientGameState) obs).getRevealStatus()) {
+            if(((ClientGameState) obs).getRevealStatus())
+            {
                 //  if set
                 //    add applicable card to revealCardsScreen
                 revealedCardsScreen.setCards

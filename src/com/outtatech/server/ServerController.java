@@ -252,6 +252,30 @@ public class ServerController
             this.forwardMessage(new KickPlayerResponse(playerId),
                 players.get(game));
             game.getServerPlayers().remove(playerId);
+            
+        }
+        else if(obj instanceof LobbyLeaveRequest) 
+        {
+            if(connectionToPlayer.containsKey(connection)) 
+            {
+                Game game = games.get(connection);
+                ServerPlayer player = connectionToPlayer.get(connection);
+                int playerId = player.getPlayerId();
+                game.getServerPlayers().remove(playerId);
+                games.remove(connection);
+                connectionToPlayer.remove(connection);
+                humans.remove(player);
+                if(game.getServerPlayers().size() == 0) 
+                {
+                    gameIdToGame.remove(game.getGameId());
+                    players.remove(game);
+                    lobbies.remove(game.getGameId());
+                }
+                else {
+                    this.forwardMessage(new LobbyLeaveResponse(playerId),
+                        players.get(game));
+                }
+            }
         }
 
         /**

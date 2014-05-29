@@ -85,7 +85,8 @@ public class GameSelectScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         createGameButton = new javax.swing.JButton();
         joinGameButton = new javax.swing.JButton();
@@ -96,24 +97,30 @@ public class GameSelectScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         createGameButton.setText("Create Game");
-        createGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        createGameButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 createGameButtonMouseClicked(evt);
             }
         });
 
         joinGameButton.setText("Join Game");
         joinGameButton.setPreferredSize(new java.awt.Dimension(95, 23));
-        joinGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        joinGameButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 joinGameButtonMouseClicked(evt);
             }
         });
 
         closeButton.setText("Close");
         closeButton.setPreferredSize(new java.awt.Dimension(95, 23));
-        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        closeButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 closeButtonMouseClicked(evt);
             }
         });
@@ -152,12 +159,14 @@ public class GameSelectScreen extends javax.swing.JFrame
             new String [] {
                 "Game Name", "Status"
             }
-        ) {
+        )
+        {
             boolean[] canEdit = new boolean [] {
                 false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -200,12 +209,14 @@ public class GameSelectScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGameButtonMouseClicked
+    private void createGameButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_createGameButtonMouseClicked
         //call controller's createGame method
         controller.createGame();
     }//GEN-LAST:event_createGameButtonMouseClicked
 
-    private void joinGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinGameButtonMouseClicked
+    private void joinGameButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_joinGameButtonMouseClicked
         //call controller's joinGame method with the selected lobby's lobby id
         int row = gameList.getSelectedRow();
 
@@ -216,7 +227,8 @@ public class GameSelectScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_joinGameButtonMouseClicked
 
-    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeButtonMouseClicked
+    private void closeButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_closeButtonMouseClicked
         //call controller's exitWindow method
         controller.exitWindow();
     }//GEN-LAST:event_closeButtonMouseClicked

@@ -11,7 +11,7 @@ package com.outtatech.common;
  */
 public class Suggestion extends ActionCard
 {
-    SuggestionType type;
+    private SuggestionType type;
 
     /**
      * Version-latenightpizzaparty

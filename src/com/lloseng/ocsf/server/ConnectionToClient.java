@@ -132,7 +132,9 @@ public class ConnectionToClient extends Thread
       {
         closeAll();
       }
-      catch (Exception exc) { }
+      catch (Exception exc)
+      {
+      }
 
       throw ex;  // Rethrow the exception.
     }

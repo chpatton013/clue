@@ -13,7 +13,7 @@ package com.outtatech.common;
  */
 public class SuperSleuth extends ActionCard
 {
-    SuperSleuthType type;
+    private SuperSleuthType type;
 
     /**
      * Version-latenightpizzaparty

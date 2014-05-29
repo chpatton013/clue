@@ -9,9 +9,9 @@ package com.outtatech.common;
 public class VehicleCard extends HintCard
 {
     /*A unique Vehicle*/
-    VehicleID vehicle;
-    boolean isAir;
-    CardColor color;
+    private VehicleID vehicle;
+    private boolean isAir;
+    private CardColor color;
 
     /**
      * Version-latenightpizzaparty

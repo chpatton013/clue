@@ -41,7 +41,7 @@ public class ObservableSWRClient extends ObservableClient
      * @param host
      * @param port
      */
-        public ObservableSWRClient(String host, int port)
+    public ObservableSWRClient(String host, int port)
     {
         super(host, port);
     }
