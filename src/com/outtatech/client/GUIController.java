@@ -235,6 +235,8 @@ public class GUIController implements Observer
         accusationScreen.setVisible(false);
         mainGameScreen.setVisible(false);
 
+        clientController.leaveLobby();
+
         //set state to INTRO
         state = CurrentWindow.INTRO;
     }
