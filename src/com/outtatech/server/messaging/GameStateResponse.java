@@ -38,6 +38,7 @@ public class GameStateResponse extends ServerResponse
         this.deckCardCount = deckCardCount;
         this.players = players;
         this.hintCards = hintCards;
+        this.actionCards = actionCards;
         this.playerTurnOrder = playerTurnOrder;
         this.currentActivePlayer = currentActivePlayer;
     }
