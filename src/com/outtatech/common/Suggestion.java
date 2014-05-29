@@ -33,4 +33,9 @@ public class Suggestion extends ActionCard
     {
         return type;
     }
+
+    public String toString()
+    {
+        return "SUGGESTION";
+    }
 }

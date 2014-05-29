@@ -70,4 +70,36 @@ public class VehicleCard extends HintCard
     {
         return color;
     }
+
+    public String toString()
+    {
+        if (this.vehicle == VehicleID.SEAPLANE)
+        {
+            return "SEAPLANE";
+        }
+        else if (this.vehicle == VehicleID.AUTOMOBILE)
+        {
+            return "AUTOMOBILE";
+        }
+        else if (this.vehicle == VehicleID.AIRLINER)
+        {
+            return "AIRLINER";
+        }
+        else if (this.vehicle == VehicleID.HOT_AIR_BALLOON)
+        {
+            return "HOT_AIR_BALLOON";
+        }
+        else if (this.vehicle == VehicleID.LIMOUSINE)
+        {
+            return "LIMOUSINE";
+        }
+        else if (this.vehicle == VehicleID.TRAIN)
+        {
+            return "TRAIN";
+        }
+        else
+        {
+            return super.toString();
+        }
+    }
 }

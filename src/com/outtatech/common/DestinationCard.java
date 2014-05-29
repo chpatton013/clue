@@ -87,4 +87,48 @@ public class DestinationCard extends HintCard
     {
         return west;
     }
+
+    public String toString()
+    {
+       if (this.destination == DestinationID.NIAGRA_FALLS)
+       {
+           return "NIAGRA_FALLS";
+       }
+       else if (this.destination == DestinationID.GOLDEN_GATE_BRIDGE)
+       {
+           return "GOLDEN_GATE_BRIDGE";
+       }
+       else if (this.destination == DestinationID.OLD_FAITHFUL)
+       {
+           return "OLD_FAITHFUL";
+       }
+       else if (this.destination == DestinationID.CONEY_ISLAND)
+       {
+           return "CONEY_ISLAND";
+       }
+       else if (this.destination == DestinationID.THE_ALAMO)
+       {
+           return "THE_ALAMO";
+       }
+       else if (this.destination == DestinationID.HOOVER_DAM)
+       {
+           return "HOOVER_DAM";
+       }
+       else if (this.destination == DestinationID.LINCOLN_MEMORIAL)
+       {
+           return "LINCOLN_MEMORIAL";
+       }
+       else if (this.destination == DestinationID.MIAMI_BEACH)
+       {
+           return "MIAMI_BEACH";
+       }
+       else if (this.destination == DestinationID.MT_RUSHMORE)
+       {
+           return "MT_RUSHMORE";
+       }
+       else
+       {
+           return super.toString();
+       }
+    }
 }

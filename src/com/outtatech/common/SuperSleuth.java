@@ -35,4 +35,9 @@ public class SuperSleuth extends ActionCard
     {
         return type;
     }
+
+    public String toString()
+    {
+        return "SUPERSLEUTH";
+    }
 }
