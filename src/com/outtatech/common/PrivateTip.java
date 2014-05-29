@@ -13,7 +13,7 @@ package com.outtatech.common;
  */
 public class PrivateTip extends ActionCard
 {
-    PrivateTipType type;
+    private PrivateTipType type;
 
     /**
      * Version-latenightpizzaparty

@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Card implements Serializable
 {
     private static int id = -1;
-    CardType cardType;
+    private CardType cardType;
 
     /**
      * Version-latenightpizzaparty
