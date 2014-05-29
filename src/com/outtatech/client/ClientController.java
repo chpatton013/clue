@@ -73,7 +73,7 @@ public class ClientController
             this.state = newState;
         }
     }
-    
+
     public void triggerChange()
     {
         this.state.triggerChange();
@@ -271,8 +271,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received LobbyLeaveResponse while not in "
-                    + "ClientLobbyState.");
+            System.err.println("Received LobbyLeaveResponse while not in " +
+                    "ClientLobbyState.");
             return;
         }
 
@@ -283,8 +283,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received KickPlayerResponse while not in "
-                    + "ClientLobbyState.");
+            System.err.println("Received KickPlayerResponse while not in " +
+                    "ClientLobbyState.");
             return;
         }
 
@@ -297,7 +297,7 @@ public class ClientController
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
             Integer me = state.getPlayerId();
-            
+
             List<Card> newStateCards = new ArrayList(rsp.getHintCards());
             newStateCards.addAll(rsp.getActionCards());
             this.setState(new ClientGameState(me, newStateCards,
@@ -340,9 +340,18 @@ public class ClientController
         else
         {
             ClientGameState state = (ClientGameState) this.state;
-            state.addToHand(rsp.getCard());
+            state.pushGameLog("Turn started");
 
-            state.pushGameLog("Card dealt: " + rsp.getCard());
+            Card card = rsp.getCard();
+            if (card != null)
+            {
+               state.addToHand(rsp.getCard());
+               state.pushGameLog("Card dealt: " + rsp.getCard());
+            }
+            else
+            {
+                this.triggerChange();
+            }
         }
     }
 
@@ -378,8 +387,8 @@ public class ClientController
             // TODO: GUI
             // tell GUI to present cards
         }
-        else if (type == ActionCardType.SNOOP || type
-                == ActionCardType.ALL_SNOOP)
+        else if (type == ActionCardType.SNOOP ||
+                type == ActionCardType.ALL_SNOOP)
         {
             List<Card> hints = new ArrayList<Card>(state.getHand());
             int index = 0;

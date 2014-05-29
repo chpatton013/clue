@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -32,6 +34,9 @@ public class ServerController
     private Map<ServerPlayer, AI> robots;
     private Map<Integer, Lobby> lobbies;
     private ServerNetwork network;
+
+    private Set<Integer> skipDeal;
+    private Set<Integer> playedThisTurn;
 
     private int playerCounter = 1;
     private int robotCounter = 1;
@@ -59,13 +64,16 @@ public class ServerController
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
 
+        this.skipDeal = new HashSet<Integer>();
+        this.playedThisTurn = new HashSet<Integer>();
+
         try
         {
             network.listen();
         }
         catch (IOException ex)
         {
-
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -280,8 +288,17 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
+        Integer playerId = initiator.getPlayerId();
+        if (!playedThisTurn.contains(playerId))
+        {
+            skipDeal.add(playerId);
+        }
+
         game.advanceTurn();
         dealActionCard(game);
+
+        playedThisTurn.remove(playerId);
+        skipDeal.remove(playerId);
     }
 
     /**
@@ -379,6 +396,9 @@ public class ServerController
     private void handleSuggestion(SuggestionRequest suggestionReq,
             ConnectionToClient connection)
     {
+        ServerPlayer player = connectionToPlayer.get(connection);
+        playedThisTurn.add(player.getPlayerId());
+
         ArrayList<ConnectionToClient> gamePlayers
                 = new ArrayList<ConnectionToClient>();
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
@@ -886,6 +906,9 @@ public class ServerController
     private void handleActionRequest(ActionRequest actionReq,
             ConnectionToClient connection)
     {
+        ServerPlayer player = connectionToPlayer.get(connection);
+        playedThisTurn.add(player.getPlayerId());
+
         ActionCard card = actionReq.getActionCard();
         //Get the players game
         Game game = games.get(connection);
@@ -921,17 +944,23 @@ public class ServerController
      */
     private void dealActionCard(Game game)
     {
-        List<ActionCard> drawCards = new ArrayList<ActionCard>();
-        ActionCard newCard = game.getDrawPile().remove(0);
-        
-        // Add the card to the server player's hand if they're not an AI
-        // AI will take care of this themselves.
-        if(!(game.getCurrentPlayer() instanceof AI))
+        ServerPlayer player = game.getCurrentPlayer();
+
+        ActionCard newCard = null;
+        if (!this.skipDeal.contains(player.getPlayerId()))
         {
-            game.getCurrentPlayer().addActionCard(newCard);
+            List<ActionCard> drawCards = new ArrayList<ActionCard>();
+            newCard = game.getDrawPile().remove(0);
+
+            // Add the card to the server player's hand if they're not an AI
+            // AI will take care of this themselves.
+            if (!(player instanceof AI))
+            {
+                player.addActionCard(newCard);
+            }
         }
 
         ServerResponse response = new CardDealResponse(newCard);
-        informPlayer(game.getCurrentPlayer(), response);
+        informPlayer(player, response);
     }
 }
