@@ -32,7 +32,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private ArrayList playerIds = new ArrayList();
 
-    int selectedPlayer = 0;
+    private int selectedPlayer = 0;
 
     GUIController controller;
     

@@ -9,7 +9,7 @@ package com.outtatech.client.messaging;
  */
 public class LobbyCreateRequest extends ClientRequest
 {
-    String lobbyName;
+    private String lobbyName;
 
     /**
      * Version-latenightpizzaparty

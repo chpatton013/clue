@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class AccusationRequest extends ClientRequest
 {
-    Solution accusation;
+    private Solution accusation;
 
     /**
      * Version-latenightpizzaparty
