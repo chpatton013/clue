@@ -222,7 +222,7 @@ public class ServerController
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
 
             ServerPlayer serverPlayer = new ServerPlayer();
-            serverPlayer.setName("single_player_host");
+            serverPlayer.setName("CluePlayer" + this.playerCounter++);
             game.addServerPlayer(serverPlayer);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
