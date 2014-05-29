@@ -31,7 +31,6 @@ public class ServerController
     //maybe mapped differently? AI are serverplayers
     private Map<ServerPlayer, AI> robots;
     private Map<Integer, Lobby> lobbies;
-    private Map<ServerPlayer, Lobby> waiting;
     private ServerNetwork network;
 
     /**
@@ -254,6 +253,10 @@ public class ServerController
             Game game = games.get(connection);
             handleGameStartRequest(games.get(connection), lobbies.get(game.
                     getGameId()));
+            List<ActionCard> drawCards = new ArrayList<ActionCard>();
+            drawCards.add(game.getDrawPile().remove(0));
+            ServerResponse response = new CardDealResponse(drawCards);
+            informPlayer(game.getCurrentPlayer(), response);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -602,7 +605,8 @@ public class ServerController
         }
 
         // Remove lobby when game starts
-        waiting.remove(game);
+        // Connection to server player
+        lobbies.remove(game);
 
     }
 
