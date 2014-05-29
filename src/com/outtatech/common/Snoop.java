@@ -18,4 +18,9 @@ public class Snoop extends ActionCard
     {
         super(ActionCardType.SNOOP);
     }
+
+    public String toString()
+    {
+        return "SNOOP";
+    }
 }

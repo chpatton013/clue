@@ -110,6 +110,9 @@ public class GUIController implements Observer
                 gameSelectScreen.addGame(lobList.get(indx).getLobbyName(),
                         lobList.get(indx).getLobbyId());
             }
+            introScreen.setVisible(false);
+            gameSelectScreen.setVisible(true);
+            lobbyScreen.setVisible(false);
         }
 
         //if state is LOBBY

@@ -33,6 +33,9 @@ public class ServerController
     private Map<Integer, Lobby> lobbies;
     private ServerNetwork network;
 
+    private int playerCounter = 1;
+    private int robotCounter = 1;
+
     /**
      * Construct a ServerController object. A ServerController instance can be
      * used to facilitate changes to multiple Game instances with many different
@@ -118,15 +121,20 @@ public class ServerController
         else if (obj instanceof AddAIRequest)
         {
             AddAIRequest addAIReq = (AddAIRequest) obj;
-            int num = games.get(connection).getPlayers().size();
-            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
-                    games.get(connection));
-            newPlayer.setName("CLUEBot" + num);
-
             // Get the requestor's lobby
             Lobby lobby = lobbies.get(addAIReq.getLobbyId());
             // Get the game associated with the lobby
             Game lobbyGame = gameIdToGame.get(lobby.getGameId());
+
+            if (lobbyGame.getPlayers().size() >= 5)
+            {
+                return;
+            }
+
+            ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
+                games.get(connection));
+            newPlayer.setName("ClueBot" + this.robotCounter++);
+
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
             // Inform game players
@@ -149,17 +157,21 @@ public class ServerController
         else if (obj instanceof LobbyJoinRequest)
         {
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
-            System.out.println(lobby);
+            Game game = gameIdToGame.get(lobby.getGameId());
+
+            if (game.getPlayers().size() >= 5)
+            {
+                return;
+            }
+
             ServerPlayer serverPlayer = new ServerPlayer();
-            int num = humans.keySet().size();
-            serverPlayer.setName("CluePlayer" + (num + 1));
+            serverPlayer.setName("CluePlayer" + this.playerCounter++);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
             cxns.add(this.humans.get(serverPlayer));
 
-            Game game = gameIdToGame.get(lobby.getGameId());
             game.addServerPlayer(serverPlayer);
 
             List<Player> players = game.getPlayers();
@@ -226,24 +238,12 @@ public class ServerController
         }
         else if (obj instanceof KickPlayerRequest)
         {
-            KickPlayerRequest rqst = ((KickPlayerRequest) obj);
-            Player player = null;
+            Integer playerId = ((KickPlayerRequest) obj).getPlayerId();
             Game game = games.get(connection);
-            List<Player> players = game.getPlayers();
-            Map<Integer, ServerPlayer> map = game.getServerPlayers();
-            // Iterate over this set
-            for (Player temp : players)
-            {
-                // Guard against this
-                if (rqst.getPlayerId() == temp.getPlayerId())
-                {
-                    map.remove(temp.getPlayerId());
-                    player = temp;
-                }
-            }
-            // Iterate over this set
-            forwardMessage(new KickPlayerResponse(player.getPlayerId()),
-                    connection);
+            Player player = game.getServerPlayers().get(playerId);
+            this.forwardMessage(new KickPlayerResponse(playerId),
+                players.get(game));
+            game.getServerPlayers().remove(playerId);
         }
 
         /**
@@ -254,7 +254,6 @@ public class ServerController
             Game game = games.get(connection);
             handleGameStartRequest(games.get(connection), lobbies.get(game.
                     getGameId()), connection);
-
             dealActionCard(game);
         }
         /**
@@ -474,6 +473,11 @@ public class ServerController
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
             handleAccusation(robot, accusationReq);
+        }
+        else if(obj instanceof EndTurnRequest) 
+        {
+            EndTurnRequest rqst = (EndTurnRequest)obj;
+            handleEndTurnRequest(robot.getGame(), robot);
         }
         /**
          * Check instanceOf obj to determine what change needs to be made the AI
@@ -917,7 +921,6 @@ public class ServerController
     {
         List<ActionCard> drawCards = new ArrayList<ActionCard>();
         ActionCard newCard = game.getDrawPile().remove(0);
-        drawCards.add(newCard);
         
         // Add the card to the server player's hand if they're not an AI
         // AI will take care of this themselves.
@@ -926,7 +929,7 @@ public class ServerController
             game.getCurrentPlayer().addActionCard(newCard);
         }
 
-        ServerResponse response = new CardDealResponse(drawCards);
+        ServerResponse response = new CardDealResponse(newCard);
         informPlayer(game.getCurrentPlayer(), response);
     }
 }

@@ -35,4 +35,9 @@ public class PrivateTip extends ActionCard
     {
         return type;
     }
+
+    public String toString()
+    {
+        return "PRIVATETIP";
+    }
 }

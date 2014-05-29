@@ -59,4 +59,35 @@ public class SuspectCard extends HintCard
         return gender;
     }
 
+    public String toString()
+    {
+        if (this.suspect == SuspectID.WHITE)
+        {
+            return "WHITE";
+        }
+        else if (this.suspect == SuspectID.PEACOCK)
+        {
+            return "PEACOCK";
+        }
+        else if (this.suspect == SuspectID.GREEN)
+        {
+            return "GREEN";
+        }
+        else if (this.suspect == SuspectID.MUSTARD)
+        {
+            return "MUSTARD";
+        }
+        else if (this.suspect == SuspectID.PLUM)
+        {
+            return "PLUM";
+        }
+        else if (this.suspect == SuspectID.SCARLET)
+        {
+            return "SCARLET";
+        }
+        else
+        {
+            return super.toString();
+        }
+    }
 }

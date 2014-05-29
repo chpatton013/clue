@@ -43,57 +43,18 @@ public class AccusationScreen extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cardImage1 = new javax.swing.JPanel();
-        cardImage2 = new javax.swing.JPanel();
-        cardImage3 = new javax.swing.JPanel();
         cardDropDown1 = new javax.swing.JComboBox();
         cardDropDown2 = new javax.swing.JComboBox();
         cardDropDown3 = new javax.swing.JComboBox();
         accuseButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-
-        cardImage1.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout cardImage1Layout = new javax.swing.GroupLayout(cardImage1);
-        cardImage1.setLayout(cardImage1Layout);
-        cardImage1Layout.setHorizontalGroup(
-            cardImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        cardImage1Layout.setVerticalGroup(
-            cardImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        cardImage2.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout cardImage2Layout = new javax.swing.GroupLayout(cardImage2);
-        cardImage2.setLayout(cardImage2Layout);
-        cardImage2Layout.setHorizontalGroup(
-            cardImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        cardImage2Layout.setVerticalGroup(
-            cardImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        cardImage3.setPreferredSize(new java.awt.Dimension(70, 100));
-
-        javax.swing.GroupLayout cardImage3Layout = new javax.swing.GroupLayout(cardImage3);
-        cardImage3.setLayout(cardImage3Layout);
-        cardImage3Layout.setHorizontalGroup(
-            cardImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        cardImage3Layout.setVerticalGroup(
-            cardImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        image1 = new javax.swing.JLabel();
+        image2 = new javax.swing.JLabel();
+        image3 = new javax.swing.JLabel();
 
         cardDropDown1.setMaximumRowCount(9);
-        cardDropDown1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cardDropDown1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suspect1", "Suspect2", "Suspect3", "Suspect4", "Suspect5", "Suspect6" }));
         cardDropDown1.setPreferredSize(new java.awt.Dimension(70, 20));
         cardDropDown1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +62,7 @@ public class AccusationScreen extends javax.swing.JFrame
             }
         });
 
-        cardDropDown2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cardDropDown2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vehicle1", "Vehicle2", "Vehicle3", "Vehicle4", "Vehicle5", "Vehicle6" }));
         cardDropDown2.setPreferredSize(new java.awt.Dimension(70, 20));
         cardDropDown2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +70,7 @@ public class AccusationScreen extends javax.swing.JFrame
             }
         });
 
-        cardDropDown3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cardDropDown3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Location1", "Location2", "Location3", "Location4", "Location5", "Location6", "Location7", "Location8", "Location9" }));
         cardDropDown3.setPreferredSize(new java.awt.Dimension(70, 20));
         cardDropDown3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,12 +94,22 @@ public class AccusationScreen extends javax.swing.JFrame
 
         jLabel1.setText("Make an accusation:");
 
+        image1.setText("I1");
+
+        image2.setText("I2");
+
+        image3.setText("I3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(accuseButton)
@@ -146,33 +117,32 @@ public class AccusationScreen extends javax.swing.JFrame
                         .addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(76, 76, 76))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(image1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(image2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(image3)
+                            .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cardImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(image1)
+                    .addComponent(image2)
+                    .addComponent(image3))
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -273,10 +243,10 @@ public class AccusationScreen extends javax.swing.JFrame
     private javax.swing.JComboBox cardDropDown1;
     private javax.swing.JComboBox cardDropDown2;
     private javax.swing.JComboBox cardDropDown3;
-    private javax.swing.JPanel cardImage1;
-    private javax.swing.JPanel cardImage2;
-    private javax.swing.JPanel cardImage3;
     private javax.swing.JButton closeButton;
+    private javax.swing.JLabel image1;
+    private javax.swing.JLabel image2;
+    private javax.swing.JLabel image3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

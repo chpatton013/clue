@@ -84,6 +84,18 @@ public class ClientLobbyState extends State
     /**
      * Version-latenightpizzaparty
      *
+     * @param playerId method parameter
+     * @param name method parameter
+     */
+    public void removePlayer(Integer playerId)
+    {
+        this.players.remove(playerId);
+        this.triggerChange();
+    }
+
+    /**
+     * Version-latenightpizzaparty
+     *
      * @param players method parameter
      */
     public void setPlayers(Map<Integer, String> players)

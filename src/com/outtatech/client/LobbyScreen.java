@@ -94,6 +94,9 @@ public class LobbyScreen extends javax.swing.JFrame
         {
             gameStartButton.setEnabled(isLeader);
         }
+        if(numPlayers > 5) {
+            createAIButton.setEnabled(false);
+        }
     }
 
     /**

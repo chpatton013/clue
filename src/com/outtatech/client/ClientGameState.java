@@ -199,6 +199,17 @@ public class ClientGameState extends State
         this.hand = hand;
         triggerChange();
     }
+    
+    /**
+     * Adds the given card to the player's hand.
+     * 
+     * @param cards to add to hand
+     */
+    public void addToHand(Card card)
+    {
+        this.hand.add(card);
+        triggerChange();
+    }
 
     /**
      * Returns an Object representing the players notes.

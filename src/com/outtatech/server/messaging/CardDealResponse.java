@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CardDealResponse extends ServerResponse
 {
-    private final List<ActionCard> cards;
+    private final ActionCard card;
 
     /**
      * Version-latenightpizzaparty
@@ -20,19 +20,19 @@ public class CardDealResponse extends ServerResponse
      *
      * @param cards list of cards that have been dealt. method parameter
      */
-    public CardDealResponse(List<ActionCard> cards)
+    public CardDealResponse(ActionCard card)
     {
-        this.cards = cards;
+        this.card = card;
     }
 
     /**
      * Version-latenightpizzaparty
      * Getter methods for the cards dealt to the player.
      *
-     * @return cards dealt to the player. return value
+     * @return card dealt to the player. return value
      */
-    public List<ActionCard> getCards()
+    public ActionCard getCard()
     {
-        return cards;
+        return card;
     }
 }

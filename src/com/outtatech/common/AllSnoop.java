@@ -40,4 +40,9 @@ public class AllSnoop extends ActionCard
     {
         return right;
     }
+
+    public String toString()
+    {
+        return "ALLSNOOP";
+    }
 }

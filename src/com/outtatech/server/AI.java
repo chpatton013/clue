@@ -577,8 +577,9 @@ public class AI extends ServerPlayer
         if (obj instanceof CardDealResponse)
         {
             CardDealResponse rsp = (CardDealResponse) obj;
-            // Iterate over this set
-            for (Card temp : rsp.getCards())
+            Card temp = rsp.getCard();
+            // Guard against this
+            if (temp.getCardType() == CardType.ACTION)
             {
                 // Guard against this
                 if (temp.getCardType() == CardType.ACTION)
