@@ -48,6 +48,15 @@ public class AI extends ServerPlayer
     {
         return difficulty;
     }
+    
+    /**
+     * Getter method for the AI's game
+     * @return the AI's game
+     */
+    public Game getGame()
+    {
+        return game;
+    }
 
     /**
      * Version-latenightpizzaparty
