@@ -57,6 +57,11 @@ public class ServerPlayer implements Player, Serializable
 
     public void addActionCard(ActionCard card)
     {
+        if (card == null)
+        {
+            return;
+        }
+
         actionCardsHand.add(card);
     }
     

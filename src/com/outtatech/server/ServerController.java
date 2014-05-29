@@ -35,9 +35,6 @@ public class ServerController
     private Map<Integer, Lobby> lobbies;
     private ServerNetwork network;
 
-    private Set<Integer> skipDeal;
-    private Set<Integer> playedThisTurn;
-
     private int gameCounter = 1;
     private int playerCounter = 1;
     private int robotCounter = 1;
@@ -64,9 +61,6 @@ public class ServerController
         this.robots = new HashMap<ServerPlayer, AI>();
         this.lobbies = new HashMap<Integer, Lobby>();
         this.gameIdToGame = new HashMap<Integer, Game>();
-
-        this.skipDeal = new HashSet<Integer>();
-        this.playedThisTurn = new HashSet<Integer>();
 
         try
         {
@@ -314,17 +308,8 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
-        Integer playerId = initiator.getPlayerId();
-        if (!playedThisTurn.contains(playerId))
-        {
-            skipDeal.add(playerId);
-        }
-
         game.advanceTurn();
         dealActionCard(game);
-
-        playedThisTurn.remove(playerId);
-        skipDeal.remove(playerId);
     }
 
     /**
@@ -423,7 +408,6 @@ public class ServerController
             ConnectionToClient connection)
     {
         ServerPlayer player = connectionToPlayer.get(connection);
-        playedThisTurn.add(player.getPlayerId());
 
         ArrayList<ConnectionToClient> gamePlayers
                 = new ArrayList<ConnectionToClient>();
@@ -933,7 +917,6 @@ public class ServerController
             ConnectionToClient connection)
     {
         ServerPlayer player = connectionToPlayer.get(connection);
-        playedThisTurn.add(player.getPlayerId());
 
         ActionCard card = actionReq.getActionCard();
         //Get the players game
@@ -973,17 +956,17 @@ public class ServerController
         ServerPlayer player = game.getCurrentPlayer();
 
         ActionCard newCard = null;
-        if (!this.skipDeal.contains(player.getPlayerId()))
+        if (player.getActionCardsHand().size() < 2)
         {
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
             newCard = game.getDrawPile().remove(0);
+        }
 
-            // Add the card to the server player's hand if they're not an AI
-            // AI will take care of this themselves.
-            if (!(player instanceof AI))
-            {
-                player.addActionCard(newCard);
-            }
+        // Add the card to the server player's hand if they're not an AI
+        // AI will take care of this themselves.
+        if (!(player instanceof AI))
+        {
+            player.addActionCard(newCard);
         }
 
         ServerResponse response = new CardDealResponse(newCard);
