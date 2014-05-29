@@ -1,5 +1,7 @@
 package com.outtatech.client;
 
+import javax.swing.ImageIcon;
+
 /**
  * Version-latenightpizzaparty
  *
@@ -17,6 +19,7 @@ public class AccusationScreen extends javax.swing.JFrame
     public AccusationScreen()
     {
         initComponents();
+        
     }
 
     /**
@@ -31,6 +34,15 @@ public class AccusationScreen extends javax.swing.JFrame
         controller = ctrl;
 
         initComponents();
+        
+        image1.setText("");
+        image2.setText("");
+        image3.setText("");
+        
+        String path = controller.getImagePath();
+        image1.setIcon(new ImageIcon(path + "MUSTARD.jpg"));
+        image2.setIcon(new ImageIcon(path + "SEAPLANE.jpg"));
+        image3.setIcon(new ImageIcon(path + "Location-1.jpg"));
     }
 
     /**
@@ -111,22 +123,20 @@ public class AccusationScreen extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(image1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addComponent(accuseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(closeButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(image1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(image2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95)))
+                            .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(image2))
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(image3)
                             .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -140,19 +150,19 @@ public class AccusationScreen extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(image1)
-                    .addComponent(image2)
-                    .addComponent(image3))
-                .addGap(83, 83, 83)
+                    .addComponent(image3)
+                    .addComponent(image2))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accuseButton)
                     .addComponent(closeButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,14 +180,63 @@ public class AccusationScreen extends javax.swing.JFrame
 
     private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown1ActionPerformed
         //set cardImage1 to image of selected card
+        int suspectNumber = cardDropDown1.getSelectedIndex();
+        String path = controller.getImagePath();
+        String image;
+        if(suspectNumber == 0) {
+            image = "MUSTARD.jpg";
+        }
+        else if(suspectNumber == 1) {
+            image = "PEACOCK.jpg";
+        }
+        else if(suspectNumber == 2) {
+            image = "WHITE.jpg";
+        }
+        else if(suspectNumber == 3) {
+            image = "GREEN.jpg";
+        }
+        else if(suspectNumber == 4) {
+            image = "PLUM.jpg";
+        }
+        else {
+            image = "SCARLET.jpg";
+        }
+        image1.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown1ActionPerformed
 
     private void cardDropDown2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown2ActionPerformed
         //set cardImage2 to image of selected card
+        int vehicleNumber = cardDropDown2.getSelectedIndex();
+        String path = controller.getImagePath();
+        String image;
+        if(vehicleNumber == 0) {
+            image = "SEAPLANE.jpg";
+        }
+        else if(vehicleNumber == 1) {
+            image = "AUTOMOBILE.jpg";
+        }
+        else if(vehicleNumber == 2) {
+            image = "HOTAIRBALLOON.jpg";
+        }
+        else if(vehicleNumber == 3) {
+            image = "LIMOSINE.jpg";
+        }
+        else if(vehicleNumber == 4) {
+            image = "AIRLINER.jpg";
+        }
+        else {
+            image = "TRAIN.jpg";
+        }
+        image2.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown2ActionPerformed
 
     private void cardDropDown3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardDropDown3ActionPerformed
         //set cardImage3 to image of selected card
+        int locationNumber = cardDropDown3.getSelectedIndex() + 1;
+        String path = controller.getImagePath();
+        String image = "Location-" + locationNumber + ".jpg";
+        System.out.println(image);
+        image3.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown3ActionPerformed
 
     /**
