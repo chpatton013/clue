@@ -252,17 +252,12 @@ public class ServerController
         else if (obj instanceof GameStartRequest)
         {
             Game game = games.get(connection);
-<<<<<<< Updated upstream
             handleGameStartRequest(games.get(connection), lobbies.get(game.
-                    getGameId()));
+                    getGameId()), connection);
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
             drawCards.add(game.getDrawPile().remove(0));
             ServerResponse response = new CardDealResponse(drawCards);
             informPlayer(game.getCurrentPlayer(), response);
-=======
-            handleGameStartRequest(game, lobbies.get(game.
-                    getGameId()), connection);
->>>>>>> Stashed changes
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -612,12 +607,8 @@ public class ServerController
         }
 
         // Remove lobby when game starts
-<<<<<<< Updated upstream
         // Connection to server player
         lobbies.remove(game);
-=======
-        waiting.remove(connectionToPlayer.get(connection));
->>>>>>> Stashed changes
 
     }
 
