@@ -23,4 +23,9 @@ public class Snoop extends ActionCard
     {
         return "SNOOP";
     }
+
+    public boolean equals(Object obj)
+    {
+        return obj instanceof Snoop;
+    }
 }

@@ -40,4 +40,14 @@ public class SuperSleuth extends ActionCard
     {
         return "SUPERSLEUTH";
     }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof SuperSleuth)) {
+            return false;
+        }
+
+        SuperSleuth other = (SuperSleuth)obj;
+        return this.type == other.type;
+    }
 }

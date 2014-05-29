@@ -40,4 +40,14 @@ public class PrivateTip extends ActionCard
     {
         return "PRIVATETIP";
     }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof PrivateTip)) {
+            return false;
+        }
+
+        PrivateTip other = (PrivateTip)obj;
+        return this.type == other.type;
+    }
 }
