@@ -484,17 +484,20 @@ public class ServerController
         /**
          * Using the robots Map find the Game instance of the AI robot.
          */
+        System.out.println("Recieved a message from the AI");
         if (obj instanceof ActionRequest)
         {
+            System.out.println("Action Request");
             AccusationRequest accusationReq = (AccusationRequest) obj;
             handleAccusation(robot, accusationReq);
         }
         else if (obj instanceof AccusationRequest)
         {
-            
+            System.out.println("AccusationRequest");
         }
         else if(obj instanceof EndTurnRequest) 
         {
+            System.out.println("EndTurnRequest");
             EndTurnRequest rqst = (EndTurnRequest)obj;
             handleEndTurnRequest(robot.getGame(), robot);
         }
