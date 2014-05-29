@@ -1515,8 +1515,8 @@ public class MainGameScreen extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
-        playerList.setGridColor(new java.awt.Color(255, 255, 255));
         playerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        playerList.setShowHorizontalLines(false);
         playerList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playerListMouseClicked(evt);
@@ -1528,47 +1528,48 @@ public class MainGameScreen extends javax.swing.JFrame
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.setText("Suspect1");
 
-        jCheckBox2.setText("jCheckBox2");
+        jCheckBox2.setText("Suspect2");
 
-        jCheckBox3.setText("jCheckBox3");
+        jCheckBox3.setText("Suspect3");
 
-        jCheckBox4.setText("jCheckBox4");
+        jCheckBox4.setText("Suspect4");
 
-        jCheckBox5.setText("jCheckBox5");
+        jCheckBox5.setText("Suspect5");
 
-        jCheckBox6.setText("jCheckBox6");
+        jCheckBox6.setText("Suspect6");
 
-        jCheckBox7.setText("jCheckBox7");
+        jCheckBox7.setText("Vehicle1");
 
-        jCheckBox8.setText("jCheckBox8");
+        jCheckBox8.setText("Vehicle2");
 
-        jCheckBox9.setText("jCheckBox9");
+        jCheckBox9.setText("Vehicle3");
 
-        jCheckBox10.setText("jCheckBox10");
+        jCheckBox10.setText("Vehicle4");
 
-        jCheckBox11.setText("jCheckBox11");
+        jCheckBox11.setText("Vehicle5");
 
-        jCheckBox12.setText("jCheckBox12");
+        jCheckBox12.setText("Vehicle6");
 
-        jCheckBox13.setText("jCheckBox13");
+        jCheckBox13.setText("Location1");
 
-        jCheckBox14.setText("jCheckBox14");
+        jCheckBox14.setText("Location2");
 
-        jCheckBox15.setText("jCheckBox15");
+        jCheckBox15.setText("Location3");
 
-        jCheckBox16.setText("jCheckBox16");
+        jCheckBox16.setText("Location4");
 
-        jCheckBox17.setText("jCheckBox17");
+        jCheckBox17.setText("Location5");
 
-        jCheckBox18.setText("jCheckBox18");
+        jCheckBox18.setText("Location6");
 
-        jCheckBox19.setText("jCheckBox19");
+        jCheckBox19.setText("Location7");
 
-        jCheckBox20.setText("jCheckBox20");
+        jCheckBox20.setText("Location8");
 
-        jCheckBox21.setText("jCheckBox21");
+        jCheckBox21.setText("Location9");
+        jCheckBox21.setToolTipText("");
 
         leaveGameButton.setText("Leave Game");
         leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1659,24 +1660,19 @@ public class MainGameScreen extends javax.swing.JFrame
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jCheckBox1)
-                                                            .addComponent(jCheckBox2)
-                                                            .addComponent(jCheckBox3)
-                                                            .addComponent(jCheckBox4)
-                                                            .addComponent(jCheckBox5)
-                                                            .addComponent(jCheckBox6))
-                                                        .addGap(83, 83, 83))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jCheckBox7)
-                                                            .addComponent(jCheckBox8)
-                                                            .addComponent(jCheckBox9)
-                                                            .addComponent(jCheckBox10)
-                                                            .addComponent(jCheckBox11)
-                                                            .addComponent(jCheckBox12))
-                                                        .addGap(68, 68, 68)))
+                                                    .addComponent(jCheckBox1)
+                                                    .addComponent(jCheckBox2)
+                                                    .addComponent(jCheckBox3)
+                                                    .addComponent(jCheckBox4)
+                                                    .addComponent(jCheckBox5)
+                                                    .addComponent(jCheckBox6)
+                                                    .addComponent(jCheckBox7)
+                                                    .addComponent(jCheckBox8)
+                                                    .addComponent(jCheckBox9)
+                                                    .addComponent(jCheckBox10)
+                                                    .addComponent(jCheckBox11)
+                                                    .addComponent(jCheckBox12))
+                                                .addGap(83, 83, 83)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jCheckBox21)
                                                     .addComponent(jCheckBox20)
@@ -1852,7 +1848,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
-        selectedPlayer = playerList.getSelectedRow();
+        selectedPlayer = (int)playerIds.get(playerList.getSelectedRow());
         
     }//GEN-LAST:event_playerListMouseClicked
 
