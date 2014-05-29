@@ -579,7 +579,7 @@ public class AI extends ServerPlayer
             CardDealResponse rsp = (CardDealResponse) obj;
             Card temp = rsp.getCard();
             // Guard against this
-            if (temp.getCardType() == CardType.ACTION)
+            if (temp != null && temp.getCardType() == CardType.ACTION)
             {
                 // Guard against this
                 if (temp.getCardType() == CardType.ACTION)
