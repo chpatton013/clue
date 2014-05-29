@@ -302,7 +302,7 @@ public class GUIController implements Observer
     {
         //call Client Controller's setState method with
         //a parameter of new ClientLobbyState()
-        clientController.startMultiPlayerGame("LOBBYGAME!!!");
+        clientController.startMultiPlayerGame("GameLobby");
     }
 
     /**

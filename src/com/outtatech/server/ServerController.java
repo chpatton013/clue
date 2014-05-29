@@ -38,6 +38,7 @@ public class ServerController
     private Set<Integer> skipDeal;
     private Set<Integer> playedThisTurn;
 
+    private int gameCounter = 1;
     private int playerCounter = 1;
     private int robotCounter = 1;
 
@@ -200,7 +201,8 @@ public class ServerController
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
-            Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
+            Lobby lobby = new Lobby(lcr.getLobbyName() + gameCounter++,
+                game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
             lobbies.put(game.getGameId(), lobby);
