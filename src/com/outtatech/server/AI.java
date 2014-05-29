@@ -569,20 +569,18 @@ public class AI extends ServerPlayer
         if (obj instanceof CardDealResponse)
         {
             CardDealResponse rsp = (CardDealResponse) obj;
-            // Iterate over this set
-            for (Card temp : rsp.getCards())
+            Card temp = rsp.getCard();
+            // Guard against this
+            if (temp.getCardType() == CardType.ACTION)
             {
-                // Guard against this
-                if (temp.getCardType() == CardType.ACTION)
-                {
-                    actionCardsHand.add((ActionCard) temp);
-                }
-                // Guard against this
-                if (temp.getCardType() == CardType.HINT)
-                {
-                    hintCardsHand.add((HintCard) temp);
-                }
+                actionCardsHand.add((ActionCard) temp);
             }
+            // Guard against this
+            if (temp.getCardType() == CardType.HINT)
+            {
+                hintCardsHand.add((HintCard) temp);
+            }
+
             //playActionCard();
             ctrl.handleEndTurnRequest(game, this);
         }

@@ -255,8 +255,8 @@ public class ServerController
             handleGameStartRequest(games.get(connection), lobbies.get(game.
                     getGameId()), connection);
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
-            drawCards.add(game.getDrawPile().remove(0));
-            ServerResponse response = new CardDealResponse(drawCards);
+            ServerResponse response =
+                new CardDealResponse(game.getDrawPile().remove(0));
             informPlayer(game.getCurrentPlayer(), response);
         }
         /**
@@ -285,8 +285,8 @@ public class ServerController
     {
         ServerPlayer newCurrent = game.advanceTurn();
         List<ActionCard> drawCards = new ArrayList<ActionCard>();
-        drawCards.add(game.getDrawPile().remove(0));
-        ServerResponse response = new CardDealResponse(drawCards);
+        ServerResponse response =
+            new CardDealResponse(game.getDrawPile().remove(0));
         informPlayer(initiator, response);
     }
 

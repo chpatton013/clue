@@ -338,10 +338,10 @@ public class ClientController
         }
         else
         {
-            ((ClientGameState) this.state).getHand().addAll(rsp.getCards());
+            ClientGameState state = (ClientGameState) this.state;
+            state.addToHand(rsp.getCard());
 
-            ((ClientGameState) this.state).pushGameLog(
-                    "Cards dealt: " + rsp.getCards());
+            state.pushGameLog("Card dealt: " + rsp.getCard());
         }
     }
 
