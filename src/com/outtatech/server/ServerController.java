@@ -502,7 +502,7 @@ public class ServerController
 
     public void informAI(Object obj, AI ai)
     {
-
+        ai.reactToServer(obj);
     }
 
     /**

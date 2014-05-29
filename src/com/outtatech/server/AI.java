@@ -593,7 +593,7 @@ public class AI extends ServerPlayer
 //                }
             }
             
-            aiTurn();
+            //aiTurn();
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }
