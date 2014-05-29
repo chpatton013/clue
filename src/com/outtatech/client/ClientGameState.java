@@ -91,21 +91,21 @@ public class ClientGameState extends State
     {
         return playerID;
     }
-    
+
     /**
      * Setter method that sets the mapping from destination IDs to player IDs
-     * @param map 
+     * @param map
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> map)
     {
         this.destToPlayerId = map;
         triggerChange();
     }
-    
-    
+
+
     /**
      * Sets the players in this game
-     * 
+     *
      * @param players the players in this game.
      */
     public void setPlayers(Map<Integer, String> players)
@@ -113,10 +113,10 @@ public class ClientGameState extends State
         this.players = players;
         triggerChange();
     }
-    
+
     /**
      * Returns the list of players in this game
-     * 
+     *
      * @return the list of players in this game
      */
     public Map<Integer, String> getPlayers()
@@ -145,7 +145,7 @@ public class ClientGameState extends State
 <<<<<<< HEAD
      * @param revealed the list of cards that have been revealed to the client.
 =======
-     * @param revealed the list of cards that have been revealed to the client. 
+     * @param revealed the list of cards that have been revealed to the client.
      * method parameter
 >>>>>>> 7af8a8b0c28bdab833deebdabe18a56bbb0bf199
      */
@@ -188,26 +188,37 @@ public class ClientGameState extends State
         this.playerID = playerID;
         triggerChange();
     }
-    
+
     /**
      * Sets this players hand.
-     * 
-     * @param hand 
+     *
+     * @param hand
      */
     public void setPlayerHand(List<Card> hand)
     {
         this.hand = hand;
         triggerChange();
     }
-    
+
     /**
      * Adds the given card to the player's hand.
-     * 
+     *
      * @param cards to add to hand
      */
     public void addToHand(Card card)
     {
         this.hand.add(card);
+        triggerChange();
+    }
+
+    /**
+     * Removes the given card from the player's hand.
+     *
+     * @param cards to remove from hand
+     */
+    public void removeFromHand(Card card)
+    {
+        this.hand.remove(card);
         triggerChange();
     }
 
@@ -220,11 +231,11 @@ public class ClientGameState extends State
     {
         return notes;
     }
-    
+
     /**
      * Sets this players notes.
-     * 
-     * @param notes 
+     *
+     * @param notes
      */
     public void setNotes(Object notes)
     {

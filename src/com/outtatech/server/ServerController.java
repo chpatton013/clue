@@ -413,7 +413,9 @@ public class ServerController
                 = new ArrayList<ConnectionToClient>();
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
 
+        Suggestion card = suggestionReq.getCard();
         Solution suggestion = suggestionReq.getSuggestion();
+        player.removeActionCard(card);
 
         //Get the clients game
         Game clientGame = games.get(connection);
@@ -457,7 +459,8 @@ public class ServerController
 
     }
 
-    private void handleAccusation(ServerPlayer fromPlayer, AccusationRequest accusationReq)
+    private void handleAccusation(ServerPlayer fromPlayer,
+            AccusationRequest accusationReq)
     {
         Game clientGame;
         Solution accusation = accusationReq.getSolution();
@@ -943,6 +946,8 @@ public class ServerController
             SuperSleuth superSleuthCard = (SuperSleuth) card;
             handleSuperSleuth(superSleuthCard, connection);
         }
+
+        player.removeActionCard(card);
     }
 
     /**

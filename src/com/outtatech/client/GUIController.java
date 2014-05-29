@@ -35,6 +35,7 @@ public class GUIController implements Observer
     int imageIndex = 0, curPlayerId = -1;
 
     boolean isTurn = false;
+    boolean played = false;
 
     String[] imagePaths =
     {
@@ -393,9 +394,10 @@ public class GUIController implements Observer
     public void playCard(ActionCard card, int selectedPlayer)
     {
         // Guard against this
-        if (isTurn)
+        if (isTurn && !this.played)
         {
             clientController.playActionCard(card, selectedPlayer);
+            this.played = true;
         }
     }
 
@@ -407,6 +409,8 @@ public class GUIController implements Observer
     {
         revealedCardsScreen.setVisible(false);
         accusationScreen.setVisible(false);
+
+        this.played = false;
 
         //call client controller's end turn method
         clientController.endTurn();

@@ -162,11 +162,13 @@ public class ClientController
     public void playActionCard(ActionCard card, Integer playerId)
     {
         this.forwardMessage(new ActionRequest(card, playerId));
+        ((ClientGameState)this.state).removeFromHand(card);
     }
 
     public void playSuggestionCard(Suggestion card, Solution solution)
     {
         this.forwardMessage(new SuggestionRequest(card, solution));
+        ((ClientGameState)this.state).removeFromHand(card);
     }
 
 //    public void revealCards(List<Card> cards)
