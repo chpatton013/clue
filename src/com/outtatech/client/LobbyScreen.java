@@ -94,7 +94,8 @@ public class LobbyScreen extends javax.swing.JFrame
         {
             gameStartButton.setEnabled(isLeader);
         }
-        if(numPlayers == 5) {
+        if(numPlayers == 5)
+        {
             createAIButton.setEnabled(false);
         }
     }
@@ -133,7 +134,8 @@ public class LobbyScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         gameStartButton = new javax.swing.JButton();
         createAIButton = new javax.swing.JButton();
@@ -145,29 +147,37 @@ public class LobbyScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         gameStartButton.setText("START!");
-        gameStartButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        gameStartButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 gameStartButtonMouseClicked(evt);
             }
         });
 
         createAIButton.setText("Create AI");
-        createAIButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        createAIButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 createAIButtonMouseClicked(evt);
             }
         });
 
         kickPlayerButton.setText("Kick Player");
-        kickPlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        kickPlayerButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 kickPlayerButtonMouseClicked(evt);
             }
         });
 
         exitButton.setText("Exit");
-        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 exitButtonMouseClicked(evt);
             }
         });
@@ -183,12 +193,14 @@ public class LobbyScreen extends javax.swing.JFrame
             new String [] {
                 "Players:"
             }
-        ) {
+        )
+        {
             boolean[] canEdit = new boolean [] {
                 false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -234,7 +246,8 @@ public class LobbyScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gameStartButtonMouseClicked
+    private void gameStartButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_gameStartButtonMouseClicked
         // Guard against this
         if (gameStartButton.isEnabled())
         {
@@ -243,7 +256,8 @@ public class LobbyScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_gameStartButtonMouseClicked
 
-    private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAIButtonMouseClicked
+    private void createAIButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_createAIButtonMouseClicked
         // Guard against this
         if (createAIButton.isEnabled())
         {
@@ -252,7 +266,8 @@ public class LobbyScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_createAIButtonMouseClicked
 
-    private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kickPlayerButtonMouseClicked
+    private void kickPlayerButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_kickPlayerButtonMouseClicked
         //call controller's kickPlayer method with the selected player's id
         int indx = playerList.getSelectedRow();
 
@@ -263,7 +278,8 @@ public class LobbyScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_kickPlayerButtonMouseClicked
 
-    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
+    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt)
+    {//GEN-FIRST:event_exitButtonMouseClicked
         //call controller's exitWindow method
         controller.exitWindow();
     }//GEN-LAST:event_exitButtonMouseClicked
