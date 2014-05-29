@@ -467,8 +467,8 @@ public class ServerController
          */
         if (obj instanceof ActionRequest)
         {
-            ActionRequest accusationReq = (ActionRequest) obj;
-            handleAccusation(robot, accusationReq);
+//            ActionRequest accusationReq = (ActionRequest) obj;
+//            handleAccusation(robot, accusationReq);
         }
         else if (obj instanceof AccusationRequest)
         {
