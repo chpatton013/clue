@@ -473,6 +473,11 @@ public class ServerController
         {
             
         }
+        else if(obj instanceof EndTurnRequest) 
+        {
+            EndTurnRequest rqst = (EndTurnRequest)obj;
+            handleEndTurnRequest(robot.getGame(), robot);
+        }
         /**
          * Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
