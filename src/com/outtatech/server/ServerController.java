@@ -467,12 +467,13 @@ public class ServerController
          */
         if (obj instanceof ActionRequest)
         {
-            AccusationRequest accusationReq = (AccusationRequest) obj;
+            ActionRequest accusationReq = (ActionRequest) obj;
             handleAccusation(robot, accusationReq);
         }
         else if (obj instanceof AccusationRequest)
         {
-            
+            AccusationRequest accusationReq = (AccusationRequest) obj;
+            handleAccusation(robot, accusationReq);
         }
         /**
          * Check instanceOf obj to determine what change needs to be made the AI
