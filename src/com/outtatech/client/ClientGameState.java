@@ -264,6 +264,21 @@ public class ClientGameState extends State
         return this.playerTurnOrder;
     }
 
+    public String getPlayerName(Integer playerId)
+    {
+        return this.players.get(playerId);
+    }
+
+    public List<String> getPlayerNames(List<Integer> playerIds)
+    {
+        List<String> names = new ArrayList<String>();
+        for (Integer playerId : playerIds)
+        {
+            names.add(this.players.get(playerId));
+        }
+        return names;
+    }
+
     public Integer getCurrentActivePlayer()
     {
         return this.currentActivePlayer;
