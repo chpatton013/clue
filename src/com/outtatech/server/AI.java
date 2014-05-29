@@ -318,8 +318,6 @@ public class AI extends ServerPlayer
             }
         }
 
-        ctrl.reactToRobot(new EndTurnRequest(), this);
-
     }
 
     /**
@@ -572,7 +570,8 @@ public class AI extends ServerPlayer
         // Guard against this
         if (obj instanceof AccusationResponse)
         {
-            //?
+            //check if accusation is correct
+            //if not, keep sending endturnrequests
         }
         // Guard against this
         if (obj instanceof CardDealResponse)
@@ -587,18 +586,22 @@ public class AI extends ServerPlayer
                     actionCardsHand.add((ActionCard) temp);
                 }
                 // Guard against this
-                if (temp.getCardType() == CardType.HINT)
-                {
-                    hintCardsHand.add((HintCard) temp);
-                }
+//                if (temp.getCardType() == CardType.HINT)
+//                {
+//                    hintCardsHand.add((HintCard) temp);
+//                }
             }
+            
+            aiTurn();
             //playActionCard();
-            ctrl.handleEndTurnRequest(game, this);
+            ctrl.reactToRobot(new EndTurnRequest(), this);
         }
         // Guard against this
         if (obj instanceof GameStateResponse)
         {
-            //?
+            GameStateResponse gsr = (GameStateResponse) obj;
+            actionCardsHand = gsr.getActionCards();
+            hintCardsHand = gsr.getHintCards();
         }
         // Guard against this
         if (obj instanceof KickPlayerResponse)

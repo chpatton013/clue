@@ -377,16 +377,12 @@ public class GUIController implements Observer
      *
      * @param card method parameter
      */
-    public void playCard(ActionCard card)
+    public void playCard(ActionCard card, int selectedPlayer)
     {
         // Guard against this
         if (isTurn)
         {
-            //check type of card
-
-            //call client controller's requestUse method with an action card of
-            //type cardType and selected playerId from game window if
-            //it is a snoop card
+            clientController.playActionCard(card, null, selectedPlayer);
         }
     }
 
