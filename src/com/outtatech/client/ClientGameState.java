@@ -305,6 +305,7 @@ public class ClientGameState extends State
     public void pushGameLog(String message)
     {
         this.gameLog.addLast(message);
+        this.triggerChange();
     }
 
     public String pollGameLog()
