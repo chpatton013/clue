@@ -298,19 +298,26 @@ public class AI extends ServerPlayer
         {
             return;
         }
-
+        
         System.out.println("AI " + this.getPlayerId() + " is taking its turn");
-        ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
+        int choice = (int) (Math.random() * 2);
+        System.out.println("Picking card: " + choice);
+        ActionCard cardToPlay = actionCardsHand.get(choice);
+        System.out.println("AI : I'm going to play the card " + 
+                cardToPlay.getActionType());
 
         // Guard against this
         if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
         {
-            aiMakeSuggestion((Suggestion) cardToPlay);
+            System.out.println("Can't play this fucking suggestion!");
+            //aiMakeSuggestion(cardToPlay);
         }
         // Otherwise...
-        else if (cardToPlay.getActionType() == ActionCardType.SNOOP ||
-                cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
+        else if (cardToPlay.getActionType() == ActionCardType.SNOOP
+                || cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
         {
+            int randomPlayer = getRandomPlayerID();
+            System.out.println("AI chose playerID " + randomPlayer + " as the target");
             ctrl.reactToRobot(new ActionRequest(cardToPlay,
                     getRandomPlayerID()), this);
         }
@@ -330,12 +337,12 @@ public class AI extends ServerPlayer
      */
     private Integer getRandomPlayerID()
     {
-        Integer playerID = -1;
+        Integer playerID = this.getPlayerId();
 
         // Iterate until false
         while (playerID == this.getPlayerId())
         {
-            int index = (int) Math.random() * game.getServerPlayersList().size();
+            int index = (int) (Math.random() * game.getServerPlayersList().size());
             playerID = game.getServerPlayersList().get(index).getPlayerId();
         }
 
@@ -348,7 +355,7 @@ public class AI extends ServerPlayer
         VehicleID choice2;
         DestinationID choice3;
 
-        System.out.println("AI GONNA MAKE AN ACCUSATION!");
+        System.out.println("AI GONNA MAKE A SUGGESTION!");
         // Guard against this
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
@@ -435,11 +442,14 @@ public class AI extends ServerPlayer
         // number of cards in each category) / 3
         float knowledge = (suspectCardsSeen.size() / 6 + vehicleCardsSeen.size()
                 / 6 + locationsSeen.size() / 9) / 3;
+        System.out.println("Knowledge coefficient of AI is: " + knowledge);
+        System.out.println("AI riskiness variable is: " + difficulty.getRiskiness());
         // if knowledge < riskiness of AI
         // Guard against this
         if ((knowledge * 0) <= difficulty.getRiskiness())
         //  return false
         {
+            System.out.println("Will not make an accusation!");
             return false;
         }
         // else {
@@ -570,15 +580,18 @@ public class AI extends ServerPlayer
      */
     public void reactToServer(Object obj)
     {
+        System.out.println("Server gave me a message!");
         // Guard against this
         if (obj instanceof AccusationResponse)
         {
+            System.out.println("AI got an AccusationRepsonse!");
             //check if accusation is correct
             //if not, keep sending endturnrequests
         }
         // Guard against this
         if (obj instanceof CardDealResponse)
         {
+            System.out.println("AI got an CardDealRepsonse!");
             CardDealResponse rsp = (CardDealResponse) obj;
             Card temp = rsp.getCard();
             // Guard against this
@@ -596,13 +609,14 @@ public class AI extends ServerPlayer
 //                }
             }
             
-            //aiTurn();
+            aiTurn();
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }
         // Guard against this
         if (obj instanceof GameStateResponse)
         {
+            System.out.println("AI got an GameStateResponse!");
             GameStateResponse gsr = (GameStateResponse) obj;
             actionCardsHand = gsr.getActionCards();
             hintCardsHand = gsr.getHintCards();
@@ -610,11 +624,13 @@ public class AI extends ServerPlayer
         // Guard against this
         if (obj instanceof KickPlayerResponse)
         {
-
+            System.out.println("AI got an KickPlayerRepsonse!");
         }
         // Guard against this
         if (obj instanceof RevealCardResponse)
         {
+            System.out.println("AI got an RevealCardRepsonse!");
+            System.out.println("AI got some cards!");
             RevealCardResponse rsp = (RevealCardResponse) obj;
             // Iterate over this set
             for (Card temp : rsp.getCards())
@@ -622,19 +638,26 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.SUSPECT)
                 {
+                    System.out.println("AI found " + 
+                            ((SuspectCard) temp).getSuspect());
                     suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
                 }
                 // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
                 {
+                    System.out.println("AI found " + 
+                            ((VehicleCard) temp).getVehicle());
                     vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
                 }
                 // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
                 {
+                    System.out.println("AI found " + 
+                            ((DestinationCard) temp).getDestination());
                     locationsSeen.add(((DestinationCard) temp).getDestination());
                 }
             }
         }
+        System.out.println("AI got an unsupported Response of " + obj);
     }
 }

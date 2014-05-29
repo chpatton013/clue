@@ -100,7 +100,7 @@ public class ServerController
         else if (obj instanceof ActionRequest)
         {
             ActionRequest actionReq = (ActionRequest) obj;
-            handleActionRequest(actionReq, connection);
+            handleActionRequest(actionReq, connectionToPlayer.get(connection));
         }
         /* 
          * AccusationRequest respond with AccusationResponse
@@ -137,6 +137,7 @@ public class ServerController
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                 games.get(connection));
             newPlayer.setName("ClueBot" + this.robotCounter++);
+            robots.put(newPlayer, (AI) newPlayer);
 
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
@@ -159,6 +160,7 @@ public class ServerController
          */
         else if (obj instanceof LobbyJoinRequest)
         {
+            System.out.println("Got LobbyJoinRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             Game game = gameIdToGame.get(lobby.getGameId());
 
@@ -182,6 +184,10 @@ public class ServerController
             for (Player temp : players)
             {
                 names.put(temp.getPlayerId(), temp.getName());
+            }
+            
+            for(ConnectionToClient temp: cxns) {
+                System.out.println(temp.getId());
             }
 
             forwardMessage(new LobbyJoinResponse(lobby,
@@ -252,13 +258,19 @@ public class ServerController
         }
         else if(obj instanceof LobbyLeaveRequest) 
         {
-            if(connectionToPlayer.containsKey(connection)) 
+            System.out.println("lobbyleaveRequest");
+            for(ConnectionToClient temp: games.keySet()) {
+                System.out.println(temp.getId());
+            }
+            if(games.containsKey(connection)) 
             {
+                System.out.println("removing connection " + connection.getId());
                 Game game = games.get(connection);
                 ServerPlayer player = connectionToPlayer.get(connection);
                 int playerId = player.getPlayerId();
                 game.getServerPlayers().remove(playerId);
                 games.remove(connection);
+                players.get(game).remove(connection);
                 connectionToPlayer.remove(connection);
                 humans.remove(player);
                 if(game.getServerPlayers().size() == 0) 
@@ -500,13 +512,17 @@ public class ServerController
         System.out.println("Recieved a message from the AI");
         if (obj instanceof ActionRequest)
         {
-            System.out.println("Action Request");
-            AccusationRequest accusationReq = (AccusationRequest) obj;
-            handleAccusation(robot, accusationReq);
+            System.out.println("Recieved an ActionRequest");
+            ActionRequest rqst = (ActionRequest) obj;
+            Game game = robot.getGame();
+            List<ServerPlayer> players = game.getServerPlayersList();
+            handleActionRequest(rqst, (ServerPlayer) robot);
         }
         else if (obj instanceof AccusationRequest)
         {
             System.out.println("AccusationRequest");
+            AccusationRequest accusationReq = (AccusationRequest) obj;
+            handleAccusation(robot, accusationReq);
         }
         else if(obj instanceof EndTurnRequest) 
         {
@@ -538,6 +554,7 @@ public class ServerController
 
     public void informAI(Object obj, AI ai)
     {
+        System.out.println("Informing the AI about " + obj);
         ai.reactToServer(obj);
     }
 
@@ -668,6 +685,7 @@ public class ServerController
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
     {
+        System.out.println("Handling all snoop!");
         for (int playerNum = 0; playerNum < players.size(); playerNum++)
         {
             ServerPlayer curPlayer = players.get(playerNum);
@@ -687,6 +705,8 @@ public class ServerController
             {
                 otherPlayer = players.get((playerNum + 1) % players.size());
             }
+            
+            System.out.println("Got through player directions");
 
             List<HintCard> cards = otherPlayer.getHintCardsHand();
             List<Card> revealed = new ArrayList<Card>();
@@ -696,15 +716,37 @@ public class ServerController
             revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
             RevealCardResponse response
                     = new RevealCardResponse(card, revealed);
-            forwardMessage(response, humans.get(curPlayer));
+            if(humans.containsKey(curPlayer)) 
+            {
+                forwardMessage(response, humans.get(curPlayer));
+            }
+            else
+            {
+                informAI(response, (AI)curPlayer);
+            }
         }
     }
 
     private void handlePrivateTip(PrivateTip card, Integer playerId,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling private tip");
+        
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+        if(humans.containsKey(player)) 
+        {
+            connection = humans.get(player);
+        }
+        if(!isAI) 
+        {
+            curGame = games.get(connection);
+        }
+        else 
+        {
+            curGame = ((AI) player).getGame();
+        }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
 
         // List playableCards to return
@@ -804,14 +846,35 @@ public class ServerController
 
         // Create a new CardDealResponse
         RevealCardResponse response = new RevealCardResponse(card, revealed);
-        forwardMessage(response, connection);
+        if(!isAI)
+        {
+            forwardMessage(response, connection);
+        }
+        else
+        {
+            informAI(response, robots.get(player));
+        }
     }
 
     private void handleSnoop(Snoop card, Integer playerId,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling Snoop!");
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+        if(humans.containsKey(player)) 
+        {
+            connection = humans.get(player);
+        }
+        if(!isAI) 
+        {
+            curGame = games.get(connection);
+        }
+        else 
+        {
+            curGame = ((AI) player).getGame();
+        }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
         Integer randomCard = new Random().nextInt(
                 opponent.getHintCardsHand().size());
@@ -821,15 +884,36 @@ public class ServerController
         // Find the player with the given ID
         RevealCardResponse response
                 = new RevealCardResponse(card, snoopedCards);
-        forwardMessage(response, connection);
+        if(!isAI) 
+        {
+            forwardMessage(response, connection);
+        }
+        else
+        {
+            informAI(response, robots.get(player));
+        }
 
     }
 
     private void handleSuperSleuth(SuperSleuth sleuthCard,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling Super Sleuth");
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+        if(humans.containsKey(player)) 
+        {
+            connection = humans.get(player);
+        }
+        if(!isAI) 
+        {
+            curGame = games.get(connection);
+        }
+        else 
+        {
+            curGame = ((AI) player).getGame();
+        }
         List<ServerPlayer> opponents = curGame.getServerPlayersList();
         List<Card> revealedCards = new ArrayList<Card>();
         // List playableCards to return
@@ -911,40 +995,71 @@ public class ServerController
 
         RevealCardResponse response = new RevealCardResponse(sleuthCard,
                 revealedCards);
-
-        forwardMessage(response, connection);
+        if(!isAI)
+        {
+            forwardMessage(response, connection);
+        }
+        else
+        {
+            informAI(response, robots.get(player));
+        }
 
     }
 
     private void handleActionRequest(ActionRequest actionReq,
-            ConnectionToClient connection)
+            ServerPlayer player)
     {
-        ServerPlayer player = connectionToPlayer.get(connection);
+        System.out.println("handling Action Request!");
+        boolean isAI = true;
+        Game game;
+        ConnectionToClient connection = null;
+        if(humans.containsKey(player)) 
+        {
+            System.out.println("Action Player was a human");
+            connection = humans.get(player);
+            isAI = false;
+        }
 
         ActionCard card = actionReq.getActionCard();
         //Get the players game
-        Game game = games.get(connection);
+        if(!isAI) 
+        {
+            game = games.get(connection);
+        }
+        else 
+        {
+            game = ((AI) player).getGame();
+        }
         List<ServerPlayer> players = game.getServerPlayersList();
+        
+        System.out.println("Got the Action Card " + card.getActionType());
 
         if (card instanceof AllSnoop)
         {
+            System.out.println("AllSnoop");
             AllSnoop allSnoopCard = (AllSnoop) card;
             handleAllSnoop(allSnoopCard, players);
         }
         else if (card instanceof PrivateTip)
         {
+            System.out.println("PrivateTip");
             PrivateTip privTipCard = (PrivateTip) card;
-            handlePrivateTip(privTipCard, actionReq.getPlayerId(), connection);
+            handlePrivateTip(privTipCard, actionReq.getPlayerId(), player, isAI);
         }
         else if (card instanceof Snoop)
         {
+            System.out.println("Snoop");
             Snoop snoopCard = (Snoop) card;
-            handleSnoop(snoopCard, actionReq.getPlayerId(), connection);
+            handleSnoop(snoopCard, actionReq.getPlayerId(), player, isAI);
         }
         else if (card instanceof SuperSleuth)
         {
+            System.out.println("SuperSleuth");
             SuperSleuth superSleuthCard = (SuperSleuth) card;
-            handleSuperSleuth(superSleuthCard, connection);
+            handleSuperSleuth(superSleuthCard, player, isAI);
+        }
+        else if (card instanceof Suggestion) {
+            System.out.println("Not implemented yet!");
         }
 
         player.removeActionCard(card);
