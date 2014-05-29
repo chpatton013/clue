@@ -65,29 +65,20 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jCheckBox12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jCheckBox12" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
+                                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jCheckBox21" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jCheckBox20" min="-2" max="-2" attributes="0"/>
@@ -334,6 +325,7 @@
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>
             </Property>
+            <Property name="showHorizontalLines" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="playerListMouseClicked"/>
@@ -358,107 +350,108 @@
     </Container>
     <Component class="javax.swing.JCheckBox" name="jCheckBox1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+        <Property name="text" type="java.lang.String" value="Suspect1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox2"/>
+        <Property name="text" type="java.lang.String" value="Suspect2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox3"/>
+        <Property name="text" type="java.lang.String" value="Suspect3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox4"/>
+        <Property name="text" type="java.lang.String" value="Suspect4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox5"/>
+        <Property name="text" type="java.lang.String" value="Suspect5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox6"/>
+        <Property name="text" type="java.lang.String" value="Suspect6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox7"/>
+        <Property name="text" type="java.lang.String" value="Vehicle1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox8"/>
+        <Property name="text" type="java.lang.String" value="Vehicle2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox9"/>
+        <Property name="text" type="java.lang.String" value="Vehicle3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox10"/>
+        <Property name="text" type="java.lang.String" value="Vehicle4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox11"/>
+        <Property name="text" type="java.lang.String" value="Vehicle5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox12">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox12"/>
+        <Property name="text" type="java.lang.String" value="Vehicle6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox13"/>
+        <Property name="text" type="java.lang.String" value="Location1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox14"/>
+        <Property name="text" type="java.lang.String" value="Location2"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox15">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox15"/>
+        <Property name="text" type="java.lang.String" value="Location3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox16">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox16"/>
+        <Property name="text" type="java.lang.String" value="Location4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox17">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox17"/>
+        <Property name="text" type="java.lang.String" value="Location5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox18">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox18"/>
+        <Property name="text" type="java.lang.String" value="Location6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox19">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox19"/>
+        <Property name="text" type="java.lang.String" value="Location7"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox20">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox20"/>
+        <Property name="text" type="java.lang.String" value="Location8"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox21">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox21"/>
+        <Property name="text" type="java.lang.String" value="Location9"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="leaveGameButton">
