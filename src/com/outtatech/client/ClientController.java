@@ -458,7 +458,7 @@ public class ClientController
 
         state.removePlayer(playerId);
 
-        if (playerId == state.getPlayerId())
+        if (playerId.equals(state.getPlayerId()))
         {
             this.searchForGames();
         }

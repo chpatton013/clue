@@ -238,24 +238,12 @@ public class ServerController
         }
         else if (obj instanceof KickPlayerRequest)
         {
-            KickPlayerRequest rqst = ((KickPlayerRequest) obj);
-            Player player = null;
+            Integer playerId = ((KickPlayerRequest) obj).getPlayerId();
             Game game = games.get(connection);
-            List<Player> players = game.getPlayers();
-            Map<Integer, ServerPlayer> map = game.getServerPlayers();
-            // Iterate over this set
-            for (Player temp : players)
-            {
-                // Guard against this
-                if (rqst.getPlayerId() == temp.getPlayerId())
-                {
-                    map.remove(temp.getPlayerId());
-                    player = temp;
-                }
-            }
-            // Iterate over this set
-            forwardMessage(new KickPlayerResponse(player.getPlayerId()),
-                    connection);
+            Player player = game.getServerPlayers().get(playerId);
+            this.forwardMessage(new KickPlayerResponse(playerId),
+                players.get(game));
+            game.getServerPlayers().remove(playerId);
         }
 
         /**
