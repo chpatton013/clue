@@ -1,6 +1,7 @@
 package com.outtatech.client;
 
 import com.outtatech.common.ActionCard;
+import com.outtatech.common.Card;
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
@@ -374,11 +375,11 @@ public class GUIController implements Observer
      * @param cardType2 method parameter
      * @param cardType3 method parameter
      */
-    public void makeAccusation(int cardType1, int cardType2, int cardType3)
+    public void makeAccusation(Card card1, Card card2, Card card3)
     {
         //call client controller's makeAccusation method with the 3 cards
         //specified
-
+        System.out.println(card1 + " " + card2 + " " + card3);
     }
 
     /**

@@ -244,6 +244,13 @@ public class AccusationScreen extends javax.swing.JFrame
     {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's makeAccusation method with the card types of
         //the three selected cards
+        int suspectNumber = cardDropDown1.getSelectedIndex();
+        int vehicleNumber = cardDropDown2.getSelectedIndex();
+        int locationNumber = cardDropDown3.getSelectedIndex();
+        
+        controller.makeAccusation(translate.getCard("suspect", suspectNumber),
+                translate.getCard("vehicle", vehicleNumber),
+                translate.getCard("location", locationNumber));
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt)
