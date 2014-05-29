@@ -456,7 +456,9 @@ public abstract class AbstractServer implements Runnable
    *
    * @param client the connection connected to the client.
    */
-  protected void clientConnected(ConnectionToClient client) {}
+  protected void clientConnected(ConnectionToClient client)
+  {
+  }
 
   /**
    * Hook method called each time a client disconnects.
@@ -468,7 +470,9 @@ public abstract class AbstractServer implements Runnable
    * @param client the connection with the client.
    */
   synchronized protected void clientDisconnected(
-    ConnectionToClient client) {}
+    ConnectionToClient client)
+  {
+  }
 
   /**
    * Hook method called each time an exception is thrown in a
@@ -484,7 +488,9 @@ public abstract class AbstractServer implements Runnable
    * @param exception the exception thrown.
    */
   synchronized protected void clientException(
-    ConnectionToClient client, Throwable exception) {}
+    ConnectionToClient client, Throwable exception)
+  {
+  }
 
   /**
    * Hook method called when the server stops accepting
@@ -494,21 +500,27 @@ public abstract class AbstractServer implements Runnable
    *
    * @param exception the exception raised.
    */
-  protected void listeningException(Throwable exception) {}
+  protected void listeningException(Throwable exception)
+  {
+  }
 
   /**
    * Hook method called when the server starts listening for
    * connections.  The default implementation does nothing.
    * The method may be overridden by subclasses.
    */
-  protected void serverStarted() {}
+  protected void serverStarted()
+  {
+  }
 
   /**
    * Hook method called when the server stops accepting
    * connections.  The default implementation
    * does nothing. This method may be overriden by subclasses.
    */
-  protected void serverStopped() {}
+  protected void serverStopped()
+  {
+  }
 
   /**
    * Hook method called when the server is clased.
@@ -516,7 +528,12 @@ public abstract class AbstractServer implements Runnable
    * overriden by subclasses. When the server is closed while still
    * listening, serverStopped() will also be called.
    */
-  protected void serverClosed() {}
+  protected void serverClosed()
+  {
+  }
+
+
+  
 
   /**
    * Handles a command sent from one client to the server.
