@@ -46,6 +46,13 @@ public class RevealedCardsScreen extends javax.swing.JFrame
         controller = ctrl;
         
         initComponents();
+        
+        hintImage1.setText("");
+        hintImage2.setText("");
+        hintImage3.setText("");
+        hintImage4.setText("");
+        hintImage5.setText("");
+        hintImage6.setText("");
     }
     
      public void setCards(java.util.List<Card> cards)
