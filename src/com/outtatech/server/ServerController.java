@@ -149,6 +149,7 @@ public class ServerController
         else if (obj instanceof LobbyJoinRequest)
         {
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
+            System.out.println(lobby);
             ServerPlayer serverPlayer = new ServerPlayer();
             int num = humans.keySet().size();
             serverPlayer.setName("CluePlayer" + (num + 1));
@@ -251,12 +252,17 @@ public class ServerController
         else if (obj instanceof GameStartRequest)
         {
             Game game = games.get(connection);
+<<<<<<< Updated upstream
             handleGameStartRequest(games.get(connection), lobbies.get(game.
                     getGameId()));
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
             drawCards.add(game.getDrawPile().remove(0));
             ServerResponse response = new CardDealResponse(drawCards);
             informPlayer(game.getCurrentPlayer(), response);
+=======
+            handleGameStartRequest(game, lobbies.get(game.
+                    getGameId()), connection);
+>>>>>>> Stashed changes
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -565,7 +571,8 @@ public class ServerController
      * @TODO also send out a GameStateResponse??
      * @param game
      */
-    private void handleGameStartRequest(Game game, Lobby lobby)
+    private void handleGameStartRequest(Game game, Lobby lobby, 
+            ConnectionToClient connection)
     {
         game.initialize();
 
@@ -605,8 +612,12 @@ public class ServerController
         }
 
         // Remove lobby when game starts
+<<<<<<< Updated upstream
         // Connection to server player
         lobbies.remove(game);
+=======
+        waiting.remove(connectionToPlayer.get(connection));
+>>>>>>> Stashed changes
 
     }
 
