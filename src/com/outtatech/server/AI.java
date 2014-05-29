@@ -310,7 +310,7 @@ public class AI extends ServerPlayer
         if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
         {
             System.out.println("Can't play this fucking suggestion!");
-            //aiMakeSuggestion(cardToPlay);
+            aiMakeSuggestion((Suggestion) cardToPlay);
         }
         // Otherwise...
         else if (cardToPlay.getActionType() == ActionCardType.SNOOP
@@ -440,13 +440,16 @@ public class AI extends ServerPlayer
     { // void for sake of complitation w/pseudocde. should return a boolean
         // knowledge = (add number of known cards in each category 
         // number of cards in each category) / 3
-        float knowledge = (suspectCardsSeen.size() / 6 + vehicleCardsSeen.size()
-                / 6 + locationsSeen.size() / 9) / 3;
+        float knowledge = (suspectCardsSeen.size() / 6.0f + vehicleCardsSeen.size()
+                / 6.0f + locationsSeen.size() / 9.0f) / 3.0f;
+        System.out.println("suspects seen: " + suspectCardsSeen.size());
+        System.out.println("vehicles seen: " + vehicleCardsSeen.size());
+        System.out.println("locations seen: " + locationsSeen.size());
         System.out.println("Knowledge coefficient of AI is: " + knowledge);
         System.out.println("AI riskiness variable is: " + difficulty.getRiskiness());
         // if knowledge < riskiness of AI
         // Guard against this
-        if ((knowledge * 0) <= difficulty.getRiskiness())
+        if ((knowledge * 5) <= difficulty.getRiskiness())
         //  return false
         {
             System.out.println("Will not make an accusation!");
@@ -602,11 +605,6 @@ public class AI extends ServerPlayer
                 {
                     actionCardsHand.add((ActionCard) temp);
                 }
-                // Guard against this
-//                if (temp.getCardType() == CardType.HINT)
-//                {
-//                    hintCardsHand.add((HintCard) temp);
-//                }
             }
             
             aiTurn();
@@ -620,6 +618,30 @@ public class AI extends ServerPlayer
             GameStateResponse gsr = (GameStateResponse) obj;
             actionCardsHand = gsr.getActionCards();
             hintCardsHand = gsr.getHintCards();
+            for(HintCard temp : hintCardsHand)
+            {
+                // Guard against this
+                if (((HintCard) temp).getHintType() == HintCardType.SUSPECT)
+                {
+                    System.out.println("AI found " + 
+                            ((SuspectCard) temp).getSuspect());
+                    suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
+                }
+                // Guard against this
+                if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
+                {
+                    System.out.println("AI found " + 
+                            ((VehicleCard) temp).getVehicle());
+                    vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
+                }
+                // Guard against this
+                if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
+                {
+                    System.out.println("AI found " + 
+                            ((DestinationCard) temp).getDestination());
+                    locationsSeen.add(((DestinationCard) temp).getDestination());
+                }
+            }
         }
         // Guard against this
         if (obj instanceof KickPlayerResponse)

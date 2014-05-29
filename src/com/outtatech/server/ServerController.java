@@ -748,6 +748,7 @@ public class ServerController
             curGame = ((AI) player).getGame();
         }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
+        System.out.println("The opponent has been found as " + opponent);
 
         // List playableCards to return
         ArrayList<HintCard> playableCards = new ArrayList();
