@@ -297,6 +297,7 @@ public class ClientController
         {
             ClientLobbyState state = (ClientLobbyState) this.state;
             Integer me = state.getPlayerId();
+            
             List<Card> newStateCards = new ArrayList(rsp.getHintCards());
             newStateCards.addAll(rsp.getActionCards());
             this.setState(new ClientGameState(me, newStateCards,
