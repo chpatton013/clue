@@ -456,7 +456,7 @@ public class ClientController
     {
         ClientLobbyState state = (ClientLobbyState) this.state;
 
-        state.getPlayers().remove(playerId);
+        state.removePlayer(playerId);
 
         if (playerId == state.getPlayerId())
         {
