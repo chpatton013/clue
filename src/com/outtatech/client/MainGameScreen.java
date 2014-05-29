@@ -356,6 +356,136 @@ public class MainGameScreen extends javax.swing.JFrame
                                 = new ActionCard(ActionCardType.ALL_SNOOP);
                     }
                 }
+                else if (((ActionCard) card).getActionType()
+                        == ActionCardType.SUPER_SLEUTH)
+                {
+                    if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.AIR_VEHICLE)
+                    {
+                        image = "Action-SuperSleuthAir.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.AIR_VEHICLE);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.AIR_VEHICLE);
+                        }
+                    }
+                    else if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.BLUE_CARD)
+                    {
+                        image = "Action-SuperSleuthBlue.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.BLUE_CARD);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.BLUE_CARD);
+                        }
+                    }
+                    else if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.FEMALE_SUSPECT)
+                    {
+                        image = "Action-SuperSleuthFemale.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.FEMALE_SUSPECT);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.FEMALE_SUSPECT);
+                        }
+                    }
+                    else if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.MALE_SUSPECT)
+                    {
+                        image = "Action-SuperSleuthMale.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.MALE_SUSPECT);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.MALE_SUSPECT);
+                        }
+                    }
+                    else if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.SOUTHERN_DESTINATION)
+                    {
+                        image = "Action-SuperSleuthSouth.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.SOUTHERN_DESTINATION);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.SOUTHERN_DESTINATION);
+                        }
+                    }
+                    else if (((SuperSleuth) card).getType()
+                            == SuperSleuthType.WESTERN_DESTINATION)
+                    {
+                        image = "Action-SuperSleuthWest.jpg";
+                        // Guard against this
+                        if (!filled[0])
+                        {
+                            filled[0] = true;
+                            actionImage1.setIcon(new ImageIcon(path + image));
+                            actionCards[0] = new SuperSleuth
+                                (SuperSleuthType.WESTERN_DESTINATION);
+                        }
+                        // Otherwise...
+                        else if (!filled[1])
+                        {
+                            filled[1] = true;
+                            actionImage2.setIcon(new ImageIcon(path + image));
+                            actionCards[1] = new SuperSleuth
+                                (SuperSleuthType.WESTERN_DESTINATION);
+                        }
+                    }
+                }
             }
             // Otherwise...
             else if (card.getCardType() == CardType.HINT)

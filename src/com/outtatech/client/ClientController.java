@@ -316,10 +316,11 @@ public class ClientController
             state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
 
             state.pushGameLog("Game state updated:" +
-                  "\n   Deck Card Count: " + rsp.getDeckCardCount() +
-                  "\n   Player Turn Order: " + rsp.getDeckCardCount() +
-                  "\n   Current Active Player: " +
-                  rsp.getCurrentActivePlayer());
+                "\n   Deck Card Count: " + rsp.getDeckCardCount() +
+                "\n   Player Turn Order: " +
+                state.getPlayerNames(rsp.getPlayerTurnOrder()) +
+                "\n   Current Active Player: " +
+                state.getPlayerName(rsp.getCurrentActivePlayer()));
         }
         else
         {
@@ -333,8 +334,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received CardDealResponse while not in "
-                    + "ClientGameState.");
+            System.err.println("Received CardDealResponse while not in " +
+                    "ClientGameState.");
         }
         else
         {

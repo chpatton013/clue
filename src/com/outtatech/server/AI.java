@@ -296,6 +296,7 @@ public class AI extends ServerPlayer
         // Guard against this
         if (!aiMakeAccusation())
         {
+            System.out.println("AI " + this.getPlayerId() + " is taking its turn");
             ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
 
             // Guard against this
@@ -346,6 +347,7 @@ public class AI extends ServerPlayer
         VehicleID choice2;
         DestinationID choice3;
 
+        System.out.println("AI GONNA MAKE AN ACCUSATION!");
         // Guard against this
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
@@ -434,7 +436,7 @@ public class AI extends ServerPlayer
                 / 6 + locationsSeen.size() / 9) / 3;
         // if knowledge < riskiness of AI
         // Guard against this
-        if ((knowledge * 5) < difficulty.getRiskiness())
+        if ((knowledge * 0) <= difficulty.getRiskiness())
         //  return false
         {
             return false;
@@ -593,7 +595,7 @@ public class AI extends ServerPlayer
 //                }
             }
             
-            aiTurn();
+            //aiTurn();
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }
