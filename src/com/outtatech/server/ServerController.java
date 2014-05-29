@@ -118,12 +118,10 @@ public class ServerController
          */
         else if (obj instanceof AddAIRequest)
         {
-            System.out.println("Recieved AI Request");
             AddAIRequest addAIReq = (AddAIRequest) obj;
             int num = games.get(connection).getPlayers().size();
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
                     games.get(connection));
-            System.out.println("Creating new Clue Bot");
             newPlayer.setName("CLUEBot" + num);
 
             // Get the requestor's lobby
@@ -138,7 +136,6 @@ public class ServerController
             Map<Integer, String> names = new HashMap<Integer, String>();
             for (Player temp : players)
             {
-                System.out.println(temp.getName());
                 names.put(temp.getPlayerId(), temp.getName());
             }
 
@@ -183,7 +180,6 @@ public class ServerController
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
-            game.addServerPlayer(connectionToPlayer.get(connection));
             Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
@@ -211,6 +207,7 @@ public class ServerController
 
             ServerPlayer serverPlayer = new ServerPlayer();
             serverPlayer.setName("single_player_host");
+            game.addServerPlayer(serverPlayer);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
             List<ConnectionToClient> cxns = this.getGameClients(
@@ -622,7 +619,6 @@ public class ServerController
         Map<Integer, String> names = new HashMap<Integer, String>();
         for (Player player : game.getServerPlayers().values())
         {
-            System.out.println(player.getName());
             names.put(player.getPlayerId(), player.getName());
         }
 
