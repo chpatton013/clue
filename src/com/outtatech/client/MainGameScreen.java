@@ -1852,7 +1852,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private void playerListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
-        selectedPlayer = playerList.getSelectedRow();
+        selectedPlayer = (int)playerIds.get(playerList.getSelectedRow());
         
     }//GEN-LAST:event_playerListMouseClicked
 
