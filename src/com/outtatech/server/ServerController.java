@@ -102,7 +102,7 @@ public class ServerController
         else if (obj instanceof AccusationRequest)
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
-            handleAccusation(accusationReq, connection);
+            handleAccusation(connectionToPlayer.get(connection) , accusationReq);
         }
         /*
          * SuggestionRequest respond with SuggestionResponse
@@ -254,10 +254,7 @@ public class ServerController
             Game game = games.get(connection);
             handleGameStartRequest(games.get(connection), lobbies.get(game.
                     getGameId()), connection);
-            List<ActionCard> drawCards = new ArrayList<ActionCard>();
-            ServerResponse response =
-                new CardDealResponse(game.getDrawPile().remove(0));
-            informPlayer(game.getCurrentPlayer(), response);
+            dealActionCard(game);
         }
         /**
          * @TODO Add a response class? PlayersResponse? List of player names and
@@ -283,11 +280,8 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
-        ServerPlayer newCurrent = game.advanceTurn();
-        List<ActionCard> drawCards = new ArrayList<ActionCard>();
-        ServerResponse response =
-            new CardDealResponse(game.getDrawPile().remove(0));
-        informPlayer(initiator, response);
+        game.advanceTurn();
+        dealActionCard(game);
     }
 
     /**
@@ -433,44 +427,30 @@ public class ServerController
 
     }
 
-    private void handleAccusation(AccusationRequest accusationReq,
-            ConnectionToClient connection)
+    private void handleAccusation(ServerPlayer fromPlayer, AccusationRequest accusationReq)
     {
-        ArrayList<ConnectionToClient> gamePlayers
-                = new ArrayList<ConnectionToClient>();
-        ArrayList<AI> aiPlayers = new ArrayList<AI>();
-
+        Game clientGame;
         Solution accusation = accusationReq.getSolution();
-        //Get the clients game
-        Game clientGame = games.get(connection);
-
+        //Get players game
+        if(fromPlayer instanceof AI)
+        {
+            AI aiPlayer = (AI)fromPlayer;
+            clientGame = aiPlayer.getGame();
+        }
+        else
+        {
+            clientGame = games.get(humans.get(fromPlayer));
+        }
+        
         //Get all players in game
         List<ServerPlayer> gameServerPlayers
                 = clientGame.getServerPlayersList();
-
-        //Build a list of human client connections to send accusation
-        //response to
-        for (ServerPlayer serverPlayer : gameServerPlayers)
-        {
-            if (!humans.containsKey(serverPlayer))
-            {
-                aiPlayers.add(robots.get(serverPlayer));
-            }
-            else
-            {
-                gamePlayers.add(humans.get(serverPlayer));
-            }
-        }
-
+        
         //Create accusation response
         AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()));
 
-        //Send to humans
-        forwardMessage(accResp, gamePlayers);
-
-        //Send to AI
-        informAI(accResp, aiPlayers);
+        informPlayers(clientGame, accResp);
     }
 
     /**
@@ -484,7 +464,15 @@ public class ServerController
         /**
          * Using the robots Map find the Game instance of the AI robot.
          */
-
+        if (obj instanceof ActionRequest)
+        {
+            AccusationRequest accusationReq = (AccusationRequest) obj;
+            handleAccusation(robot, accusationReq);
+        }
+        else if (obj instanceof AccusationRequest)
+        {
+            
+        }
         /**
          * Check instanceOf obj to determine what change needs to be made the AI
          * Players Game instance.
@@ -607,8 +595,12 @@ public class ServerController
         }
 
         // Remove lobby when game starts
+
         // Connection to server player
         lobbies.remove(game);
+
+        //waiting.remove(connectionToPlayer.get(connection));
+
 
     }
 
@@ -911,5 +903,27 @@ public class ServerController
             SuperSleuth superSleuthCard = (SuperSleuth) card;
             handleSuperSleuth(superSleuthCard, connection);
         }
+    }
+
+    /**
+     * Deal an action card to the current active player in game by adding
+     * a card to their ServerPlayer hand and sending a message.
+     * 
+     * @param game the game with the player to deal an action card to.
+     */
+    private void dealActionCard(Game game)
+    {
+        List<ActionCard> drawCards = new ArrayList<ActionCard>();
+        ActionCard newCard = game.getDrawPile().remove(0);
+        
+        // Add the card to the server player's hand if they're not an AI
+        // AI will take care of this themselves.
+        if(!(game.getCurrentPlayer() instanceof AI))
+        {
+            game.getCurrentPlayer().addActionCard(newCard);
+        }
+
+        ServerResponse response = new CardDealResponse(newCard);
+        informPlayer(game.getCurrentPlayer(), response);
     }
 }
