@@ -9,6 +9,7 @@ package com.outtatech.client;
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.ActionCardType;
 import com.outtatech.common.Card;
+import com.outtatech.common.CardColor;
 import com.outtatech.common.CardType;
 import com.outtatech.common.DestinationCard;
 import com.outtatech.common.DestinationID;
@@ -34,6 +35,53 @@ import java.util.List;
 public class CardTranslator {
     
     GUIController controller;
+    
+    private String[][] nameList = 
+    {
+        {
+            "Green", "Mustard", "Peacock", "Plum", "Scarlet", "White"
+        },
+        {
+            "Airliner", "Automobile", "HotAirBalloon", "Limosine", 
+            "Seaplane", "Train"
+        },
+        {
+            "ConeyIsland", "GoldenGateBridge", "HooverDam", "LincolnMemorial",
+            "MiamiBeach", "MTRushmore", "NiagraFalls", "OldFaithful", 
+            "TheAlamo"
+        }
+    };
+    
+    private Card[][] cardList = 
+    {
+        {
+            new SuspectCard(SuspectID.GREEN),
+            new SuspectCard(SuspectID.MUSTARD),
+            new SuspectCard(SuspectID.PEACOCK),
+            new SuspectCard(SuspectID.PLUM),
+            new SuspectCard(SuspectID.SCARLET),
+            new SuspectCard(SuspectID.WHITE)
+        },
+        {
+            new VehicleCard(VehicleID.AIRLINER, CardColor.BLUE),
+            new VehicleCard(VehicleID.AUTOMOBILE, CardColor.BLUE),
+            new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE),
+            new VehicleCard(VehicleID.LIMOUSINE, CardColor.RED),
+            new VehicleCard(VehicleID.SEAPLANE, CardColor.RED),
+            new VehicleCard(VehicleID.TRAIN, CardColor.RED)
+        },
+        {
+            new DestinationCard(DestinationID.CONEY_ISLAND),
+            new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE),
+            new DestinationCard(DestinationID.HOOVER_DAM),
+            new DestinationCard(DestinationID.LINCOLN_MEMORIAL),
+            new DestinationCard(DestinationID.MIAMI_BEACH),
+            new DestinationCard(DestinationID.MT_RUSHMORE),
+            new DestinationCard(DestinationID.NIAGRA_FALLS),
+            new DestinationCard(DestinationID.OLD_FAITHFUL),
+            new DestinationCard(DestinationID.THE_ALAMO),
+        }
+    };
     
     public CardTranslator(GUIController ctrl) 
     {
@@ -294,6 +342,46 @@ public class CardTranslator {
         else
         {
             return "";
+        }
+    }
+
+    public String getName(String type, int num)
+    {
+        if(type.equals("suspect") && num < 6 && num >= 0)
+        {
+            return nameList[0][num];
+        }
+        else if(type.equals("vehicle") && num < 6 && num >= 0)
+        {
+            return nameList[1][num];
+        }
+        else if(type.equals("location") && num < 9 && num >= 0)
+        {
+            return nameList[2][num];
+        }
+        else
+        {
+            return "";
+        }
+    }
+    
+    public Card getCard(String type, int num)
+    {
+        if(type.equals("suspect") && num < 6 && num >= 0)
+        {
+            return cardList[0][num];
+        }
+        else if(type.equals("vehicle") && num < 6 && num >= 0)
+        {
+            return cardList[1][num];
+        }
+        else if(type.equals("location") && num < 9 && num >= 0)
+        {
+            return cardList[2][num];
+        }
+        else
+        {
+            return null;
         }
     }
 }

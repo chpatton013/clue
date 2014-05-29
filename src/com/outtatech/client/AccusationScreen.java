@@ -11,6 +11,10 @@ public class AccusationScreen extends javax.swing.JFrame
 {
 
     GUIController controller;
+    
+    CardTranslator translate;
+    
+    boolean performAction = true;
 
     /**
      * Version-latenightpizzaparty
@@ -32,19 +36,70 @@ public class AccusationScreen extends javax.swing.JFrame
     {
         //set controller = ctrl
         controller = ctrl;
+        translate = new CardTranslator(ctrl);
 
         initComponents();
+        
+        updateImages();
+        
+        updateDropDowns();
+    }
+    
+    public void updateDropDowns()
+    {      
+        performAction = false;
+        
+        cardDropDown1.removeAllItems();
+        cardDropDown2.removeAllItems();
+        cardDropDown3.removeAllItems();
+        
+        cardDropDown1.addItem(translate.getName("suspect", 0));
+        cardDropDown1.addItem(translate.getName("suspect", 1));
+        cardDropDown1.addItem(translate.getName("suspect", 2));
+        cardDropDown1.addItem(translate.getName("suspect", 3));
+        cardDropDown1.addItem(translate.getName("suspect", 4));
+        cardDropDown1.addItem(translate.getName("suspect", 5));
+        
+        cardDropDown2.addItem(translate.getName("vehicle", 0));
+        cardDropDown2.addItem(translate.getName("vehicle", 1));
+        cardDropDown2.addItem(translate.getName("vehicle", 2));
+        cardDropDown2.addItem(translate.getName("vehicle", 3));
+        cardDropDown2.addItem(translate.getName("vehicle", 4));
+        cardDropDown2.addItem(translate.getName("vehicle", 5));
+        
+        cardDropDown3.addItem(translate.getName("location", 0));
+        cardDropDown3.addItem(translate.getName("location", 1));
+        cardDropDown3.addItem(translate.getName("location", 2));
+        cardDropDown3.addItem(translate.getName("location", 3));
+        cardDropDown3.addItem(translate.getName("location", 4));
+        cardDropDown3.addItem(translate.getName("location", 5));
+        cardDropDown3.addItem(translate.getName("location", 6));
+        cardDropDown3.addItem(translate.getName("location", 7));
+        cardDropDown3.addItem(translate.getName("location", 8));
+        
+        performAction = true;
+    }
+
+    public void updateImages()
+    {
+        int suspectNumber = cardDropDown1.getSelectedIndex();
+        int vehicleNumber = cardDropDown2.getSelectedIndex();
+        int locationNumber = cardDropDown3.getSelectedIndex();
         
         image1.setText("");
         image2.setText("");
         image3.setText("");
-        
-        String path = controller.getImagePath();
-        image1.setIcon(new ImageIcon(path + "MUSTARD.jpg"));
-        image2.setIcon(new ImageIcon(path + "SEAPLANE.jpg"));
-        image3.setIcon(new ImageIcon(path + "Location-1.jpg"));
-    }
 
+        image1.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("suspect", suspectNumber))));
+
+        image2.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("vehicle", vehicleNumber))));
+
+        image3.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("location", locationNumber))));
+    }
+    
     /**
      * Version-latenightpizzaparty
      * This method is called from within the constructor to initialize the form.
@@ -194,65 +249,28 @@ public class AccusationScreen extends javax.swing.JFrame
     private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown1ActionPerformed
         //set cardImage1 to image of selected card
-        int suspectNumber = cardDropDown1.getSelectedIndex();
-        String path = controller.getImagePath();
-        String image;
-        if(suspectNumber == 0) {
-            image = "MUSTARD.jpg";
+        if(performAction)
+        {
+            updateImages();
         }
-        else if(suspectNumber == 1) {
-            image = "PEACOCK.jpg";
-        }
-        else if(suspectNumber == 2) {
-            image = "WHITE.jpg";
-        }
-        else if(suspectNumber == 3) {
-            image = "GREEN.jpg";
-        }
-        else if(suspectNumber == 4) {
-            image = "PLUM.jpg";
-        }
-        else {
-            image = "SCARLET.jpg";
-        }
-        image1.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown1ActionPerformed
 
     private void cardDropDown2ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown2ActionPerformed
         //set cardImage2 to image of selected card
-        int vehicleNumber = cardDropDown2.getSelectedIndex();
-        String path = controller.getImagePath();
-        String image;
-        if(vehicleNumber == 0) {
-            image = "SEAPLANE.jpg";
+        if(performAction)
+        {
+            updateImages();
         }
-        else if(vehicleNumber == 1) {
-            image = "AUTOMOBILE.jpg";
-        }
-        else if(vehicleNumber == 2) {
-            image = "HOTAIRBALLOON.jpg";
-        }
-        else if(vehicleNumber == 3) {
-            image = "LIMOSINE.jpg";
-        }
-        else if(vehicleNumber == 4) {
-            image = "AIRLINER.jpg";
-        }
-        else {
-            image = "TRAIN.jpg";
-        }
-        image2.setIcon(new ImageIcon(path + image));
     }//GEN-LAST:event_cardDropDown2ActionPerformed
 
     private void cardDropDown3ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown3ActionPerformed
         //set cardImage3 to image of selected card
-        int locationNumber = cardDropDown3.getSelectedIndex() + 1;
-        String path = controller.getImagePath();
-        String image = "Location-" + locationNumber + ".jpg";
-        System.out.println(image);
-        image3.setIcon(new ImageIcon(path + image));
+        if(performAction)
+        {
+            updateImages();
+        }
     }//GEN-LAST:event_cardDropDown3ActionPerformed
 
     /**

@@ -166,6 +166,9 @@ public class GUIController implements Observer
 
             mainGameScreen.updateHand(((ClientGameState) obs).getHand());
             mainGameScreen.updateLocation();
+            mainGameScreen.updateNotes();
+            accusationScreen.updateDropDowns();
+            accusationScreen.updateImages();
 
             //  add any applicable messages to game log through updateGameLog method
             String logUpdate = ((ClientGameState) obs).pollGameLog();

@@ -108,6 +108,33 @@ public class MainGameScreen extends javax.swing.JFrame
         locationImage8.setIcon(new ImageIcon(path + "Location-8.jpg"));
         locationImage9.setIcon(new ImageIcon(path + "Location-9.jpg"));
     }
+    
+    public void updateNotes()
+    {
+        suspectBox1.setText(translate.getName("suspect", 0));
+        suspectBox2.setText(translate.getName("suspect", 1));
+        suspectBox3.setText(translate.getName("suspect", 2));
+        suspectBox4.setText(translate.getName("suspect", 3));
+        suspectBox5.setText(translate.getName("suspect", 4));
+        suspectBox6.setText(translate.getName("suspect", 5));
+        
+        vehicleBox1.setText(translate.getName("vehicle", 0));
+        vehicleBox2.setText(translate.getName("vehicle", 1));
+        vehicleBox3.setText(translate.getName("vehicle", 2));
+        vehicleBox4.setText(translate.getName("vehicle", 3));
+        vehicleBox5.setText(translate.getName("vehicle", 4));
+        vehicleBox6.setText(translate.getName("vehicle", 5));
+        
+        locationBox1.setText(translate.getName("location", 0));
+        locationBox2.setText(translate.getName("location", 1));
+        locationBox3.setText(translate.getName("location", 2));
+        locationBox4.setText(translate.getName("location", 3));
+        locationBox5.setText(translate.getName("location", 4));
+        locationBox6.setText(translate.getName("location", 5));
+        locationBox7.setText(translate.getName("location", 6));
+        locationBox8.setText(translate.getName("location", 7));
+        locationBox9.setText(translate.getName("location", 8));
+    }
 
     /**
      * Version-latenightpizzaparty
@@ -313,8 +340,7 @@ public class MainGameScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -328,27 +354,27 @@ public class MainGameScreen extends javax.swing.JFrame
         playerList = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
-        jCheckBox18 = new javax.swing.JCheckBox();
-        jCheckBox19 = new javax.swing.JCheckBox();
-        jCheckBox20 = new javax.swing.JCheckBox();
-        jCheckBox21 = new javax.swing.JCheckBox();
+        suspectBox1 = new javax.swing.JCheckBox();
+        suspectBox2 = new javax.swing.JCheckBox();
+        suspectBox3 = new javax.swing.JCheckBox();
+        suspectBox4 = new javax.swing.JCheckBox();
+        suspectBox5 = new javax.swing.JCheckBox();
+        suspectBox6 = new javax.swing.JCheckBox();
+        vehicleBox1 = new javax.swing.JCheckBox();
+        vehicleBox2 = new javax.swing.JCheckBox();
+        vehicleBox3 = new javax.swing.JCheckBox();
+        vehicleBox4 = new javax.swing.JCheckBox();
+        vehicleBox5 = new javax.swing.JCheckBox();
+        vehicleBox6 = new javax.swing.JCheckBox();
+        locationBox1 = new javax.swing.JCheckBox();
+        locationBox2 = new javax.swing.JCheckBox();
+        locationBox3 = new javax.swing.JCheckBox();
+        locationBox4 = new javax.swing.JCheckBox();
+        locationBox5 = new javax.swing.JCheckBox();
+        locationBox6 = new javax.swing.JCheckBox();
+        locationBox7 = new javax.swing.JCheckBox();
+        locationBox8 = new javax.swing.JCheckBox();
+        locationBox9 = new javax.swing.JCheckBox();
         leaveGameButton = new javax.swing.JButton();
         locationImage1 = new javax.swing.JLabel();
         locationImage2 = new javax.swing.JLabel();
@@ -378,37 +404,29 @@ public class MainGameScreen extends javax.swing.JFrame
         jScrollPane1.setViewportView(gameLog);
 
         optionsButton.setText("Options");
-        optionsButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        optionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 optionsButtonMouseClicked(evt);
             }
         });
 
         instructionsButton.setText("Instructions");
-        instructionsButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        instructionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 instructionsButtonMouseClicked(evt);
             }
         });
 
         accuseButton.setText("Accuse!");
-        accuseButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        accuseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 accuseButtonMouseClicked(evt);
             }
         });
 
         endTurnButton.setText("End Turn");
-        endTurnButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        endTurnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 endTurnButtonMouseClicked(evt);
             }
         });
@@ -426,23 +444,19 @@ public class MainGameScreen extends javax.swing.JFrame
             new String [] {
                 "Players:"
             }
-        )
-        {
+        ) {
             boolean[] canEdit = new boolean [] {
                 false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         playerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         playerList.setShowHorizontalLines(false);
-        playerList.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        playerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playerListMouseClicked(evt);
             }
         });
@@ -452,54 +466,52 @@ public class MainGameScreen extends javax.swing.JFrame
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jCheckBox1.setText("Suspect1");
+        suspectBox1.setText("Suspect1");
 
-        jCheckBox2.setText("Suspect2");
+        suspectBox2.setText("Suspect2");
 
-        jCheckBox3.setText("Suspect3");
+        suspectBox3.setText("Suspect3");
 
-        jCheckBox4.setText("Suspect4");
+        suspectBox4.setText("Suspect4");
 
-        jCheckBox5.setText("Suspect5");
+        suspectBox5.setText("Suspect5");
 
-        jCheckBox6.setText("Suspect6");
+        suspectBox6.setText("Suspect6");
 
-        jCheckBox7.setText("Vehicle1");
+        vehicleBox1.setText("Vehicle1");
 
-        jCheckBox8.setText("Vehicle2");
+        vehicleBox2.setText("Vehicle2");
 
-        jCheckBox9.setText("Vehicle3");
+        vehicleBox3.setText("Vehicle3");
 
-        jCheckBox10.setText("Vehicle4");
+        vehicleBox4.setText("Vehicle4");
 
-        jCheckBox11.setText("Vehicle5");
+        vehicleBox5.setText("Vehicle5");
 
-        jCheckBox12.setText("Vehicle6");
+        vehicleBox6.setText("Vehicle6");
 
-        jCheckBox13.setText("Location1");
+        locationBox1.setText("Location1");
 
-        jCheckBox14.setText("Location2");
+        locationBox2.setText("Location2");
 
-        jCheckBox15.setText("Location3");
+        locationBox3.setText("Location3");
 
-        jCheckBox16.setText("Location4");
+        locationBox4.setText("Location4");
 
-        jCheckBox17.setText("Location5");
+        locationBox5.setText("Location5");
 
-        jCheckBox18.setText("Location6");
+        locationBox6.setText("Location6");
 
-        jCheckBox19.setText("Location7");
+        locationBox7.setText("Location7");
 
-        jCheckBox20.setText("Location8");
+        locationBox8.setText("Location8");
 
-        jCheckBox21.setText("Location9");
-        jCheckBox21.setToolTipText("");
+        locationBox9.setText("Location9");
+        locationBox9.setToolTipText("");
 
         leaveGameButton.setText("Leave Game");
-        leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        leaveGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 leaveGameButtonMouseClicked(evt);
             }
         });
@@ -523,19 +535,15 @@ public class MainGameScreen extends javax.swing.JFrame
         locationImage9.setText("L9");
 
         actionImage1.setText("AC1");
-        actionImage1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        actionImage1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 actionImage1MouseClicked(evt);
             }
         });
 
         actionImage2.setText("AC2");
-        actionImage2.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        actionImage2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 actionImage2MouseClicked(evt);
             }
         });
@@ -590,29 +598,29 @@ public class MainGameScreen extends javax.swing.JFrame
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jCheckBox1)
-                                                    .addComponent(jCheckBox2)
-                                                    .addComponent(jCheckBox3)
-                                                    .addComponent(jCheckBox4)
-                                                    .addComponent(jCheckBox5)
-                                                    .addComponent(jCheckBox6)
-                                                    .addComponent(jCheckBox7)
-                                                    .addComponent(jCheckBox8)
-                                                    .addComponent(jCheckBox9)
-                                                    .addComponent(jCheckBox10)
-                                                    .addComponent(jCheckBox11)
-                                                    .addComponent(jCheckBox12))
+                                                    .addComponent(suspectBox1)
+                                                    .addComponent(suspectBox2)
+                                                    .addComponent(suspectBox3)
+                                                    .addComponent(suspectBox4)
+                                                    .addComponent(suspectBox5)
+                                                    .addComponent(suspectBox6)
+                                                    .addComponent(vehicleBox1)
+                                                    .addComponent(vehicleBox2)
+                                                    .addComponent(vehicleBox3)
+                                                    .addComponent(vehicleBox4)
+                                                    .addComponent(vehicleBox5)
+                                                    .addComponent(vehicleBox6))
                                                 .addGap(83, 83, 83)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jCheckBox21)
-                                                    .addComponent(jCheckBox20)
-                                                    .addComponent(jCheckBox18)
-                                                    .addComponent(jCheckBox17)
-                                                    .addComponent(jCheckBox16)
-                                                    .addComponent(jCheckBox15)
-                                                    .addComponent(jCheckBox14)
-                                                    .addComponent(jCheckBox13)
-                                                    .addComponent(jCheckBox19)))
+                                                    .addComponent(locationBox9)
+                                                    .addComponent(locationBox8)
+                                                    .addComponent(locationBox6)
+                                                    .addComponent(locationBox5)
+                                                    .addComponent(locationBox4)
+                                                    .addComponent(locationBox3)
+                                                    .addComponent(locationBox2)
+                                                    .addComponent(locationBox1)
+                                                    .addComponent(locationBox7)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(actionImage1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -696,46 +704,46 @@ public class MainGameScreen extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox13))
+                            .addComponent(suspectBox1)
+                            .addComponent(locationBox1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox14))
+                            .addComponent(suspectBox2)
+                            .addComponent(locationBox2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox15))
+                            .addComponent(suspectBox3)
+                            .addComponent(locationBox3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox4)
-                            .addComponent(jCheckBox16))
+                            .addComponent(suspectBox4)
+                            .addComponent(locationBox4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox17))
+                            .addComponent(suspectBox5)
+                            .addComponent(locationBox5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox6)
-                            .addComponent(jCheckBox18))
+                            .addComponent(suspectBox6)
+                            .addComponent(locationBox6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox20))
+                        .addComponent(locationBox7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox8)
-                            .addComponent(jCheckBox21))
+                            .addComponent(vehicleBox1)
+                            .addComponent(locationBox8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(vehicleBox2)
+                            .addComponent(locationBox9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox10)
+                        .addComponent(vehicleBox3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox11)
+                        .addComponent(vehicleBox4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox12))
+                        .addComponent(vehicleBox5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vehicleBox6))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(leaveGameButton)
@@ -902,27 +910,6 @@ public class MainGameScreen extends javax.swing.JFrame
     private javax.swing.JLabel hintImage5;
     private javax.swing.JLabel hintImage6;
     private javax.swing.JButton instructionsButton;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
-    private javax.swing.JCheckBox jCheckBox18;
-    private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox20;
-    private javax.swing.JCheckBox jCheckBox21;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -930,6 +917,15 @@ public class MainGameScreen extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton leaveGameButton;
+    private javax.swing.JCheckBox locationBox1;
+    private javax.swing.JCheckBox locationBox2;
+    private javax.swing.JCheckBox locationBox3;
+    private javax.swing.JCheckBox locationBox4;
+    private javax.swing.JCheckBox locationBox5;
+    private javax.swing.JCheckBox locationBox6;
+    private javax.swing.JCheckBox locationBox7;
+    private javax.swing.JCheckBox locationBox8;
+    private javax.swing.JCheckBox locationBox9;
     private javax.swing.JLabel locationImage1;
     private javax.swing.JLabel locationImage2;
     private javax.swing.JLabel locationImage3;
@@ -941,5 +937,17 @@ public class MainGameScreen extends javax.swing.JFrame
     private javax.swing.JLabel locationImage9;
     private javax.swing.JButton optionsButton;
     private javax.swing.JTable playerList;
+    private javax.swing.JCheckBox suspectBox1;
+    private javax.swing.JCheckBox suspectBox2;
+    private javax.swing.JCheckBox suspectBox3;
+    private javax.swing.JCheckBox suspectBox4;
+    private javax.swing.JCheckBox suspectBox5;
+    private javax.swing.JCheckBox suspectBox6;
+    private javax.swing.JCheckBox vehicleBox1;
+    private javax.swing.JCheckBox vehicleBox2;
+    private javax.swing.JCheckBox vehicleBox3;
+    private javax.swing.JCheckBox vehicleBox4;
+    private javax.swing.JCheckBox vehicleBox5;
+    private javax.swing.JCheckBox vehicleBox6;
     // End of variables declaration//GEN-END:variables
 }
