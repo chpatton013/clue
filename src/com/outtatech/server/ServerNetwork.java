@@ -2,8 +2,9 @@ package com.outtatech.server;
 
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
-import com.outtatech.server.messaging.ServerResponse;
 import com.outtatech.client.messaging.AddAIRequest;
+import com.outtatech.client.messaging.LobbyLeaveRequest;
+import com.outtatech.server.messaging.ServerResponse;
 import java.util.List;
 
 /**
@@ -122,8 +123,11 @@ public class ServerNetwork extends AbstractServer
     synchronized protected void clientDisconnected(
             ConnectionToClient client)
     {
+        System.out.println("Client has Disconnected!");
         Integer lobbyId = ctrl.getLobbyId(client);
         Difficulty difficulty = new Difficulty(3, 3);
+        LobbyLeaveRequest rqst = new LobbyLeaveRequest();
+        ctrl.reactToNetwork(rqst, client);
         AddAIRequest air = new AddAIRequest(difficulty, lobbyId);
         ctrl.reactToNetwork(air, client);
     }
