@@ -73,7 +73,7 @@ public class ServerController
         }
         catch (IOException ex)
         {
-
+            System.err.println(ex.getMessage());
         }
     }
 

@@ -65,10 +65,9 @@ public class ServerNetwork extends AbstractServer
                 client.sendToClient(msg);
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            // Handle Exception
-            System.out.println("Error sending message to client");
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -89,10 +88,9 @@ public class ServerNetwork extends AbstractServer
             // Call OCSF's sendToClient on obj
             client.sendToClient(msg);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            System.out.println("Error sending message to client");
-
+            System.err.println(ex.getMessage());
         }
     }
 
