@@ -1,6 +1,7 @@
 package com.outtatech.client.messaging;
 
 import com.outtatech.common.Solution;
+import com.outtatech.common.Suggestion;
 
 /**
  * Version-latenightpizzaparty
@@ -11,6 +12,7 @@ import com.outtatech.common.Solution;
  */
 public class SuggestionRequest extends ClientRequest
 {
+    private Suggestion card;
     private Solution suggestion;
 
     /**
@@ -18,9 +20,20 @@ public class SuggestionRequest extends ClientRequest
      *
      * @param suggestion method parameter
      */
-    public SuggestionRequest(Solution suggestion)
+    public SuggestionRequest(Suggestion card, Solution suggestion)
     {
+        this.card = card;
         this.suggestion = suggestion;
+    }
+
+    /**
+     * Version-latenightpizzaparty
+     *
+     * @return return value
+     */
+    public Suggestion getCard()
+    {
+        return this.card;
     }
 
     /**

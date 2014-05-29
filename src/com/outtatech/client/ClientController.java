@@ -159,10 +159,14 @@ public class ClientController
         this.forwardMessage(new EndTurnRequest());
     }
 
-    public void playActionCard(ActionCard actionCard, List<Card> cards,
-            Integer playerId)
+    public void playActionCard(ActionCard card, Integer playerId)
     {
-        this.forwardMessage(new ActionRequest(actionCard, cards, playerId));
+        this.forwardMessage(new ActionRequest(card, playerId));
+    }
+
+    public void playSuggestionCard(Suggestion card, Solution solution)
+    {
+        this.forwardMessage(new SuggestionRequest(card, solution));
     }
 
 //    public void revealCards(List<Card> cards)

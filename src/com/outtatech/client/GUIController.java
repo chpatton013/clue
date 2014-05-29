@@ -395,7 +395,7 @@ public class GUIController implements Observer
         // Guard against this
         if (isTurn)
         {
-            clientController.playActionCard(card, null, selectedPlayer);
+            clientController.playActionCard(card, selectedPlayer);
         }
     }
 

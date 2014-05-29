@@ -294,29 +294,30 @@ public class AI extends ServerPlayer
     public void aiTurn()
     {
         // Guard against this
-        if (!aiMakeAccusation())
+        if (aiMakeAccusation())
         {
-            System.out.println("AI " + this.getPlayerId() + " is taking its turn");
-            ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
+            return;
+        }
 
-            // Guard against this
-            if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
-            {
-                aiMakeSuggestion(cardToPlay);
-            }
-            // Otherwise...
-            else if (cardToPlay.getActionType() == ActionCardType.SNOOP
-                    || cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
-            {
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null,
-                        getRandomPlayerID()), this);
-            }
+        System.out.println("AI " + this.getPlayerId() + " is taking its turn");
+        ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
 
-            // Otherwise...
-            else
-            {
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
-            }
+        // Guard against this
+        if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
+        {
+            aiMakeSuggestion((Suggestion) cardToPlay);
+        }
+        // Otherwise...
+        else if (cardToPlay.getActionType() == ActionCardType.SNOOP ||
+                cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
+        {
+            ctrl.reactToRobot(new ActionRequest(cardToPlay,
+                    getRandomPlayerID()), this);
+        }
+        // Otherwise...
+        else
+        {
+            ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
         }
 
     }
@@ -341,7 +342,7 @@ public class AI extends ServerPlayer
         return playerID;
     }
 
-    private void aiMakeSuggestion(ActionCard card)
+    private void aiMakeSuggestion(Suggestion card)
     {
         SuspectID choice1;
         VehicleID choice2;
@@ -355,7 +356,7 @@ public class AI extends ServerPlayer
             choice2 = getVehicleChoice(vehicleCardsSeen);
             choice3 = (getLocationChoice(locationsSeen));
 
-            ctrl.reactToRobot(new SuggestionRequest(
+            ctrl.reactToRobot(new SuggestionRequest(card,
                     new Solution(choice3, choice2, choice1)), this);
 
         }
@@ -365,7 +366,7 @@ public class AI extends ServerPlayer
             choice1 = getSuspectChoice(suspectCardsSeen);
             choice2 = (getVehicleChoice(vehicleCardsSeen));
 
-            ctrl.reactToRobot(new SuggestionRequest(
+            ctrl.reactToRobot(new SuggestionRequest(card,
                     new Solution(this.getLocation(), choice2, choice1)), this);
         }
 

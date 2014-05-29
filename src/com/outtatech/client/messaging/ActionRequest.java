@@ -14,7 +14,6 @@ import java.util.List;
 public class ActionRequest extends ClientRequest
 {
     private ActionCard actionCard;
-    private List<Card> cards;
     private Integer playerId;
 
     /**
@@ -23,28 +22,12 @@ public class ActionRequest extends ClientRequest
      *
      * @param actionCard the action card that the client is playing method 
      * parameter
-     * @param cards the cards involved in the action method parameter
      * @param playerId the id of the player the action is targeting method 
      * parameter
      */
-    public ActionRequest(ActionCard actionCard, List<Card> cards, int playerId)
+    public ActionRequest(ActionCard actionCard, Integer playerId)
     {
         this.actionCard = actionCard;
-        this.cards = cards;
-        this.playerId = playerId;
-    }
-
-    /**
-     * Version-latenightpizzaparty
-     * Returns a new ActionRequest object.
-     *
-     * @param actionCard the action card that the client is playing method parameter
-     * @param cards the cards involved in the action method parameter
-     */
-    public ActionRequest(ActionCard actionCard, List<Card> cards)
-    {
-        this.actionCard = actionCard;
-        this.cards = cards;
         this.playerId = playerId;
     }
 
@@ -57,17 +40,6 @@ public class ActionRequest extends ClientRequest
     public ActionCard getActionCard()
     {
         return actionCard;
-    }
-
-    /**
-     * Version-latenightpizzaparty
-     * Returns the cards involved in the clients action.
-     *
-     * @return the cards involved in the clients action. return value
-     */
-    public List<Card> getCards()
-    {
-        return cards;
     }
 
     /**
