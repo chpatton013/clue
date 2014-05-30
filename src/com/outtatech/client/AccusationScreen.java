@@ -1,5 +1,6 @@
 package com.outtatech.client;
 
+import com.outtatech.common.Suggestion;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,6 +18,8 @@ public class AccusationScreen extends javax.swing.JFrame
     boolean performAction = true;
     
     boolean isSuggestion = false;
+    
+    Suggestion card;
 
     /**
      * Version-latenightpizzaparty
@@ -34,13 +37,16 @@ public class AccusationScreen extends javax.swing.JFrame
      *
      * @param ctrl method parameter
      */
-    public AccusationScreen(GUIController ctrl, boolean isSug)
+    public AccusationScreen(GUIController ctrl, boolean isSug,
+            Suggestion sCard)
     {
         //set controller = ctrl
         controller = ctrl;
         translate = new CardTranslator(ctrl);
         
         isSuggestion = isSug;
+        
+        card = sCard;
 
         initComponents();
         
@@ -267,7 +273,7 @@ public class AccusationScreen extends javax.swing.JFrame
         {
             controller.makeSuggestion(translate.getCard("suspect", suspectNumber),
                     translate.getCard("vehicle", vehicleNumber),
-                    translate.getCard("location", locationNumber));
+                    translate.getCard("location", locationNumber), card);
         }
     }//GEN-LAST:event_accuseButtonMouseClicked
 
