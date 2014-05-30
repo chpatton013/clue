@@ -118,6 +118,7 @@ public class ClientController
      * Sends a request to the game server to add an AI player.
      *
      * @param difficulty Difficulty the difficulty for this AI player
+     * @param lobbyId
      */
     public void addAIPlayer(Difficulty difficulty, Integer lobbyId)
     {
@@ -174,7 +175,7 @@ public class ClientController
      * Called when the client would like to make an accusation during their
      * turn.
      *
-     * @param accusationCards list containing the Destination, Vehicle and
+     * @param accusation list containing the Destination, Vehicle and
      * Suspect card required to make an accusation.
      */
     public void makeAccusation(Solution accusation)

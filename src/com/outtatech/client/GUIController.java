@@ -371,6 +371,7 @@ public class GUIController implements Observer
      * @param cardType2 method parameter
      * @param cardType3 method parameter
      */
+    //!!!!!int will have to be changed to enum types from the Common package!!!!!
     public void makeAccusation(int cardType1, int cardType2, int cardType3)
     {
         //call client controller's makeAccusation method with the 3 cards
