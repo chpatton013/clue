@@ -95,6 +95,31 @@ public class Game
         this.solution = pickSolution();
         initDestinations();
     }
+    
+    /**
+     * Move the given player to the given destination.
+     * 
+     * @param playerId the id of the player to move
+     * @param dest the destination to move the player to.
+     * 
+     * @return the ID of the player whose destination was changed
+     */
+    public Integer swapLocations(Integer playerId, DestinationID dest)
+    {
+        //Get the players current destination
+        DestinationID curLoc = playerIdToDest.get(playerId);
+
+        //Find out who has the other destination
+        Integer otherPlayerID = destToPlayerId.get(dest);
+        
+        destToPlayerId.put(dest, playerId);
+        destToPlayerId.put(curLoc, otherPlayerID);
+        
+        playerIdToDest.put(playerId, dest);
+        playerIdToDest.put(otherPlayerID, curLoc);
+        
+        return otherPlayerID;
+    }
 
     /**
      * Method that shuffles the destinations and assigns one to each player

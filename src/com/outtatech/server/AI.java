@@ -310,7 +310,7 @@ public class AI extends ServerPlayer
         if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
         {
             System.out.println("Can't play this fucking suggestion!");
-            aiMakeSuggestion((Suggestion) cardToPlay);
+            //aiMakeSuggestion((Suggestion) cardToPlay);
         }
         // Otherwise...
         else if (cardToPlay.getActionType() == ActionCardType.SNOOP
