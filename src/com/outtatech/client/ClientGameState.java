@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class ClientGameState extends State
 {
-    private int playerID;
+    private Integer playerID;
     private Object notes;
     private List<Card> hand;
     private boolean revealStatus;
@@ -88,7 +88,7 @@ public class ClientGameState extends State
      *
      * @return playerID
      */
-    public int getPlayerId()
+    public Integer getPlayerId()
     {
         return playerID;
     }
