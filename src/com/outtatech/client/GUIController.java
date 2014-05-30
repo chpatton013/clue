@@ -28,6 +28,7 @@ public class GUIController implements Observer
     LobbyScreen lobbyScreen;
     RevealedCardsScreen revealedCardsScreen;
     AccusationScreen accusationScreen;
+    AccusationScreen suggestionScreen;
     MainGameScreen mainGameScreen;
 
     ClientController clientController;
@@ -86,7 +87,8 @@ public class GUIController implements Observer
         gameSelectScreen = new GameSelectScreen(ctrl);
         lobbyScreen = new LobbyScreen(ctrl);
         revealedCardsScreen = new RevealedCardsScreen(ctrl);
-        accusationScreen = new AccusationScreen(ctrl);
+        accusationScreen = new AccusationScreen(ctrl, false);
+        suggestionScreen = new AccusationScreen(ctrl, true);
         mainGameScreen = new MainGameScreen(ctrl);
     }
     /**
@@ -201,6 +203,16 @@ public class GUIController implements Observer
                 //    show revealCardsScreen
                 revealedCardsScreen.setVisible(true);
             }
+            
+            /*   FOR SUGGESTIONS
+            
+            if( ((ClientGameState) obs).getSuggestionStatus() )
+            {
+                suggestionScreen = new AccusationScreen(this, true);
+                suggestionScreen.setVisible(true);
+            }
+            
+            */
             //  check clientController's correctAccusation flag
             //
             //  if set
@@ -364,7 +376,7 @@ public class GUIController implements Observer
     public void accuse()
     {
         //show the accusation window
-        accusationScreen = new AccusationScreen(this);
+        accusationScreen = new AccusationScreen(this, false);
         accusationScreen.setVisible(true);
     }
 
@@ -381,7 +393,12 @@ public class GUIController implements Observer
     {
         //call client controller's makeAccusation method with the 3 cards
         //specified
-        System.out.println(card1 + " " + card2 + " " + card3);
+        System.out.println("Accuse: " + card1 + " " + card2 + " " + card3);
+    }
+    
+    public void makeSuggestion(Card card1, Card card2, Card card3)
+    {
+        System.out.println("Suggest: " + card1 + " " + card2 + " " + card3);
     }
 
     /**
