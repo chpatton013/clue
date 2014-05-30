@@ -64,7 +64,6 @@ public class Game
         this.solution = solution;
         this.destToPlayerId = destToPlayerId;
         this.gameId = ++gameIdCounter;
-        curPlayerTurn = 0;
         this.playerTurnOrder = playerTurnOrder;
     }
 
@@ -89,8 +88,8 @@ public class Game
     public void initialize()
     {
         playerTurnOrder = new ArrayList(players.values());
+        curPlayerTurn = 0;
         Collections.shuffle(playerTurnOrder);
-        curPlayerTurn = playerTurnOrder.get(0).getPlayerId();
         drawPile = this.initializeDrawPile();
         listHintCards = this.initializeHintCards();
         this.solution = pickSolution();
@@ -156,7 +155,8 @@ public class Game
     public ServerPlayer advanceTurn()
     {
         curPlayerTurn = (curPlayerTurn + 1) % playerTurnOrder.size();
-        return playerTurnOrder.get(curPlayerTurn);
+        System.out.println("advancing turn index to " + curPlayerTurn);
+        return this.getCurrentPlayer();
     }
 
     /**
@@ -174,7 +174,7 @@ public class Game
      *
      * @return the id of the currently active player;
      */
-    public Integer getCurrentPlayerId()
+    public Integer getCurrentPlayerIndex()
     {
         return this.getCurrentPlayer().getPlayerId();
     }
@@ -246,7 +246,7 @@ public class Game
 
     public Map<Integer, String> getPlayerIdNames()
     {
-        Map<Integer, String> names = new HashMap<Integer, String>();
+        Map<Integer, String> names = new ConcurrentHashMap<Integer, String>();
         for (Integer playerId : this.players.keySet())
         {
             names.put(playerId, this.players.get(playerId).getName());

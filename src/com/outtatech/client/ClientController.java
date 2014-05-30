@@ -172,10 +172,6 @@ public class ClientController
         ((ClientGameState) this.state).removeFromHand(card);
     }
 
-//    public void revealCards(List<Card> cards)
-//    {
-//        this.forwardMessage(new RevealCardsRequest(cards));
-//    }
     /**
      * Called when the client would like to make an accusation during their
      * turn.
@@ -230,7 +226,7 @@ public class ClientController
 //        }
         else if (obj instanceof RevealCardResponse)
         {
-            this.reactToRevealCardRequest((RevealCardResponse) obj);
+            this.reactToRevealCardResponse((RevealCardResponse) obj);
         }
         else if (obj instanceof AccusationResponse)
         {
@@ -305,13 +301,18 @@ public class ClientController
             Integer me = state.getPlayerId();
 
             List<Card> newStateCards = new ArrayList(rsp.getHintCards());
+            ClientGameState newState = new ClientGameState(me, newStateCards,
+                    state.getPlayers());
             newStateCards.addAll(rsp.getActionCards());
-            this.setState(new ClientGameState(me, newStateCards,
-                    state.getPlayers()));
 
+            this.setState(newState);
             ((ClientGameState) this.state).pushGameLog("Game Started");
-
-            this.forwardMessage(new GameStateRequest());
+            newState.setDeckCardCount(rsp.getDeckCardCount());
+            newState.setPlayers(rsp.getPlayers());
+            newState.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
+            newState.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+            newState.setDestToPlayerId(rsp.getDestToPlayerID());
+            // this.forwardMessage(new GameStateRequest());
         }
         else if (this.state instanceof ClientGameState)
         {
@@ -358,6 +359,7 @@ public class ClientController
             {
                 this.triggerChange();
             }
+            state.advancePlayer();
         }
     }
 
@@ -374,7 +376,7 @@ public class ClientController
 //                "Player " + rsp.getPlayerId() + " played card " + rsp.
 //                getActionCard());
 //    }
-    private void reactToRevealCardRequest(RevealCardResponse rsp)
+    private void reactToRevealCardResponse(RevealCardResponse rsp)
     {
         if (!(this.state instanceof ClientGameState))
         {
@@ -384,50 +386,52 @@ public class ClientController
         }
 
         ClientGameState state = (ClientGameState) this.state;
+        state.setRevealed(rsp.getCards());
+        state.setRevealStatus(true);
 
-        ActionCardType type = rsp.getActionCard().getActionType();
-        if (type == ActionCardType.SUGGESTION)
-        {
-            List<Card> cards = rsp.getCards();
-            // TODO: GUI
-            // tell GUI to present cards
-        }
-        else if (type == ActionCardType.SNOOP || type
-                == ActionCardType.ALL_SNOOP)
-        {
-            List<Card> hints = new ArrayList<Card>(state.getHand());
-            int index = 0;
-            while (index < hints.size())
-            {
-                if (hints.get(index) instanceof ActionCard)
-                {
-                    hints.remove(index);
-                }
-                else
-                {
-                    ++index;
-                }
-            }
-            Collections.shuffle(hints);
-            Card card = hints.get(0);
+//         ActionCardType type = rsp.getActionCard().getActionType();
+//         if (type == ActionCardType.SUGGESTION)
+//         {
+//             List<Card> cards = rsp.getCards();
+//             // TODO: GUI
+//             // tell GUI to present cards
+//         }
+//         else if (type == ActionCardType.SNOOP || type
+//                 == ActionCardType.ALL_SNOOP)
+//         {
+//             List<Card> hints = new ArrayList<Card>(state.getHand());
+//             int index = 0;
+//             while (index < hints.size())
+//             {
+//                 if (hints.get(index) instanceof ActionCard)
+//                 {
+//                     hints.remove(index);
+//                 }
+//                 else
+//                 {
+//                     ++index;
+//                 }
+//             }
+//             Collections.shuffle(hints);
+//             Card card = hints.get(0);
 
-            // TODO: GUI
-            // tell GUI card was shown to user rsp.getPlayerId()
-        }
-        else if (type == ActionCardType.SUPER_SLEUTH)
-        {
-            // get condition from this card
-            // TODO: GUI
-            // prompt GUI to present user with choice of cards that match
-            //  condition
-        }
-        else if (type == ActionCardType.PRIVATE_TIP)
-        {
-            // get condition from this card
-            // TODO: GUI
-            // prompt GUI to present user with choice of cards that match
-            //  condition
-        }
+//             // TODO: GUI
+//             // tell GUI card was shown to user rsp.getPlayerId()
+//         }
+//         else if (type == ActionCardType.SUPER_SLEUTH)
+//         {
+//             // get condition from this card
+//             // TODO: GUI
+//             // prompt GUI to present user with choice of cards that match
+//             //  condition
+//         }
+//         else if (type == ActionCardType.PRIVATE_TIP)
+//         {
+//             // get condition from this card
+//             // TODO: GUI
+//             // prompt GUI to present user with choice of cards that match
+//             //  condition
+//         }
     }
 
     private void reactToAccusationResponse(AccusationResponse rsp)

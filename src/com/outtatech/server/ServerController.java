@@ -7,6 +7,7 @@ import com.outtatech.server.messaging.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -53,14 +54,14 @@ public class ServerController
         this.network = network;
         this.network.setServerController(this);
         this.connectionToPlayer
-                = new HashMap<ConnectionToClient, ServerPlayer>();
-        this.games = new HashMap<ConnectionToClient, Game>();
+                = new ConcurrentHashMap<ConnectionToClient, ServerPlayer>();
+        this.games = new ConcurrentHashMap<ConnectionToClient, Game>();
         this.players
-                = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
-        this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
-        this.robots = new HashMap<ServerPlayer, AI>();
-        this.lobbies = new HashMap<Integer, Lobby>();
-        this.gameIdToGame = new HashMap<Integer, Game>();
+                = new ConcurrentHashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
+        this.humans = new ConcurrentHashMap<ServerPlayer, ConnectionToClient>();
+        this.robots = new ConcurrentHashMap<ServerPlayer, AI>();
+        this.lobbies = new ConcurrentHashMap<Integer, Lobby>();
+        this.gameIdToGame = new ConcurrentHashMap<Integer, Game>();
 
         try
         {
@@ -174,9 +175,11 @@ public class ServerController
             serverPlayer.setName("CluePlayer" + this.playerCounter++);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
+            games.put(connection, game);
+
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
-            cxns.add(this.humans.get(serverPlayer));
+            cxns.add(connection);
 
             game.addServerPlayer(serverPlayer);
 
@@ -314,6 +317,8 @@ public class ServerController
         else if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest endTurnReq = (EndTurnRequest) obj;
+            System.out.println("server: " + games);
+            System.out.println("connection: " + connection);
             handleEndTurnRequest(games.get(connection), connectionToPlayer.get(
                     connection));
 //            forwardMessage(new GameStateResponse()), connection, false);
@@ -322,6 +327,7 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
+        System.out.println("server: handleEndTurnRequest: " + game + "," + initiator);
         game.advanceTurn();
         dealActionCard(game);
     }
@@ -674,7 +680,7 @@ public class ServerController
         {
             GameStateResponse gameResponse = new GameStateResponse(
                     game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
-                    game.getCurrentPlayerId(), game.getPlayerIdNames(),
+                    game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
                     pl.getHintCardsHand(),
                     pl.getActionCardsHand(),
                     game.getDestToPlayerId());
@@ -690,7 +696,7 @@ public class ServerController
         ServerPlayer serverPlayer = connectionToPlayer.get(cxn);
         this.forwardMessage(new GameStateResponse(
                 game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
-                game.getCurrentPlayerId(), game.getPlayerIdNames(),
+                game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
                 serverPlayer.getHintCardsHand(),
                 serverPlayer.getActionCardsHand(),
                 game.getDestToPlayerId()), cxn);
@@ -1104,13 +1110,17 @@ public class ServerController
      */
     private void dealActionCard(Game game)
     {
+        System.out.println("server: dealActionCard: " + game);
         ServerPlayer player = game.getCurrentPlayer();
+        System.out.println("server: current player index: " + game.getCurrentPlayerIndex());
+        System.out.println("server: current player: " + player.getName());
 
         ActionCard newCard = null;
         if (player.getActionCardsHand().size() < 2)
         {
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
             newCard = game.getDrawPile().remove(0);
+            System.out.println("server: dealing card: " + newCard);
         }
 
         // Add the card to the server player's hand if they're not an AI
@@ -1169,7 +1179,7 @@ public class ServerController
 
                 GameStateResponse newGameState = new GameStateResponse(game.
                         getDrawPile().size(), playerTurnOrder, game.
-                        getCurrentPlayerId(), game.getPlayerIdNames(),
+                        getCurrentPlayerIndex(), game.getPlayerIdNames(),
                         null, game.getDrawPile(), game.getDestToPlayerId());
                 
                 informPlayers(game, newGameState);
