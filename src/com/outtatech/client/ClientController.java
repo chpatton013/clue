@@ -402,6 +402,17 @@ public class ClientController
                     + "ClientGameState.");
             return;
         }
+        
+        System.out.println("The following cards were revealed to you: ");
+        
+        for(Card c : rsp.getCards())
+        {
+            if(c instanceof HintCard)
+            {
+                HintCard hintCard = (HintCard)c;
+                hintCard.toString();
+            }
+        }
 
         ClientGameState state = (ClientGameState) this.state;
         state.setRevealed(rsp.getCards());

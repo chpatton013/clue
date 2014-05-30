@@ -15,6 +15,8 @@ public class AccusationScreen extends javax.swing.JFrame
     CardTranslator translate;
     
     boolean performAction = true;
+    
+    boolean isSuggestion = false;
 
     /**
      * Version-latenightpizzaparty
@@ -32,13 +34,20 @@ public class AccusationScreen extends javax.swing.JFrame
      *
      * @param ctrl method parameter
      */
-    public AccusationScreen(GUIController ctrl)
+    public AccusationScreen(GUIController ctrl, boolean isSug)
     {
         //set controller = ctrl
         controller = ctrl;
         translate = new CardTranslator(ctrl);
+        
+        isSuggestion = isSug;
 
         initComponents();
+        
+        if(isSug)
+        {
+            accuseButton.setText("Suggest");
+        }        
         
         updateImages();
         
@@ -248,9 +257,18 @@ public class AccusationScreen extends javax.swing.JFrame
         int vehicleNumber = cardDropDown2.getSelectedIndex();
         int locationNumber = cardDropDown3.getSelectedIndex();
         
-        controller.makeAccusation(translate.getCard("suspect", suspectNumber),
-                translate.getCard("vehicle", vehicleNumber),
-                translate.getCard("location", locationNumber));
+        if(!isSuggestion)
+        {
+            controller.makeAccusation(translate.getCard("suspect", suspectNumber),
+                    translate.getCard("vehicle", vehicleNumber),
+                    translate.getCard("location", locationNumber));
+        }
+        else
+        {
+            controller.makeSuggestion(translate.getCard("suspect", suspectNumber),
+                    translate.getCard("vehicle", vehicleNumber),
+                    translate.getCard("location", locationNumber));
+        }
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt)

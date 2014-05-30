@@ -815,16 +815,7 @@ public class MainGameScreen extends javax.swing.JFrame
         // Guard against this
         if (actionCards[0] != null)
         {
-            // Guard against this
-            if (actionCards[0].getActionType() == ActionCardType.SUGGESTION)
-            {
-
-            }
-            // Otherwise...
-            else
-            {
-                controller.playCard(actionCards[0], selectedPlayer);
-            }
+            controller.playCard(actionCards[0], selectedPlayer);
         }
     }//GEN-LAST:event_actionImage1MouseClicked
 
@@ -833,16 +824,7 @@ public class MainGameScreen extends javax.swing.JFrame
         // Guard against this
         if (actionCards[1] != null)
         {
-            // Guard against this
-            if (actionCards[1].getActionType() == ActionCardType.SUGGESTION)
-            {
-
-            }
-            // Otherwise...
-            else
-            {
-                controller.playCard(actionCards[1], selectedPlayer);
-            }
+            controller.playCard(actionCards[1], selectedPlayer);
         }
     }//GEN-LAST:event_actionImage2MouseClicked
 
