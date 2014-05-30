@@ -297,16 +297,13 @@ public class ServerController
         else if (obj instanceof GameStartRequest)
         {
             Game game = games.get(connection);
-            handleGameStartRequest(games.get(connection), lobbies.get(game.
-                    getGameId()), connection);
+            Lobby lobby = lobbies.get(game.getGameId());
+            handleGameStartRequest(game, lobby, connection);
             dealActionCard(game);
         }
         /**
-         * @TODO Add a response class? PlayersResponse? List of player names and
-         * made up AI names? or Add a list of players to the
-         * LobbyDiscoveryResponse?
+         *
          */
-
         else if (obj instanceof GameStateRequest)
         {
             this.handleGameStateRequest(games.get(connection), connection);
@@ -397,7 +394,7 @@ public class ServerController
         //Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
-        // Build a list of human client connections to send 
+        // Build a list of human client connections to send
         // LobbyUpdateResponse to
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
@@ -677,7 +674,7 @@ public class ServerController
         {
             GameStateResponse gameResponse = new GameStateResponse(
                     game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
-                    game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                    game.getCurrentPlayerId(), game.getPlayerIdNames(),
                     pl.getHintCardsHand(),
                     pl.getActionCardsHand(),
                     game.getDestToPlayerId());
@@ -693,7 +690,7 @@ public class ServerController
         ServerPlayer serverPlayer = connectionToPlayer.get(cxn);
         this.forwardMessage(new GameStateResponse(
                 game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
-                game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                game.getCurrentPlayerId(), game.getPlayerIdNames(),
                 serverPlayer.getHintCardsHand(),
                 serverPlayer.getActionCardsHand(),
                 game.getDestToPlayerId()), cxn);
@@ -1172,7 +1169,7 @@ public class ServerController
 
                 GameStateResponse newGameState = new GameStateResponse(game.
                         getDrawPile().size(), playerTurnOrder, game.
-                        getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                        getCurrentPlayerId(), game.getPlayerIdNames(),
                         null, game.getDrawPile(), game.getDestToPlayerId());
                 
                 informPlayers(game, newGameState);

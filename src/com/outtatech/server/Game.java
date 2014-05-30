@@ -170,13 +170,13 @@ public class Game
     }
 
     /**
-     * Returns the index for the player array for the currently active player.
+     * Returns the id for the player array for the currently active player.
      *
-     * @return the index of the currently active player;
+     * @return the id of the currently active player;
      */
-    public Integer getCurrentPlayerIndex()
+    public Integer getCurrentPlayerId()
     {
-        return curPlayerTurn;
+        return this.getCurrentPlayer().getPlayerId();
     }
 
     /**
