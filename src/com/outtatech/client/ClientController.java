@@ -163,11 +163,18 @@ public class ClientController
 
     public boolean playActionCard(ActionCard card, Integer playerId)
     {
+        ClientGameState state = (ClientGameState)this.state;
+        Integer myPlayerId = state.getPlayerId();
+        int numPlayers = state.getPlayerTurnOrder().size();
+
         boolean requiresSelectedPlayer = card instanceof Snoop ||
             card instanceof PrivateTip;
-        Integer myPlayerId = ((ClientGameState)this.state).getPlayerId();
+        boolean playerSelected = playerId != null;
+        boolean selectedSelf = playerId == myPlayerId;
+        boolean validSelection = playerId >= 0 && playerId < numPlayers;
+        // No player selected.
         if (requiresSelectedPlayer &&
-                (playerId == null || playerId == myPlayerId))
+                (!playerSelected || selectedSelf || !validSelection))
         {
             return false;
         }
