@@ -8,9 +8,8 @@ import java.util.*;
 import java.util.Random;
 
 /**
- * Version-latenightpizzaparty
- * AI Class can be used to replace a human player. An AI instance will have its
- * own level of Difficulty
+ * Version-latenightpizzaparty AI Class can be used to replace a human player.
+ * An AI instance will have its own level of Difficulty
  *
  * @author Steven Chiu
  * @version 1.0 - May 11, 2014
@@ -22,11 +21,11 @@ public class AI extends ServerPlayer
     private Game game;
 
     /**
-     * Version-latenightpizzaparty
-     * Construct an AI instance, requires instantiated instances of Difficulty
-     * and ServerController.
+     * Version-latenightpizzaparty Construct an AI instance, requires
+     * instantiated instances of Difficulty and ServerController.
      *
-     * @param difficulty the Difficulty instance to drive the AI method parameter
+     * @param difficulty the Difficulty instance to drive the AI method
+     * parameter
      * @param ctrl the Server Controller instance needing an AI method parameter
      * @param game method parameter
      */
@@ -39,8 +38,7 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Gets the difficulty associated with this AI.
+     * Version-latenightpizzaparty Gets the difficulty associated with this AI.
      *
      * @return The difficulty associated with this AI. return value
      */
@@ -48,9 +46,10 @@ public class AI extends ServerPlayer
     {
         return difficulty;
     }
-    
+
     /**
      * Getter method for the AI's game
+     *
      * @return the AI's game
      */
     public Game getGame()
@@ -59,8 +58,7 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Sets the difficulty associated with this AI.
+     * Version-latenightpizzaparty Sets the difficulty associated with this AI.
      *
      * @param difficulty The difficulty level of the AI. method parameter
      */
@@ -70,8 +68,8 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Gets the ServerController associated with this AI.
+     * Version-latenightpizzaparty Gets the ServerController associated with
+     * this AI.
      *
      * @return ctrl The ServerController of this AI. return value
      */
@@ -81,8 +79,8 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Sets the ServerController associated with this AI.
+     * Version-latenightpizzaparty Sets the ServerController associated with
+     * this AI.
      *
      * @param ctrl The ServerController of this AI. method parameter
      */
@@ -92,14 +90,12 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Method invoked when AI needs to respond to Action cards requiring it's
-     * participation.
+     * Version-latenightpizzaparty Method invoked when AI needs to respond to
+     * Action cards requiring it's participation.
      *
      * @param card The card to respond to. method parameter
      * @return playableCards The list of cards to show or null if there are no
-     * return value
-     * compatible cards found.
+     * return value compatible cards found.
      */
     public ArrayList<HintCard> aiRespond(ActionCard card)
     {
@@ -119,8 +115,8 @@ public class AI extends ServerPlayer
                     cardInHand++)
             {
                 HintCard curHintCard = hintCardsHand.get(cardInHand);
-                HintCardType curHintType = 
-                        hintCardsHand.get(cardInHand).getHintType();
+                HintCardType curHintType = hintCardsHand.get(cardInHand).
+                        getHintType();
 
                 //Checks sleuthType
                 switch (sleuthType)
@@ -213,8 +209,8 @@ public class AI extends ServerPlayer
                     cardInHand++)
             {
                 HintCard curHintCard = hintCardsHand.get(cardInHand);
-                HintCardType curHintType = 
-                        hintCardsHand.get(cardInHand).getHintType();
+                HintCardType curHintType = hintCardsHand.get(cardInHand).
+                        getHintType();
 
                 //Checks Destinations
                 switch (privateTipType)
@@ -288,75 +284,108 @@ public class AI extends ServerPlayer
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Method invoked when it is AI's turn to play an action card.
+     * Version-latenightpizzaparty Method invoked when it is AI's turn to play
+     * an action card.
      */
     public void aiTurn()
     {
         // Guard against this
-        if (!aiMakeAccusation())
+        if (aiMakeAccusation())
         {
-            System.out.println("AI " + this.getPlayerId() + " is taking its turn");
-            ActionCard cardToPlay = actionCardsHand.get((int) Math.random());
+            return;
+        }
 
-            // Guard against this
-            if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
-            {
-                aiMakeSuggestion(cardToPlay);
-            }
-            // Otherwise...
-            else if (cardToPlay.getActionType() == ActionCardType.SNOOP
-                    || cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
-            {
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null,
-                        getRandomPlayerID()), this);
-            }
+        System.out.println("AI " + this.getPlayerId() + " is taking its turn");
+        int choice = 0;
+        if (difficulty.getIntelligence() <= 2)
+        {
+            choice = (int) (Math.random() * actionCardsHand.size());
+        }
+        else
+        {
+            choice = getBestCardToPlay();
+        }
+        System.out.println("Picking card: " + choice);
+        ActionCard cardToPlay = actionCardsHand.get(choice);
+        System.out.println("AI : I'm going to play the card " + cardToPlay.
+                getActionType());
 
-            // Otherwise...
-            else
-            {
-                ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
-            }
+        // Guard against this
+        if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
+        {
+            System.out.println("Can play this fucking suggestion!");
+            aiMakeSuggestion((Suggestion) cardToPlay);
+        }
+        // Otherwise...
+        else if (cardToPlay.getActionType() == ActionCardType.SNOOP
+                || cardToPlay.getActionType() == ActionCardType.PRIVATE_TIP)
+        {
+            int randomPlayer = getRandomPlayerID();
+            System.out.println("AI chose playerID " + randomPlayer
+                    + " as the target");
+            ctrl.reactToRobot(new ActionRequest(cardToPlay,
+                    getRandomPlayerID()), this);
+        }
+        // Otherwise...
+        else
+        {
+            ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
         }
 
     }
 
+    private int getBestCardToPlay()
+    {
+        if (actionCardsHand.get(0) instanceof SuperSleuth)
+        {
+            return 0;
+        }
+        else if (actionCardsHand.get(1) instanceof SuperSleuth)
+        {
+            return 1;
+        }
+        return (int) (Math.random() * 2);
+    }
+
     /**
-     * Version-latenightpizzaparty
-     * Returns ID of random player in game.
+     * Version-latenightpizzaparty Returns ID of random player in game.
      *
      * @return playerID ID of random player in game. return value
      */
     private Integer getRandomPlayerID()
     {
-        Integer playerID = -1;
+        Integer playerID = this.getPlayerId();
 
         // Iterate until false
         while (playerID == this.getPlayerId())
         {
-            int index = (int) Math.random() * game.getServerPlayersList().size();
+            int index = (int) (Math.random() * game.getServerPlayersList().
+                    size());
             playerID = game.getServerPlayersList().get(index).getPlayerId();
         }
 
         return playerID;
     }
 
-    private void aiMakeSuggestion(ActionCard card)
+    private void aiMakeSuggestion(Suggestion card)
     {
         SuspectID choice1;
         VehicleID choice2;
         DestinationID choice3;
 
-        System.out.println("AI GONNA MAKE AN ACCUSATION!");
+        System.out.println("AI is making a suggestion of : ");
         // Guard against this
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
+            System.out.println(choice1);
             choice2 = getVehicleChoice(vehicleCardsSeen);
-            choice3 = (getLocationChoice(locationsSeen));
+            System.out.println(choice2);
+            choice3 = getLocationChoice(locationsSeen);
+            System.out.println(choice3);
 
-            ctrl.reactToRobot(new SuggestionRequest(
-                    new Solution(choice3, choice2, choice1)), this);
+            ctrl.reactToRobot(new SuggestionRequest(card,
+                    new Solution(choice3, choice2, choice1), choice3), this);
 
         }
         // Otherwise...
@@ -364,16 +393,19 @@ public class AI extends ServerPlayer
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
             choice2 = (getVehicleChoice(vehicleCardsSeen));
+            choice3 = game.getPlayerIdToDest().get(this.getPlayerId());
+            System.out.println(choice3);
 
-            ctrl.reactToRobot(new SuggestionRequest(
-                    new Solution(this.getLocation(), choice2, choice1)), this);
+            ctrl.reactToRobot(new SuggestionRequest(card,
+                    new Solution(this.getLocation(), choice2, choice1), choice3),
+                    this);
         }
 
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Method invoked when another player or bot makes a suggestion.
+     * Version-latenightpizzaparty Method invoked when another player or bot
+     * makes a suggestion.
      *
      * @param suspect The ID of suspect in the suggestion. method parameter
      * @param vehicle The ID of vehicle in the suggestion. method parameter
@@ -383,7 +415,8 @@ public class AI extends ServerPlayer
     public HintCard aiRefuteSuggestion(SuspectID suspect, VehicleID vehicle,
             DestinationID destination)
     {
-
+        System.out.println("AI " + getPlayerId()
+                + " is attempting to refute the suggetsion");
         // Iterate over this set
         for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++)
         {
@@ -395,6 +428,7 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((SuspectCard) card).getSuspect() == suspect)
                 {
+                    System.out.println("AI HAS suspect " + suspect);
                     return card;
                 }
             }
@@ -404,6 +438,7 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((DestinationCard) card).getDestination() == destination)
                 {
+                    System.out.println("AI HAS destination " + destination);
                     return card;
                 }
             }
@@ -413,32 +448,42 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((VehicleCard) card).getVehicle() == vehicle)
                 {
+                    System.out.println("AI HAS vehicle " + vehicle);
                     return card;
                 }
             }
         }
+        System.out.println("AI could not refute card.");
         return null;
     }
 
     /**
-     * Version-latenightpizzaparty
-     * Method invoked each time AI plays a turn in order to determine whether or
-     * not to make an accusation based on the AI difficulty level.
+     * Version-latenightpizzaparty Method invoked each time AI plays a turn in
+     * order to determine whether or not to make an accusation based on the AI
+     * difficulty level.
      *
-     * @return boolean Returns true if accusation has been made, false if it return value
-     * hasn't.
+     * @return boolean Returns true if accusation has been made, false if it
+     * return value hasn't.
      */
     private boolean aiMakeAccusation()
     { // void for sake of complitation w/pseudocde. should return a boolean
         // knowledge = (add number of known cards in each category 
         // number of cards in each category) / 3
-        float knowledge = (suspectCardsSeen.size() / 6 + vehicleCardsSeen.size()
-                / 6 + locationsSeen.size() / 9) / 3;
+        float knowledge = (suspectCardsSeen.size() / 6.0f + vehicleCardsSeen.
+                size()
+                / 6.0f + locationsSeen.size() / 9.0f) / 3.0f;
+        System.out.println("suspects seen: " + suspectCardsSeen.size());
+        System.out.println("vehicles seen: " + vehicleCardsSeen.size());
+        System.out.println("locations seen: " + locationsSeen.size());
+        System.out.println("Knowledge coefficient of AI is: " + knowledge);
+        System.out.println("AI riskiness variable is: " + difficulty.
+                getRiskiness());
         // if knowledge < riskiness of AI
         // Guard against this
-        if ((knowledge * 0) <= difficulty.getRiskiness())
+        if ((knowledge * 5) <= difficulty.getRiskiness())
         //  return false
         {
+            System.out.println("Will not make an accusation!");
             return false;
         }
         // else {
@@ -465,7 +510,6 @@ public class AI extends ServerPlayer
     }
 
     //Tim minshim
-
     private SuspectID getSuspectChoice(EnumSet cards)
     {
         EnumSet complement = EnumSet.complementOf(cards);
@@ -490,8 +534,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (SuspectID) cards.toArray()[(int) choice - 
-                            cards.size()];
+                    return (SuspectID) cards.toArray()[(int) choice - cards.
+                            size()];
                 }
             }
         }
@@ -522,8 +566,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (VehicleID) cards.toArray()[(int) choice - 
-                            cards.size()];
+                    return (VehicleID) cards.toArray()[(int) choice - cards.
+                            size()];
                 }
             }
         }
@@ -554,8 +598,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (DestinationID) cards.toArray()[(int) choice -
-                            cards.size()];
+                    return (DestinationID) cards.toArray()[(int) choice - cards.
+                            size()];
                 }
             }
         }
@@ -569,15 +613,18 @@ public class AI extends ServerPlayer
      */
     public void reactToServer(Object obj)
     {
+        System.out.println("Server gave me a message!");
         // Guard against this
         if (obj instanceof AccusationResponse)
         {
+            System.out.println("AI got an AccusationRepsonse!");
             //check if accusation is correct
             //if not, keep sending endturnrequests
         }
         // Guard against this
-        if (obj instanceof CardDealResponse)
+        else if (obj instanceof CardDealResponse)
         {
+            System.out.println("AI got an CardDealRepsonse!");
             CardDealResponse rsp = (CardDealResponse) obj;
             Card temp = rsp.getCard();
             // Guard against this
@@ -588,32 +635,55 @@ public class AI extends ServerPlayer
                 {
                     actionCardsHand.add((ActionCard) temp);
                 }
-                // Guard against this
-//                if (temp.getCardType() == CardType.HINT)
-//                {
-//                    hintCardsHand.add((HintCard) temp);
-//                }
             }
-            
-            //aiTurn();
+
+            aiTurn();
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }
         // Guard against this
-        if (obj instanceof GameStateResponse)
+        else if (obj instanceof GameStateResponse)
         {
+            System.out.println("AI got an GameStateResponse!");
             GameStateResponse gsr = (GameStateResponse) obj;
             actionCardsHand = gsr.getActionCards();
             hintCardsHand = gsr.getHintCards();
+            for (HintCard temp : hintCardsHand)
+            {
+                // Guard against this
+                if (((HintCard) temp).getHintType() == HintCardType.SUSPECT)
+                {
+                    System.out.println("AI found " + ((SuspectCard) temp).
+                            getSuspect());
+                    suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
+                }
+                // Guard against this
+                else if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
+                {
+                    System.out.println("AI found " + ((VehicleCard) temp).
+                            getVehicle());
+                    vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
+                }
+                // Guard against this
+                else if (((HintCard) temp).getHintType()
+                        == HintCardType.DESTINATION)
+                {
+                    System.out.println("AI found " + ((DestinationCard) temp).
+                            getDestination());
+                    locationsSeen.add(((DestinationCard) temp).getDestination());
+                }
+            }
         }
         // Guard against this
-        if (obj instanceof KickPlayerResponse)
+        else if (obj instanceof KickPlayerResponse)
         {
-
+            System.out.println("AI got an KickPlayerRepsonse!");
         }
         // Guard against this
-        if (obj instanceof RevealCardResponse)
+        else if (obj instanceof RevealCardResponse)
         {
+            System.out.println("AI got an RevealCardRepsonse!");
+            System.out.println("AI got some cards!");
             RevealCardResponse rsp = (RevealCardResponse) obj;
             // Iterate over this set
             for (Card temp : rsp.getCards())
@@ -621,16 +691,23 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((HintCard) temp).getHintType() == HintCardType.SUSPECT)
                 {
+                    System.out.println("AI found " + ((SuspectCard) temp).
+                            getSuspect());
                     suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
+                else if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
                 {
+                    System.out.println("AI found " + ((VehicleCard) temp).
+                            getVehicle());
                     vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
+                else if (((HintCard) temp).getHintType()
+                        == HintCardType.DESTINATION)
                 {
+                    System.out.println("AI found " + ((DestinationCard) temp).
+                            getDestination());
                     locationsSeen.add(((DestinationCard) temp).getDestination());
                 }
             }

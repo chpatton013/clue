@@ -30,6 +30,7 @@ public class ClientGameState extends State
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
+    private boolean myTurn = false;
 
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
@@ -91,21 +92,21 @@ public class ClientGameState extends State
     {
         return playerID;
     }
-    
+
     /**
      * Setter method that sets the mapping from destination IDs to player IDs
-     * @param map 
+     * @param map
      */
     public void setDestToPlayerId(Map<DestinationID, Integer> map)
     {
         this.destToPlayerId = map;
         triggerChange();
     }
-    
-    
+
+
     /**
      * Sets the players in this game
-     * 
+     *
      * @param players the players in this game.
      */
     public void setPlayers(Map<Integer, String> players)
@@ -113,10 +114,10 @@ public class ClientGameState extends State
         this.players = players;
         triggerChange();
     }
-    
+
     /**
      * Returns the list of players in this game
-     * 
+     *
      * @return the list of players in this game
      */
     public Map<Integer, String> getPlayers()
@@ -128,10 +129,6 @@ public class ClientGameState extends State
      * Getter method for the cards that have been revealed to the client.
      *
      * @return a list that contains cards that have been revealed to the client.
-<<<<<<< HEAD
-=======
-     * return value
->>>>>>> 7af8a8b0c28bdab833deebdabe18a56bbb0bf199
      */
     public List<Card> getRevealed()
     {
@@ -142,12 +139,8 @@ public class ClientGameState extends State
      * Setter method for the list of cards that have been revealed to the
      * client.
      *
-<<<<<<< HEAD
      * @param revealed the list of cards that have been revealed to the client.
-=======
-     * @param revealed the list of cards that have been revealed to the client. 
      * method parameter
->>>>>>> 7af8a8b0c28bdab833deebdabe18a56bbb0bf199
      */
     public void setRevealed(List<Card> revealed)
     {
@@ -188,26 +181,37 @@ public class ClientGameState extends State
         this.playerID = playerID;
         triggerChange();
     }
-    
+
     /**
      * Sets this players hand.
-     * 
-     * @param hand 
+     *
+     * @param hand
      */
     public void setPlayerHand(List<Card> hand)
     {
         this.hand = hand;
         triggerChange();
     }
-    
+
     /**
      * Adds the given card to the player's hand.
-     * 
+     *
      * @param cards to add to hand
      */
     public void addToHand(Card card)
     {
         this.hand.add(card);
+        triggerChange();
+    }
+
+    /**
+     * Removes the given card from the player's hand.
+     *
+     * @param cards to remove from hand
+     */
+    public void removeFromHand(Card card)
+    {
+        this.hand.remove(card);
         triggerChange();
     }
 
@@ -220,11 +224,11 @@ public class ClientGameState extends State
     {
         return notes;
     }
-    
+
     /**
      * Sets this players notes.
-     * 
-     * @param notes 
+     *
+     * @param notes
      */
     public void setNotes(Object notes)
     {
@@ -262,6 +266,16 @@ public class ClientGameState extends State
     public List<Integer> getPlayerTurnOrder()
     {
         return this.playerTurnOrder;
+    }
+
+    public Integer getPlayerIdAtIndex(Integer index)
+    {
+        return this.playerTurnOrder.get(index);
+    }
+
+    public Integer getCurrentPlayerId()
+    {
+        return this.getPlayerIdAtIndex(this.getCurrentActivePlayer());
     }
 
     public String getPlayerName(Integer playerId)
@@ -302,6 +316,12 @@ public class ClientGameState extends State
         triggerChange();
     }
 
+    public void advancePlayer()
+    {
+        int next = (this.currentActivePlayer + 1) % this.playerTurnOrder.size();
+        this.setCurrentActivePlayer(next);
+    }
+
     public void pushGameLog(String message)
     {
         this.gameLog.addLast(message);
@@ -311,5 +331,16 @@ public class ClientGameState extends State
     public String pollGameLog()
     {
         return this.gameLog.poll();
+    }
+
+    public boolean isMyTurn()
+    {
+        return this.myTurn;
+    }
+
+    public void setMyTurn(boolean myTurn)
+    {
+        this.myTurn = myTurn;
+        this.triggerChange();
     }
 }

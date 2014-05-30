@@ -17,10 +17,10 @@ public class Lobby implements Serializable
      *
      */
     protected static Integer lobbyIdCounter = 0;
-    String lobbyName;
-    Integer gameId;
-    Integer lobbyId;
-    boolean visible;
+    private String lobbyName;
+    private Integer gameId;
+    private Integer lobbyId;
+    private boolean visible;
 
     /**
      * Version-latenightpizzaparty

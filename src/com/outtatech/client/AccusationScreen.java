@@ -1,5 +1,7 @@
 package com.outtatech.client;
 
+import javax.swing.ImageIcon;
+
 /**
  * Version-latenightpizzaparty
  *
@@ -9,6 +11,10 @@ public class AccusationScreen extends javax.swing.JFrame
 {
 
     GUIController controller;
+    
+    CardTranslator translate;
+    
+    boolean performAction = true;
 
     /**
      * Version-latenightpizzaparty
@@ -17,6 +23,7 @@ public class AccusationScreen extends javax.swing.JFrame
     public AccusationScreen()
     {
         initComponents();
+        
     }
 
     /**
@@ -29,10 +36,70 @@ public class AccusationScreen extends javax.swing.JFrame
     {
         //set controller = ctrl
         controller = ctrl;
+        translate = new CardTranslator(ctrl);
 
         initComponents();
+        
+        updateImages();
+        
+        updateDropDowns();
+    }
+    
+    public void updateDropDowns()
+    {      
+        performAction = false;
+        
+        cardDropDown1.removeAllItems();
+        cardDropDown2.removeAllItems();
+        cardDropDown3.removeAllItems();
+        
+        cardDropDown1.addItem(translate.getName("suspect", 0));
+        cardDropDown1.addItem(translate.getName("suspect", 1));
+        cardDropDown1.addItem(translate.getName("suspect", 2));
+        cardDropDown1.addItem(translate.getName("suspect", 3));
+        cardDropDown1.addItem(translate.getName("suspect", 4));
+        cardDropDown1.addItem(translate.getName("suspect", 5));
+        
+        cardDropDown2.addItem(translate.getName("vehicle", 0));
+        cardDropDown2.addItem(translate.getName("vehicle", 1));
+        cardDropDown2.addItem(translate.getName("vehicle", 2));
+        cardDropDown2.addItem(translate.getName("vehicle", 3));
+        cardDropDown2.addItem(translate.getName("vehicle", 4));
+        cardDropDown2.addItem(translate.getName("vehicle", 5));
+        
+        cardDropDown3.addItem(translate.getName("location", 0));
+        cardDropDown3.addItem(translate.getName("location", 1));
+        cardDropDown3.addItem(translate.getName("location", 2));
+        cardDropDown3.addItem(translate.getName("location", 3));
+        cardDropDown3.addItem(translate.getName("location", 4));
+        cardDropDown3.addItem(translate.getName("location", 5));
+        cardDropDown3.addItem(translate.getName("location", 6));
+        cardDropDown3.addItem(translate.getName("location", 7));
+        cardDropDown3.addItem(translate.getName("location", 8));
+        
+        performAction = true;
     }
 
+    public void updateImages()
+    {
+        int suspectNumber = cardDropDown1.getSelectedIndex();
+        int vehicleNumber = cardDropDown2.getSelectedIndex();
+        int locationNumber = cardDropDown3.getSelectedIndex();
+        
+        image1.setText("");
+        image2.setText("");
+        image3.setText("");
+
+        image1.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("suspect", suspectNumber))));
+
+        image2.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("vehicle", vehicleNumber))));
+
+        image3.setIcon(new ImageIcon(translate.getPath(
+                translate.getCard("location", locationNumber))));
+    }
+    
     /**
      * Version-latenightpizzaparty
      * This method is called from within the constructor to initialize the form.
@@ -122,22 +189,20 @@ public class AccusationScreen extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(image1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addComponent(accuseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(closeButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(image1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(image2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95)))
+                            .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(image2))
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(image3)
                             .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -151,19 +216,19 @@ public class AccusationScreen extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(image1)
-                    .addComponent(image2)
-                    .addComponent(image3))
-                .addGap(83, 83, 83)
+                    .addComponent(image3)
+                    .addComponent(image2))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardDropDown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cardDropDown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cardDropDown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accuseButton)
                     .addComponent(closeButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,21 +244,40 @@ public class AccusationScreen extends javax.swing.JFrame
     {//GEN-FIRST:event_accuseButtonMouseClicked
         //call controller's makeAccusation method with the card types of
         //the three selected cards
+        int suspectNumber = cardDropDown1.getSelectedIndex();
+        int vehicleNumber = cardDropDown2.getSelectedIndex();
+        int locationNumber = cardDropDown3.getSelectedIndex();
+        
+        controller.makeAccusation(translate.getCard("suspect", suspectNumber),
+                translate.getCard("vehicle", vehicleNumber),
+                translate.getCard("location", locationNumber));
     }//GEN-LAST:event_accuseButtonMouseClicked
 
     private void cardDropDown1ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown1ActionPerformed
         //set cardImage1 to image of selected card
+        if(performAction)
+        {
+            updateImages();
+        }
     }//GEN-LAST:event_cardDropDown1ActionPerformed
 
     private void cardDropDown2ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown2ActionPerformed
         //set cardImage2 to image of selected card
+        if(performAction)
+        {
+            updateImages();
+        }
     }//GEN-LAST:event_cardDropDown2ActionPerformed
 
     private void cardDropDown3ActionPerformed(java.awt.event.ActionEvent evt)
     {//GEN-FIRST:event_cardDropDown3ActionPerformed
         //set cardImage3 to image of selected card
+        if(performAction)
+        {
+            updateImages();
+        }
     }//GEN-LAST:event_cardDropDown3ActionPerformed
 
     /**

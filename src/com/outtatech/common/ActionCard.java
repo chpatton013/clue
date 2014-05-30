@@ -15,7 +15,7 @@ package com.outtatech.common;
  */
 public class ActionCard extends Card
 {
-    ActionCardType type;
+    private ActionCardType type;
 
     /**
      * Version-latenightpizzaparty

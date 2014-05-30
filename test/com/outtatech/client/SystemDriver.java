@@ -24,7 +24,7 @@ public class SystemDriver implements Observer
     /**
      *
      */
-    public static final int port = 4444;
+    public static final int port = 55555;
 
     /**
      *
@@ -64,6 +64,7 @@ public class SystemDriver implements Observer
         {
             System.out.println(ex.getMessage());
         }**/
+        
         State state;
         ClientController clientOne = new ClientController();
         state = clientOne.getState();

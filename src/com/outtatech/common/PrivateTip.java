@@ -13,7 +13,7 @@ package com.outtatech.common;
  */
 public class PrivateTip extends ActionCard
 {
-    PrivateTipType type;
+    private PrivateTipType type;
 
     /**
      * Version-latenightpizzaparty
@@ -39,5 +39,15 @@ public class PrivateTip extends ActionCard
     public String toString()
     {
         return "PRIVATETIP";
+    }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof PrivateTip)) {
+            return false;
+        }
+
+        PrivateTip other = (PrivateTip)obj;
+        return this.type == other.type;
     }
 }

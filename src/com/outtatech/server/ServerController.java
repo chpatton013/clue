@@ -7,6 +7,7 @@ import com.outtatech.server.messaging.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -35,9 +36,7 @@ public class ServerController
     private Map<Integer, Lobby> lobbies;
     private ServerNetwork network;
 
-    private Set<Integer> skipDeal;
-    private Set<Integer> playedThisTurn;
-
+    private int gameCounter = 1;
     private int playerCounter = 1;
     private int robotCounter = 1;
 
@@ -55,17 +54,14 @@ public class ServerController
         this.network = network;
         this.network.setServerController(this);
         this.connectionToPlayer
-                = new HashMap<ConnectionToClient, ServerPlayer>();
-        this.games = new HashMap<ConnectionToClient, Game>();
+                = new ConcurrentHashMap<ConnectionToClient, ServerPlayer>();
+        this.games = new ConcurrentHashMap<ConnectionToClient, Game>();
         this.players
-                = new HashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
-        this.humans = new HashMap<ServerPlayer, ConnectionToClient>();
-        this.robots = new HashMap<ServerPlayer, AI>();
-        this.lobbies = new HashMap<Integer, Lobby>();
-        this.gameIdToGame = new HashMap<Integer, Game>();
-
-        this.skipDeal = new HashSet<Integer>();
-        this.playedThisTurn = new HashSet<Integer>();
+                = new ConcurrentHashMap<Game, CopyOnWriteArrayList<ConnectionToClient>>();
+        this.humans = new ConcurrentHashMap<ServerPlayer, ConnectionToClient>();
+        this.robots = new ConcurrentHashMap<ServerPlayer, AI>();
+        this.lobbies = new ConcurrentHashMap<Integer, Lobby>();
+        this.gameIdToGame = new ConcurrentHashMap<Integer, Game>();
 
         try
         {
@@ -105,15 +101,15 @@ public class ServerController
         else if (obj instanceof ActionRequest)
         {
             ActionRequest actionReq = (ActionRequest) obj;
-            handleActionRequest(actionReq, connection);
+            handleActionRequest(actionReq, connectionToPlayer.get(connection));
         }
-        /* 
+        /*
          * AccusationRequest respond with AccusationResponse
          */
         else if (obj instanceof AccusationRequest)
         {
             AccusationRequest accusationReq = (AccusationRequest) obj;
-            handleAccusation(connectionToPlayer.get(connection) , accusationReq);
+            handleAccusation(connectionToPlayer.get(connection), accusationReq);
         }
         /*
          * SuggestionRequest respond with SuggestionResponse
@@ -121,7 +117,8 @@ public class ServerController
         else if (obj instanceof SuggestionRequest)
         {
             SuggestionRequest suggestionReq = (SuggestionRequest) obj;
-            handleSuggestion(suggestionReq, connection);
+            handleSuggestion(suggestionReq, connectionToPlayer.get(connection),
+                    games.get(connection));
         }
         /*
          * AddAIRequest respond with AddAIResponse
@@ -140,8 +137,9 @@ public class ServerController
             }
 
             ServerPlayer newPlayer = new AI(addAIReq.getDifficulty(), this,
-                games.get(connection));
+                    games.get(connection));
             newPlayer.setName("ClueBot" + this.robotCounter++);
+            robots.put(newPlayer, (AI) newPlayer);
 
             // Add the AI
             lobbyGame.addServerPlayer(newPlayer);
@@ -158,12 +156,13 @@ public class ServerController
                     newPlayer.getPlayerId(), names));
         }
 
-        /* 
+        /*
          * LobbyJoinRequest respond with LobbyJoinResponse
          * notify all clients.
          */
         else if (obj instanceof LobbyJoinRequest)
         {
+            System.out.println("Got LobbyJoinRequest");
             Lobby lobby = lobbies.get(((LobbyJoinRequest) obj).getLobbyId());
             Game game = gameIdToGame.get(lobby.getGameId());
 
@@ -176,9 +175,11 @@ public class ServerController
             serverPlayer.setName("CluePlayer" + this.playerCounter++);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
+            games.put(connection, game);
+
             List<ConnectionToClient> cxns = this.getGameClients(
                     lobby.getLobbyId());
-            cxns.add(this.humans.get(serverPlayer));
+            cxns.add(connection);
 
             game.addServerPlayer(serverPlayer);
 
@@ -187,6 +188,11 @@ public class ServerController
             for (Player temp : players)
             {
                 names.put(temp.getPlayerId(), temp.getName());
+            }
+
+            for (ConnectionToClient temp : cxns)
+            {
+                System.out.println(temp.getId());
             }
 
             forwardMessage(new LobbyJoinResponse(lobby,
@@ -200,7 +206,8 @@ public class ServerController
         {
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
-            Lobby lobby = new Lobby(lcr.getLobbyName(), game.getGameId(), true);
+            Lobby lobby = new Lobby(lcr.getLobbyName() + gameCounter++,
+                    game.getGameId(), true);
             games.put(connection, game);
             gameIdToGame.put(game.getGameId(), game);
             lobbies.put(game.getGameId(), lobby);
@@ -226,7 +233,7 @@ public class ServerController
             players.put(game, new CopyOnWriteArrayList<ConnectionToClient>());
 
             ServerPlayer serverPlayer = new ServerPlayer();
-            serverPlayer.setName("single_player_host");
+            serverPlayer.setName("CluePlayer" + this.playerCounter++);
             game.addServerPlayer(serverPlayer);
             this.humans.put(serverPlayer, connection);
             this.connectionToPlayer.put(connection, serverPlayer);
@@ -250,8 +257,41 @@ public class ServerController
             Game game = games.get(connection);
             Player player = game.getServerPlayers().get(playerId);
             this.forwardMessage(new KickPlayerResponse(playerId),
-                players.get(game));
+                    players.get(game));
             game.getServerPlayers().remove(playerId);
+
+        }
+        else if (obj instanceof LobbyLeaveRequest)
+        {
+            System.out.println("lobbyleaveRequest");
+            for (ConnectionToClient temp : games.keySet())
+            {
+                System.out.println(temp.getId());
+            }
+
+            if (games.containsKey(connection))
+            {
+                System.out.println("removing connection " + connection.getId());
+                Game game = games.get(connection);
+                ServerPlayer player = connectionToPlayer.get(connection);
+                int playerId = player.getPlayerId();
+                game.getServerPlayers().remove(playerId);
+                games.remove(connection);
+                players.get(game).remove(connection);
+                connectionToPlayer.remove(connection);
+                humans.remove(player);
+                if (game.getServerPlayers().size() == 0)
+                {
+                    gameIdToGame.remove(game.getGameId());
+                    players.remove(game);
+                    lobbies.remove(game.getGameId());
+                }
+                else
+                {
+                    this.forwardMessage(new LobbyLeaveResponse(playerId),
+                            players.get(game));
+                }
+            }
         }
 
         /**
@@ -260,16 +300,13 @@ public class ServerController
         else if (obj instanceof GameStartRequest)
         {
             Game game = games.get(connection);
-            handleGameStartRequest(games.get(connection), lobbies.get(game.
-                    getGameId()), connection);
+            Lobby lobby = lobbies.get(game.getGameId());
+            handleGameStartRequest(game, lobby, connection);
             dealActionCard(game);
         }
         /**
-         * @TODO Add a response class? PlayersResponse? List of player names and
-         * made up AI names? or Add a list of players to the
-         * LobbyDiscoveryResponse?
+         *
          */
-
         else if (obj instanceof GameStateRequest)
         {
             this.handleGameStateRequest(games.get(connection), connection);
@@ -280,6 +317,8 @@ public class ServerController
         else if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest endTurnReq = (EndTurnRequest) obj;
+            System.out.println("server: " + games);
+            System.out.println("connection: " + connection);
             handleEndTurnRequest(games.get(connection), connectionToPlayer.get(
                     connection));
 //            forwardMessage(new GameStateResponse()), connection, false);
@@ -288,17 +327,9 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
-        Integer playerId = initiator.getPlayerId();
-        if (!playedThisTurn.contains(playerId))
-        {
-            skipDeal.add(playerId);
-        }
-
+        System.out.println("server: handleEndTurnRequest: " + game + "," + initiator);
         game.advanceTurn();
         dealActionCard(game);
-
-        playedThisTurn.remove(playerId);
-        skipDeal.remove(playerId);
     }
 
     /**
@@ -326,15 +357,13 @@ public class ServerController
      * @param game the game that contains the players the msg should be sent to
      * @param msg the message that should be sent to the players in the game
      */
-    private void informPlayers(Game game, ServerResponse msg)
+    private void informPlayers(List<ServerPlayer> gameServerPlayers,
+            ServerResponse msg)
     {
         ArrayList<ConnectionToClient> gamePlayers
                 = new ArrayList<ConnectionToClient>();
 
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
-
-        //Get all players in game
-        List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
         // Build a list of human client connections to send 
         // LobbyUpdateResponse to
@@ -355,65 +384,24 @@ public class ServerController
         //informAI(msg, aiPlayers);
     }
 
-    private HintCard findRefutingCard(List<ServerPlayer> gameServerPlayers,
-            Solution guess)
+    /**
+     * Given a game and a message, distributes the message to AI and Players
+     *
+     * @param game the game that contains the players the msg should be sent to
+     * @param msg the message that should be sent to the players in the game
+     */
+    private void informPlayers(Game game, ServerResponse msg)
     {
-
-        for (ServerPlayer player : gameServerPlayers)
-        {
-            for (HintCard card : player.getHintCardsHand())
-            {
-                if (card instanceof DestinationCard)
-                {
-                    DestinationCard dest = (DestinationCard) card;
-                    if (dest.getDestination().equals(guess.getDestination()))
-                    {
-                        return dest;
-                    }
-                }
-                else if (card instanceof SuspectCard)
-                {
-                    SuspectCard susp = (SuspectCard) card;
-                    if (susp.getSuspect().equals(guess.getSuspect()))
-                    {
-                        return susp;
-                    }
-                }
-                else if (card instanceof VehicleCard)
-                {
-                    VehicleCard vehicle = (VehicleCard) card;
-                    if (vehicle.getVehicle().equals(guess.getVehicle()))
-                    {
-                        return vehicle;
-                    }
-                }
-            }
-        }
-
-        return gameServerPlayers.get(0).getHintCardsHand().get(0);
-    }
-
-    private void handleSuggestion(SuggestionRequest suggestionReq,
-            ConnectionToClient connection)
-    {
-        ServerPlayer player = connectionToPlayer.get(connection);
-        playedThisTurn.add(player.getPlayerId());
-
         ArrayList<ConnectionToClient> gamePlayers
                 = new ArrayList<ConnectionToClient>();
+
         ArrayList<AI> aiPlayers = new ArrayList<AI>();
 
-        Solution suggestion = suggestionReq.getSuggestion();
-
-        //Get the clients game
-        Game clientGame = games.get(connection);
-
         //Get all players in game
-        List<ServerPlayer> gameServerPlayers
-                = clientGame.getServerPlayersList();
+        List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
-        //Build a list of human client connections to send accusation
-        //response to
+        // Build a list of human client connections to send
+        // LobbyUpdateResponse to
         for (ServerPlayer serverPlayer : gameServerPlayers)
         {
             if (!humans.containsKey(serverPlayer))
@@ -426,46 +414,119 @@ public class ServerController
             }
         }
 
-        if (suggestion.equals(clientGame.getSolution()))
-        {
-            SuggestionResponse suggResp = new SuggestionResponse(true);
+        // Send all human players in the lobby a LobbyUpdateResponse
+        forwardMessage(msg, gamePlayers);
+        //informAI(msg, aiPlayers);
+    }
 
-        }
-        else
-        {
-            SuggestionResponse suggResp = new SuggestionResponse(false);
-            //Find a refuting card
-            HintCard refutingCard = findRefutingCard(gameServerPlayers,
-                    suggestion);
-            suggResp.setRefutingCard(refutingCard);
-            //Send to humans
-            forwardMessage(suggResp, gamePlayers);
+    private HintCard findRefutingCard(List<ServerPlayer> gameServerPlayers,
+            Solution guess, Integer playerId)
+    {
 
-            //Send to AI
-            informAI(suggResp, aiPlayers);
+        for (ServerPlayer player : gameServerPlayers)
+        {
+            for (HintCard card : player.getHintCardsHand())
+            {
+                if (card instanceof DestinationCard)
+                {
+                    DestinationCard dest = (DestinationCard) card;
+                    if (dest.getDestination().equals(guess.getDestination()))
+                    {
+                        playerId = player.getPlayerId();
+                        return dest;
+                    }
+                }
+                else if (card instanceof SuspectCard)
+                {
+                    SuspectCard susp = (SuspectCard) card;
+                    if (susp.getSuspect().equals(guess.getSuspect()))
+                    {
+                        playerId = player.getPlayerId();
+                        return susp;
+                    }
+                }
+                else if (card instanceof VehicleCard)
+                {
+                    VehicleCard vehicle = (VehicleCard) card;
+                    if (vehicle.getVehicle().equals(guess.getVehicle()))
+                    {
+                        playerId = player.getPlayerId();
+                        return vehicle;
+                    }
+                }
+            }
         }
+
+        return gameServerPlayers.get(0).getHintCardsHand().get(0);
+    }
+
+    private void handleSuggestion(SuggestionRequest suggestionReq,
+            ServerPlayer player, Game clientGame)
+    {
+        //Get all players in game, except the accusor
+        List<ServerPlayer> gameServerPlayers
+                = clientGame.getServerPlayersList();
+
+        gameServerPlayers.remove(player);
+
+        // Get the suggestion out of the request
+        Suggestion suggestion = suggestionReq.getCard();
+
+        // Get the suggestion type
+        SuggestionType suggType = suggestion.getType();
+
+        // Move the players location
+        moveLocation(player, suggestionReq.getDestination());
+
+        // See if anyone has a card to refute the suggestion
+        Integer refutingPlayerID = null;
+
+        HintCard refutingCard = findRefutingCard(gameServerPlayers,
+                suggestionReq.getSuggestion(), refutingPlayerID);
+
+        // Response to send everyone but the accusor
+        SuggestionResponse respAll
+                = new SuggestionResponse(player.getPlayerId(),
+                        refutingPlayerID, null, suggestionReq.getSuggestion());
+
+        // Response to send the accusor
+        SuggestionResponse respAccusor = new SuggestionResponse(player.
+                getPlayerId(),
+                refutingPlayerID, refutingCard, suggestionReq.getSuggestion());
+
+        // Send everyone but the accusor a suggestion response with a null refutingCard
+        informPlayers(gameServerPlayers, respAll);
+
+        List<ServerPlayer> accusorList = new ArrayList<ServerPlayer>();
+        accusorList.add(player);
+
+        informPlayers(accusorList, respAccusor);
+
+        //Remove the action card from the players hand
+        player.removeActionCard(suggestionReq.getCard());
 
     }
 
-    private void handleAccusation(ServerPlayer fromPlayer, AccusationRequest accusationReq)
+    private void handleAccusation(ServerPlayer fromPlayer,
+            AccusationRequest accusationReq)
     {
         Game clientGame;
         Solution accusation = accusationReq.getSolution();
         //Get players game
-        if(fromPlayer instanceof AI)
+        if (fromPlayer instanceof AI)
         {
-            AI aiPlayer = (AI)fromPlayer;
+            AI aiPlayer = (AI) fromPlayer;
             clientGame = aiPlayer.getGame();
         }
         else
         {
             clientGame = games.get(humans.get(fromPlayer));
         }
-        
+
         //Get all players in game
         List<ServerPlayer> gameServerPlayers
                 = clientGame.getServerPlayersList();
-        
+
         //Create accusation response
         AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()));
@@ -487,19 +548,29 @@ public class ServerController
         System.out.println("Recieved a message from the AI");
         if (obj instanceof ActionRequest)
         {
-            System.out.println("Action Request");
-            AccusationRequest accusationReq = (AccusationRequest) obj;
-            handleAccusation(robot, accusationReq);
+            System.out.println("Recieved an ActionRequest");
+            ActionRequest rqst = (ActionRequest) obj;
+            Game game = robot.getGame();
+            List<ServerPlayer> players = game.getServerPlayersList();
+            handleActionRequest(rqst, (ServerPlayer) robot);
         }
         else if (obj instanceof AccusationRequest)
         {
             System.out.println("AccusationRequest");
+            AccusationRequest accusationReq = (AccusationRequest) obj;
+            handleAccusation(robot, accusationReq);
         }
-        else if(obj instanceof EndTurnRequest) 
+        else if (obj instanceof EndTurnRequest)
         {
             System.out.println("EndTurnRequest");
-            EndTurnRequest rqst = (EndTurnRequest)obj;
+            EndTurnRequest rqst = (EndTurnRequest) obj;
             handleEndTurnRequest(robot.getGame(), robot);
+        }
+        else if (obj instanceof SuggestionRequest)
+        {
+            System.out.println("SuggestionRequest");
+            SuggestionRequest rqst = (SuggestionRequest) obj;
+            handleSuggestion(rqst, robot, robot.getGame());
         }
         /**
          * Check instanceOf obj to determine what change needs to be made the AI
@@ -525,6 +596,7 @@ public class ServerController
 
     public void informAI(Object obj, AI ai)
     {
+        System.out.println("Informing the AI about " + obj);
         ai.reactToServer(obj);
     }
 
@@ -582,79 +654,57 @@ public class ServerController
      * @TODO also send out a GameStateResponse??
      * @param game
      */
-    private void handleGameStartRequest(Game game, Lobby lobby, 
+    private void handleGameStartRequest(Game game, Lobby lobby,
             ConnectionToClient connection)
     {
         game.initialize();
 
-        //Get all players in game
+        // Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
+        // Deal out all hint cards
         Integer playerCount = gameServerPlayers.size();
-        int playerIndex = 0;
-
-        //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
             gameServerPlayers.get(index % playerCount).addHintCard(game.
                     popHintCard());
         }
 
-        List<Integer> idList = new ArrayList<Integer>();
-        List<Integer> playerTurnOrder = new ArrayList<Integer>();
-        Map<Integer, String> nameMap = new HashMap<Integer, String>();
-
-        //Add one action card to each hand.
+        // Add one action card to each hand.
         for (ServerPlayer pl : gameServerPlayers)
         {
             pl.addActionCard(game.popActionCard());
-            idList.add(pl.getPlayerId());
-            nameMap.put(pl.getPlayerId(), pl.getName());
         }
 
-        for (ServerPlayer pl : game.getPlayerTurnOrder())
+        for (ServerPlayer pl : gameServerPlayers)
         {
-            playerTurnOrder.add(playerTurnOrder.size(), pl.getPlayerId());
-            GameStateResponse gameResponse = new GameStateResponse(game.
-                    getDrawPile().size(), playerTurnOrder, game.
-                    getCurrentPlayerIndex(), nameMap, pl.hintCardsHand,
-                    pl.actionCardsHand);
+            GameStateResponse gameResponse = new GameStateResponse(
+                    game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
+                    game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                    pl.getHintCardsHand(),
+                    pl.getActionCardsHand(),
+                    game.getDestToPlayerId());
             informPlayer(pl, gameResponse);
         }
 
         // Remove lobby when game starts
-
-        // Connection to server player
         lobbies.remove(game);
-
-        //waiting.remove(connectionToPlayer.get(connection));
-
-
     }
 
     private void handleGameStateRequest(Game game, ConnectionToClient cxn)
     {
-        Integer deckSize = game.getDrawPile().size();
         ServerPlayer serverPlayer = connectionToPlayer.get(cxn);
-
-        List<Integer> playerTurnOrder = new ArrayList<Integer>(
-                game.getServerPlayers().keySet());
-
-        Integer currentActivePlayer = playerTurnOrder.get(0);
-
-        Map<Integer, String> names = new HashMap<Integer, String>();
-        for (Player player : game.getServerPlayers().values())
-        {
-            names.put(player.getPlayerId(), player.getName());
-        }
-
-        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
-                currentActivePlayer, names, serverPlayer.getHintCardsHand(),
-                serverPlayer.getActionCardsHand()), cxn);
+        this.forwardMessage(new GameStateResponse(
+                game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
+                game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                serverPlayer.getHintCardsHand(),
+                serverPlayer.getActionCardsHand(),
+                game.getDestToPlayerId()), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
     {
+        System.out.println("Handling all snoop!");
         for (int playerNum = 0; playerNum < players.size(); playerNum++)
         {
             ServerPlayer curPlayer = players.get(playerNum);
@@ -675,6 +725,8 @@ public class ServerController
                 otherPlayer = players.get((playerNum + 1) % players.size());
             }
 
+            System.out.println("Got through player directions");
+
             List<HintCard> cards = otherPlayer.getHintCardsHand();
             List<Card> revealed = new ArrayList<Card>();
             Integer randomCard = new Random().nextInt(
@@ -683,23 +735,47 @@ public class ServerController
             revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
             RevealCardResponse response
                     = new RevealCardResponse(card, revealed);
-            forwardMessage(response, humans.get(curPlayer));
+
+            if (humans.containsKey(curPlayer))
+            {
+                forwardMessage(response, humans.get(curPlayer));
+            }
+            else
+            {
+                informAI(response, (AI) curPlayer);
+            }
         }
     }
 
     private void handlePrivateTip(PrivateTip card, Integer playerId,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling private tip");
+
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+        if (humans.containsKey(player))
+        {
+            connection = humans.get(player);
+        }
+        if (!isAI)
+        {
+            curGame = games.get(connection);
+        }
+        else
+        {
+            curGame = ((AI) player).getGame();
+        }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
 
         // List playableCards to return
-        ArrayList<HintCard> playableCards = new ArrayList();
+        ArrayList<Card> playableCards = new ArrayList();
         List<HintCard> hintCardsHand = opponent.getHintCardsHand();
         PrivateTipType privateTipType = card.getType();
 
-        for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++)
+        for (int cardInHand = 0; cardInHand < hintCardsHand.size();
+                cardInHand++)
         {
             HintCard curHintCard = hintCardsHand.get(cardInHand);
             HintCardType curHintType = hintCardsHand.get(cardInHand).
@@ -726,7 +802,7 @@ public class ServerController
                     }
                     break;
                 case ONE_FEMALE_SUSPECT:
-                    if (curHintType == HintCardType.DESTINATION)
+                    if (curHintType == HintCardType.SUSPECT)
                     {
                         if (((SuspectCard) curHintCard).getGender()
                                 == Gender.FEMALE)
@@ -761,44 +837,73 @@ public class ServerController
         List<Card> revealed = new ArrayList<Card>();
         Integer randomCard;
 
-        switch (privateTipType)
+        if (playableCards.size() > 0)
         {
-            case ALL_DESTINATIONS:
-                revealed.addAll(playableCards);
-                break;
-            case ALL_VEHICLES:
-                revealed.addAll(playableCards);
-                break;
-            case ALL_SUSPECTS:
-                revealed.addAll(playableCards);
-                break;
-            case ONE_FEMALE_SUSPECT:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-            case ONE_NORTHERN_DESTINATION:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-            case ONE_RED_VEHICLE:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-        }
+            switch (privateTipType)
+            {
+                case ALL_DESTINATIONS:
+                    revealed.addAll(playableCards);
+                    break;
+                case ALL_VEHICLES:
+                    revealed.addAll(playableCards);
+                    break;
+                case ALL_SUSPECTS:
+                    revealed.addAll(playableCards);
+                    break;
+                case ONE_FEMALE_SUSPECT:
+                    randomCard = (int) (Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+                case ONE_NORTHERN_DESTINATION:
+                    randomCard = (int) (Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+                case ONE_RED_VEHICLE:
+                    randomCard = (int) (Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+            }
 
-        // Create a new CardDealResponse
-        RevealCardResponse response = new RevealCardResponse(card, revealed);
-        forwardMessage(response, connection);
+            System.out.println("Made it out of the second switch!");
+
+            // Create a new CardDealResponse
+            RevealCardResponse response = new RevealCardResponse(card, revealed);
+            if (!isAI)
+            {
+                System.out.println("sending to player");
+                forwardMessage(response, connection);
+            }
+            else
+            {
+                System.out.println("sending to AI");
+                informAI(response, robots.get(player));
+            }
+        }
     }
 
     private void handleSnoop(Snoop card, Integer playerId,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling Snoop!");
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+
+        if (humans.containsKey(player))
+        {
+            connection = humans.get(player);
+        }
+        if (!isAI)
+        {
+            curGame = games.get(connection);
+        }
+        else
+        {
+            curGame = ((AI) player).getGame();
+        }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
         Integer randomCard = new Random().nextInt(
                 opponent.getHintCardsHand().size());
@@ -808,15 +913,38 @@ public class ServerController
         // Find the player with the given ID
         RevealCardResponse response
                 = new RevealCardResponse(card, snoopedCards);
-        forwardMessage(response, connection);
+
+        if (!isAI)
+        {
+            forwardMessage(response, connection);
+        }
+        else
+        {
+            informAI(response, robots.get(player));
+        }
 
     }
 
     private void handleSuperSleuth(SuperSleuth sleuthCard,
-            ConnectionToClient connection)
+            ServerPlayer player, boolean isAI)
     {
+        System.out.println("Handling Super Sleuth");
         // Get the requestor's game
-        Game curGame = games.get(connection);
+        ConnectionToClient connection = null;
+        Game curGame;
+
+        if (humans.containsKey(player))
+        {
+            connection = humans.get(player);
+        }
+        if (!isAI)
+        {
+            curGame = games.get(connection);
+        }
+        else
+        {
+            curGame = ((AI) player).getGame();
+        }
         List<ServerPlayer> opponents = curGame.getServerPlayersList();
         List<Card> revealedCards = new ArrayList<Card>();
         // List playableCards to return
@@ -898,69 +1026,168 @@ public class ServerController
 
         RevealCardResponse response = new RevealCardResponse(sleuthCard,
                 revealedCards);
-
-        forwardMessage(response, connection);
+        if (!isAI)
+        {
+            forwardMessage(response, connection);
+        }
+        else
+        {
+            informAI(response, robots.get(player));
+        }
 
     }
 
     private void handleActionRequest(ActionRequest actionReq,
-            ConnectionToClient connection)
+            ServerPlayer player)
     {
-        ServerPlayer player = connectionToPlayer.get(connection);
-        playedThisTurn.add(player.getPlayerId());
+        System.out.println("handling Action Request!");
+        boolean isAI = true;
+        Game game;
+        ConnectionToClient connection = null;
+
+        if (humans.containsKey(player))
+        {
+            System.out.println("Action Player was a human");
+            connection = humans.get(player);
+            isAI = false;
+        }
 
         ActionCard card = actionReq.getActionCard();
-        //Get the players game
-        Game game = games.get(connection);
+
+//Get the players game
+        if (!isAI)
+        {
+            game = games.get(connection);
+        }
+        else
+        {
+            game = ((AI) player).getGame();
+        }
         List<ServerPlayer> players = game.getServerPlayersList();
+
+        System.out.println("Got the Action Card " + card.getActionType());
 
         if (card instanceof AllSnoop)
         {
+            System.out.println("AllSnoop");
             AllSnoop allSnoopCard = (AllSnoop) card;
             handleAllSnoop(allSnoopCard, players);
         }
         else if (card instanceof PrivateTip)
         {
+            System.out.println("PrivateTip");
             PrivateTip privTipCard = (PrivateTip) card;
-            handlePrivateTip(privTipCard, actionReq.getPlayerId(), connection);
+            handlePrivateTip(privTipCard, actionReq.getPlayerId(), player, isAI);
         }
         else if (card instanceof Snoop)
         {
+            System.out.println("Snoop");
             Snoop snoopCard = (Snoop) card;
-            handleSnoop(snoopCard, actionReq.getPlayerId(), connection);
+            handleSnoop(snoopCard, actionReq.getPlayerId(), player, isAI);
         }
         else if (card instanceof SuperSleuth)
         {
+            System.out.println("SuperSleuth");
             SuperSleuth superSleuthCard = (SuperSleuth) card;
-            handleSuperSleuth(superSleuthCard, connection);
+            handleSuperSleuth(superSleuthCard, player, isAI);
         }
+        else if (card instanceof Suggestion)
+        {
+            System.out.println("Not implemented yet!");
+        }
+
+        player.removeActionCard(card);
     }
 
     /**
-     * Deal an action card to the current active player in game by adding
-     * a card to their ServerPlayer hand and sending a message.
-     * 
+     * <<<<<<< HEAD Deal an action card to the current active player in game by
+     * adding a card to their ServerPlayer hand and sending a message. =======
+     * Deal an action card to the current active player in game by adding a card
+     * to their ServerPlayer hand and sending a message. >>>>>>>
+     * 983e08ff407cdb233c3d4737c61d0632f3222714
+     *
      * @param game the game with the player to deal an action card to.
      */
     private void dealActionCard(Game game)
     {
+        System.out.println("server: dealActionCard: " + game);
         ServerPlayer player = game.getCurrentPlayer();
+        System.out.println("server: current player index: " + game.getCurrentPlayerIndex());
+        System.out.println("server: current player: " + player.getName());
 
         ActionCard newCard = null;
-        if (!this.skipDeal.contains(player.getPlayerId()))
+        if (player.getActionCardsHand().size() < 2)
         {
             List<ActionCard> drawCards = new ArrayList<ActionCard>();
             newCard = game.getDrawPile().remove(0);
+            System.out.println("server: dealing card: " + newCard);
+        }
 
-            // Add the card to the server player's hand if they're not an AI
-            // AI will take care of this themselves.
-            if (!(player instanceof AI))
-            {
-                player.addActionCard(newCard);
-            }
+        // Add the card to the server player's hand if they're not an AI
+        // AI will take care of this themselves.
+        if (!(player instanceof AI))
+        {
+            player.addActionCard(newCard);
         }
 
         ServerResponse response = new CardDealResponse(newCard);
         informPlayer(player, response);
+    }
+
+    /**
+     * Swaps a players location if necessary
+     *
+     * @param player the player who wants their destination changed
+     * @param destination the destination the player would like to move to
+     */
+    private void moveLocation(ServerPlayer player, DestinationID destination)
+    {
+
+        // Get the player's current location
+        DestinationID curDest = player.getLocation();
+
+        // If the players desired location is not the same as their current one,
+        // find out who has it and swap their locations
+        if (!curDest.equals(destination))
+        {
+            Game game;
+            // Find out who has the destination
+            // First get the current player's game
+            if (player instanceof AI)
+            {
+                AI playerAI = (AI) player;
+                game = playerAI.getGame();
+            }
+            else
+            {
+                ConnectionToClient playerConn = humans.get(player);
+                game = games.get(playerConn);
+            }
+
+            if (game != null)
+            {
+                //Swap locations
+                game.swapLocations(player.getPlayerId(), destination);
+
+                //Build a list of playerIDs
+                List<Integer> playerTurnOrder = new ArrayList<Integer>();
+
+                for (ServerPlayer activePlayer : game.getPlayerTurnOrder())
+                {
+                    playerTurnOrder.add(activePlayer.getPlayerId());
+                }
+
+                GameStateResponse newGameState = new GameStateResponse(game.
+                        getDrawPile().size(), playerTurnOrder, game.
+                        getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                        null, game.getDrawPile(), game.getDestToPlayerId());
+                
+                informPlayers(game, newGameState);
+            }
+            else
+            {
+                System.out.println("Game could not be found in moveLocation");
+            }
+        }
     }
 }

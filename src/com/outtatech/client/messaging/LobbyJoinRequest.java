@@ -8,7 +8,7 @@ package com.outtatech.client.messaging;
  */
 public class LobbyJoinRequest extends ClientRequest
 {
-    Integer lobbyId;
+    private Integer lobbyId;
 
     /**
      * Version-latenightpizzaparty

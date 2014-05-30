@@ -45,4 +45,14 @@ public class AllSnoop extends ActionCard
     {
         return "ALLSNOOP";
     }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof AllSnoop)) {
+            return false;
+        }
+
+        AllSnoop other = (AllSnoop)obj;
+        return this.right == other.right;
+    }
 }

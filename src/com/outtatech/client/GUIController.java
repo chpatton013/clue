@@ -1,6 +1,7 @@
 package com.outtatech.client;
 
 import com.outtatech.common.ActionCard;
+import com.outtatech.common.Card;
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
@@ -34,6 +35,7 @@ public class GUIController implements Observer
     int imageIndex = 0, curPlayerId = -1;
 
     boolean isTurn = false;
+    boolean played = false;
 
     String[] imagePaths =
     {
@@ -166,6 +168,9 @@ public class GUIController implements Observer
 
             mainGameScreen.updateHand(((ClientGameState) obs).getHand());
             mainGameScreen.updateLocation();
+            mainGameScreen.updateNotes();
+            accusationScreen.updateDropDowns();
+            accusationScreen.updateImages();
 
             //  add any applicable messages to game log through updateGameLog method
             String logUpdate = ((ClientGameState) obs).pollGameLog();
@@ -178,14 +183,11 @@ public class GUIController implements Observer
             }
 
             //  if it is the client's turn, call startTurn and clearGameLog methods
-            isTurn = false;
-            Integer currentActive = 
-                ((ClientGameState) obs).getCurrentActivePlayer();
+            isTurn = ((ClientGameState) obs).isMyTurn();
             // Guard against this
-            if (currentActive != null && currentActive == curPlayerId)
+            if (isTurn)
             {
                 mainGameScreen.startTurn();
-                isTurn = true;
             }
 
             //  check client controller's reveal flag
@@ -230,6 +232,8 @@ public class GUIController implements Observer
         revealedCardsScreen.setVisible(false);
         accusationScreen.setVisible(false);
         mainGameScreen.setVisible(false);
+
+        clientController.leaveLobby();
 
         //set state to INTRO
         state = CurrentWindow.INTRO;
@@ -298,7 +302,7 @@ public class GUIController implements Observer
     {
         //call Client Controller's setState method with
         //a parameter of new ClientLobbyState()
-        clientController.startMultiPlayerGame("LOBBYGAME!!!");
+        clientController.startMultiPlayerGame("GameLobby");
     }
 
     /**
@@ -371,12 +375,12 @@ public class GUIController implements Observer
      * @param cardType2 method parameter
      * @param cardType3 method parameter
      */
-    //!!!!!int will have to be changed to enum types from the Common package!!!!!
-    public void makeAccusation(int cardType1, int cardType2, int cardType3)
+
+    public void makeAccusation(Card card1, Card card2, Card card3)
     {
         //call client controller's makeAccusation method with the 3 cards
         //specified
-
+        System.out.println(card1 + " " + card2 + " " + card3);
     }
 
     /**
@@ -388,9 +392,10 @@ public class GUIController implements Observer
     public void playCard(ActionCard card, int selectedPlayer)
     {
         // Guard against this
-        if (isTurn)
+        if (isTurn && !this.played)
         {
-            clientController.playActionCard(card, null, selectedPlayer);
+            clientController.playActionCard(card, selectedPlayer);
+            this.played = true;
         }
     }
 
@@ -402,6 +407,8 @@ public class GUIController implements Observer
     {
         revealedCardsScreen.setVisible(false);
         accusationScreen.setVisible(false);
+
+        this.played = false;
 
         //call client controller's end turn method
         clientController.endTurn();

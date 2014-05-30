@@ -11,7 +11,7 @@ package com.outtatech.common;
  */
 public class Suggestion extends ActionCard
 {
-    SuggestionType type;
+    private SuggestionType type;
 
     /**
      * Version-latenightpizzaparty
@@ -36,6 +36,17 @@ public class Suggestion extends ActionCard
 
     public String toString()
     {
-        return "SUGGESTION";
+        return (this.type == SuggestionType.ANY) ? "SUGGESTION_ANYWHERE" :
+            "SUGGESTION";
+    }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Suggestion)) {
+            return false;
+        }
+
+        Suggestion other = (Suggestion)obj;
+        return this.type == other.type;
     }
 }

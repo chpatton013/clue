@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -63,7 +64,6 @@ public class Game
         this.solution = solution;
         this.destToPlayerId = destToPlayerId;
         this.gameId = ++gameIdCounter;
-        curPlayerTurn = 0;
         this.playerTurnOrder = playerTurnOrder;
     }
 
@@ -94,6 +94,31 @@ public class Game
         listHintCards = this.initializeHintCards();
         this.solution = pickSolution();
         initDestinations();
+    }
+    
+    /**
+     * Move the given player to the given destination.
+     * 
+     * @param playerId the id of the player to move
+     * @param dest the destination to move the player to.
+     * 
+     * @return the ID of the player whose destination was changed
+     */
+    public Integer swapLocations(Integer playerId, DestinationID dest)
+    {
+        //Get the players current destination
+        DestinationID curLoc = playerIdToDest.get(playerId);
+
+        //Find out who has the other destination
+        Integer otherPlayerID = destToPlayerId.get(dest);
+        
+        destToPlayerId.put(dest, playerId);
+        destToPlayerId.put(curLoc, otherPlayerID);
+        
+        playerIdToDest.put(playerId, dest);
+        playerIdToDest.put(otherPlayerID, curLoc);
+        
+        return otherPlayerID;
     }
 
     /**
@@ -130,7 +155,8 @@ public class Game
     public ServerPlayer advanceTurn()
     {
         curPlayerTurn = (curPlayerTurn + 1) % playerTurnOrder.size();
-        return playerTurnOrder.get(curPlayerTurn);
+        System.out.println("advancing turn index to " + curPlayerTurn);
+        return this.getCurrentPlayer();
     }
 
     /**
@@ -144,9 +170,9 @@ public class Game
     }
 
     /**
-     * Returns the index for the player array for the currently active player.
+     * Returns the id for the player array for the currently active player.
      *
-     * @return the index of the currently active player;
+     * @return the id of the currently active player;
      */
     public Integer getCurrentPlayerIndex()
     {
@@ -161,6 +187,21 @@ public class Game
     public List<ServerPlayer> getPlayerTurnOrder()
     {
         return playerTurnOrder;
+    }
+
+    /**
+     * Returns the ids of the player turn order for this game
+     *
+     * @return the player turn order.
+     */
+    public List<Integer> getPlayerIdTurnOrder()
+    {
+        List<Integer> ids = new ArrayList<Integer>();
+        for (ServerPlayer player : playerTurnOrder)
+        {
+            ids.add(player.getPlayerId());
+        }
+        return ids;
     }
 
     /**
@@ -196,6 +237,21 @@ public class Game
             players.add(player);
         }
         return players;
+    }
+
+    public String getPlayerName(Integer playerId)
+    {
+        return this.players.get(playerId).getName();
+    }
+
+    public Map<Integer, String> getPlayerIdNames()
+    {
+        Map<Integer, String> names = new ConcurrentHashMap<Integer, String>();
+        for (Integer playerId : this.players.keySet())
+        {
+            names.put(playerId, this.players.get(playerId).getName());
+        }
+        return names;
     }
 
     /**
@@ -294,6 +350,16 @@ public class Game
      *
      * @return The Map of destination Ids and PlayerIds for this game
      */
+    public Map<Integer, DestinationID> getPlayerIdToDest()
+    {
+        return playerIdToDest;
+    }
+    
+    /**
+     * Gets the Map between destination Ids and playerIds for this game.
+     *
+     * @return The Map of destination Ids and PlayerIds for this game
+     */
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
         return destToPlayerId;
@@ -378,21 +444,23 @@ public class Game
     private List<HintCard> initializeHintCards()
     {
         List<HintCard> hintCards = new CopyOnWriteArrayList<HintCard>();
-        CardColor dc = CardColor.BLUE;
+        
 
         //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.
         hintCards.add(new SuspectCard(SuspectID.GREEN));
         hintCards.add(new SuspectCard(SuspectID.MUSTARD));
-        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new SuspectCard(SuspectID.PLUM));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new SuspectCard(SuspectID.SCARLET));
         hintCards.add(new SuspectCard(SuspectID.WHITE));
-
-        hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
-        hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
+        
+        CardColor dc = CardColor.BLUE;
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, dc));
         hintCards.add(new VehicleCard(VehicleID.LIMOUSINE, dc));
         hintCards.add(new VehicleCard(VehicleID.SEAPLANE, dc));
+        dc = CardColor.RED;
+        hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
+        hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
         hintCards.add(new VehicleCard(VehicleID.TRAIN, dc));
 
         hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND));

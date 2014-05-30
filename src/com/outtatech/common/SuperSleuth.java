@@ -13,7 +13,7 @@ package com.outtatech.common;
  */
 public class SuperSleuth extends ActionCard
 {
-    SuperSleuthType type;
+    private SuperSleuthType type;
 
     /**
      * Version-latenightpizzaparty
@@ -39,5 +39,15 @@ public class SuperSleuth extends ActionCard
     public String toString()
     {
         return "SUPERSLEUTH";
+    }
+
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof SuperSleuth)) {
+            return false;
+        }
+
+        SuperSleuth other = (SuperSleuth)obj;
+        return this.type == other.type;
     }
 }

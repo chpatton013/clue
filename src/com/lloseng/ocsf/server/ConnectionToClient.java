@@ -58,6 +58,13 @@ import java.util.*;
 */
 public class ConnectionToClient extends Thread
 {
+  private static Integer hashCodeCounter = 0;
+  private Integer myHashCodeCounter = hashCodeCounter++;
+  public int hashCode()
+  {
+    return myHashCodeCounter.hashCode();
+  }
+
 // INSTANCE VARIABLES ***********************************************
 
   /**
@@ -132,7 +139,9 @@ public class ConnectionToClient extends Thread
       {
         closeAll();
       }
-      catch (Exception exc) { }
+      catch (Exception exc)
+      {
+      }
 
       throw ex;  // Rethrow the exception.
     }

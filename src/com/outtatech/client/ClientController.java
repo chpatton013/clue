@@ -157,19 +157,22 @@ public class ClientController
      */
     public void endTurn()
     {
+        ((ClientGameState) this.state).setMyTurn(false);
         this.forwardMessage(new EndTurnRequest());
     }
 
-    public void playActionCard(ActionCard actionCard, List<Card> cards,
-            Integer playerId)
+    public void playActionCard(ActionCard card, Integer playerId)
     {
-        this.forwardMessage(new ActionRequest(actionCard, cards, playerId));
+        this.forwardMessage(new ActionRequest(card, playerId));
+        ((ClientGameState) this.state).removeFromHand(card);
     }
 
-//    public void revealCards(List<Card> cards)
-//    {
-//        this.forwardMessage(new RevealCardsRequest(cards));
-//    }
+    public void playSuggestionCard(Suggestion card, Solution solution)
+    {
+        this.forwardMessage(new SuggestionRequest(card, solution, solution.
+                getDestination()));
+        ((ClientGameState) this.state).removeFromHand(card);
+    }
 
     /**
      * Called when the client would like to make an accusation during their
@@ -225,7 +228,7 @@ public class ClientController
 //        }
         else if (obj instanceof RevealCardResponse)
         {
-            this.reactToRevealCardRequest((RevealCardResponse) obj);
+            this.reactToRevealCardResponse((RevealCardResponse) obj);
         }
         else if (obj instanceof AccusationResponse)
         {
@@ -246,8 +249,8 @@ public class ClientController
 
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
-        if (this.state instanceof ClientMenuState ||
-                this.state instanceof ClientLobbyDiscoveryState)
+        if (this.state instanceof ClientMenuState
+                || this.state instanceof ClientLobbyDiscoveryState)
         {
             Integer myId = rsp.getPlayerId();
             Map<Integer, String> players = rsp.getPlayers();
@@ -262,9 +265,9 @@ public class ClientController
         }
         else
         {
-            System.err.println("Received LobbyJoinResponse while not in " +
-                    "ClientMenuState, ClientLobbyDiscoveryState, or " +
-                    "ClientLobbyState.");
+            System.err.println("Received LobbyJoinResponse while not in "
+                    + "ClientMenuState, ClientLobbyDiscoveryState, or "
+                    + "ClientLobbyState.");
         }
     }
 
@@ -272,8 +275,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received LobbyLeaveResponse while not in " +
-                    "ClientLobbyState.");
+            System.err.println("Received LobbyLeaveResponse while not in "
+                    + "ClientLobbyState.");
             return;
         }
 
@@ -284,8 +287,8 @@ public class ClientController
     {
         if (!(this.state instanceof ClientLobbyState))
         {
-            System.err.println("Received KickPlayerResponse while not in " +
-                    "ClientLobbyState.");
+            System.err.println("Received KickPlayerResponse while not in "
+                    + "ClientLobbyState.");
             return;
         }
 
@@ -300,13 +303,17 @@ public class ClientController
             Integer me = state.getPlayerId();
 
             List<Card> newStateCards = new ArrayList(rsp.getHintCards());
+            ClientGameState newState = new ClientGameState(me, newStateCards,
+                    state.getPlayers());
             newStateCards.addAll(rsp.getActionCards());
-            this.setState(new ClientGameState(me, newStateCards,
-                    state.getPlayers()));
 
-            ((ClientGameState) this.state).pushGameLog("Game Started");
-
-            this.forwardMessage(new GameStateRequest());
+            newState.pushGameLog("Game Started");
+            newState.setDeckCardCount(rsp.getDeckCardCount());
+            newState.setPlayers(rsp.getPlayers());
+            newState.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
+            newState.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+            newState.setDestToPlayerId(rsp.getDestToPlayerID());
+            this.setState(newState);
         }
         else if (this.state instanceof ClientGameState)
         {
@@ -315,18 +322,18 @@ public class ClientController
             state.setPlayers(rsp.getPlayers());
             state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
             state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+            state.setDestToPlayerId(rsp.getDestToPlayerID());
 
-            state.pushGameLog("Game state updated:" +
-                "\n   Deck Card Count: " + rsp.getDeckCardCount() +
-                "\n   Player Turn Order: " +
-                state.getPlayerNames(rsp.getPlayerTurnOrder()) +
-                "\n   Current Active Player: " +
-                state.getPlayerName(rsp.getCurrentActivePlayer()));
+            state.pushGameLog("Game state updated:" + "\n   Deck Card Count: "
+                    + rsp.getDeckCardCount() + "\n   Player Turn Order: "
+                    + state.getPlayerNames(rsp.getPlayerTurnOrder())
+                    + "\n   Current Active Player: " + state.getPlayerName(rsp.
+                            getCurrentActivePlayer()));
         }
         else
         {
-            System.err.println("Received GameStateResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received GameStateResponse while not in "
+                    + "ClientGameState.");
             return;
         }
     }
@@ -335,24 +342,24 @@ public class ClientController
     {
         if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received CardDealResponse while not in " +
-                    "ClientGameState.");
+            System.err.println("Received CardDealResponse while not in "
+                    + "ClientGameState.");
+            return;
+        }
+
+        ClientGameState state = (ClientGameState) this.state;
+        state.setMyTurn(true);
+        state.pushGameLog("Turn started");
+
+        Card card = rsp.getCard();
+        if (card != null)
+        {
+            state.addToHand(rsp.getCard());
+            state.pushGameLog("Card dealt: " + rsp.getCard());
         }
         else
         {
-            ClientGameState state = (ClientGameState) this.state;
-            state.pushGameLog("Turn started");
-
-            Card card = rsp.getCard();
-            if (card != null)
-            {
-               state.addToHand(rsp.getCard());
-               state.pushGameLog("Card dealt: " + rsp.getCard());
-            }
-            else
-            {
-                this.triggerChange();
-            }
+            this.triggerChange();
         }
     }
 
@@ -369,8 +376,7 @@ public class ClientController
 //                "Player " + rsp.getPlayerId() + " played card " + rsp.
 //                getActionCard());
 //    }
-
-    private void reactToRevealCardRequest(RevealCardResponse rsp)
+    private void reactToRevealCardResponse(RevealCardResponse rsp)
     {
         if (!(this.state instanceof ClientGameState))
         {
@@ -380,50 +386,52 @@ public class ClientController
         }
 
         ClientGameState state = (ClientGameState) this.state;
+        state.setRevealed(rsp.getCards());
+        state.setRevealStatus(true);
 
-        ActionCardType type = rsp.getActionCard().getActionType();
-        if (type == ActionCardType.SUGGESTION)
-        {
-            List<Card> cards = rsp.getCards();
-            // TODO: GUI
-            // tell GUI to present cards
-        }
-        else if (type == ActionCardType.SNOOP ||
-                type == ActionCardType.ALL_SNOOP)
-        {
-            List<Card> hints = new ArrayList<Card>(state.getHand());
-            int index = 0;
-            while (index < hints.size())
-            {
-                if (hints.get(index) instanceof ActionCard)
-                {
-                    hints.remove(index);
-                }
-                else
-                {
-                    ++index;
-                }
-            }
-            Collections.shuffle(hints);
-            Card card = hints.get(0);
+//         ActionCardType type = rsp.getActionCard().getActionType();
+//         if (type == ActionCardType.SUGGESTION)
+//         {
+//             List<Card> cards = rsp.getCards();
+//             // TODO: GUI
+//             // tell GUI to present cards
+//         }
+//         else if (type == ActionCardType.SNOOP || type
+//                 == ActionCardType.ALL_SNOOP)
+//         {
+//             List<Card> hints = new ArrayList<Card>(state.getHand());
+//             int index = 0;
+//             while (index < hints.size())
+//             {
+//                 if (hints.get(index) instanceof ActionCard)
+//                 {
+//                     hints.remove(index);
+//                 }
+//                 else
+//                 {
+//                     ++index;
+//                 }
+//             }
+//             Collections.shuffle(hints);
+//             Card card = hints.get(0);
 
-            // TODO: GUI
-            // tell GUI card was shown to user rsp.getPlayerId()
-        }
-        else if (type == ActionCardType.SUPER_SLEUTH)
-        {
-            // get condition from this card
-            // TODO: GUI
-            // prompt GUI to present user with choice of cards that match
-            //  condition
-        }
-        else if (type == ActionCardType.PRIVATE_TIP)
-        {
-            // get condition from this card
-            // TODO: GUI
-            // prompt GUI to present user with choice of cards that match
-            //  condition
-        }
+//             // TODO: GUI
+//             // tell GUI card was shown to user rsp.getPlayerId()
+//         }
+//         else if (type == ActionCardType.SUPER_SLEUTH)
+//         {
+//             // get condition from this card
+//             // TODO: GUI
+//             // prompt GUI to present user with choice of cards that match
+//             //  condition
+//         }
+//         else if (type == ActionCardType.PRIVATE_TIP)
+//         {
+//             // get condition from this card
+//             // TODO: GUI
+//             // prompt GUI to present user with choice of cards that match
+//             //  condition
+//         }
     }
 
     private void reactToAccusationResponse(AccusationResponse rsp)
