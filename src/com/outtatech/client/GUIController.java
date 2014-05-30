@@ -2,6 +2,7 @@ package com.outtatech.client;
 
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.Card;
+import com.outtatech.common.Suggestion;
 import com.outtatech.common.Player;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
@@ -32,7 +33,7 @@ public class GUIController implements Observer
     ClientController clientController;
     State gameState;
 
-    int imageIndex = 0, curPlayerId = -1;
+    Integer imageIndex = 0, curPlayerId = null;
 
     boolean isTurn = false;
     boolean played = false;
@@ -135,7 +136,7 @@ public class GUIController implements Observer
                 lobbyScreen.addPlayer(playMap.get((
                         (Integer) playList.get(indx))),
                         ((Integer) playList.get(indx)), ((Integer) playList.get(
-                                indx)) == curPlayerId);
+                                indx)).equals(curPlayerId));
             }
 
             lobbyScreen.setLeader(((ClientLobbyState) obs).getGameOwner());
@@ -163,7 +164,7 @@ public class GUIController implements Observer
             {
                 mainGameScreen.addPlayer(playMap.get(((Integer) playList.get(
                         indx))), ((Integer) playList.get(indx)),
-                        ((Integer) playList.get(indx)) == curPlayerId);
+                        ((Integer) playList.get(indx)).equals(curPlayerId));
             }
 
             mainGameScreen.updateHand(((ClientGameState) obs).getHand());
@@ -375,6 +376,7 @@ public class GUIController implements Observer
      * @param cardType2 method parameter
      * @param cardType3 method parameter
      */
+
     public void makeAccusation(Card card1, Card card2, Card card3)
     {
         //call client controller's makeAccusation method with the 3 cards
@@ -388,14 +390,25 @@ public class GUIController implements Observer
      *
      * @param card method parameter
      */
-    public void playCard(ActionCard card, int selectedPlayer)
+    public void playCard(ActionCard card, Integer selectedPlayer)
     {
+        System.out.println("gui: playCard: " + card + ", selected: " + selectedPlayer);
         // Guard against this
-        if (isTurn && !this.played)
+        if (!isTurn || this.played)
         {
-            clientController.playActionCard(card, selectedPlayer);
-            this.played = true;
+            return;
         }
+
+        if (card instanceof Suggestion)
+        {
+            this.played = true;
+            // prompt for solution
+        }
+        else
+        {
+            this.played = clientController.playActionCard(card, selectedPlayer);
+        }
+
     }
 
     /**

@@ -32,7 +32,7 @@ public class MainGameScreen extends javax.swing.JFrame
 
     private ArrayList playerIds = new ArrayList();
 
-    private int selectedPlayer = 0;
+    private Integer selectedPlayer = null;
 
     GUIController controller;
     
@@ -241,8 +241,17 @@ public class MainGameScreen extends javax.swing.JFrame
      */
     public void updateGameLog(String updateString)
     {
+        String newText = gameLog.getText();
+        if (newText.equals(""))
+        {
+            newText = updateString;
+        }
+        else
+        {
+            newText += "\n" + updateString;
+        }
         //set game log's text to the current text + updateString
-        gameLog.setText(gameLog.getText() + "\n" + updateString);
+        gameLog.setText(newText);
     }
 
     /**
@@ -263,14 +272,14 @@ public class MainGameScreen extends javax.swing.JFrame
      * @param playerId method parameter
      * @param isPlayer method parameter
      */
-    public void addPlayer(String playerName, int playerId, boolean isPlayer)
+    public void addPlayer(String playerName, Integer playerId, boolean isPlayer)
     {
         //set player list to current text + playerName
         String name = playerName;
         // Guard against this
         if (isPlayer)
         {
-            name = name + "(You)";
+            name = name + " (You)";
         }
         playerList.setValueAt(name, playerIds.size(), 0);
 
@@ -791,7 +800,7 @@ public class MainGameScreen extends javax.swing.JFrame
     private void playerListMouseClicked(java.awt.event.MouseEvent evt)
     {//GEN-FIRST:event_playerListMouseClicked
         //set selectedPlayer to selected player's id
-        selectedPlayer = (int)playerIds.get(playerList.getSelectedRow());
+        selectedPlayer = (Integer)playerIds.get(playerList.getSelectedRow());
         
     }//GEN-LAST:event_playerListMouseClicked
 
@@ -809,14 +818,12 @@ public class MainGameScreen extends javax.swing.JFrame
             // Guard against this
             if (actionCards[0].getActionType() == ActionCardType.SUGGESTION)
             {
-               System.out.println("Tried to Play the first action card SUGGESTION");
 
             }
             // Otherwise...
             else
             {
                 controller.playCard(actionCards[0], selectedPlayer);
-                System.out.println("Tried to Play the first action card");
             }
         }
     }//GEN-LAST:event_actionImage1MouseClicked

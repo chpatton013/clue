@@ -118,6 +118,7 @@ public class ClientController
      * Sends a request to the game server to add an AI player.
      *
      * @param difficulty Difficulty the difficulty for this AI player
+     * @param lobbyId
      */
     public void addAIPlayer(Difficulty difficulty, Integer lobbyId)
     {
@@ -160,24 +161,35 @@ public class ClientController
         this.forwardMessage(new EndTurnRequest());
     }
 
-    public void playActionCard(ActionCard card, Integer playerId)
+    public boolean playActionCard(ActionCard card, Integer playerId)
     {
+        boolean requiresSelectedPlayer = card instanceof Snoop ||
+            card instanceof PrivateTip;
+        Integer myPlayerId = ((ClientGameState)this.state).getPlayerId();
+        if (requiresSelectedPlayer &&
+                (playerId == null || playerId == myPlayerId))
+        {
+            return false;
+        }
+
         this.forwardMessage(new ActionRequest(card, playerId));
         ((ClientGameState) this.state).removeFromHand(card);
+        return true;
     }
 
-    public void playSuggestionCard(Suggestion card, Solution solution)
+    public boolean playSuggestionCard(Suggestion card, Solution solution)
     {
         this.forwardMessage(new SuggestionRequest(card, solution, solution.
                 getDestination()));
         ((ClientGameState) this.state).removeFromHand(card);
+        return true;
     }
 
     /**
      * Called when the client would like to make an accusation during their
      * turn.
      *
-     * @param accusationCards list containing the Destination, Vehicle and
+     * @param accusation list containing the Destination, Vehicle and
      * Suspect card required to make an accusation.
      */
     public void makeAccusation(Solution accusation)

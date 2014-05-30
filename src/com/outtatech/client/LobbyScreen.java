@@ -62,14 +62,14 @@ public class LobbyScreen extends javax.swing.JFrame
      * @param playerId method parameter
      * @param isPlayer method parameter
      */
-    public void addPlayer(String playerName, int playerId, boolean isPlayer)
+    public void addPlayer(String playerName, Integer playerId, boolean isPlayer)
     {
         //set player list text to current text + playerName + "waiting..."
         String name = playerName;
         // Guard against this
         if (isPlayer)
         {
-            name = name + "(You)";
+            name = name + " (You)";
         }
         playerList.setValueAt(name, numPlayers, 0);
 
