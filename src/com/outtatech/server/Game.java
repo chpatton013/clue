@@ -378,21 +378,23 @@ public class Game
     private List<HintCard> initializeHintCards()
     {
         List<HintCard> hintCards = new CopyOnWriteArrayList<HintCard>();
-        CardColor dc = CardColor.BLUE;
+        
 
         //6 Suspect cards, 6 Vehicle cards, and 9 Destination cards.
         hintCards.add(new SuspectCard(SuspectID.GREEN));
         hintCards.add(new SuspectCard(SuspectID.MUSTARD));
-        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new SuspectCard(SuspectID.PLUM));
+        hintCards.add(new SuspectCard(SuspectID.PEACOCK));
         hintCards.add(new SuspectCard(SuspectID.SCARLET));
         hintCards.add(new SuspectCard(SuspectID.WHITE));
-
-        hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
-        hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
+        
+        CardColor dc = CardColor.BLUE;
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, dc));
         hintCards.add(new VehicleCard(VehicleID.LIMOUSINE, dc));
         hintCards.add(new VehicleCard(VehicleID.SEAPLANE, dc));
+        dc = CardColor.RED;
+        hintCards.add(new VehicleCard(VehicleID.AIRLINER, dc));
+        hintCards.add(new VehicleCard(VehicleID.AUTOMOBILE, dc));
         hintCards.add(new VehicleCard(VehicleID.TRAIN, dc));
 
         hintCards.add(new DestinationCard(DestinationID.CONEY_ISLAND));

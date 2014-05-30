@@ -300,7 +300,15 @@ public class AI extends ServerPlayer
         }
         
         System.out.println("AI " + this.getPlayerId() + " is taking its turn");
-        int choice = (int) (Math.random() * 2);
+        int choice = 0;
+        if(difficulty.getIntelligence() <= 2) 
+        {
+            choice = (int) (Math.random() * actionCardsHand.size());
+        }
+        else 
+        {
+            choice = getBestCardToPlay();
+        }
         System.out.println("Picking card: " + choice);
         ActionCard cardToPlay = actionCardsHand.get(choice);
         System.out.println("AI : I'm going to play the card " + 
@@ -310,7 +318,7 @@ public class AI extends ServerPlayer
         if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
         {
             System.out.println("Can't play this fucking suggestion!");
-            aiMakeSuggestion((Suggestion) cardToPlay);
+            //aiMakeSuggestion((Suggestion) cardToPlay);
         }
         // Otherwise...
         else if (cardToPlay.getActionType() == ActionCardType.SNOOP
@@ -327,6 +335,19 @@ public class AI extends ServerPlayer
             ctrl.reactToRobot(new ActionRequest(cardToPlay, null), this);
         }
 
+    }
+    
+    private int getBestCardToPlay()
+    {
+        if(actionCardsHand.get(0) instanceof SuperSleuth)
+        {
+            return 0;
+        }
+        else if(actionCardsHand.get(1) instanceof SuperSleuth)
+        {
+            return 1;
+        }
+        return (int)(Math.random() * 2);
     }
 
     /**
@@ -355,13 +376,16 @@ public class AI extends ServerPlayer
         VehicleID choice2;
         DestinationID choice3;
 
-        System.out.println("AI GONNA MAKE A SUGGESTION!");
+        System.out.println("AI is making a suggestion of : ");
         // Guard against this
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
+            System.out.println(choice1);
             choice2 = getVehicleChoice(vehicleCardsSeen);
-            choice3 = (getLocationChoice(locationsSeen));
+            System.out.println(choice2);
+            choice3 = getLocationChoice(locationsSeen);
+            System.out.println(choice3);
 
             ctrl.reactToRobot(new SuggestionRequest(card,
                     new Solution(choice3, choice2, choice1)), this);
@@ -391,7 +415,8 @@ public class AI extends ServerPlayer
     public HintCard aiRefuteSuggestion(SuspectID suspect, VehicleID vehicle,
             DestinationID destination)
     {
-
+        System.out.println("AI " + getPlayerId() + 
+                " is attempting to refute the suggetsion");
         // Iterate over this set
         for (int hintCard = 0; hintCard < hintCardsHand.size(); hintCard++)
         {
@@ -403,6 +428,7 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((SuspectCard) card).getSuspect() == suspect)
                 {
+                    System.out.println("AI HAS suspect " + suspect);
                     return card;
                 }
             }
@@ -412,6 +438,7 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((DestinationCard) card).getDestination() == destination)
                 {
+                    System.out.println("AI HAS destination " + destination);
                     return card;
                 }
             }
@@ -421,10 +448,12 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (((VehicleCard) card).getVehicle() == vehicle)
                 {
+                    System.out.println("AI HAS vehicle " + vehicle);
                     return card;
                 }
             }
         }
+        System.out.println("AI could not refute card.");
         return null;
     }
 
@@ -592,7 +621,7 @@ public class AI extends ServerPlayer
             //if not, keep sending endturnrequests
         }
         // Guard against this
-        if (obj instanceof CardDealResponse)
+        else if (obj instanceof CardDealResponse)
         {
             System.out.println("AI got an CardDealRepsonse!");
             CardDealResponse rsp = (CardDealResponse) obj;
@@ -612,7 +641,7 @@ public class AI extends ServerPlayer
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }
         // Guard against this
-        if (obj instanceof GameStateResponse)
+        else if (obj instanceof GameStateResponse)
         {
             System.out.println("AI got an GameStateResponse!");
             GameStateResponse gsr = (GameStateResponse) obj;
@@ -628,14 +657,14 @@ public class AI extends ServerPlayer
                     suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
+                else if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
                 {
                     System.out.println("AI found " + 
                             ((VehicleCard) temp).getVehicle());
                     vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
+                else if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
                 {
                     System.out.println("AI found " + 
                             ((DestinationCard) temp).getDestination());
@@ -644,12 +673,12 @@ public class AI extends ServerPlayer
             }
         }
         // Guard against this
-        if (obj instanceof KickPlayerResponse)
+        else if (obj instanceof KickPlayerResponse)
         {
             System.out.println("AI got an KickPlayerRepsonse!");
         }
         // Guard against this
-        if (obj instanceof RevealCardResponse)
+        else if (obj instanceof RevealCardResponse)
         {
             System.out.println("AI got an RevealCardRepsonse!");
             System.out.println("AI got some cards!");
@@ -665,14 +694,14 @@ public class AI extends ServerPlayer
                     suspectCardsSeen.add(((SuspectCard) temp).getSuspect());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
+                else if (((HintCard) temp).getHintType() == HintCardType.VEHICLE)
                 {
                     System.out.println("AI found " + 
                             ((VehicleCard) temp).getVehicle());
                     vehicleCardsSeen.add(((VehicleCard) temp).getVehicle());
                 }
                 // Guard against this
-                if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
+                else if (((HintCard) temp).getHintType() == HintCardType.DESTINATION)
                 {
                     System.out.println("AI found " + 
                             ((DestinationCard) temp).getDestination());
@@ -680,6 +709,5 @@ public class AI extends ServerPlayer
                 }
             }
         }
-        System.out.println("AI got an unsupported Response of " + obj);
     }
 }
