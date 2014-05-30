@@ -102,7 +102,7 @@ public class ServerController
             ActionRequest actionReq = (ActionRequest) obj;
             handleActionRequest(actionReq, connectionToPlayer.get(connection));
         }
-        /* 
+        /*
          * AccusationRequest respond with AccusationResponse
          */
         else if (obj instanceof AccusationRequest)
@@ -154,7 +154,7 @@ public class ServerController
                     newPlayer.getPlayerId(), names));
         }
 
-        /* 
+        /*
          * LobbyJoinRequest respond with LobbyJoinResponse
          * notify all clients.
          */
@@ -185,7 +185,7 @@ public class ServerController
             {
                 names.put(temp.getPlayerId(), temp.getName());
             }
-            
+
             for(ConnectionToClient temp: cxns) {
                 System.out.println(temp.getId());
             }
@@ -254,15 +254,15 @@ public class ServerController
             this.forwardMessage(new KickPlayerResponse(playerId),
                 players.get(game));
             game.getServerPlayers().remove(playerId);
-            
+
         }
-        else if(obj instanceof LobbyLeaveRequest) 
+        else if(obj instanceof LobbyLeaveRequest)
         {
             System.out.println("lobbyleaveRequest");
             for(ConnectionToClient temp: games.keySet()) {
                 System.out.println(temp.getId());
             }
-            if(games.containsKey(connection)) 
+            if(games.containsKey(connection))
             {
                 System.out.println("removing connection " + connection.getId());
                 Game game = games.get(connection);
@@ -273,7 +273,7 @@ public class ServerController
                 players.get(game).remove(connection);
                 connectionToPlayer.remove(connection);
                 humans.remove(player);
-                if(game.getServerPlayers().size() == 0) 
+                if(game.getServerPlayers().size() == 0)
                 {
                     gameIdToGame.remove(game.getGameId());
                     players.remove(game);

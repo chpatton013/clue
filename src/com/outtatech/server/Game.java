@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -164,6 +165,21 @@ public class Game
     }
 
     /**
+     * Returns the ids of the player turn order for this game
+     *
+     * @return the player turn order.
+     */
+    public List<Integer> getPlayerIdTurnOrder()
+    {
+        List<Integer> ids = new ArrayList<Integer>();
+        for (ServerPlayer player : playerTurnOrder)
+        {
+            ids.add(player.getPlayerId());
+        }
+        return ids;
+    }
+
+    /**
      * Add a ServerPlayer to the List of ServerPlayers in this game.
      *
      * @param newPlayer The ServerPlayer to add to the Game
@@ -196,6 +212,21 @@ public class Game
             players.add(player);
         }
         return players;
+    }
+
+    public String getPlayerName(Integer playerId)
+    {
+        return this.players.get(playerId).getName();
+    }
+
+    public Map<Integer, String> getPlayerIdNames()
+    {
+        Map<Integer, String> names = new HashMap<Integer, String>();
+        for (Integer playerId : this.players.keySet())
+        {
+            names.put(playerId, this.players.get(playerId).getName());
+        }
+        return names;
     }
 
     /**
