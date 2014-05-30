@@ -116,7 +116,8 @@ public class ServerController
         else if (obj instanceof SuggestionRequest)
         {
             SuggestionRequest suggestionReq = (SuggestionRequest) obj;
-            handleSuggestion(suggestionReq, connectionToPlayer.get(connection), games.get(connection));
+            handleSuggestion(suggestionReq, connectionToPlayer.get(connection),
+                    games.get(connection));
         }
         /*
          * AddAIRequest respond with AddAIResponse
@@ -264,7 +265,7 @@ public class ServerController
             {
                 System.out.println(temp.getId());
             }
-            
+
             if (games.containsKey(connection))
             {
                 System.out.println("removing connection " + connection.getId());
@@ -276,7 +277,7 @@ public class ServerController
                 players.get(game).remove(connection);
                 connectionToPlayer.remove(connection);
                 humans.remove(player);
-                if(game.getServerPlayers().size() == 0)
+                if (game.getServerPlayers().size() == 0)
                 {
                     gameIdToGame.remove(game.getGameId());
                     players.remove(game);
@@ -655,67 +656,47 @@ public class ServerController
     {
         game.initialize();
 
-        //Get all players in game
+        // Get all players in game
         List<ServerPlayer> gameServerPlayers = game.getServerPlayersList();
 
+        // Deal out all hint cards
         Integer playerCount = gameServerPlayers.size();
-        int playerIndex = 0;
-
-        //Deal out all hint cards
         for (int index = 0; game.getHintCardsSize() > 0; index++)
         {
             gameServerPlayers.get(index % playerCount).addHintCard(game.
                     popHintCard());
         }
 
-        List<Integer> idList = new ArrayList<Integer>();
-        List<Integer> playerTurnOrder = new ArrayList<Integer>();
-        Map<Integer, String> nameMap = new HashMap<Integer, String>();
-
-        //Add one action card to each hand.
+        // Add one action card to each hand.
         for (ServerPlayer pl : gameServerPlayers)
         {
             pl.addActionCard(game.popActionCard());
-            idList.add(pl.getPlayerId());
-            nameMap.put(pl.getPlayerId(), pl.getName());
         }
 
-        for (ServerPlayer pl : game.getPlayerTurnOrder())
+        for (ServerPlayer pl : gameServerPlayers)
         {
-            playerTurnOrder.add(playerTurnOrder.size(), pl.getPlayerId());
-            GameStateResponse gameResponse = new GameStateResponse(game.
-                    getDrawPile().size(), playerTurnOrder, game.
-                    getCurrentPlayerIndex(), nameMap, pl.hintCardsHand,
-                    pl.actionCardsHand);
+            GameStateResponse gameResponse = new GameStateResponse(
+                    game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
+                    game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                    pl.getHintCardsHand(),
+                    pl.getActionCardsHand(),
+                    game.getDestToPlayerId());
             informPlayer(pl, gameResponse);
         }
 
         // Remove lobby when game starts
-        // Connection to server player
         lobbies.remove(game);
-
-        //waiting.remove(connectionToPlayer.get(connection));
     }
 
     private void handleGameStateRequest(Game game, ConnectionToClient cxn)
     {
-        Integer deckSize = game.getDrawPile().size();
         ServerPlayer serverPlayer = connectionToPlayer.get(cxn);
-
-        List<Integer> playerTurnOrder = new ArrayList<Integer>(
-                game.getServerPlayers().keySet());
-
-        Integer currentActivePlayer = playerTurnOrder.get(0);
-
-        Map<Integer, String> names = new HashMap<Integer, String>();
-        for (Player player : game.getServerPlayers().values())
-        {
-            names.put(player.getPlayerId(), player.getName());
-        }
-
-        this.forwardMessage(new GameStateResponse(deckSize, playerTurnOrder,
-                currentActivePlayer, names, serverPlayer.getHintCardsHand(),
-                serverPlayer.getActionCardsHand()), cxn);
+        this.forwardMessage(new GameStateResponse(
+                game.getDrawPile().size(), game.getPlayerIdTurnOrder(),
+                game.getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                serverPlayer.getHintCardsHand(),
+                serverPlayer.getActionCardsHand(),
+                game.getDestToPlayerId()), cxn);
     }
 
     private void handleAllSnoop(AllSnoop card, List<ServerPlayer> players)
@@ -751,6 +732,7 @@ public class ServerController
             revealed.add(otherPlayer.getHintCardsHand().get(randomCard));
             RevealCardResponse response
                     = new RevealCardResponse(card, revealed);
+
             if (humans.containsKey(curPlayer))
             {
                 forwardMessage(response, humans.get(curPlayer));
@@ -789,7 +771,7 @@ public class ServerController
         List<HintCard> hintCardsHand = opponent.getHintCardsHand();
         PrivateTipType privateTipType = card.getType();
 
-        for (int cardInHand = 0; cardInHand < hintCardsHand.size(); 
+        for (int cardInHand = 0; cardInHand < hintCardsHand.size();
                 cardInHand++)
         {
             HintCard curHintCard = hintCardsHand.get(cardInHand);
@@ -851,8 +833,8 @@ public class ServerController
 
         List<Card> revealed = new ArrayList<Card>();
         Integer randomCard;
-        
-        if(playableCards.size() > 0)
+
+        if (playableCards.size() > 0)
         {
             switch (privateTipType)
             {
@@ -866,17 +848,17 @@ public class ServerController
                     revealed.addAll(playableCards);
                     break;
                 case ONE_FEMALE_SUSPECT:
-                    randomCard = (int)(Math.random() * playableCards.size());
+                    randomCard = (int) (Math.random() * playableCards.size());
                     System.out.println(randomCard);
                     revealed.add(playableCards.get(randomCard));
                     break;
                 case ONE_NORTHERN_DESTINATION:
-                    randomCard = (int)(Math.random() * playableCards.size());
+                    randomCard = (int) (Math.random() * playableCards.size());
                     System.out.println(randomCard);
                     revealed.add(playableCards.get(randomCard));
                     break;
                 case ONE_RED_VEHICLE:
-                    randomCard = (int)(Math.random() * playableCards.size());
+                    randomCard = (int) (Math.random() * playableCards.size());
                     System.out.println(randomCard);
                     revealed.add(playableCards.get(randomCard));
                     break;
@@ -886,7 +868,7 @@ public class ServerController
 
             // Create a new CardDealResponse
             RevealCardResponse response = new RevealCardResponse(card, revealed);
-            if(!isAI)
+            if (!isAI)
             {
                 System.out.println("sending to player");
                 forwardMessage(response, connection);
@@ -906,6 +888,7 @@ public class ServerController
         // Get the requestor's game
         ConnectionToClient connection = null;
         Game curGame;
+
         if (humans.containsKey(player))
         {
             connection = humans.get(player);
@@ -927,6 +910,7 @@ public class ServerController
         // Find the player with the given ID
         RevealCardResponse response
                 = new RevealCardResponse(card, snoopedCards);
+
         if (!isAI)
         {
             forwardMessage(response, connection);
@@ -945,6 +929,7 @@ public class ServerController
         // Get the requestor's game
         ConnectionToClient connection = null;
         Game curGame;
+
         if (humans.containsKey(player))
         {
             connection = humans.get(player);
@@ -1056,6 +1041,7 @@ public class ServerController
         boolean isAI = true;
         Game game;
         ConnectionToClient connection = null;
+
         if (humans.containsKey(player))
         {
             System.out.println("Action Player was a human");
@@ -1064,7 +1050,8 @@ public class ServerController
         }
 
         ActionCard card = actionReq.getActionCard();
-        //Get the players game
+
+//Get the players game
         if (!isAI)
         {
             game = games.get(connection);
@@ -1110,8 +1097,11 @@ public class ServerController
     }
 
     /**
+     * <<<<<<< HEAD Deal an action card to the current active player in game by
+     * adding a card to their ServerPlayer hand and sending a message. =======
      * Deal an action card to the current active player in game by adding a card
-     * to their ServerPlayer hand and sending a message.
+     * to their ServerPlayer hand and sending a message. >>>>>>>
+     * 983e08ff407cdb233c3d4737c61d0632f3222714
      *
      * @param game the game with the player to deal an action card to.
      */
@@ -1171,19 +1161,21 @@ public class ServerController
             {
                 //Swap locations
                 game.swapLocations(player.getPlayerId(), destination);
-                
+
                 //Build a list of playerIDs
                 List<Integer> playerTurnOrder = new ArrayList<Integer>();
 
-                for(ServerPlayer activePlayer : game.getPlayerTurnOrder())
+                for (ServerPlayer activePlayer : game.getPlayerTurnOrder())
                 {
                     playerTurnOrder.add(activePlayer.getPlayerId());
                 }
-                
+
                 GameStateResponse newGameState = new GameStateResponse(game.
                         getDrawPile().size(), playerTurnOrder, game.
-                        getCurrentPlayer().getPlayerId(), game.getPlayerIdNames(),
-                        null, game.getDrawPile());
+                        getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                        null, game.getDrawPile(), game.getDestToPlayerId());
+                
+                informPlayers(game, newGameState);
             }
             else
             {

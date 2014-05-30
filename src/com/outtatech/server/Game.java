@@ -350,6 +350,16 @@ public class Game
      *
      * @return The Map of destination Ids and PlayerIds for this game
      */
+    public Map<Integer, DestinationID> getPlayerIdToDest()
+    {
+        return playerIdToDest;
+    }
+    
+    /**
+     * Gets the Map between destination Ids and playerIds for this game.
+     *
+     * @return The Map of destination Ids and PlayerIds for this game
+     */
     public Map<DestinationID, Integer> getDestToPlayerId()
     {
         return destToPlayerId;

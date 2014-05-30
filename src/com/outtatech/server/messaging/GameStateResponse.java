@@ -1,6 +1,7 @@
 package com.outtatech.server.messaging;
 
 import com.outtatech.common.Card;
+import com.outtatech.common.DestinationID;
 import com.outtatech.common.HintCard;
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.Player;
@@ -22,6 +23,7 @@ public class GameStateResponse extends ServerResponse
     private Map<Integer, String> players;
     private List<HintCard> hintCards;
     private List<ActionCard> actionCards;
+    private Map<DestinationID, Integer> destToPlayerId;
 
     /**
      * Constructs a new GameStateResponse object
@@ -31,9 +33,10 @@ public class GameStateResponse extends ServerResponse
      * @param currentActivePlayer id of the currently active player
      */
     public GameStateResponse(Integer deckCardCount,
-            List<Integer> playerTurnOrder, Integer currentActivePlayer, 
+            List<Integer> playerTurnOrder, Integer currentActivePlayer,
             Map<Integer, String> players, List<HintCard> hintCards,
-            List<ActionCard> actionCards)
+            List<ActionCard> actionCards,
+            Map<DestinationID, Integer> destToPlayerId)
     {
         this.deckCardCount = deckCardCount;
         this.players = players;
@@ -41,6 +44,7 @@ public class GameStateResponse extends ServerResponse
         this.actionCards = actionCards;
         this.playerTurnOrder = playerTurnOrder;
         this.currentActivePlayer = currentActivePlayer;
+        this.destToPlayerId = destToPlayerId;
     }
 
     /**
@@ -85,6 +89,16 @@ public class GameStateResponse extends ServerResponse
     public List<HintCard> getHintCards()
     {
         return hintCards;
+    }
+    
+    /**
+     * Returns the destination to player ID map of this game
+     * 
+     * @return the destination to player ID
+     */
+    public Map<DestinationID, Integer> getDestToPlayerID()
+    {
+        return destToPlayerId;
     }
     
     /**
