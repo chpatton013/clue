@@ -748,14 +748,14 @@ public class ServerController
             curGame = ((AI) player).getGame();
         }
         ServerPlayer opponent = curGame.getServerPlayers().get(playerId);
-        System.out.println("The opponent has been found as " + opponent);
 
         // List playableCards to return
-        ArrayList<HintCard> playableCards = new ArrayList();
+        ArrayList<Card> playableCards = new ArrayList();
         List<HintCard> hintCardsHand = opponent.getHintCardsHand();
         PrivateTipType privateTipType = card.getType();
 
-        for (int cardInHand = 0; cardInHand < hintCardsHand.size(); cardInHand++)
+        for (int cardInHand = 0; cardInHand < hintCardsHand.size(); 
+                cardInHand++)
         {
             HintCard curHintCard = hintCardsHand.get(cardInHand);
             HintCardType curHintType = hintCardsHand.get(cardInHand).
@@ -782,7 +782,7 @@ public class ServerController
                     }
                     break;
                 case ONE_FEMALE_SUSPECT:
-                    if (curHintType == HintCardType.DESTINATION)
+                    if (curHintType == HintCardType.SUSPECT)
                     {
                         if (((SuspectCard) curHintCard).getGender()
                                 == Gender.FEMALE)
@@ -816,44 +816,51 @@ public class ServerController
 
         List<Card> revealed = new ArrayList<Card>();
         Integer randomCard;
+        
+        if(playableCards.size() > 0)
+        {
+            switch (privateTipType)
+            {
+                case ALL_DESTINATIONS:
+                    revealed.addAll(playableCards);
+                    break;
+                case ALL_VEHICLES:
+                    revealed.addAll(playableCards);
+                    break;
+                case ALL_SUSPECTS:
+                    revealed.addAll(playableCards);
+                    break;
+                case ONE_FEMALE_SUSPECT:
+                    randomCard = (int)(Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+                case ONE_NORTHERN_DESTINATION:
+                    randomCard = (int)(Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+                case ONE_RED_VEHICLE:
+                    randomCard = (int)(Math.random() * playableCards.size());
+                    System.out.println(randomCard);
+                    revealed.add(playableCards.get(randomCard));
+                    break;
+            }
 
-        switch (privateTipType)
-        {
-            case ALL_DESTINATIONS:
-                revealed.addAll(playableCards);
-                break;
-            case ALL_VEHICLES:
-                revealed.addAll(playableCards);
-                break;
-            case ALL_SUSPECTS:
-                revealed.addAll(playableCards);
-                break;
-            case ONE_FEMALE_SUSPECT:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-            case ONE_NORTHERN_DESTINATION:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-            case ONE_RED_VEHICLE:
-                randomCard = new Random().nextInt(
-                        playableCards.size());
-                revealed.add(playableCards.get(randomCard));
-                break;
-        }
+            System.out.println("Made it out of the second switch!");
 
-        // Create a new CardDealResponse
-        RevealCardResponse response = new RevealCardResponse(card, revealed);
-        if(!isAI)
-        {
-            forwardMessage(response, connection);
-        }
-        else
-        {
-            informAI(response, robots.get(player));
+            // Create a new CardDealResponse
+            RevealCardResponse response = new RevealCardResponse(card, revealed);
+            if(!isAI)
+            {
+                System.out.println("sending to player");
+                forwardMessage(response, connection);
+            }
+            else
+            {
+                System.out.println("sending to AI");
+                informAI(response, robots.get(player));
+            }
         }
     }
 
