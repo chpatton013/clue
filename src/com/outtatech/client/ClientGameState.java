@@ -30,6 +30,7 @@ public class ClientGameState extends State
     private Integer deckCardCount;
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
+    private boolean myTurn = false;
 
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
@@ -294,7 +295,6 @@ public class ClientGameState extends State
 
     public Integer getCurrentActivePlayer()
     {
-        System.out.println(this.playerTurnOrder);
         return this.currentActivePlayer;
     }
 
@@ -331,5 +331,16 @@ public class ClientGameState extends State
     public String pollGameLog()
     {
         return this.gameLog.poll();
+    }
+
+    public boolean isMyTurn()
+    {
+        return this.myTurn;
+    }
+
+    public void setMyTurn(boolean myTurn)
+    {
+        this.myTurn = myTurn;
+        this.triggerChange();
     }
 }

@@ -121,7 +121,6 @@ public class ConnectionToClient extends Thread
     AbstractServer server) throws IOException
   {
     super(group,(Runnable)null);
-    // this.myHashCodeCounter = hashCodeCounter++;
     // Initialize variables
     this.clientSocket = clientSocket;
     this.server = server;
@@ -199,17 +198,17 @@ public class ConnectionToClient extends Thread
     return clientSocket == null ? null : clientSocket.getInetAddress();
   }
 
-  // /**
-  //  * Returns a string representation of the client.
-  //  *
-  //  * @return the client's description.
-  //  */
-  // public String toString()
-  // {
-  //   return clientSocket == null ? null :
-  //     clientSocket.getInetAddress().getHostName()
-  //       +" (" + clientSocket.getInetAddress().getHostAddress() + ")";
-  // }
+  /**
+   * Returns a string representation of the client.
+   *
+   * @return the client's description.
+   */
+  public String toString()
+  {
+    return clientSocket == null ? null :
+      clientSocket.getInetAddress().getHostName()
+        +" (" + clientSocket.getInetAddress().getHostAddress() + ")";
+  }
 
   /**
    * Saves arbitrary information about this client. Designed to be

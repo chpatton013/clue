@@ -176,7 +176,7 @@ public class Game
      */
     public Integer getCurrentPlayerIndex()
     {
-        return this.getCurrentPlayer().getPlayerId();
+        return curPlayerTurn;
     }
 
     /**

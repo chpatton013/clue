@@ -156,6 +156,7 @@ public class ClientController
      */
     public void endTurn()
     {
+        ((ClientGameState) this.state).setMyTurn(false);
         this.forwardMessage(new EndTurnRequest());
     }
 
@@ -305,14 +306,13 @@ public class ClientController
                     state.getPlayers());
             newStateCards.addAll(rsp.getActionCards());
 
-            this.setState(newState);
-            ((ClientGameState) this.state).pushGameLog("Game Started");
+            newState.pushGameLog("Game Started");
             newState.setDeckCardCount(rsp.getDeckCardCount());
             newState.setPlayers(rsp.getPlayers());
             newState.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
             newState.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
             newState.setDestToPlayerId(rsp.getDestToPlayerID());
-            // this.forwardMessage(new GameStateRequest());
+            this.setState(newState);
         }
         else if (this.state instanceof ClientGameState)
         {
@@ -343,23 +343,22 @@ public class ClientController
         {
             System.err.println("Received CardDealResponse while not in "
                     + "ClientGameState.");
+            return;
+        }
+
+        ClientGameState state = (ClientGameState) this.state;
+        state.setMyTurn(true);
+        state.pushGameLog("Turn started");
+
+        Card card = rsp.getCard();
+        if (card != null)
+        {
+            state.addToHand(rsp.getCard());
+            state.pushGameLog("Card dealt: " + rsp.getCard());
         }
         else
         {
-            ClientGameState state = (ClientGameState) this.state;
-            state.pushGameLog("Turn started");
-
-            Card card = rsp.getCard();
-            if (card != null)
-            {
-                state.addToHand(rsp.getCard());
-                state.pushGameLog("Card dealt: " + rsp.getCard());
-            }
-            else
-            {
-                this.triggerChange();
-            }
-            state.advancePlayer();
+            this.triggerChange();
         }
     }
 
