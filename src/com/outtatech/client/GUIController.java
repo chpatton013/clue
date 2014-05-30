@@ -204,15 +204,6 @@ public class GUIController implements Observer
                 revealedCardsScreen.setVisible(true);
             }
             
-            /*   FOR SUGGESTIONS
-            
-            if( ((ClientGameState) obs).getSuggestionStatus() )
-            {
-                suggestionScreen = new AccusationScreen(this, true);
-                suggestionScreen.setVisible(true);
-            }
-            
-            */
             //  check clientController's correctAccusation flag
             //
             //  if set
@@ -394,11 +385,13 @@ public class GUIController implements Observer
         //call client controller's makeAccusation method with the 3 cards
         //specified
         System.out.println("Accuse: " + card1 + " " + card2 + " " + card3);
+        accusationScreen.setVisible(false);
     }
     
     public void makeSuggestion(Card card1, Card card2, Card card3)
     {
         System.out.println("Suggest: " + card1 + " " + card2 + " " + card3);
+        suggestionScreen.setVisible(false);
     }
 
     /**
@@ -420,6 +413,9 @@ public class GUIController implements Observer
         {
             this.played = true;
             // prompt for solution
+            suggestionScreen = new AccusationScreen(this, true);
+            suggestionScreen.setVisible(true);
+            
         }
         else
         {

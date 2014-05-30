@@ -41,12 +41,13 @@ public class AccusationScreen extends javax.swing.JFrame
         translate = new CardTranslator(ctrl);
         
         isSuggestion = isSug;
+
+        initComponents();
+        
         if(isSug)
         {
             accuseButton.setText("Suggest");
-        }
-
-        initComponents();
+        }        
         
         updateImages();
         
