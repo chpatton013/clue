@@ -320,6 +320,7 @@ public class ClientController
             state.setPlayers(rsp.getPlayers());
             state.setPlayerTurnOrder(rsp.getPlayerTurnOrder());
             state.setCurrentActivePlayer(rsp.getCurrentActivePlayer());
+            state.setDestToPlayerId(rsp.getDestToPlayerId());
 
             state.pushGameLog("Game state updated:" +
                 "\n   Deck Card Count: " + rsp.getDeckCardCount() +
