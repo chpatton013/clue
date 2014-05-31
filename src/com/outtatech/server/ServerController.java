@@ -457,7 +457,7 @@ public class ServerController
             }
         }
 
-        return gameServerPlayers.get(0).getHintCardsHand().get(0);
+        return null;
     }
 
     private void handleSuggestion(SuggestionRequest suggestionReq,
@@ -474,6 +474,9 @@ public class ServerController
 
         // Get the suggestion type
         SuggestionType suggType = suggestion.getType();
+        
+        // Get the suggestion solution
+        Solution suggestedSol = suggestionReq.getSuggestion();
 
         // Move the players location
         moveLocation(player, suggestionReq.getDestination());

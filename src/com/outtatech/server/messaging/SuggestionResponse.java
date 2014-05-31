@@ -46,7 +46,7 @@ public class SuggestionResponse extends ServerResponse
      *
      * @return the suggestion that was made
      */
-    private Solution getSuggestion()
+    public Solution getSuggestion()
     {
         return this.solution;
     }

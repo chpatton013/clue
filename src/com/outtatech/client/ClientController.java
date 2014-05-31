@@ -163,11 +163,11 @@ public class ClientController
 
     public boolean playActionCard(ActionCard card, Integer playerId)
     {
-        boolean requiresSelectedPlayer = card instanceof Snoop ||
-            card instanceof PrivateTip;
-        Integer myPlayerId = ((ClientGameState)this.state).getPlayerId();
-        if (requiresSelectedPlayer &&
-                (playerId == null || playerId == myPlayerId))
+        boolean requiresSelectedPlayer = card instanceof Snoop
+                || card instanceof PrivateTip;
+        Integer myPlayerId = ((ClientGameState) this.state).getPlayerId();
+        if (requiresSelectedPlayer && (playerId == null || playerId
+                == myPlayerId))
         {
             return false;
         }
@@ -189,8 +189,8 @@ public class ClientController
      * Called when the client would like to make an accusation during their
      * turn.
      *
-     * @param accusation list containing the Destination, Vehicle and
-     * Suspect card required to make an accusation.
+     * @param accusation list containing the Destination, Vehicle and Suspect
+     * card required to make an accusation.
      */
     public void makeAccusation(Solution accusation)
     {
@@ -232,6 +232,10 @@ public class ClientController
         else if (obj instanceof CardDealResponse)
         {
             this.reactToCardDealResponse((CardDealResponse) obj);
+        }
+        else if (obj instanceof SuggestionResponse)
+        {
+            this.reactToSuggestionResponse((SuggestionResponse) obj);
         }
 //        else if (obj instanceof ActionResponse)
 //        {
@@ -395,14 +399,14 @@ public class ClientController
                     + "ClientGameState.");
             return;
         }
-        
+
         System.out.println("The following cards were revealed to you: ");
-        
-        for(Card c : rsp.getCards())
+
+        for (Card c : rsp.getCards())
         {
-            if(c instanceof HintCard)
+            if (c instanceof HintCard)
             {
-                HintCard hintCard = (HintCard)c;
+                HintCard hintCard = (HintCard) c;
                 hintCard.toString();
             }
         }
@@ -436,7 +440,6 @@ public class ClientController
 //             }
 //             Collections.shuffle(hints);
 //             Card card = hints.get(0);
-
 //             // TODO: GUI
 //             // tell GUI card was shown to user rsp.getPlayerId()
 //         }
@@ -514,5 +517,43 @@ public class ClientController
     private void forwardMessage(Object obj)
     {
         this.network.sendMessageToServer(obj);
+    }
+
+    private void reactToSuggestionResponse(SuggestionResponse suggResp)
+    {
+        HintCard refutingCard = suggResp.getRefutingCard();
+        Solution solution = suggResp.getSuggestion();
+        Integer refutingID = suggResp.getRefutingPlayerID();
+        Integer suggID = suggResp.getSuggestorID();
+
+        if (state instanceof ClientGameState)
+        {
+            ClientGameState gameState = (ClientGameState) state;
+            if (!gameState.getPlayerId().equals(suggID))
+            {
+                gameState.pushGameLog(suggID + " suggested " + solution.
+                        getSuspect() + " got to " + solution.getDestination()
+                        + " using a " + solution.getVehicle());
+            }
+            else
+            {
+                if (refutingCard == null)
+                {
+                    gameState.pushGameLog("Your suggestion was correct!");
+                }
+                else
+                {
+                    gameState.pushGameLog(refutingID
+                            + " refuted your suggestion with "
+                            + refutingCard.toString());
+                }
+            }
+        }
+        else
+        {
+            System.out.println(
+                    "Error, not in corect state to get a suggestion");
+        }
+        suggResp.getRefutingPlayerID();
     }
 }
