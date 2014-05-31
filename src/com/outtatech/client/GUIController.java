@@ -2,8 +2,12 @@ package com.outtatech.client;
 
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.Card;
-import com.outtatech.common.Suggestion;
+import com.outtatech.common.DestinationCard;
 import com.outtatech.common.Player;
+import com.outtatech.common.Solution;
+import com.outtatech.common.Suggestion;
+import com.outtatech.common.SuspectCard;
+import com.outtatech.common.VehicleCard;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import com.outtatech.server.ServerPlayer;
@@ -87,8 +91,8 @@ public class GUIController implements Observer
         gameSelectScreen = new GameSelectScreen(ctrl);
         lobbyScreen = new LobbyScreen(ctrl);
         revealedCardsScreen = new RevealedCardsScreen(ctrl);
-        accusationScreen = new AccusationScreen(ctrl, false);
-        suggestionScreen = new AccusationScreen(ctrl, true);
+        accusationScreen = new AccusationScreen(ctrl, false, null);
+        suggestionScreen = new AccusationScreen(ctrl, true, null);
         mainGameScreen = new MainGameScreen(ctrl);
     }
     /**
@@ -367,7 +371,7 @@ public class GUIController implements Observer
     public void accuse()
     {
         //show the accusation window
-        accusationScreen = new AccusationScreen(this, false);
+        accusationScreen = new AccusationScreen(this, false, null);
         accusationScreen.setVisible(true);
     }
 
@@ -384,12 +388,21 @@ public class GUIController implements Observer
     {
         //call client controller's makeAccusation method with the 3 cards
         //specified
+        clientController.makeAccusation(new Solution(
+                ((DestinationCard)card3).getDestination(), 
+                ((VehicleCard)card2).getVehicle(), 
+                ((SuspectCard)card1).getSuspect()));
         System.out.println("Accuse: " + card1 + " " + card2 + " " + card3);
         accusationScreen.setVisible(false);
     }
     
-    public void makeSuggestion(Card card1, Card card2, Card card3)
+    public void makeSuggestion(Card card1, Card card2, Card card3, 
+            Suggestion card)
     {
+        clientController.playSuggestionCard(card, new Solution(
+                ((DestinationCard)card3).getDestination(), 
+                ((VehicleCard)card2).getVehicle(), 
+                ((SuspectCard)card1).getSuspect()));
         System.out.println("Suggest: " + card1 + " " + card2 + " " + card3);
         suggestionScreen.setVisible(false);
     }
@@ -413,7 +426,7 @@ public class GUIController implements Observer
         {
             this.played = true;
             // prompt for solution
-            suggestionScreen = new AccusationScreen(this, true);
+            suggestionScreen = new AccusationScreen(this, true, (Suggestion)card);
             suggestionScreen.setVisible(true);
             
         }
