@@ -164,19 +164,25 @@ public class ClientController
     public boolean playActionCard(ActionCard card, Integer playerId)
     {
         ClientGameState state = (ClientGameState)this.state;
-        Integer myPlayerId = state.getPlayerId();
-        int numPlayers = state.getPlayerTurnOrder().size();
 
         boolean requiresSelectedPlayer = card instanceof Snoop ||
             card instanceof PrivateTip;
-        boolean playerSelected = playerId != null;
-        boolean selectedSelf = playerId == myPlayerId;
-        boolean validSelection = playerId >= 0 && playerId < numPlayers;
-        // No player selected.
-        if (requiresSelectedPlayer &&
-                (!playerSelected || selectedSelf || !validSelection))
+        if (requiresSelectedPlayer)
         {
-            return false;
+            boolean playerSelected = playerId != null;
+            if (!playerSelected)
+            {
+                return false;
+            }
+
+            Integer myPlayerId = state.getPlayerId();
+            int numPlayers = state.getPlayerTurnOrder().size();
+            boolean selectedSelf = myPlayerId.equals(playerId);
+            boolean validSelection = playerId >= 0 && playerId < numPlayers;
+            if (selectedSelf || !validSelection)
+            {
+                return false;
+            }
         }
 
         this.forwardMessage(new ActionRequest(card, playerId));
@@ -244,10 +250,6 @@ public class ClientController
         {
             this.reactToSuggestionResponse((SuggestionResponse) obj);
         }
-//        else if (obj instanceof ActionResponse)
-//        {
-//            this.reactToActionResponse((ActionResponse) obj);
-//        }
         else if (obj instanceof RevealCardResponse)
         {
             this.reactToRevealCardResponse((RevealCardResponse) obj);
