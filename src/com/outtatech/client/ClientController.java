@@ -535,34 +535,32 @@ public class ClientController
         Integer refutingID = suggResp.getRefutingPlayerID();
         Integer suggID = suggResp.getSuggestorID();
 
-        if (state instanceof ClientGameState)
+        if (!(state instanceof ClientGameState))
         {
-            ClientGameState gameState = (ClientGameState) state;
-            if (!gameState.getPlayerId().equals(suggID))
-            {
-                gameState.pushGameLog(suggID + " suggested " + solution.
-                        getSuspect() + " got to " + solution.getDestination()
-                        + " using a " + solution.getVehicle());
-            }
-            else
-            {
-                if (refutingCard == null)
-                {
-                    gameState.pushGameLog("Your suggestion was correct!");
-                }
-                else
-                {
-                    gameState.pushGameLog(refutingID
-                            + " refuted your suggestion with "
-                            + refutingCard.toString());
-                }
-            }
+            System.err.println("Received SuggestionResponse while not in "
+                    + "ClientGameState.");
+            return;
+        }
+
+        ClientGameState gameState = (ClientGameState) state;
+        if (!gameState.getPlayerId().equals(suggID))
+        {
+            gameState.pushGameLog(suggID + " suggested " + solution.
+                    getSuspect() + " got to " + solution.getDestination()
+                    + " using a " + solution.getVehicle());
         }
         else
         {
-            System.out.println(
-                    "Error, not in corect state to get a suggestion");
+            if (refutingCard == null)
+            {
+                gameState.pushGameLog("Your suggestion was correct!");
+            }
+            else
+            {
+                gameState.pushGameLog(refutingID
+                        + " refuted your suggestion with "
+                        + refutingCard.toString());
+            }
         }
-        suggResp.getRefutingPlayerID();
     }
 }
