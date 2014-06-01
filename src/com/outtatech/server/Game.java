@@ -113,10 +113,12 @@ public class Game
         Integer otherPlayerID = destToPlayerId.get(dest);
         
         destToPlayerId.put(dest, playerId);
-        destToPlayerId.put(curLoc, otherPlayerID);
+        if (otherPlayerID != null)
+            destToPlayerId.put(curLoc, otherPlayerID);
         
         playerIdToDest.put(playerId, dest);
-        playerIdToDest.put(otherPlayerID, curLoc);
+        if (otherPlayerID != null)
+            playerIdToDest.put(otherPlayerID, curLoc);
         
         return otherPlayerID;
     }
