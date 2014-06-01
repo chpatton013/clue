@@ -429,7 +429,6 @@ public class GUIController implements Observer
             // prompt for solution
             suggestionScreen = new AccusationScreen(this, true, (Suggestion)card);
             suggestionScreen.setVisible(true);
-            
         }
         else
         {

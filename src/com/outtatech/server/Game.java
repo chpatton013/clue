@@ -89,9 +89,8 @@ public class Game
     {
         playerTurnOrder = new ArrayList(players.values());
         curPlayerTurn = 0;
-        //Collections.shuffle(playerTurnOrder);
-        //drawPile = this.initializeDrawPile();
-        drawPile = this.initializeDrawPileTest();
+        Collections.shuffle(playerTurnOrder);
+        drawPile = this.initializeDrawPile();
         listHintCards = this.initializeHintCards();
         this.solution = pickSolution();
         initDestinations();
@@ -371,103 +370,59 @@ public class Game
         return gameId;
     }
 
-    private List<ActionCard> initializeDrawPile()
-    {
-        List<ActionCard> drawPileT = new CopyOnWriteArrayList<ActionCard>();
-        int countSuggestionANY = 10;
-        int countSuggestionCURRENT = 9;
-        int countSnoop = 4;
-        int countAllSnoopLEFT = 2;
-        int countAllSnoopRIGHT = 2;
-        boolean right = true;
-
-        for (int index = 0; index < countSuggestionANY; index++)
+        private List<ActionCard> initializeDrawPile()
         {
-            drawPileT.add(new Suggestion(SuggestionType.ANY));
+            List<ActionCard> drawPileT = new CopyOnWriteArrayList<ActionCard>();
+            int countSuggestionANY = 10;
+            int countSuggestionCURRENT = 9;
+            int countSnoop = 4;
+            int countAllSnoopLEFT = 2;
+            int countAllSnoopRIGHT = 2;
+            boolean right = true;
+
+            for (int index = 0; index < countSuggestionANY; index++)
+            {
+                drawPileT.add(new Suggestion(SuggestionType.ANY));
+            }
+
+            for (int index = 0; index < countSuggestionCURRENT; index++)
+            {
+                drawPileT.add(new Suggestion(SuggestionType.CURRENT));
+            }
+
+            for (int index = 0; index < countSnoop; index++)
+            {
+                drawPileT.add(new Snoop());
+            }
+
+            for (int index = 0; index < countAllSnoopLEFT; index++)
+            {
+                drawPileT.add(new AllSnoop(!right));
+            }
+
+            for (int index = 0; index < countAllSnoopRIGHT; index++)
+            {
+                drawPileT.add(new AllSnoop(right));
+            }
+
+            drawPileT.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
+            drawPileT.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
+            drawPileT.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
+            drawPileT.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
+            drawPileT.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
+            drawPileT.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
+
+            drawPileT.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
+            drawPileT.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
+            drawPileT.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
+            drawPileT.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
+            drawPileT.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
+            drawPileT.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
+
+            Collections.shuffle(drawPileT);
+            return drawPileT;
         }
 
-        for (int index = 0; index < countSuggestionCURRENT; index++)
-        {
-            drawPileT.add(new Suggestion(SuggestionType.CURRENT));
-        }
-
-        for (int index = 0; index < countSnoop; index++)
-        {
-            drawPileT.add(new Snoop());
-        }
-
-        for (int index = 0; index < countAllSnoopLEFT; index++)
-        {
-            drawPileT.add(new AllSnoop(!right));
-        }
-
-        for (int index = 0; index < countAllSnoopRIGHT; index++)
-        {
-            drawPileT.add(new AllSnoop(right));
-        }
-
-        drawPileT.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
-
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
-
-        Collections.shuffle(drawPileT);
-        return drawPileT;
-    }
-
-    private List<ActionCard> initializeDrawPileTest()
-    {
-        List<ActionCard> drawPileT = new CopyOnWriteArrayList<ActionCard>();
-        int countSuggestionANY = 10;
-        int countSuggestionCURRENT = 9;
-        int countSnoop = 4;
-        int countAllSnoopLEFT = 2;
-        int countAllSnoopRIGHT = 2;
-        boolean right = true;
-
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_SUSPECTS));
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_VEHICLES));
-        drawPileT.add(new PrivateTip(PrivateTipType.ALL_DESTINATIONS));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_FEMALE_SUSPECT));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_RED_VEHICLE));
-        drawPileT.add(new PrivateTip(PrivateTipType.ONE_NORTHERN_DESTINATION));
-
-        drawPileT.add(new SuperSleuth(SuperSleuthType.FEMALE_SUSPECT));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.MALE_SUSPECT));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.AIR_VEHICLE));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.BLUE_CARD));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.SOUTHERN_DESTINATION));
-        drawPileT.add(new SuperSleuth(SuperSleuthType.WESTERN_DESTINATION));
-
-        
-        for (int index = 0; index < countSnoop; index++)
-        {
-            drawPileT.add(new Snoop());
-        }
-
-        for (int index = 0; index < countAllSnoopLEFT; index++)
-        {
-            drawPileT.add(new AllSnoop(!right));
-        }
-
-        for (int index = 0; index < countAllSnoopRIGHT; index++)
-        {
-            drawPileT.add(new AllSnoop(right));
-        }
-
-        //Collections.shuffle(drawPileT);
-        return drawPileT;
-    }
-    
     public ActionCard popActionCard()
     {
         ActionCard ac = null;
