@@ -31,6 +31,8 @@ public class ClientGameState extends State
     private List<Integer> playerTurnOrder;
     private Integer currentActivePlayer;
     private boolean myTurn = false;
+    private boolean loser = false;
+    private boolean gameOver = false;
 
     /**
      * Map holds the set of DestinationIds and a corresponding playerId.
@@ -45,6 +47,8 @@ public class ClientGameState extends State
         this.revealed = new ArrayList<Card>();
         this.revealStatus = false;
         this.newAccusation = false;
+        this.loser = false;
+        this.gameOver = false;
         this.accusationStatus = false;
         this.gameLog = new LinkedList<String>();
     }
@@ -68,6 +72,44 @@ public class ClientGameState extends State
     public boolean getAccusationStatus()
     {
         return accusationStatus;
+    }
+    
+    /**
+     * Returns a boolean that indicates whether or not the game is over.
+     * 
+     * @return true if game is over, false if its not.
+     */
+    public boolean getGameOverStatus()
+    {
+        return gameOver;
+    }
+    
+    /**
+     * Provides a boolean that indicates whether or not the player has lost.
+     * 
+     * @return true if the player has lost, false if they have not
+     */
+    public boolean getLoserStatus()
+    {
+        return loser;
+    }
+    
+    /**
+     * Set this players loser status
+     * @param loser true if the player has lost, false if they haven't
+     */
+    public void setLoserStatus(boolean loser)
+    {
+        this.loser = loser;
+    }
+    
+    /**
+     * Set whether or not the game is over
+     * @param gameOver boolean that represents whether or not the game is over.
+     */
+    public void setGameOverStatus(boolean gameOver)
+    {
+        this.gameOver = gameOver;
     }
 
     /**

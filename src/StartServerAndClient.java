@@ -21,6 +21,7 @@ public class StartServerAndClient
         ServerController server = new ServerController(network);
         ClientController client = new ClientController();
         GUIController gui = new GUIController(client);
+        client.setGUICtrl(gui);
         client.getState().addObserver(gui);
         gui.initWindows(gui);
         gui.exitWindow();

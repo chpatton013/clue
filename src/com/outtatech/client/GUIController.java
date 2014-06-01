@@ -159,7 +159,10 @@ public class GUIController implements Observer
         // Guard against this
         if (obs instanceof ClientGameState)
         {
-            curPlayerId = ((ClientGameState) obs).getPlayerId();
+            ClientGameState gameState = (ClientGameState)obs;
+            
+            curPlayerId = gameState.getPlayerId();
+            
             //  call mainGameScreen's clearFields method
             mainGameScreen.clearPlayers();
             //  add each hand card and location back
@@ -207,6 +210,12 @@ public class GUIController implements Observer
                 //    show revealCardsScreen
                 revealedCardsScreen.setVisible(true);
             }
+            
+            if(gameState.getGameOverStatus() || gameState.getLoserStatus())
+            {
+                mainGameScreen.disableEndTurnBtn();
+            }
+            
             
             //  check clientController's correctAccusation flag
             //
