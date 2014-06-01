@@ -530,9 +530,11 @@ public class ServerController
         List<ServerPlayer> gameServerPlayers
                 = clientGame.getServerPlayersList();
 
+        Solution sol = clientGame.getSolution();
+        System.out.println("Solution: " + sol.getSuspect() + " " + sol.getDestination() + " " + sol.getVehicle());
         //Create accusation response
         AccusationResponse accResp = new AccusationResponse(accusation,
-                accusation.equals(clientGame.getSolution()));
+                accusation.equals(clientGame.getSolution()), fromPlayer.getPlayerId());
 
         informPlayers(clientGame, accResp);
     }

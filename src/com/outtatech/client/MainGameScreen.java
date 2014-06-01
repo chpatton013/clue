@@ -783,7 +783,15 @@ public class MainGameScreen extends javax.swing.JFrame
             controller.accuse();
         }
     }//GEN-LAST:event_accuseButtonMouseClicked
-
+    
+    public void disableEndTurnBtn()
+    {
+        if(endTurnButton.isEnabled())
+        {
+            endTurnButton.setEnabled(false);
+        }
+    }
+    
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt)
     {//GEN-FIRST:event_endTurnButtonMouseClicked
         // Guard against this
@@ -791,7 +799,7 @@ public class MainGameScreen extends javax.swing.JFrame
         {
             //call controller's endTurn method
             endTurn();
-
+            
             //call this's endTurn method
             controller.endTurn();
         }

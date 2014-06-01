@@ -23,8 +23,10 @@ public class ClientController
 {
     private State state;
     private ClientNetwork network;
+    private GUIController guiCtrl;
     private boolean creator = false;
     private boolean accused = false;
+    private boolean loser = false;
 
     /**
      * Constructor for the ClientController.
@@ -44,6 +46,15 @@ public class ClientController
 
         network.setClientController(this);
     }
+    
+    /**
+     * Returns whether or not the player has lost
+     * @return whether or not the player has lost
+     */
+    public boolean isLost()
+    {
+        return loser;
+    }
 
     /**
      * Get the Player's current State
@@ -53,6 +64,16 @@ public class ClientController
     public State getState()
     {
         return this.state;
+    }
+
+    /**
+     * Sets the GUI Controller for this client controller
+     *
+     * @param guiCtrl the gui controller
+     */
+    public void setGUICtrl(GUIController guiCtrl)
+    {
+        this.guiCtrl = guiCtrl;
     }
 
     /**
@@ -163,18 +184,18 @@ public class ClientController
 
     public boolean playActionCard(ActionCard card, Integer playerId)
     {
-        ClientGameState state = (ClientGameState)this.state;
+        ClientGameState state = (ClientGameState) this.state;
         Integer myPlayerId = state.getPlayerId();
         int numPlayers = state.getPlayerTurnOrder().size();
 
-        boolean requiresSelectedPlayer = card instanceof Snoop ||
-            card instanceof PrivateTip;
+        boolean requiresSelectedPlayer = card instanceof Snoop
+                || card instanceof PrivateTip;
         boolean playerSelected = playerId != null;
         boolean selectedSelf = playerId == myPlayerId;
         boolean validSelection = playerId >= 0 && playerId < numPlayers;
         // No player selected.
-        if (requiresSelectedPlayer &&
-                (!playerSelected || selectedSelf || !validSelection))
+        if (requiresSelectedPlayer && (!playerSelected || selectedSelf
+                || !validSelection))
         {
             return false;
         }
@@ -362,6 +383,12 @@ public class ClientController
 
     private void reactToCardDealResponse(CardDealResponse rsp)
     {
+        if (loser)
+        {
+            guiCtrl.endTurn();
+            return;
+        }
+        
         if (!(this.state instanceof ClientGameState))
         {
             System.err.println("Received CardDealResponse while not in "
@@ -472,34 +499,56 @@ public class ClientController
 
         if (this.accused)
         {
-            if (rsp.getCorrectAccusation())
+            if (state instanceof ClientGameState)
             {
-                // you win!
-                // TODO: GUI
-                // show correct solution
-            }
-            else
-            {
-                // you lose! you get nothing! good day sir!
-                // TODO: GUI
-                // show wrong solution
-                // remove from game
-            }
+                ClientGameState gameState = (ClientGameState) state;
+                Solution sol = rsp.getSolution();
 
-            return;
-        }
-
-        if (rsp.getCorrectAccusation())
-        {
-            // you lose! you get nothing! good day sir!
-            // TODO: GUI
-            // show correct solution
-            // give option to leave game
+                if (rsp.getCorrectAccusation())
+                {
+                    gameState.pushGameLog("You win!");
+                    gameState.pushGameLog("Solution: " + sol.getSuspect()
+                            + " at " + sol.getDestination() + " with " + sol.
+                            getVehicle());
+                    gameState.setGameOverStatus(true);
+                }
+                else
+                {
+                    gameState.pushGameLog("You lose! Incorrect accusation!");
+                    loser = true;
+                    gameState.setLoserStatus(true);
+                    gameState.setGameOverStatus(true);
+                    
+                    guiCtrl.endTurn();
+                }
+            }
         }
         else
         {
-            // TODO: GUI
-            // show wrong solution
+            if (state instanceof ClientGameState)
+            {
+                ClientGameState gameState = (ClientGameState) state;
+                Solution sol = rsp.getSolution();
+
+                if (rsp.getCorrectAccusation())
+                {
+                    gameState.pushGameLog("Player " + rsp.getPlayerId()
+                            + " wins!");
+                    gameState.pushGameLog("Solution: " + sol.getSuspect()
+                            + " at " + sol.getDestination() + " with " + sol.
+                            getVehicle());
+                    gameState.setLoserStatus(true);
+                    gameState.setGameOverStatus(true);
+                }
+                else
+                {
+                    gameState.pushGameLog("Player " + rsp.getPlayerId()
+                            + " loses due to an incorrect accusation!");
+                    gameState.pushGameLog("Their guess: " + sol.getSuspect()
+                            + " at " + sol.getDestination() + " with " + sol.
+                            getVehicle());
+                }
+            }
         }
     }
 
