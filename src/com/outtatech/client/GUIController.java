@@ -405,6 +405,7 @@ public class GUIController implements Observer
                 ((SuspectCard)card1).getSuspect()));
         System.out.println("Suggest: " + card1 + " " + card2 + " " + card3);
         suggestionScreen.setVisible(false);
+        this.played = true;
     }
 
     /**
