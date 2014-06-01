@@ -89,9 +89,9 @@ public class Game
     {
         playerTurnOrder = new ArrayList(players.values());
         curPlayerTurn = 0;
-        //Collections.shuffle(playerTurnOrder);
-        //drawPile = this.initializeDrawPile();
-        drawPile = this.initializeDrawPileTest();
+        Collections.shuffle(playerTurnOrder);
+        drawPile = this.initializeDrawPile();
+        //drawPile = this.initializeDrawPileTest();
         listHintCards = this.initializeHintCards();
         this.solution = pickSolution();
         initDestinations();
