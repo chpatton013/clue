@@ -313,7 +313,7 @@ public class AI extends ServerPlayer
         // Guard against this
         if (cardToPlay.getActionType() == ActionCardType.SUGGESTION)
         {
-            System.out.println("Can play this fucking suggestion!");
+            //System.out.println("Can play this fucking suggestion!");
             aiMakeSuggestion((Suggestion) cardToPlay);
         }
         // Otherwise...
@@ -378,11 +378,11 @@ public class AI extends ServerPlayer
         if (((Suggestion) card).getType() == SuggestionType.ANY)
         {
             choice1 = getSuspectChoice(suspectCardsSeen);
-            System.out.println(choice1);
+            System.out.println("Suspect picked it: " + choice1);
             choice2 = getVehicleChoice(vehicleCardsSeen);
-            System.out.println(choice2);
+            System.out.println("Vehicle picked is: " + choice2);
             choice3 = getLocationChoice(locationsSeen);
-            System.out.println(choice3);
+            System.out.println("Location picked is: " + choice3);
 
             ctrl.reactToRobot(new SuggestionRequest(card,
                     new Solution(choice3, choice2, choice1), choice3), this);
@@ -518,13 +518,17 @@ public class AI extends ServerPlayer
         while (!flag)
         {
             double choice = Math.random();
+            System.out.println(choice);
+            System.out.println(difficulty.getIntelligence());
             // Guard against this
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
                 // Guard against this
-                if (difficulty.getIntelligence() < Math.random() * 5)
+                System.out.println("standard suggestion");
+                if (difficulty.getIntelligence() > Math.random() * 5)
                 {
-                    return (SuspectID) complement.toArray()[(int) choice
+                    System.out.println("Picking card" + ((int) (choice * (cards.size() + complement.size())) - cards.size()));
+                    return (SuspectID) complement.toArray()[(int) (choice * (cards.size() + complement.size()))
                             - cards.size()];
                 }
             }
@@ -532,10 +536,12 @@ public class AI extends ServerPlayer
             else
             {
                 // Guard against this
+                System.out.println("Dumb sugegstion");
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (SuspectID) cards.toArray()[(int) choice - cards.
-                            size()];
+                    System.out.println("Picking a card");
+                    return (SuspectID) cards.toArray()[(int) (choice * (cards.size() + complement.size()))
+                            - cards.size()];
                 }
             }
         }
@@ -554,9 +560,9 @@ public class AI extends ServerPlayer
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
                 // Guard against this
-                if (difficulty.getIntelligence() < Math.random() * 5)
+                if (difficulty.getIntelligence() > Math.random() * 5)
                 {
-                    return (VehicleID) complement.toArray()[(int) choice
+                    return (VehicleID) complement.toArray()[(int) (choice * (cards.size() + complement.size()))
                             - cards.size()];
                 }
             }
@@ -566,8 +572,8 @@ public class AI extends ServerPlayer
                 // Guard against this
                 if (difficulty.getIntelligence() < Math.random() * 5)
                 {
-                    return (VehicleID) cards.toArray()[(int) choice - cards.
-                            size()];
+                    return (VehicleID) cards.toArray()[(int) (choice * (cards.size() + complement.size()))
+                            - cards.size()];
                 }
             }
         }
@@ -586,9 +592,9 @@ public class AI extends ServerPlayer
             if (choice * (cards.size() + complement.size()) > cards.size())
             {
                 // Guard against this
-                if (difficulty.getIntelligence() < Math.random() * 5)
+                if (difficulty.getIntelligence() > Math.random() * 5)
                 {
-                    return (DestinationID) complement.toArray()[(int) choice
+                    return (DestinationID) complement.toArray()[(int) (choice * (cards.size() + complement.size()))
                             - cards.size()];
                 }
             }
@@ -640,6 +646,10 @@ public class AI extends ServerPlayer
             aiTurn();
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
+        }
+        else if (obj instanceof SuggestionResponse) 
+        {
+            System.out.println("Got a response");
         }
         // Guard against this
         else if (obj instanceof GameStateResponse)
