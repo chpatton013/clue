@@ -951,6 +951,7 @@ public class ServerController
             curGame = ((AI) player).getGame();
         }
         List<ServerPlayer> opponents = curGame.getServerPlayersList();
+        opponents.remove(player);
         List<Card> revealedCards = new ArrayList<Card>();
         // List playableCards to return
         for (ServerPlayer opponent : opponents)
@@ -996,6 +997,7 @@ public class ServerController
                                 playableCards.add(curHintCard);
                             }
                         }
+                    break;
                     case MALE_SUSPECT:
                         if (curHintType == HintCardType.SUSPECT)
                         {
@@ -1015,6 +1017,7 @@ public class ServerController
                             }
 
                         }
+                    break;
                     case WESTERN_DESTINATION:
                         if (curHintType == HintCardType.DESTINATION)
                         {
