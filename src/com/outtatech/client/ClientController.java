@@ -577,38 +577,45 @@ public class ClientController
         this.network.sendMessageToServer(obj);
     }
 
-    private void reactToSuggestionResponse(SuggestionResponse suggResp)
+    private void reactToSuggestionResponse(SuggestionResponse rsp)
     {
-        HintCard refutingCard = suggResp.getRefutingCard();
-        Solution solution = suggResp.getSuggestion();
-        Integer refutingID = suggResp.getRefutingPlayerID();
-        Integer suggID = suggResp.getSuggestorID();
-
-        if (!(state instanceof ClientGameState))
+        if (!(this.state instanceof ClientGameState))
         {
-            System.err.println("Received SuggestionResponse while not in "
-                    + "ClientGameState.");
+            System.err.println("Received SuggestionResponse while not in " +
+                    "ClientGameState.");
             return;
         }
 
-        ClientGameState gameState = (ClientGameState) state;
-        if (!gameState.getPlayerId().equals(suggID))
+        ClientGameState state = (ClientGameState) this.state;
+
+        HintCard refutingCard = rsp.getRefutingCard();
+        Solution solution = rsp.getSuggestion();
+        Integer refutingID = rsp.getRefutingPlayerID();
+        Integer suggID = rsp.getSuggestorID();
+
+        if (!state.getPlayerId().equals(suggID))
         {
-            gameState.pushGameLog(suggID + " suggested " + solution.
-                    getSuspect() + " got to " + solution.getDestination()
-                    + " using a " + solution.getVehicle());
+            state.pushGameLog(state.getPlayerName(suggID) +
+                    " suggested " + solution.getSuspect() +
+                    " got to " + solution.getDestination() +
+                    " using a " + solution.getVehicle());
         }
         else
         {
             if (refutingCard == null)
             {
-                gameState.pushGameLog("Your suggestion was correct!");
+                state.pushGameLog("Your suggestion could not be refuted.");
             }
             else
             {
-                gameState.pushGameLog(refutingID
-                        + " refuted your suggestion with "
-                        + refutingCard.toString());
+                List<Card> revealed = new ArrayList<Card>();
+                revealed.add(refutingCard);
+                state.setRevealed(revealed);
+                state.setRevealStatus(true);
+
+                state.pushGameLog(state.getPlayerName(refutingID) +
+                        " refuted your suggestion with " +
+                        refutingCard.toString());
             }
         }
     }

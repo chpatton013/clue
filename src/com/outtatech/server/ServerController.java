@@ -317,8 +317,6 @@ public class ServerController
         else if (obj instanceof EndTurnRequest)
         {
             EndTurnRequest endTurnReq = (EndTurnRequest) obj;
-            System.out.println("server: " + games);
-            System.out.println("connection: " + connection);
             handleEndTurnRequest(games.get(connection), connectionToPlayer.get(
                     connection));
 //            forwardMessage(new GameStateResponse()), connection, false);
@@ -327,7 +325,6 @@ public class ServerController
 
     void handleEndTurnRequest(Game game, ServerPlayer initiator)
     {
-        System.out.println("server: handleEndTurnRequest: " + game + "," + initiator);
         game.advanceTurn();
         dealActionCard(game);
     }
@@ -419,8 +416,18 @@ public class ServerController
         //informAI(msg, aiPlayers);
     }
 
-    private HintCard findRefutingCard(List<ServerPlayer> gameServerPlayers,
-            Solution guess, Integer playerId)
+    private class Refutation {
+        public Integer playerId;
+        public HintCard card;
+        public Refutation(Integer playerId, HintCard card)
+        {
+            this.playerId = playerId;
+            this.card = card;
+        }
+    }
+
+    private Refutation findRefutingCard(List<ServerPlayer> gameServerPlayers,
+            Solution guess)
     {
 
         for (ServerPlayer player : gameServerPlayers)
@@ -432,8 +439,7 @@ public class ServerController
                     DestinationCard dest = (DestinationCard) card;
                     if (dest.getDestination().equals(guess.getDestination()))
                     {
-                        playerId = player.getPlayerId();
-                        return dest;
+                        return new Refutation(player.getPlayerId(), dest);
                     }
                 }
                 else if (card instanceof SuspectCard)
@@ -441,8 +447,7 @@ public class ServerController
                     SuspectCard susp = (SuspectCard) card;
                     if (susp.getSuspect().equals(guess.getSuspect()))
                     {
-                        playerId = player.getPlayerId();
-                        return susp;
+                        return new Refutation(player.getPlayerId(), susp);
                     }
                 }
                 else if (card instanceof VehicleCard)
@@ -450,8 +455,7 @@ public class ServerController
                     VehicleCard vehicle = (VehicleCard) card;
                     if (vehicle.getVehicle().equals(guess.getVehicle()))
                     {
-                        playerId = player.getPlayerId();
-                        return vehicle;
+                        return new Refutation(player.getPlayerId(), vehicle);
                     }
                 }
             }
@@ -474,7 +478,7 @@ public class ServerController
 
         // Get the suggestion type
         SuggestionType suggType = suggestion.getType();
-        
+
         // Get the suggestion solution
         Solution suggestedSol = suggestionReq.getSuggestion();
 
@@ -482,10 +486,15 @@ public class ServerController
         moveLocation(player, suggestionReq.getDestination());
 
         // See if anyone has a card to refute the suggestion
+        Refutation refutation = findRefutingCard(gameServerPlayers,
+                suggestionReq.getSuggestion());
         Integer refutingPlayerID = null;
-
-        HintCard refutingCard = findRefutingCard(gameServerPlayers,
-                suggestionReq.getSuggestion(), refutingPlayerID);
+        HintCard refutingCard = null;
+        if (refutation != null)
+        {
+            refutingPlayerID = refutation.playerId;
+            refutingCard = refutation.card;
+        }
 
         // Response to send everyone but the accusor
         SuggestionResponse respAll
@@ -531,7 +540,6 @@ public class ServerController
                 = clientGame.getServerPlayersList();
 
         Solution sol = clientGame.getSolution();
-        System.out.println("Solution: " + sol.getSuspect() + " " + sol.getDestination() + " " + sol.getVehicle());
         //Create accusation response
         AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()), fromPlayer.getPlayerId());
@@ -1147,52 +1155,43 @@ public class ServerController
      */
     private void moveLocation(ServerPlayer player, DestinationID destination)
     {
-
-        // Get the player's current location
-        DestinationID curDest = player.getLocation();
-
-        // If the players desired location is not the same as their current one,
-        // find out who has it and swap their locations
-        if (!curDest.equals(destination))
+        Game game;
+        // Find out who has the destination
+        // First get the current player's game
+        if (player instanceof AI)
         {
-            Game game;
-            // Find out who has the destination
-            // First get the current player's game
-            if (player instanceof AI)
-            {
-                AI playerAI = (AI) player;
-                game = playerAI.getGame();
-            }
-            else
-            {
-                ConnectionToClient playerConn = humans.get(player);
-                game = games.get(playerConn);
-            }
-
-            if (game != null)
-            {
-                //Swap locations
-                game.swapLocations(player.getPlayerId(), destination);
-
-                //Build a list of playerIDs
-                List<Integer> playerTurnOrder = new ArrayList<Integer>();
-
-                for (ServerPlayer activePlayer : game.getPlayerTurnOrder())
-                {
-                    playerTurnOrder.add(activePlayer.getPlayerId());
-                }
-
-                GameStateResponse newGameState = new GameStateResponse(game.
-                        getDrawPile().size(), playerTurnOrder, game.
-                        getCurrentPlayerIndex(), game.getPlayerIdNames(),
-                        null, game.getDrawPile(), game.getDestToPlayerId());
-                
-                informPlayers(game, newGameState);
-            }
-            else
-            {
-                System.out.println("Game could not be found in moveLocation");
-            }
+            AI playerAI = (AI) player;
+            game = playerAI.getGame();
         }
+        else
+        {
+            ConnectionToClient playerConn = humans.get(player);
+            game = games.get(playerConn);
+        }
+        DestinationID curDest = game.getPlayerIdToDest().get(player.getPlayerId());
+
+        if (game == null)
+        {
+            System.out.println("Game could not be found in moveLocation");
+            return;
+        }
+
+        //Swap locations
+        game.swapLocations(player.getPlayerId(), destination);
+
+        //Build a list of playerIDs
+        List<Integer> playerTurnOrder = new ArrayList<Integer>();
+
+        for (ServerPlayer activePlayer : game.getPlayerTurnOrder())
+        {
+            playerTurnOrder.add(activePlayer.getPlayerId());
+        }
+
+        GameStateResponse newGameState = new GameStateResponse(game.
+                getDrawPile().size(), playerTurnOrder, game.
+                getCurrentPlayerIndex(), game.getPlayerIdNames(),
+                null, game.getDrawPile(), game.getDestToPlayerId());
+
+        informPlayers(game, newGameState);
     }
 }
