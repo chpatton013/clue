@@ -522,6 +522,7 @@ public class ClientController
                     gameState.setGameOverStatus(true);
                     
                     guiCtrl.endTurn();
+                    guiCtrl.disableAccusation();
                 }
             }
         }

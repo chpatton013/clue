@@ -958,6 +958,14 @@ public class MainGameScreen extends javax.swing.JFrame
         }
     }
     
+    public void disableAccuseBtn()
+    {
+        if(accuseButton.isEnabled())
+        {
+            accuseButton.setEnabled(false);
+        }
+    }
+    
     private void endTurnButtonMouseClicked(java.awt.event.MouseEvent evt)
     {//GEN-FIRST:event_endTurnButtonMouseClicked
         // Guard against this

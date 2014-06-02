@@ -473,6 +473,11 @@ public class GUIController implements Observer
         //call client controller's end turn method
         clientController.endTurn();
     }
+    
+    public void disableAccusation()
+    {
+        mainGameScreen.disableAccuseBtn();
+    }
 
     /**
      * Version-latenightpizzaparty

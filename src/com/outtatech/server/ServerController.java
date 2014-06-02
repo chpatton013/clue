@@ -701,7 +701,7 @@ public class ServerController
         }
 
         // Remove lobby when game starts
-        lobbies.remove(game);
+        lobbies.remove(game.getGameId());
     }
 
     private void handleGameStateRequest(Game game, ConnectionToClient cxn)
