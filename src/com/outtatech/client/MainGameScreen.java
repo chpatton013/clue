@@ -176,14 +176,42 @@ public class MainGameScreen extends javax.swing.JFrame
                     filled[0] = true;
                     actionImage1.setIcon(new ImageIcon(path));
                     actionCards[0] = (ActionCard)card;
+                    actionImage1.setText(
+                            ((ActionCard)card).getActionType().toString());
+                    actionImage1.setHorizontalTextPosition(JLabel.CENTER);
+                    actionImage1.setVerticalTextPosition(JLabel.BOTTOM);
                 }
                 else if(!filled[1])
                 {
                     filled[1] = true;
                     actionImage2.setIcon(new ImageIcon(path));
                     actionCards[1] = (ActionCard)card;
+                    actionImage2.setText(
+                            ((ActionCard)card).getActionType().toString());
+                    actionImage2.setHorizontalTextPosition(JLabel.CENTER);
+                    actionImage2.setVerticalTextPosition(JLabel.BOTTOM);
                 }
             }
+        }
+    }
+    
+    private String getHintCardEnum(HintCard card)
+    {
+        if(card.getHintType() == HintCardType.DESTINATION)
+        {
+            return ((DestinationCard)card).getDestination().toString();
+        }
+        else if(card.getHintType() == HintCardType.SUSPECT)
+        {
+            return ((SuspectCard)card).getSuspect().toString();
+        }
+        else if(card.getHintType() == HintCardType.VEHICLE)
+        {
+            return ((VehicleCard)card).getVehicle().toString();
+        }
+        else
+        {
+            return "";
         }
     }
     
@@ -208,31 +236,49 @@ public class MainGameScreen extends javax.swing.JFrame
             {
                 filled[0] = true;
                 hintImage1.setIcon(new ImageIcon(path));
+                hintImage1.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage1.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage1.setVerticalTextPosition(JLabel.BOTTOM);
             }
             else if(!filled[1])
             {
                 filled[1] = true;
                 hintImage2.setIcon(new ImageIcon(path));
+                hintImage2.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage2.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage2.setVerticalTextPosition(JLabel.BOTTOM);
             }
             else if(!filled[2])
             {
                 filled[2] = true;
                 hintImage3.setIcon(new ImageIcon(path));
+                hintImage3.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage3.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage3.setVerticalTextPosition(JLabel.BOTTOM);
             }
             else if(!filled[3])
             {
                 filled[3] = true;
                 hintImage4.setIcon(new ImageIcon(path));
+                hintImage4.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage4.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage4.setVerticalTextPosition(JLabel.BOTTOM);
             }
             else if(!filled[4])
             {
                 filled[4] = true;
                 hintImage5.setIcon(new ImageIcon(path));
+                hintImage5.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage5.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage5.setVerticalTextPosition(JLabel.BOTTOM);
             }
             else if(!filled[5])
             {
                 filled[5] = true;
                 hintImage6.setIcon(new ImageIcon(path));
+                hintImage6.setText(getHintCardEnum((HintCard)cards.get(indx)));
+                hintImage6.setHorizontalTextPosition(JLabel.CENTER);
+                hintImage6.setVerticalTextPosition(JLabel.BOTTOM);
             }
         }
     }
