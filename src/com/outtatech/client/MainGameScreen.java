@@ -19,8 +19,12 @@ import com.outtatech.common.SuspectID;
 import com.outtatech.common.VehicleCard;
 import com.outtatech.common.VehicleID;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.util.Iterator;
 
 /**
  * Version-latenightpizzaparty
@@ -316,6 +320,109 @@ public class MainGameScreen extends javax.swing.JFrame
     {
         //sets the background of the specified location panel to the color
         //of the corresponding player
+    }
+    
+    /**
+     * Sets the players locations
+     * @param dP
+     * @param playerMap 
+     */
+    public void setLocationLabels(Map<DestinationID, Integer> dP, 
+            Map<Integer, String> playerMap)
+    {
+        cleanLocationLabelsText();
+        
+        ArrayList<DestinationID> enums 
+                = new ArrayList<DestinationID>(Arrays.asList(
+                DestinationID.CONEY_ISLAND, DestinationID.GOLDEN_GATE_BRIDGE,
+                DestinationID.HOOVER_DAM, DestinationID.LINCOLN_MEMORIAL,
+                DestinationID.MIAMI_BEACH, DestinationID.MT_RUSHMORE,
+                DestinationID.NIAGRA_FALLS,
+                DestinationID.OLD_FAITHFUL, DestinationID.THE_ALAMO));
+        
+        int index = 0;
+        for (DestinationID did : enums)
+        {
+            
+            String playerName = "";
+            
+            if (dP.get(did) != null) 
+            {
+                playerName = "<b>" + playerMap.get(dP.get(did)) + "</b>";
+            }
+            
+            switch(index)
+            {
+                case 0:
+                    locationImage1.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage1.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage1.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 1:
+                    locationImage2.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage2.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage2.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 2:
+                    locationImage3.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage3.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage3.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 3:
+                    locationImage4.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage4.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage4.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 4:
+                    locationImage5.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage5.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage5.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 5:
+                    locationImage6.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage6.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage6.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 6:
+                    locationImage7.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage7.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage7.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 7:
+                    locationImage8.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage8.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage8.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+                case 8:
+                    locationImage9.setText("<html>" + did 
+                            + "<br>" + playerName +"</html>");
+                    locationImage9.setHorizontalTextPosition(JLabel.CENTER);
+                    locationImage9.setVerticalTextPosition(JLabel.BOTTOM);
+                    break;
+            }
+            index++;
+        }
+    }
+    
+    private void cleanLocationLabelsText()
+    {
+        locationImage1.setText("");
+        locationImage2.setText("");
+        locationImage3.setText("");
+        locationImage4.setText("");
+        locationImage5.setText("");
+        locationImage6.setText("");
+        locationImage7.setText("");
+        locationImage8.setText("");
+        locationImage9.setText("");
     }
 
     /**

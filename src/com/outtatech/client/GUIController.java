@@ -11,6 +11,7 @@ import com.outtatech.common.VehicleCard;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import com.outtatech.server.ServerPlayer;
+import com.outtatech.common.DestinationID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -168,6 +169,12 @@ public class GUIController implements Observer
             //  add each hand card and location back
             Map<Integer, String> playMap = ((ClientGameState) obs).getPlayers();
             ArrayList playList = new ArrayList(playMap.keySet());
+            
+            Map<DestinationID, Integer> dP 
+                    = ((ClientGameState) obs).getDestToPlayerId();
+            
+            mainGameScreen.setLocationLabels(dP, playMap);
+            
             // Iterate over this set
             for (int indx = 0; indx < playList.size(); indx++)
             {
