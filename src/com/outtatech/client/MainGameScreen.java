@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 /**
  * Version-latenightpizzaparty
@@ -164,6 +165,9 @@ public class MainGameScreen extends javax.swing.JFrame
         };
         actionImage1.setIcon(new ImageIcon());
         actionImage2.setIcon(new ImageIcon());
+        actionImage1.setText("");
+        actionImage2.setText("");
+
         for (int indx = 0; indx < cards.size(); indx++)
         {
             card = cards.get(indx);
@@ -228,6 +232,15 @@ public class MainGameScreen extends javax.swing.JFrame
         hintImage4.setIcon(new ImageIcon());
         hintImage5.setIcon(new ImageIcon());
         hintImage6.setIcon(new ImageIcon());
+        
+        
+        hintImage1.setText("");
+        hintImage2.setText("");
+        hintImage3.setText("");
+        hintImage4.setText("");
+        hintImage5.setText("");
+        hintImage6.setText("");
+        
         // Iterate over this set
         for (int indx = 0; indx < cards.size(); indx++)
         {
@@ -989,6 +1002,11 @@ public class MainGameScreen extends javax.swing.JFrame
         }
     }//GEN-LAST:event_actionImage2MouseClicked
 
+    public void notifyUser(String msg)
+    {
+        JOptionPane.showMessageDialog(null, msg, " Play Error"
+                , JOptionPane.INFORMATION_MESSAGE);
+    }
     /**
      * Version-latenightpizzaparty
      * @param args the command line arguments method parameter

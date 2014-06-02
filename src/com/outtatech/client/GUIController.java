@@ -449,6 +449,12 @@ public class GUIController implements Observer
         else
         {
             this.played = clientController.playActionCard(card, selectedPlayer);
+            if(!this.played)
+            {
+                mainGameScreen.notifyUser("Play failed:  To Play this card,"
+                        + " please select a CluePlayer from the 'Players' list,"
+                        + " then click on this card.");
+            }
         }
 
     }
