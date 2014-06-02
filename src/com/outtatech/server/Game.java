@@ -305,6 +305,19 @@ public class Game
     {
         this.discardPile = discardPile;
     }
+    
+    /**
+     * Add an action card to the discard pile.  
+     * After using an action card a player must discard the Action card.
+     * @param card 
+     */
+    public void discardActionCard(ActionCard card)
+    {
+        if(discardPile != null)
+        {
+            this.discardPile.add(card);
+        }
+    }
 
     /**
      * Gets the solution of this game.
@@ -429,6 +442,15 @@ public class Game
     {
         ActionCard ac = null;
 
+        if (drawPile.isEmpty() && this.discardPile.size() > 0)
+        {
+            while(this.discardPile.size() > 0)
+            {
+                drawPile.add(this.discardPile.remove(0));
+            }
+            Collections.shuffle(drawPile);
+        }
+        
         if (drawPile.size() > 0)
         {
             ac = drawPile.remove(0);

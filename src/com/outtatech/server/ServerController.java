@@ -1113,6 +1113,7 @@ public class ServerController
         }
 
         player.removeActionCard(card);
+        game.discardActionCard(card);
     }
 
     /**
