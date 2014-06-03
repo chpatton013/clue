@@ -53,6 +53,7 @@ public class AccusationScreen extends javax.swing.JFrame
         if(isSug)
         {
             accuseButton.setText("Suggest");
+            jLabel1.setText("Make a suggestion:");
         }        
         
         updateImages();
