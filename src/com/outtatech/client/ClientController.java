@@ -24,6 +24,7 @@ public class ClientController
     private State state;
     private ClientNetwork network;
     private GUIController guiCtrl;
+    private CardTranslator translate;
     private boolean creator = false;
     private boolean accused = false;
     private boolean loser = false;
@@ -74,6 +75,7 @@ public class ClientController
     public void setGUICtrl(GUIController guiCtrl)
     {
         this.guiCtrl = guiCtrl;
+        translate = new CardTranslator(guiCtrl);
     }
 
     /**
@@ -418,7 +420,8 @@ public class ClientController
         if (card != null)
         {
             state.addToHand(rsp.getCard());
-            state.pushGameLog("Card dealt: " + rsp.getCard());
+            state.pushGameLog("Card dealt: " + translate.translateName(
+                    rsp.getCard().toString()));
         }
         else
         {
@@ -455,7 +458,7 @@ public class ClientController
             if (c instanceof HintCard)
             {
                 HintCard hintCard = (HintCard) c;
-                hintCard.toString();
+                translate.translateName(hintCard.toString());
             }
         }
 
@@ -521,9 +524,13 @@ public class ClientController
                 if (rsp.getCorrectAccusation())
                 {
                     gameState.pushGameLog("You win!");
-                    gameState.pushGameLog("Solution: " + sol.getSuspect()
-                            + " at " + sol.getDestination() + " with " + sol.
-                            getVehicle());
+                    gameState.pushGameLog("Solution: " + 
+                            translate.translateName(sol.getSuspect().toString())
+                            + " at " + 
+                            translate.translateName(
+                                    sol.getDestination().toString()) + " with "
+                            + translate.translateName(sol.
+                            getVehicle().toString()));
                     gameState.setGameOverStatus(true);
                 }
                 else
@@ -549,9 +556,13 @@ public class ClientController
                 {
                     gameState.pushGameLog("Player " + rsp.getPlayerId()
                             + " wins!");
-                    gameState.pushGameLog("Solution: " + sol.getSuspect()
-                            + " at " + sol.getDestination() + " with " + sol.
-                            getVehicle());
+                    gameState.pushGameLog("Solution: " + 
+                            translate.translateName(sol.getSuspect().toString())
+                            + " at " + 
+                            translate.translateName(
+                                    sol.getDestination().toString()) + " with "
+                            + translate.translateName(sol.
+                            getVehicle().toString()));
                     gameState.setLoserStatus(true);
                     gameState.setGameOverStatus(true);
                 }
@@ -559,9 +570,13 @@ public class ClientController
                 {
                     gameState.pushGameLog("Player " + rsp.getPlayerId()
                             + " loses due to an incorrect accusation!");
-                    gameState.pushGameLog("Their guess: " + sol.getSuspect()
-                            + " at " + sol.getDestination() + " with " + sol.
-                            getVehicle());
+                    gameState.pushGameLog("Their guess: " + 
+                            translate.translateName(sol.getSuspect().toString())
+                            + " at " + 
+                            translate.translateName(
+                                    sol.getDestination().toString()) + " with "
+                            + translate.translateName(sol.
+                            getVehicle().toString()));
                 }
             }
         }
@@ -609,9 +624,12 @@ public class ClientController
         if (!state.getPlayerId().equals(suggID))
         {
             state.pushGameLog(state.getPlayerName(suggID) +
-                    " suggested " + solution.getSuspect() +
-                    " got to " + solution.getDestination() +
-                    " using a " + solution.getVehicle());
+                    " suggested " + translate.translateName(
+                            solution.getSuspect().toString()) +
+                    " got to " + translate.translateName(
+                            solution.getDestination().toString()) +
+                    " using a " + translate.translateName(
+                            solution.getVehicle().toString()));
         }
         else
         {
@@ -628,7 +646,7 @@ public class ClientController
 
                 state.pushGameLog(state.getPlayerName(refutingID) +
                         " refuted your suggestion with " +
-                        refutingCard.toString());
+                        translate.translateName(refutingCard.toString()));
             }
         }
     }
