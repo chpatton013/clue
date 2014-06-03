@@ -3,7 +3,10 @@ package com.outtatech.client;
 import com.outtatech.common.ActionCard;
 import com.outtatech.common.Card;
 import com.outtatech.common.DestinationCard;
+import com.outtatech.common.DestinationID;
 import com.outtatech.common.Player;
+import com.outtatech.common.PrivateTip;
+import com.outtatech.common.Snoop;
 import com.outtatech.common.Solution;
 import com.outtatech.common.Suggestion;
 import com.outtatech.common.SuspectCard;
@@ -11,12 +14,12 @@ import com.outtatech.common.VehicleCard;
 import com.outtatech.server.Difficulty;
 import com.outtatech.server.Lobby;
 import com.outtatech.server.ServerPlayer;
-import com.outtatech.common.DestinationID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 
 /**
  * Version-latenightpizzaparty
@@ -438,6 +441,19 @@ public class GUIController implements Observer
         if (!isTurn || this.played)
         {
             return;
+        }
+        
+        if(card instanceof PrivateTip || card instanceof Snoop) 
+        {
+            if(selectedPlayer == null) 
+            {
+                JOptionPane.showMessageDialog(null, "Please select "
+                        + "a player in the "
+                        + "Player Listing (Upper right) that is not yourself!", 
+                        "Warning", 
+                        JOptionPane.ERROR_MESSAGE); 
+                return;
+            }
         }
 
         if (card instanceof Suggestion)

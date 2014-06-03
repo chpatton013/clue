@@ -481,7 +481,8 @@ public class AI extends ServerPlayer
                 getRiskiness());
         // if knowledge < riskiness of AI
         // Guard against this
-        if ((knowledge * 6) <= difficulty.getRiskiness())
+        if ((knowledge * 6) <= difficulty.getRiskiness() 
+                || game.getDrawPile().size() <= 3)
         //  return false
         {
             System.out.println("Will not make an accusation!");
