@@ -108,17 +108,25 @@ public class Game
     {
         //Get the players current destination
         DestinationID curLoc = playerIdToDest.get(playerId);
+        destToPlayerId.remove(curLoc);
 
         //Find out who has the other destination
         Integer otherPlayerID = destToPlayerId.get(dest);
-        
-        destToPlayerId.put(dest, playerId);
-        if (otherPlayerID != null)
+
+        if (otherPlayerID != null) 
+        {
+            destToPlayerId.remove(dest);
             destToPlayerId.put(curLoc, otherPlayerID);
+        }               
+        destToPlayerId.put(dest, playerId);
         
+        playerIdToDest.remove(playerId);
         playerIdToDest.put(playerId, dest);
         if (otherPlayerID != null)
+        {
+            playerIdToDest.remove(otherPlayerID);
             playerIdToDest.put(otherPlayerID, curLoc);
+        }
         
         return otherPlayerID;
     }
