@@ -27,46 +27,12 @@ public class ServerControllerTest
     /**
      *
      */
-    @Before
-    public void setUp()
-    {
-        state = new ClientMenuState();
-        try
-        {
-        clientnw = new ClientNetwork("localhost", 5300);
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        //clientctrl = new ClientController(state, clientnw);
-        clientctrl = new ClientController();
-        clientnw.setClientController(clientctrl);
-        
-        servernw = new ServerNetwork(5300);
-        serverctrl = new ServerController(servernw);
-        servernw.setServerController(serverctrl);
-    }
     
-    /**
-     *
-     */
-    @After
-    public void tearDown()
-    {
-        try {
-          clientnw.closeConnection();
-        } catch(Exception e) {
-            System.out.println("Problem closing connection");
-        }
-    }
     
-    /**@Test
-    public void testCreateLobby() {
-        
-        //Send a new LobbyListRequest
-        LobbyListRequest llreq = new LobbyListRequest();
-        clientctrl.forwardMessage(llreq);
-        
-    }**/
+    @Test
+    public void initServer()
+    {
+        ServerNetwork sn = new ServerNetwork(7777);
+        ServerController sc = new ServerController(sn);
+    }
 }
