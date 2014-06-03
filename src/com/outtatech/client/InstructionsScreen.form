@@ -20,13 +20,106 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="800" max="32767" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="228" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="278" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="36" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Instructions:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Starting The Game:"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="After opening the client the start window will appear. You can start a single player game, &#xa;multiplayer game, view information on how to play or set configuration options for the game.&#xa;&#xa;&#xa;Starting A Single Player Game:&#xa;&#xa;Click &quot;Single Player&quot; in the start window. You will be taken to the lobby window.&#xa;&#xa;In this window you can see a list of current players in the game, add or kick AI players, &#xa;begin the game or leave it. Add or kick robot players until you are satisfied (there must be &#xa;a minimum of 3 players) and click READY! to begin the game.&#xa;&#xa;&#xa;Starting A Multiplayer Game:&#xa;&#xa;Click &quot;Multiplayer&quot; in the start window. You will be taken to the lobby discovery window.&#xa;&#xa;In this window you can see a list of existing lobbies, how many players are in each, and &#xa;you can create or join a game lobby. Either highlight a game in the list and click join or&#xa;click create game and you will be taken to the lobby window.&#xa;&#xa;In the lobby window you will wait until the game is ready to begin. Only the creator of &#xa;the game will be able to add/kick players and robots and begin the game."/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Gameplay:"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea2">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="0"/>
+            </Property>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="When the game begins the first player is picked at random. After their turn completes the next &#xa;player in the player list will take a turn and so on until the game completes. As players take turns &#xa;the game log will be updated to show a history of actions taken by players. Destinations are&#xa; listed beneath the game log and player list. Your current action cards are shown beneath the &#xa;destinations and on the left. The suspect, destination, and vehicle cards in your hand are &#xa;displayed to the right of your action cards. You can keep track of discoveries you make in your &#xa;notes section beneath your hand. You can check suspects/destinations/vehicles you have seen &#xa;as well as type notes in the text are. Your notes, hand, and action cards can only be seen by you &#xa;(unless another player views cards in your hand by playing an action card). When you are ready &#xa;to make an accusation you can do so on your turn with the ACCUSE! button.&#xa;&#xa;&#xa;Taking Your Turn:&#xa;&#xa;When it is your turn the game log will be updated to indicate so and you will be automatically &#xa;dealt an action card. You may now choose one of your action cards to play at which point you &#xa;may have to wait for other players to react to your action card depending on which one you &#xa;played. If you play an action card requiring you to select a player or cards from their hands a &#xa;window will pop up with instructions to facilitate this action. If other players showed you cards &#xa;a window will automatically pop up after they are done making their selections displaying the &#xa;results of what they showed you. At any point during your turn you may also make an accusation &#xa;(more details on Making An Accusation are below). After you have finished playing your action &#xa;card and viewing the results you must click the end turn button and the game will proceed with &#xa;the next player.&#xa;&#xa;&#xa;Objective:&#xa;&#xa;A crime has been committed and it is your objective to discover who committed it, in which &#xa;vehicle, and where. You attempt to deduce this by learning which suspect, vehicle and &#xa;destination are not held by any player. The 3 cards not held by any player represent the winning &#xa;solution. The first player to correctly make an accusation detailing the correct 3 answers wins!&#xa;&#xa;&#xa;Making An Accusation:&#xa;&#xa;At any point during your turn you may make an accusation by clicking ACCUSE! At this point a &#xa;window will appear.&#xa;&#xa;From within this window you may select the suspect, vehicle and destination that you believe &#xa;consist of the solution. After making your selection click ACCUSE! or click close to cancel making &#xa;the accusation. If you are correct you have won the game! However, if incorrect you will lose &#xa;and be expelled from the game and a robot will take over for you for the duration of the game."/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
 </Form>

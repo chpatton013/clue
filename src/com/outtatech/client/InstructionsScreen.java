@@ -25,18 +25,70 @@ public class InstructionsScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("Instructions:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("Starting The Game:");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("After opening the client the start window will appear. You can start a single player game, \nmultiplayer game, view information on how to play or set configuration options for the game.\n\n\nStarting A Single Player Game:\n\nClick \"Single Player\" in the start window. You will be taken to the lobby window.\n\nIn this window you can see a list of current players in the game, add or kick AI players, \nbegin the game or leave it. Add or kick robot players until you are satisfied (there must be \na minimum of 3 players) and click READY! to begin the game.\n\n\nStarting A Multiplayer Game:\n\nClick \"Multiplayer\" in the start window. You will be taken to the lobby discovery window.\n\nIn this window you can see a list of existing lobbies, how many players are in each, and \nyou can create or join a game lobby. Either highlight a game in the list and click join or\nclick create game and you will be taken to the lobby window.\n\nIn the lobby window you will wait until the game is ready to begin. Only the creator of \nthe game will be able to add/kick players and robots and begin the game.");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("Gameplay:");
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTextArea2.setRows(5);
+        jTextArea2.setText("When the game begins the first player is picked at random. After their turn completes the next \nplayer in the player list will take a turn and so on until the game completes. As players take turns \nthe game log will be updated to show a history of actions taken by players. Destinations are\n listed beneath the game log and player list. Your current action cards are shown beneath the \ndestinations and on the left. The suspect, destination, and vehicle cards in your hand are \ndisplayed to the right of your action cards. You can keep track of discoveries you make in your \nnotes section beneath your hand. You can check suspects/destinations/vehicles you have seen \nas well as type notes in the text are. Your notes, hand, and action cards can only be seen by you \n(unless another player views cards in your hand by playing an action card). When you are ready \nto make an accusation you can do so on your turn with the ACCUSE! button.\n\n\nTaking Your Turn:\n\nWhen it is your turn the game log will be updated to indicate so and you will be automatically \ndealt an action card. You may now choose one of your action cards to play at which point you \nmay have to wait for other players to react to your action card depending on which one you \nplayed. If you play an action card requiring you to select a player or cards from their hands a \nwindow will pop up with instructions to facilitate this action. If other players showed you cards \na window will automatically pop up after they are done making their selections displaying the \nresults of what they showed you. At any point during your turn you may also make an accusation \n(more details on Making An Accusation are below). After you have finished playing your action \ncard and viewing the results you must click the end turn button and the game will proceed with \nthe next player.\n\n\nObjective:\n\nA crime has been committed and it is your objective to discover who committed it, in which \nvehicle, and where. You attempt to deduce this by learning which suspect, vehicle and \ndestination are not held by any player. The 3 cards not held by any player represent the winning \nsolution. The first player to correctly make an accusation detailing the correct 3 answers wins!\n\n\nMaking An Accusation:\n\nAt any point during your turn you may make an accusation by clicking ACCUSE! At this point a \nwindow will appear.\n\nFrom within this window you may select the suspect, vehicle and destination that you believe \nconsist of the solution. After making your selection click ACCUSE! or click close to cancel making \nthe accusation. If you are correct you have won the game! However, if incorrect you will lose \nand be expelled from the game and a robot will take over for you for the duration of the game.");
+        jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane2))))
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,5 +153,12 @@ public class InstructionsScreen extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }
