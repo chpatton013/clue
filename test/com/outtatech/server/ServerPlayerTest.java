@@ -74,7 +74,7 @@ public class ServerPlayerTest
         //ServerPlayer instance = new ServerPlayer(1, new Object(), "Bob", 
         //        new Color(1, 1, 1), hintCardsHand, actionCardsHand);
         ServerPlayer instance = new ServerPlayer();
-        Object expResult = 4;
+        Object expResult = 0;
         Object result = instance.getPlayerId();
         assertEquals(expResult, result);
     }
