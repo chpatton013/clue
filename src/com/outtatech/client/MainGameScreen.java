@@ -203,15 +203,17 @@ public class MainGameScreen extends javax.swing.JFrame
     {
         if(card.getHintType() == HintCardType.DESTINATION)
         {
-            return ((DestinationCard)card).getDestination().toString();
+            return translate.translateName(((DestinationCard)card).getDestination().toString());
         }
         else if(card.getHintType() == HintCardType.SUSPECT)
         {
-            return ((SuspectCard)card).getSuspect().toString();
+            return translate.translateName(((
+                    SuspectCard)card).getSuspect().toString());
         }
         else if(card.getHintType() == HintCardType.VEHICLE)
         {
-            return ((VehicleCard)card).getVehicle().toString();
+            return translate.translateName(((
+                    VehicleCard)card).getVehicle().toString());
         }
         else
         {
@@ -413,55 +415,64 @@ public class MainGameScreen extends javax.swing.JFrame
             switch(index)
             {
                 case 0:
-                    locationImage1.setText("<html>" + did 
+                    locationImage1.setText("<html>" + 
+                            translate.translateName(did.toString())
                             + "<br>" + playerName +"</html>");
                     locationImage1.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage1.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 1:
-                    locationImage2.setText("<html>" + did 
+                    locationImage2.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage2.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage2.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 2:
-                    locationImage3.setText("<html>" + did 
+                    locationImage3.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage3.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage3.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 3:
-                    locationImage4.setText("<html>" + did 
+                    locationImage4.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage4.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage4.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 4:
-                    locationImage5.setText("<html>" + did 
+                    locationImage5.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage5.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage5.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 5:
-                    locationImage6.setText("<html>" + did 
+                    locationImage6.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage6.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage6.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 6:
-                    locationImage7.setText("<html>" + did 
+                    locationImage7.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage7.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage7.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 7:
-                    locationImage8.setText("<html>" + did 
+                    locationImage8.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage8.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage8.setVerticalTextPosition(JLabel.BOTTOM);
                     break;
                 case 8:
-                    locationImage9.setText("<html>" + did 
+                    locationImage9.setText("<html>" + 
+                            translate.translateName(did.toString()) 
                             + "<br>" + playerName +"</html>");
                     locationImage9.setHorizontalTextPosition(JLabel.CENTER);
                     locationImage9.setVerticalTextPosition(JLabel.BOTTOM);
@@ -741,98 +752,98 @@ public class MainGameScreen extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(leaveGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(optionsButton)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(instructionsButton))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(44, 44, 44)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(endTurnButton)
-                                                .addComponent(accuseButton))))))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(leaveGameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(suspectBox1)
+                                                .addComponent(suspectBox2)
+                                                .addComponent(suspectBox3)
+                                                .addComponent(suspectBox4)
+                                                .addComponent(suspectBox5)
+                                                .addComponent(suspectBox6)
+                                                .addComponent(vehicleBox1)
+                                                .addComponent(vehicleBox2)
+                                                .addComponent(vehicleBox3)
+                                                .addComponent(vehicleBox4)
+                                                .addComponent(vehicleBox5)
+                                                .addComponent(vehicleBox6))
+                                            .addGap(83, 83, 83)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(locationBox9)
+                                                .addComponent(locationBox8)
+                                                .addComponent(locationBox6)
+                                                .addComponent(locationBox5)
+                                                .addComponent(locationBox4)
+                                                .addComponent(locationBox3)
+                                                .addComponent(locationBox2)
+                                                .addComponent(locationBox1)
+                                                .addComponent(locationBox7)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(actionImage1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(actionImage2)))
+                                    .addGap(8, 8, 8)
+                                    .addComponent(hintImage1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(hintImage2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(hintImage3)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(hintImage4)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(hintImage5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(hintImage6))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(locationImage1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(locationImage9)))
+                .addContainerGap(285, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(suspectBox1)
-                                                    .addComponent(suspectBox2)
-                                                    .addComponent(suspectBox3)
-                                                    .addComponent(suspectBox4)
-                                                    .addComponent(suspectBox5)
-                                                    .addComponent(suspectBox6)
-                                                    .addComponent(vehicleBox1)
-                                                    .addComponent(vehicleBox2)
-                                                    .addComponent(vehicleBox3)
-                                                    .addComponent(vehicleBox4)
-                                                    .addComponent(vehicleBox5)
-                                                    .addComponent(vehicleBox6))
-                                                .addGap(83, 83, 83)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(locationBox9)
-                                                    .addComponent(locationBox8)
-                                                    .addComponent(locationBox6)
-                                                    .addComponent(locationBox5)
-                                                    .addComponent(locationBox4)
-                                                    .addComponent(locationBox3)
-                                                    .addComponent(locationBox2)
-                                                    .addComponent(locationBox1)
-                                                    .addComponent(locationBox7)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(actionImage1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(actionImage2)))
-                                        .addGap(8, 8, 8)
-                                        .addComponent(hintImage1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(hintImage6))))
+                                .addComponent(optionsButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(instructionsButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(locationImage1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(locationImage9)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(endTurnButton)
+                                    .addComponent(accuseButton))))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -919,10 +930,10 @@ public class MainGameScreen extends javax.swing.JFrame
                         .addComponent(vehicleBox5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vehicleBox6))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(leaveGameButton)
-                .addContainerGap())
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         pack();

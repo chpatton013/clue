@@ -26,6 +26,7 @@ import com.outtatech.common.SuspectID;
 import com.outtatech.common.VehicleCard;
 import com.outtatech.common.VehicleID;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,18 +40,22 @@ public class CardTranslator {
     private String[][] nameList = 
     {
         {
-            "Green", "Mustard", "Peacock", "Plum", "Scarlet", "White"
+            "GREEN", "MUSTARD", "PEACOCK", "PLUM", "SCARLET", "WHITE"
         },
         {
-            "Airliner", "Automobile", "HotAirBalloon", "Limosine", 
-            "Seaplane", "Train"
+            "AIRLINER", "AUTOMOBILE", "HOT_AIR_BALLOON", "LIMOSINE", 
+            "SEAPLANE", "TRAIN"
         },
         {
-            "ConeyIsland", "GoldenGateBridge", "HooverDam", "LincolnMemorial",
-            "MiamiBeach", "MTRushmore", "NiagraFalls", "OldFaithful", 
-            "TheAlamo"
+            "CONEY_ISLAND", "GOLDEN_GATE_BRIDGE", "HOOVER_DAM", 
+            "LINCOLN_MEMORIAL", "MIAMI_BEACH", "MT_RUSHMORE", "NIAGRA_FALLS",
+            "OLD_FAITHFUL", "THE_ALAMO"
         }
     };
+    
+    private HashMap greeceMap;
+    private HashMap whiteMap;
+    private HashMap pirateMap;
     
     private Card[][] cardList = 
     {
@@ -86,6 +91,93 @@ public class CardTranslator {
     public CardTranslator(GUIController ctrl) 
     {
         controller = ctrl;
+        
+        greeceMap = new HashMap();
+        
+        //add characters
+        greeceMap.put("GREEN", "Hermes");
+        greeceMap.put("MUSTARD", "Ares");
+        greeceMap.put("PEACOCK", "Artemis");
+        greeceMap.put("PLUM", "Dionysus");
+        greeceMap.put("SCARLET", "Aphrodite");
+        greeceMap.put("WHITE", "Hera");
+        
+        //add vehicles
+        greeceMap.put("AIRLINER", "Eros' Wings");
+        greeceMap.put("AUTOMOBILE", "Apollo's Chariot");
+        greeceMap.put("HOT_AIR_BALLOON", "Hermes Sandals");
+        greeceMap.put("LIMOSINE", "Athena's Horse");
+        greeceMap.put("SEAPLANE", "Poseidon's Ship");
+        greeceMap.put("TRAIN", "Hades' Dogs");
+        
+        //add destinations
+        greeceMap.put("CONEY_ISLAND", "Athena's Forest");
+        greeceMap.put("GOLDEN_GATE_BRIDGE", "Athens");
+        greeceMap.put("HOOVER_DAM", "Atlas' Sky");
+        greeceMap.put("LINCOLN_MEMORIAL", "Dionysus' Vinyard");
+        greeceMap.put("MIAMI_BEACH", "Hades' Underworld");
+        greeceMap.put("MT_RUSHMORE", "Hephaestus' Volcano");
+        greeceMap.put("NIAGRA_FALLS", "Mount Olympus");
+        greeceMap.put("OLD_FAITHFUL", "Phoebe's Moon");
+        greeceMap.put("THE_ALAMO", "Poseidon's Ocean");
+        
+        whiteMap = new HashMap();
+        
+        //add characters
+        whiteMap.put("GREEN", "George W Bush");
+        whiteMap.put("MUSTARD", "Dick Cheney");
+        whiteMap.put("PEACOCK", "Ann Coulter");
+        whiteMap.put("PLUM", "Karl Rove");
+        whiteMap.put("SCARLET", "Condalisa Rice");
+        whiteMap.put("WHITE", "Laura Bush");
+        
+        //add vehicles
+        whiteMap.put("AIRLINER", "Air Force One");
+        whiteMap.put("AUTOMOBILE", "Motorcade");
+        whiteMap.put("HOT_AIR_BALLOON", "Blimp");
+        whiteMap.put("LIMOSINE", "Humvee");
+        whiteMap.put("SEAPLANE", "Chopper");
+        whiteMap.put("TRAIN", "Motorcycle");
+        
+        //add destinations
+        whiteMap.put("CONEY_ISLAND", "Dry Tortugas");
+        whiteMap.put("GOLDEN_GATE_BRIDGE", "Everglades");
+        whiteMap.put("HOOVER_DAM", "Grand Canyon");
+        whiteMap.put("LINCOLN_MEMORIAL", "Joshua Tree");
+        whiteMap.put("MIAMI_BEACH", "Olympic");
+        whiteMap.put("MT_RUSHMORE", "Shenandoah");
+        whiteMap.put("NIAGRA_FALLS", "Smokey Mountains");
+        whiteMap.put("OLD_FAITHFUL", "Yosemite");
+        whiteMap.put("THE_ALAMO", "Yellowstone");
+        
+        pirateMap = new HashMap();
+        
+        //add characters
+        pirateMap.put("GREEN", "Callico Jack");
+        pirateMap.put("MUSTARD", "Blackbeard");
+        pirateMap.put("PEACOCK", "Sadie The Goat");
+        pirateMap.put("PLUM", "William Kidd");
+        pirateMap.put("SCARLET", "Anne Bonny");
+        pirateMap.put("WHITE", "Granuldale");
+        
+        //add vehicles
+        pirateMap.put("AIRLINER", "Tartane");
+        pirateMap.put("AUTOMOBILE", "Sloop");
+        pirateMap.put("HOT_AIR_BALLOON", "Galleon");
+        pirateMap.put("LIMOSINE", "Merchantman");
+        pirateMap.put("SEAPLANE", "Brig");
+        pirateMap.put("TRAIN", "Barque");
+        
+        //add destinations
+        pirateMap.put("CONEY_ISLAND", "Barbados");
+        pirateMap.put("GOLDEN_GATE_BRIDGE", "Gibraltar");
+        pirateMap.put("HOOVER_DAM", "Guadeloupe");
+        pirateMap.put("LINCOLN_MEMORIAL", "Havana");
+        pirateMap.put("MIAMI_BEACH", "Port Royale");
+        pirateMap.put("MT_RUSHMORE", "San Juan");
+        pirateMap.put("NIAGRA_FALLS", "Santiago");
+        pirateMap.put("OLD_FAITHFUL", "Tortuga");
+        pirateMap.put("THE_ALAMO", "Veracruz");
     }
     
     public String getPath(Card card) 
@@ -345,19 +437,45 @@ public class CardTranslator {
         }
     }
 
+    public String translateName(String in)
+    {
+        HashMap useMap;
+        if(controller.getImageIndex() == 0)
+        {
+            useMap = greeceMap;
+        }
+        else if(controller.getImageIndex() == 1)
+        {
+            useMap = whiteMap;
+        }
+        else if(controller.getImageIndex() == 2)
+        {
+            useMap = pirateMap;
+        }
+        else
+            return in;
+        
+        if(useMap.containsKey(in))
+        {
+            return (String)useMap.get(in);
+        }
+        else
+            return in;
+    }
+    
     public String getName(String type, int num)
     {
         if(type.equals("suspect") && num < 6 && num >= 0)
         {
-            return nameList[0][num];
+            return translateName(nameList[0][num]);
         }
         else if(type.equals("vehicle") && num < 6 && num >= 0)
         {
-            return nameList[1][num];
+            return translateName(nameList[1][num]);
         }
         else if(type.equals("location") && num < 9 && num >= 0)
         {
-            return nameList[2][num];
+            return translateName(nameList[2][num]);
         }
         else
         {

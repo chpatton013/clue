@@ -25,118 +25,118 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jScrollPane1" min="-2" pref="463" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="247" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="leaveGameButton" min="-2" pref="109" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="optionsButton" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="instructionsButton" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="suspectBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="suspectBox2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="suspectBox3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="suspectBox4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="suspectBox5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="suspectBox6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="vehicleBox6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="locationBox9" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox8" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox6" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox5" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox4" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="locationBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="endTurnButton" min="-2" max="-2" attributes="0"/>
-                                              <Component id="accuseButton" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="actionImage1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="actionImage2" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Component id="hintImage1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="hintImage2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="hintImage3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="hintImage4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="hintImage5" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="hintImage6" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane2" min="-2" pref="422" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane2" alignment="1" min="-2" pref="422" max="-2" attributes="0"/>
-                          <Component id="leaveGameButton" alignment="1" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="suspectBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="suspectBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="suspectBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="suspectBox4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="suspectBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="suspectBox6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="vehicleBox6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="locationBox9" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox8" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox6" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox5" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox4" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox2" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="locationBox7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="actionImage1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="actionImage2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                      <Component id="hintImage1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="hintImage2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="hintImage3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="hintImage4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="hintImage5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="hintImage6" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="locationImage1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="locationImage9" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="locationImage1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="locationImage9" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="285" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="463" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="247" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="optionsButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="instructionsButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="endTurnButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="accuseButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -240,11 +240,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="vehicleBox6" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="1" min="-2" pref="325" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" min="-2" pref="325" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="169" max="32767" attributes="0"/>
-              <Component id="leaveGameButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="leaveGameButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="275" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
