@@ -26,10 +26,10 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="SinglePlayerButton" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="MultiPlayerButton" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="InformationButton" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="OptionsButton" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="SinglePlayerButton" alignment="2" max="-2" attributes="0"/>
+                  <Component id="MultiPlayerButton" alignment="2" max="-2" attributes="0"/>
+                  <Component id="InformationButton" alignment="2" max="-2" attributes="0"/>
+                  <Component id="OptionsButton" alignment="2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -74,6 +74,15 @@
     <Component class="javax.swing.JButton" name="SinglePlayerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Single Player"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SinglePlayerButtonMouseClicked"/>
@@ -82,6 +91,15 @@
     <Component class="javax.swing.JButton" name="MultiPlayerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Multiplayer"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[93, 23]"/>
         </Property>
@@ -93,6 +111,15 @@
     <Component class="javax.swing.JButton" name="InformationButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Information"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[93, 23]"/>
         </Property>
@@ -104,6 +131,15 @@
     <Component class="javax.swing.JButton" name="OptionsButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Options"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[120, 23]"/>
+        </Property>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[93, 23]"/>
         </Property>

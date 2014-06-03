@@ -114,6 +114,7 @@ public class ClientController
      */
     public void searchForGames()
     {
+        this.setState(new ClientLobbyListState());
         this.forwardMessage(new LobbyListRequest());
     }
 
@@ -283,7 +284,17 @@ public class ClientController
 
     private void reactToLobbyDiscoveryResponse(LobbyDiscoveryResponse rsp)
     {
-        this.setState(new ClientLobbyDiscoveryState(rsp.getLobbies()));
+        if(this.state instanceof ClientLobbyDiscoveryState
+            || this.state instanceof ClientLobbyListState)
+        {
+            this.setState(new ClientLobbyDiscoveryState(rsp.getLobbies()));
+        }
+        else
+        {
+            System.out.println("Ignoring lobby discovery, does not matter"
+                    + " in state: "  
+                    + this.state.getClass().toString());
+        }
     }
 
     private void reactToLobbyCreateResponse(LobbyCreateResponse rsp)
@@ -295,7 +306,8 @@ public class ClientController
     private void reactToLobbyJoinResponse(LobbyJoinResponse rsp)
     {
         if (this.state instanceof ClientMenuState
-                || this.state instanceof ClientLobbyDiscoveryState)
+                || this.state instanceof ClientLobbyDiscoveryState
+                || this.state instanceof ClientLobbyListState)
         {
             Integer myId = rsp.getPlayerId();
             Map<Integer, String> players = rsp.getPlayers();
