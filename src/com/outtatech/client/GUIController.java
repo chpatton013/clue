@@ -160,6 +160,7 @@ public class GUIController implements Observer
         // Guard against this
         if (obs instanceof ClientGameState)
         {
+            
             ClientGameState gameState = (ClientGameState)obs;
             
             curPlayerId = gameState.getPlayerId();

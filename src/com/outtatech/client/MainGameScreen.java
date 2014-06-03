@@ -247,7 +247,7 @@ public class MainGameScreen extends javax.swing.JFrame
         for (int indx = 0; indx < cards.size(); indx++)
         {
             path = translate.getPath(cards.get(indx));
-            if(!filled[0])
+            if(!filled[0] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[0] = true;
                 hintImage1.setIcon(new ImageIcon(path));
@@ -255,7 +255,7 @@ public class MainGameScreen extends javax.swing.JFrame
                 hintImage1.setHorizontalTextPosition(JLabel.CENTER);
                 hintImage1.setVerticalTextPosition(JLabel.BOTTOM);
             }
-            else if(!filled[1])
+            else if(!filled[1] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[1] = true;
                 hintImage2.setIcon(new ImageIcon(path));
@@ -263,7 +263,7 @@ public class MainGameScreen extends javax.swing.JFrame
                 hintImage2.setHorizontalTextPosition(JLabel.CENTER);
                 hintImage2.setVerticalTextPosition(JLabel.BOTTOM);
             }
-            else if(!filled[2])
+            else if(!filled[2] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[2] = true;
                 hintImage3.setIcon(new ImageIcon(path));
@@ -271,7 +271,7 @@ public class MainGameScreen extends javax.swing.JFrame
                 hintImage3.setHorizontalTextPosition(JLabel.CENTER);
                 hintImage3.setVerticalTextPosition(JLabel.BOTTOM);
             }
-            else if(!filled[3])
+            else if(!filled[3] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[3] = true;
                 hintImage4.setIcon(new ImageIcon(path));
@@ -279,7 +279,7 @@ public class MainGameScreen extends javax.swing.JFrame
                 hintImage4.setHorizontalTextPosition(JLabel.CENTER);
                 hintImage4.setVerticalTextPosition(JLabel.BOTTOM);
             }
-            else if(!filled[4])
+            else if(!filled[4] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[4] = true;
                 hintImage5.setIcon(new ImageIcon(path));
@@ -287,7 +287,7 @@ public class MainGameScreen extends javax.swing.JFrame
                 hintImage5.setHorizontalTextPosition(JLabel.CENTER);
                 hintImage5.setVerticalTextPosition(JLabel.BOTTOM);
             }
-            else if(!filled[5])
+            else if(!filled[5] && cards.get(indx).getCardType() == CardType.HINT)
             {
                 filled[5] = true;
                 hintImage6.setIcon(new ImageIcon(path));
