@@ -66,32 +66,12 @@ public class ActionRequestTest
     public void testGetActionCard()
     {
         System.out.println("getActionCard");
-        
-        List<Card> list = new ArrayList<Card>();
-        list.add(new Card(CardType.HINT));
-        Snoop s = new Snoop();
-        
-        ActionRequest instance = new ActionRequest(s, list, 2);
-        ActionCard expResult = s;
-        ActionCard result = instance.getActionCard();
-        assertEquals(expResult, result);
-    }
 
-    /**
-     * Test of getCards method, of class ActionRequest.
-     */
-    @Test
-    public void testGetCards()
-    {
-        System.out.println("getCards");
+        ActionCard card = new ActionCard(ActionCardType.ALL_SNOOP);
         
-        List<Card> list = new ArrayList<Card>();
-        list.add(new Card(CardType.HINT));
-        Snoop s = new Snoop();
-        
-        ActionRequest instance = new ActionRequest(s, list, 2);
-        List<Card> expResult = list;
-        List<Card> result = instance.getCards();
+        ActionRequest instance = new ActionRequest(card, 2);
+        ActionCard expResult = card;
+        ActionCard result = instance.getActionCard();
         assertEquals(expResult, result);
     }
     
@@ -101,13 +81,11 @@ public class ActionRequestTest
     @Test
     public void testGetPlayerId()
     {
-        System.out.println("getCards");
+        System.out.println("getPlayerID");
         
-        List<Card> list = new ArrayList<Card>();
-        list.add(new Card(CardType.HINT));
-        Snoop s = new Snoop();
+        ActionCard card = new ActionCard(ActionCardType.ALL_SNOOP);
         
-        ActionRequest instance = new ActionRequest(s, list, 2);
+        ActionRequest instance = new ActionRequest(card, 2);
         Integer expResult = 2;
         Integer result = instance.getPlayerId();
         assertEquals(expResult, result);

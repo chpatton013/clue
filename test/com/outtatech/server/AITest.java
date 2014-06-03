@@ -120,17 +120,6 @@ public class AITest {
     }
 
     /**
-     * Test of aiTurn method, of class AI.
-     */
-    @Test
-    public void testAiTurn() {
-        System.out.println("aiTurn");
-        AI instance = null;
-        instance.aiTurn();
-
-    }
-
-    /**
      * Test of aiRefuteSuggestion method, of class AI.
      */
     @Test
@@ -150,7 +139,7 @@ public class AITest {
         ai.setHintCardsHand(hintCards);   
         
         HintCard expResult = new SuspectCard(SuspectID.PEACOCK);
-        Card result = ai.aiRefuteSuggestion(suspect, vehicle, destination);
+        HintCard result = ai.aiRefuteSuggestion(suspect, vehicle, destination);
         
         assertEquals(expResult, result);
 

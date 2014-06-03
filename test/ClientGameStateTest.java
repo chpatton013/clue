@@ -82,7 +82,7 @@ public class ClientGameStateTest
             fail("---Failed To Set New Accusation. Aborting.");
         }
         
-        expResult = true;
+        expResult = false;
         result = instance.getAccusationStatus();
         assertEquals(expResult, result);
     }

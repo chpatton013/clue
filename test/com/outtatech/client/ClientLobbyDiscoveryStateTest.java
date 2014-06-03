@@ -56,21 +56,12 @@ public class ClientLobbyDiscoveryStateTest {
     @Test
     public void testGetLobbyList() {
         System.out.println("getLobbyList");
-        ClientLobbyDiscoveryState instance = null;
-        List expResult = null;
+        List<Lobby> lobby = new ArrayList<Lobby>();
+        
+        ClientLobbyDiscoveryState instance = new ClientLobbyDiscoveryState(lobby);
+        List expResult = lobby;
         List result = instance.getLobbyList();
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setLobbyList method, of class ClientLobbyDiscoveryState.
-     */
-    @Test
-    public void testSetLobbyList() {
-        System.out.println("setLobbyList");
-        List<Lobby> newLobbyList = null;
-        ClientLobbyDiscoveryState instance = null;
-        instance.setLobbyList(newLobbyList);
     }
    
 }

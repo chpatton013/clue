@@ -6,10 +6,7 @@ import com.outtatech.common.Card;
 import com.outtatech.common.DestinationCard;
 import com.outtatech.common.*;
 import java.awt.Color;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -65,9 +62,11 @@ public class GameTest
         Map<DestinationID, Integer> destToPlayerId = 
                 new HashMap<DestinationID, Integer>();
         
-        //Game instance = new Game(players, sp, drawPile, discardPile, solution, destToPlayerId);
-        Game instance = new Game();
+        List<ServerPlayer> playerTurnOrder = new ArrayList<ServerPlayer>();
         
+        Game instance = new Game(players, sp, drawPile, discardPile, solution,
+            destToPlayerId, playerTurnOrder);
+
         this.instance = instance;
         this.sp = sp;
         this.players = players;
