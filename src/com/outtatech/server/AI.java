@@ -19,6 +19,7 @@ public class AI extends ServerPlayer
     private Difficulty difficulty;
     private ServerController ctrl;
     private Game game;
+    private boolean Accused = false;
 
     /**
      * Version-latenightpizzaparty Construct an AI instance, requires
@@ -469,9 +470,9 @@ public class AI extends ServerPlayer
     { // void for sake of complitation w/pseudocde. should return a boolean
         // knowledge = (add number of known cards in each category 
         // number of cards in each category) / 3
-        float knowledge = (suspectCardsSeen.size() / 6.0f + vehicleCardsSeen.
-                size()
-                / 6.0f + locationsSeen.size() / 9.0f) / 3.0f;
+        float knowledge = ((suspectCardsSeen.size() - 1) / 6.0f + (vehicleCardsSeen.
+                size() - 1)
+                / 6.0f + (locationsSeen.size() - 1) / 9.0f) / 3.0f;
         System.out.println("suspects seen: " + suspectCardsSeen.size());
         System.out.println("vehicles seen: " + vehicleCardsSeen.size());
         System.out.println("locations seen: " + locationsSeen.size());
@@ -480,7 +481,7 @@ public class AI extends ServerPlayer
                 getRiskiness());
         // if knowledge < riskiness of AI
         // Guard against this
-        if ((knowledge * 5) <= difficulty.getRiskiness())
+        if ((knowledge * 6) <= difficulty.getRiskiness())
         //  return false
         {
             System.out.println("Will not make an accusation!");
@@ -499,6 +500,7 @@ public class AI extends ServerPlayer
         // Otherwise...
         else
         {
+            System.out.println("Making a accusation!");
             SuspectID choice1 = getSuspectChoice(suspectCardsSeen);
             VehicleID choice2 = (getVehicleChoice(vehicleCardsSeen));
             DestinationID choice3 = (getLocationChoice(locationsSeen));
@@ -624,8 +626,14 @@ public class AI extends ServerPlayer
         if (obj instanceof AccusationResponse)
         {
             System.out.println("AI got an AccusationRepsonse!");
+            AccusationResponse rsp = (AccusationResponse) obj;
             //check if accusation is correct
             //if not, keep sending endturnrequests
+            if(getPlayerId() == rsp.getPlayerId() && 
+                    !rsp.getCorrectAccusation()) 
+            {
+                Accused = true;
+            }
         }
         // Guard against this
         else if (obj instanceof CardDealResponse)
@@ -642,8 +650,10 @@ public class AI extends ServerPlayer
                     actionCardsHand.add((ActionCard) temp);
                 }
             }
-
-            aiTurn();
+            if(!Accused) 
+            {
+                aiTurn();
+            }
             //playActionCard();
             ctrl.reactToRobot(new EndTurnRequest(), this);
         }

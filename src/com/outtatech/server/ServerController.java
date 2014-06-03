@@ -546,7 +546,7 @@ public class ServerController
         AccusationResponse accResp = new AccusationResponse(accusation,
                 accusation.equals(clientGame.getSolution()), fromPlayer.getPlayerId());
 
-        informPlayers(clientGame, accResp);
+        informPlayers(gameServerPlayers, accResp);
     }
 
     /**
