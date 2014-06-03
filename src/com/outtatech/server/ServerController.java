@@ -204,6 +204,7 @@ public class ServerController
          */
         else if (obj instanceof LobbyCreateRequest)
         {
+            System.out.println("recieved lobby create from: " + connection.getId());
             LobbyCreateRequest lcr = (LobbyCreateRequest) obj;
             Game game = new Game();
             Lobby lobby = new Lobby(lcr.getLobbyName() + gameCounter++,
@@ -216,6 +217,7 @@ public class ServerController
             //@TODO Only the requesting client will be updated.  Other clients
             //will need to send a lobby discovery response to refresh.
             forwardMessage(new LobbyCreateResponse(lobby), connection);
+            handleLobbyCreateRequestNotification(game);
         }
 
         /**
@@ -1197,5 +1199,24 @@ public class ServerController
                 null, game.getDrawPile(), game.getDestToPlayerId());
 
         informPlayers(game, newGameState);
+    }
+    
+    private void handleLobbyCreateRequestNotification(Game game)
+    {
+        System.out.println("sending lobby notifications");
+        List<Lobby> publicLobbies = new ArrayList<Lobby>();
+        for (Lobby lobby : lobbies.values())
+        {
+            if (lobby.isVisible())
+            {
+                publicLobbies.add(lobby);
+            }
+        }
+
+        LobbyDiscoveryResponse ldr = new LobbyDiscoveryResponse(publicLobbies);
+        
+        //Sending to all, may be risky if a client 
+        //is not ignoring messages from a incorrect state.
+        network.sendToAllClients(ldr);
     }
 }

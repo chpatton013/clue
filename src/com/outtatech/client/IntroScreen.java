@@ -40,8 +40,7 @@ public class IntroScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,40 +57,40 @@ public class IntroScreen extends javax.swing.JFrame
         jLabel2.setText("An OutaTech Game");
 
         SinglePlayerButton.setText("Single Player");
-        SinglePlayerButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        SinglePlayerButton.setMaximumSize(new java.awt.Dimension(120, 23));
+        SinglePlayerButton.setMinimumSize(new java.awt.Dimension(120, 23));
+        SinglePlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SinglePlayerButtonMouseClicked(evt);
             }
         });
 
         MultiPlayerButton.setText("Multiplayer");
+        MultiPlayerButton.setMaximumSize(new java.awt.Dimension(120, 23));
+        MultiPlayerButton.setMinimumSize(new java.awt.Dimension(120, 23));
         MultiPlayerButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        MultiPlayerButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        MultiPlayerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MultiPlayerButtonMouseClicked(evt);
             }
         });
 
         InformationButton.setText("Information");
+        InformationButton.setMaximumSize(new java.awt.Dimension(120, 23));
+        InformationButton.setMinimumSize(new java.awt.Dimension(120, 23));
         InformationButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        InformationButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        InformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 InformationButtonMouseClicked(evt);
             }
         });
 
         OptionsButton.setText("Options");
+        OptionsButton.setMaximumSize(new java.awt.Dimension(120, 23));
+        OptionsButton.setMinimumSize(new java.awt.Dimension(120, 23));
         OptionsButton.setPreferredSize(new java.awt.Dimension(93, 23));
-        OptionsButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        OptionsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 OptionsButtonMouseClicked(evt);
             }
         });
@@ -103,10 +102,10 @@ public class IntroScreen extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addGap(286, 286, 286)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(SinglePlayerButton)
-                    .addComponent(MultiPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InformationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OptionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SinglePlayerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MultiPlayerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OptionsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addContainerGap(313, Short.MAX_VALUE))
@@ -119,7 +118,7 @@ public class IntroScreen extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(39, 39, 39)
-                .addComponent(SinglePlayerButton)
+                .addComponent(SinglePlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MultiPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
