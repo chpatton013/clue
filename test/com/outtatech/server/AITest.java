@@ -79,10 +79,13 @@ public class AITest {
      public void testAiRespond() {
         System.out.println("Testing aiRespond");
         
+        VehicleCard v1 = new VehicleCard(VehicleID.AIRLINER, CardColor.RED);
+        VehicleCard v2 = new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE);
+        
         ArrayList<HintCard> hintCards = new ArrayList();
         hintCards.add(new SuspectCard(SuspectID.PEACOCK));
-        hintCards.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
-        hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
+        hintCards.add(v1);
+        hintCards.add(v2);
         hintCards.add(new DestinationCard(DestinationID.GOLDEN_GATE_BRIDGE));
         
         ServerController ctrl = new ServerController(new ServerNetwork(5555));
@@ -93,8 +96,8 @@ public class AITest {
         ActionCard privateTipCardAll = new PrivateTip(PrivateTipType.ALL_VEHICLES);
         
         ArrayList<HintCard> expResult = new ArrayList();
-        expResult.add(new VehicleCard(VehicleID.AIRLINER, CardColor.RED));
-        expResult.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
+        expResult.add(v1);
+        expResult.add(v2);
         ArrayList<HintCard> result = ai.aiRespond(privateTipCardAll);
         
         assertEquals(expResult, result);
@@ -138,10 +141,10 @@ public class AITest {
         hintCards.add(new VehicleCard(VehicleID.HOT_AIR_BALLOON, CardColor.BLUE));
         ai.setHintCardsHand(hintCards);   
         
-        HintCard expResult = new SuspectCard(SuspectID.PEACOCK);
+        SuspectID expResult = SuspectID.PEACOCK;
         HintCard result = ai.aiRefuteSuggestion(suspect, vehicle, destination);
         
-        assertEquals(expResult, result);
+        assertEquals(expResult, ((SuspectCard)result).getSuspect());
 
     }
     
